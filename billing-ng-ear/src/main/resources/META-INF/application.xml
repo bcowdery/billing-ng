@@ -4,7 +4,7 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_5.xsd"
              version="5">
 
-    <display-name>BillingNG; a next generation billing solution</display-name>
+    <display-name>BillingNG, a next-generation billing solution</display-name>
 
     <module>
         <ejb>billing-ng-core.jar</ejb>

@@ -15,26 +15,25 @@
  along with this program.  If not, see http://www.gnu.org/licenses/agpl-3.0.html
  */
 
-package com.billing.ng.entities;
+package com.billing.ng.dao;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
+import org.hibernate.criterion.Criterion;
+
+import java.io.Serializable;
 import java.util.List;
 
-/**
- * XmlMap
- *
- * @author Brian Cowdery
- * @since 28-Apr-2010
- */
-@XmlRootElement(name = "map")
-public class XmlMap {
+public interface GenericDAO<T, ID> extends Serializable {
 
-    private final List<XmlMapEntry> entries = new ArrayList<XmlMapEntry>();
+    public T persist(T entity);
+    public T update(T entity);
+    public void delete(T entity);
 
-    @XmlElement
-    public List<XmlMapEntry> getEntries() {
-        return this.entries;
-    }
+    public boolean isManaged(T entity);
+    public boolean isIdPersisted(ID id);
+
+    public T findById(ID id, boolean lock);
+
+    public List<T> findAll();
+    public List<T> findByExample(T exampleEntity, String[] excludedProperty);
+    public List<T> findByCriteria(Criterion... criterion);
 }
