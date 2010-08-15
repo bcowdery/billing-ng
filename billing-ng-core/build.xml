@@ -24,6 +24,10 @@
         <fileset dir="${jaxb.dir}/lib/" includes="*.jar"/>
     </path>
 
+    <path id="checkstyle.classpath">
+        <fileset dir="${checkstyle.dir}" includes="checkstyle-all-*.jar"/>
+    </path>
+
     <path id="tests.classpath">
         <path refid="compile.classpath"/>
     	<fileset dir="${junit.dir}" includes="junit-dep-*.jar"/>
@@ -32,6 +36,26 @@
     </path>
 
     <!-- targets -->
+    <target name="checkstyle" description="Run code style checks on all java classes.">
+        <taskdef resource="checkstyletask.properties" classpathref="checkstyle.classpath"/>
+
+        <delete dir="${checkstyle-results.dir}"/>
+        <mkdir dir="${checkstyle-results.dir}/raw"/>
+        <mkdir dir="${checkstyle-results.dir}/html"/>
+
+        <checkstyle config="${root.dir}/checks.xml" failureproperty="checkstyle.failure" failonviolation="false">
+            <fileset dir="${src.dir}/main/java" includes="**/*.java"/>
+            <formatter type="plain"/>
+            <formatter type="xml" tofile="${checkstyle-results.dir}/raw/checkstyle_report.xml"/>
+        </checkstyle>
+
+        <xslt in="${checkstyle-results.dir}/raw/checkstyle_report.xml"
+              out="${checkstyle-results.dir}/html/checkstyle_report.html"
+              style="${checkstyle.dir}/contrib/checkstyle-noframes-severity-sorted.xsl"/>
+
+        <fail if="checkstyle.failure" message="${ant.project.name} style checks failed, see checkstyle reports for details."/>
+    </target>
+
     <target name="generate.xsd"
             depends="compile"
             description="Generate .xsd XML schema descriptors for JAXB bound entities.">
@@ -88,7 +112,7 @@
             <report format="frames" todir="${test-results.dir}/html/"/>
         </junitreport>
         
-        <fail if="${junit.failure}" message="Tests ${ant.project.name} tests failed, see testing reports for details."/>
+        <fail if="${junit.failure}" message="${ant.project.name} tests failed, see testing reports for details."/>
     </target>
 
     <target name="compile.tests" depends="compile">
@@ -178,5 +202,6 @@
         <delete dir="${dist.dir}"/>
         <delete dir="${test-build.dir}"/>
         <delete dir="${test-results.dir}"/>
+        <delete dir="${checkstyle-results.dir}"/>
     </target>
 </project>

@@ -7,7 +7,7 @@
 
   Checkstyle configuration enforcing good coding practices and maximum
   readability. This configuration tries to catch the most common programming
-  errors while enfocing some basic style and formatting constraints.
+  errors while enforcing some basic style and formatting constraints.
   
   based loosely on Suns "Code Conventions for the Java Programming Language"
   * http://java.sun.com/docs/codeconv/
@@ -205,7 +205,7 @@
         <!-- Effective Java, by Joshua Bloch           -->
         <!-- http://java.sun.com/docs/books/effective/ -->
         <module name="NoClone"/>     <!-- use a clone constructor instead -->
-        <module name="NoFinalizer"/> <!-- prefer finalizer gaurdian idom  -->
+        <module name="NoFinalizer"/> <!-- prefer finalizer guardian idiom  -->
 
 
         <!-- Checks for class design                         -->
