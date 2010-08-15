@@ -3,6 +3,17 @@
   <component name="BuildJarProjectSettings">
     <option name="BUILD_JARS_ON_MAKE" value="false" />
   </component>
+  <component name="CheckStyle-IDEA">
+    <option name="configuration">
+      <map>
+        <entry key="active-configuration" value="FILE:/home/bcowdery/projects/idea/billing-ng/checkstyle.xml:good programming checks" />
+        <entry key="check-test-classes" value="false" />
+        <entry key="location-0" value="CLASSPATH:/sun_checks.xml:The default CheckStyle rules." />
+        <entry key="location-1" value="FILE:/home/bcowdery/projects/idea/billing-ng/checkstyle.xml:good programming checks" />
+        <entry key="thirdparty-classpath" value="" />
+      </map>
+    </option>
+  </component>
   <component name="DependencyValidationManager">
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>
