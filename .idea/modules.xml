@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/billing-ng-core/billing-ng-core.iml" filepath="$PROJECT_DIR$/billing-ng-core/billing-ng-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/billing-ng-ear/billing-ng-ear.iml" filepath="$PROJECT_DIR$/billing-ng-ear/billing-ng-ear.iml" />
+      <module fileurl="file://$PROJECT_DIR$/billing-ng-web/billing-ng-web.iml" filepath="$PROJECT_DIR$/billing-ng-web/billing-ng-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/resources/resources.iml" filepath="$PROJECT_DIR$/resources/resources.iml" />
+    </modules>
+  </component>
+</project>
+

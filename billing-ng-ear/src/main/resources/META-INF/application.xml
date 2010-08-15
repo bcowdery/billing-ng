@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://java.sun.com/xml/ns/javaee"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_5.xsd"
+             version="5">
+
+    <display-name>BillingNG; a next generation billing solution</display-name>
+
+    <module>
+        <ejb>billing-ng-core.jar</ejb>
+    </module>
+
+    <module>
+        <web>
+            <web-uri>billing-ng-web.war</web-uri>
+            <context-root>/billing</context-root>
+        </web>
+    </module>
+
+    <library-directory>lib</library-directory>
+</application>

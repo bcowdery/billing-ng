@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="billing-ng-core" default="dist" basedir=".">
+
+    <!-- properties -->
+    <property name="root.dir" location=".."/>
+    <property file="${root.dir}/build.properties"/>
+
+    <property name="jar.dir" value="${build.dir}/${ant.project.name}.jar"/>
+    <property name="classes.dir" value="${jar.dir}/"/>
+
+    <!-- paths -->
+    <path id="compile.classpath">
+    	<fileset dir="${j2ee5.dir}" includes="*.jar"/>
+        <fileset dir="${j2ee5client.dir}" includes="*.jar"/>
+        <fileset dir="${commons-codec.dir}" includes="*.jar"/>
+    </path>
+
+    <path id="hibernate.classpath">
+        <fileset dir="${hibernate-tools.dir}" includes="**/*.jar"/>
+        <path refid="compile.classpath"/>
+    </path>    
+
+    <path id="xjc.classpath">
+        <fileset dir="${jaxb.dir}/lib/" includes="*.jar"/>
+    </path>
+
+    <path id="tests.classpath">
+        <path refid="compile.classpath"/>
+    	<fileset dir="${junit.dir}" includes="junit-dep-*.jar"/>
+        <fileset dir="${hamcrest.dir}" includes="hamcrest-all-*.jar"/>
+        <pathelement path="${classes.dir}"/>
+    </path>
+
+    <!-- targets -->
+    <target name="generate.xsd"
+            depends="compile"
+            description="Generate .xsd XML schema descriptors for JAXB bound entities.">
+
+        <schemagen classpathref="compile.classpath"
+                   srcdir="${src.dir}/main/java"
+                   destdir="${build.dir}"
+                   includes="**/entities/*.java"
+                   excludes="**/*Adapter.java">            
+            <schema namespace="http://billing-ng.com/entities" file="core-entities.xsd"/>
+        </schemagen>
+    </target>
+
+    <target name="generate.ddl"
+            depends="compile, set-ddl-drop.property"
+            description="Generate the schema creation .sql file from hibernate entity classes. The property 'ddl.drop' can be set add schema drop statements to the generated ddl file.">
+        
+        <property name="ddl-sql.file" value="objectmodel.ddl.sql"/>
+        <hibernatetool destdir="${build.dir}">
+            <annotationconfiguration configurationfile="${src.dir}/main/resources/hibernate.cfg.xml"
+                                     namingStrategy="org.hibernate.cfg.ImprovedNamingStrategy"/>
+
+            <classpath path="${classes.dir}"/>
+            <hbm2ddl outputfilename="${ddl-sql.file}" export="false" drop="${ddl.drop}" format="true"/>
+        </hibernatetool>
+        <echo message="Generated ddl ${build.dir}/${ddl-sql.file} with drop = ${ddl.drop}"/>
+    </target>
+
+    <target name="set-ddl-drop.property" unless="ddl.drop">
+        <property name="ddl.drop" value="false"/>
+    </target>
+
+    <target name="test.all" depends="compile.tests" description="Run all tests and generate testing reports.">
+        <junit printsummary="yes" showoutput="yes" failureproperty="junit.failure">
+            <classpath>
+                <pathelement path="${classes.dir}"/>
+                <pathelement path="${test-build.dir}"/>
+                <path refid="tests.classpath"/>
+            </classpath>
+
+            <batchtest fork="yes" todir="${test-results.dir}/raw/">
+                <formatter type="xml"/>
+                <fileset dir="${src.dir}/test/java">
+                    <include name="**/*Test*.java"/>
+                    <exclude name="**/*Tester*.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+
+        <junitreport todir="${test-results.dir}">
+            <fileset dir="${test-results.dir}/raw/">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${test-results.dir}/html/"/>
+        </junitreport>
+        
+        <fail if="${junit.failure}" message="Tests ${ant.project.name} tests failed, see testing reports for details."/>
+    </target>
+
+    <target name="compile.tests" depends="compile">
+        <!-- create junit test directories -->
+        <mkdir dir="${test-build.dir}"/>
+        <mkdir dir="${test-results.dir}/raw"/>
+        <mkdir dir="${test-results.dir}/html"/>
+
+        <javac srcdir="${src.dir}/test"
+               destdir="${test-build.dir}"
+               classpathref="tests.classpath"
+               source="${javac.source}"
+               target="${javac.target}"
+               debug="${javac.debug}" fork="${javac.fork}" deprecation="${javac.deprecation}" nowarn="${javac.nowarn}">
+        </javac>
+    </target>
+
+    <target name="dist"
+            depends="build, generate.ddl, generate.xsd, svn.revision"
+            description="Build and package as a distributable .jar file and all schema artifacts.">
+
+        <mkdir dir="${dist.dir}" />
+
+        <!-- package the jar -->
+        <tstamp/>
+        <jar destfile="${dist.dir}/${ant.project.name}.jar" basedir="${jar.dir}">
+            <manifest>
+                <attribute name="Built-By" value="${user.name}"/>
+                <attribute name="Built-On" value="${DSTAMP}-${TSTAMP}"/>
+                <attribute name="Specification-Title" value="BillingNG Core Classes"/>
+                <attribute name="Specification-Version" value="${release.version}"/>
+                <attribute name="Specification-Vendor" value="Pointyspoon.com"/>
+
+                <attribute name="Package-Title" value="${ant.project.name}"/>
+                <attribute name="Package-Version" value="${svn.revision}"/>
+                <attribute name="Package-Vendor" value="Pointyspoon.com"/>
+            </manifest>
+        </jar>
+
+        <!-- copy database schema ddl and xml schema files -->
+        <copy todir="${dist.dir}">
+            <fileset dir="${build.dir}" includes="*.sql"/>
+            <fileset dir="${build.dir}" includes="*.xsd"/>
+        </copy>
+    </target>
+
+    <target name="svn.revision" unless="svn.revision">
+        <exec executable="svnversion" outputproperty="svn.revision">
+            <arg value="."/>
+        </exec>
+        <echo message="Revision ${svn.revision}"/>
+    </target>
+
+    <target name="build" depends="compile" description="Build the exploded .jar for packaging.">
+        <mkdir dir="${build.dir}"/>
+        <copy todir="${jar.dir}">
+            <fileset dir="${src.dir}/main/resources" excludes="hibernate.cfg.xml"/>
+        </copy>
+    </target>
+
+    <target name="compile" depends="init" unless="build.compiled">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${src.dir}/main"
+               destdir="${classes.dir}"
+               classpathref="compile.classpath"
+               source="${javac.source}"
+               target="${javac.target}"
+               debug="${javac.debug}" fork="${javac.fork}" deprecation="${javac.deprecation}" nowarn="${javac.nowarn}">
+        </javac>
+
+        <copy todir="${classes.dir}">
+            <fileset dir="${src.dir}/main/java" includes="**/*.index"/>
+        </copy>
+
+        <property name="build.compiled" value="true"/> <!-- compile once per session -->
+        <property name="build.noclean" value="true"/> <!-- clean once per session -->                
+    </target>
+
+    <target name="init" depends="clean">
+        <!-- task definitions -->
+        <taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="hibernate.classpath"/>
+        <taskdef name="schemagen" classname="com.sun.tools.jxc.SchemaGenTask" classpathref="xjc.classpath"/>
+    </target>
+
+    <target name="clean" description="Remove old build artifacts and temp files." unless="build.noclean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+        <delete dir="${test-build.dir}"/>
+        <delete dir="${test-results.dir}"/>
+    </target>
+</project>

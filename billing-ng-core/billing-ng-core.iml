@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/test-build" />
+      <excludeFolder url="file://$MODULE_DIR$/test-results" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="junit-4.8.2" level="project" />
+    <orderEntry type="library" name="hamcrest-1.1" level="project" />
+    <orderEntry type="library" exported="" name="jboss5-common" level="project" />
+    <orderEntry type="library" exported="" name="jboss5-client" level="project" />
+    <orderEntry type="library" name="jaxb-ri-20091104" level="project" />
+    <orderEntry type="library" name="commons-codec-1.4" level="project" />
+  </component>
+</module>
+

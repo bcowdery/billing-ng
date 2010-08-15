@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="billing-ng" default="dist" basedir=".">
+
+    <!-- properties -->
+    <property name="root.dir" location="."/>
+    <property file="${root.dir}/build.properties"/>
+
+    <property name="ear.dir" value="${build.dir}/${ant.project.name}.ear"/>
+
+    <!-- targets -->
+    <target name="deploy.ds" description="Deploy the data source descriptor to the jBoss application server.">
+        <copy todir="${deploy.dir}">
+            <fileset dir="${resources.dir}" includes="billing-ng-ds.xml"/>
+        </copy>
+    </target>
+
+    <target name="deploy.properties" description="Deploy billing-ng.properties to the jBoss application server.">
+        <copy todir="${deploy.dir}">
+            <fileset dir="${resources.dir}" includes="billing-ng.properties"/>
+        </copy>
+    </target>
+
+
+    <!--
+        application server deployment targets
+    -->
+    <target name="undeploy" description="Delete the deployed artifact (exploded or .ear).">
+        <delete file="${deploy.dir}/${ant.project.name}.ear" failonerror="false"/> <!-- remove packaged application -->
+        <delete dir="${deploy.dir}/${ant.project.name}.ear" failonerror="false"/>  <!-- remove exploded application -->
+    </target>
+
+    <target name="touch" description="Touch the deployed artifact (exploded or .ear) and force re-deployment.">
+        <condition property="exploded.deployment">
+            <and>
+                <available file="${deploy.dir}/${ant.project.name}.ear/META-INF/application.xml"/>
+            </and>
+        </condition>
+        <antcall target="touch.ear"/>      <!-- touch packaged application -->
+        <antcall target="touch.exploded"/> <!-- touch exploded application -->
+    </target>
+
+    <target name="touch.ear" unless="exploded.deployment">
+        <echo message="Application .ear; touching archive for re-deploy."/>
+        <touch file="${deploy.dir}/${ant.project.name}.ear"/>
+    </target>
+
+    <target name="touch.exploded" if="exploded.deployment">
+        <echo message="Exploded application structure; touching application.xml for re-deploy."/>
+        <touch file="${deploy.dir}/${ant.project.name}.ear/META-INF/application.xml"/>
+    </target>
+
+
+    <!--
+        exploded application deployment targets
+    -->
+    <target name="refresh" description="Refreshes the deployed exploded application structure, copying only files that have recently changed.">
+        <property name="build.noclean" value="true"/>
+        <antcall target="explode"/>
+    </target>
+
+    <target name="explode" depends="init, copy-libs" description="Build and deploy the exploded application structure to the jBoss application server.">
+        <ant dir="${billing-ng-core.dir}" target="build" inheritall="true" inheritrefs="false"/>
+        <ant dir="${billing-ng-web.dir}" target="build" inheritall="true" inheritrefs="false"/>
+
+        <copy todir="${ear.dir}">
+            <fileset dir="${billing-ng-core.dir}/build/" includes="*.jar/**"/>
+            <fileset dir="${billing-ng-web.dir}/build/" includes="*.war/**"/>
+        </copy>
+
+        <copy todir="${ear.dir}/META-INF">
+            <fileset file="${billing-ng-ear.dir}/src/main/resources/META-INF/application.xml"/>
+        </copy>
+
+        <copy todir="${deploy.dir}">
+            <fileset dir="${build.dir}" includes="*.ear/**"/>
+        </copy>
+    </target>
+
+
+    <!--
+        ear package and deployment targets
+    -->
+    <target name="deploy" depends="dist" description="Build and deploy the application .ear to the jBoss application server.">
+        <copy todir="${deploy.dir}">
+            <fileset dir="${dist.dir}" includes="*.ear"/>
+        </copy>
+    </target>
+
+    <target name="dist" depends="init, copy-libs" description="Build and package as a distributable application .ear file.">
+        <ant dir="${billing-ng-core.dir}" target="dist" inheritall="false" inheritrefs="false"/>
+        <ant dir="${billing-ng-web.dir}" target="dist" inheritall="false" inheritrefs="false"/>
+
+        <copy todir="${ear.dir}">
+            <fileset dir="${billing-ng-core.dist}" includes="*.jar"/>
+            <fileset dir="${billing-ng-web.dist}" includes="*.war"/>
+        </copy>
+
+        <ear destfile="${dist.dir}/${ant.project.name}.ear" appxml="${billing-ng-ear.dir}/src/main/resources/META-INF/application.xml">
+            <fileset dir="${ear.dir}" includes="**/*.jar,*.war"/>
+        </ear>
+    </target>
+
+    <target name="copy-libs">
+        <mkdir dir="${ear.dir}/lib"/>
+        <copy todir="${ear.dir}/lib">
+            <fileset dir="${commons-codec.dir}">
+                <include name="commons-codec-1.4.jar"/>
+            </fileset>
+        </copy>
+    </target>
+    
+    <target name="init" depends="clean">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+    </target>
+
+    <target name="clean" description="Remove old build artifacts and temp files." unless="build.noclean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+        <ant dir="${billing-ng-core.dir}" target="clean" inheritall="false" inheritrefs="false"/>
+        <ant dir="${billing-ng-web.dir}" target="clean" inheritall="false" inheritrefs="false"/>
+    </target>
+</project>

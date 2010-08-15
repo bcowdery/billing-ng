@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="billing-ng-web" default="dist" basedir=".">
+
+    <!-- properties -->
+    <property name="root.dir" location=".."/>
+    <property file="${root.dir}/build.properties"/>
+
+    <property name="war.dir" value="${build.dir}/${ant.project.name}.war" />
+    <property name="classes.dir" value="${war.dir}/WEB-INF/classes"/>
+
+    <!-- paths -->
+    <path id="compile.classpath">
+        <fileset dir="${j2ee5.dir}" includes="*.jar"/>
+        <fileset dir="${j2ee5client.dir}" includes="*.jar"/>
+    </path>
+
+    <!-- targets -->
+    <target name="dist" depends="build, svn.revision" description="Build and package as a distributable .war file.">
+        <mkdir dir="${dist.dir}" />
+
+        <!-- package the war -->
+        <tstamp/>
+        <war warfile="${dist.dir}/${ant.project.name}.war" basedir="${war.dir}">
+            <manifest>
+                <attribute name="Built-By" value="${user.name}"/>
+                <attribute name="Built-On" value="${DSTAMP}-${TSTAMP}"/>
+                <attribute name="Specification-Title" value="BillingNG Web Application"/>
+                <attribute name="Specification-Version" value="${release.version}"/>
+                <attribute name="Specification-Vendor" value="Pointyspoon.com"/>
+
+                <attribute name="Package-Title" value="${ant.project.name}"/>
+                <attribute name="Package-Version" value="${svn.revision}"/>
+                <attribute name="Package-Vendor" value="Pointyspoon.com"/>
+            </manifest>
+        </war>
+    </target>        
+
+    <target name="svn.revision" unless="svn.revision">
+        <exec executable="svnversion" outputproperty="svn.revision">
+            <arg value="."/>
+        </exec>
+        <echo message="Revision ${svn.revision}"/>
+    </target>
+
+    <target name="build" depends="compile" description="Build the exploded .war for packaging.">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${war.dir}"/>
+
+        <copy todir="${war.dir}/WEB-INF/classes">
+            <fileset dir="${src.dir}/main/resources">
+                <include name="struts*.xml" />
+                <include name="*.properties"/>
+            </fileset>
+         </copy>
+
+        <copy todir="${war.dir}">
+            <fileset dir="${src.dir}/main/webapp" />
+        </copy>
+
+        <copy todir="${war.dir}/WEB-INF">
+            <fileset dir="${src.dir}/main/resources/WEB-INF">
+                <include name="*.*"/>
+            </fileset>
+        </copy>
+
+        <!-- todo: select framework for front-end -->
+        <!-- 
+        <copy todir="${war.dir}/WEB-INF/lib">
+        </copy>
+        -->
+    </target>
+
+    <target name="compile" depends="build.dependencies, init">
+        <mkdir dir="${classes.dir}" />
+        <javac srcdir="${src.dir}/main"
+               destdir="${classes.dir}"
+               classpathref="compile.classpath"
+               source="${javac.source}"
+               target="${javac.target}"
+               debug="${javac.debug}" fork="${javac.fork}" deprecation="${javac.deprecation}" nowarn="${javac.nowarn}">
+
+            <classpath>
+                <!-- dependencies that may or may not exist at launch - prevents errors in the compile.classpath -->
+                <fileset dir="${billing-ng-core.dist}" includes="*.jar"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="build.dependencies" unless="dependencies.present" depends="check.dependencies">
+        <ant dir="${billing-ng-core.dir}" target="dist" inheritall="false" inheritrefs="false"/>
+    </target>
+
+    <target name="check.dependencies">
+        <condition property="dependencies.present">
+            <and>
+                <!-- the build.dependencies task will be run if any of the following are missing -->
+                <available file="${billing-ng-core.dist}/billing-ng-core.jar"/>
+            </and>
+        </condition>
+    </target>
+
+    <target name="init" depends="clean">
+        <!-- task definitions -->
+        <!-- note: no task defs for web -->
+    </target>    
+
+    <target name="clean" description="Remove old build artifacts and temp files." unless="build.noclean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+</project>
