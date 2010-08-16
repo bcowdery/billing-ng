@@ -54,7 +54,7 @@ import java.util.List;
 public abstract class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T, ID> {
 
     @PersistenceContext
-    private EntityManager em;
+    private EntityManager entityManager;
     private transient Session session;
 
     private Class<T> entityBeanType;
@@ -65,14 +65,14 @@ public abstract class GenericDAOImpl<T, ID extends Serializable> implements Gene
                 = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
-    public void setEntityManager(EntityManager em) {
-        this.em = em;
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     protected EntityManager getEntityManager() {
-        if (em == null)
+        if (entityManager == null)
             throw new IllegalStateException("EntityManager has not been set on DAO prior to usage");
-        return em;
+        return entityManager;
     }
 
     /**

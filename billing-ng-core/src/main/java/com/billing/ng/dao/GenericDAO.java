@@ -24,16 +24,16 @@ import java.util.List;
 
 public interface GenericDAO<T, ID> extends Serializable {
 
-    public T persist(T entity);
-    public T update(T entity);
-    public void delete(T entity);
+    T persist(T entity);
+    T update(T entity);
+    void delete(T entity);
 
-    public boolean isManaged(T entity);
-    public boolean isIdPersisted(ID id);
+    boolean isManaged(T entity);
+    boolean isIdPersisted(ID id);
 
-    public T findById(ID id, boolean lock);
+    T findById(ID id, boolean lock);
 
-    public List<T> findAll();
-    public List<T> findByExample(T exampleEntity, String[] excludedProperty);
-    public List<T> findByCriteria(Criterion... criterion);
+    List<T> findAll();
+    List<T> findByExample(T exampleEntity, String[] excludedProperty);
+    List<T> findByCriteria(Criterion... criterion);
 }

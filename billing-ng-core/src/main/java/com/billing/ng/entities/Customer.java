@@ -69,7 +69,7 @@ public class Customer extends BaseEntity {
     private String workPhoneNumber;
 
     @Column
-    private boolean useMailingAddress = true;
+    private boolean useMailingAddress = true;   
 
     public Long getId() {
         return id;
