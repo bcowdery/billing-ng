@@ -29,16 +29,16 @@ import java.util.Map;
  * @author Brian Cowdery
  * @since 15-Aug-2010
  */
-public class RateTable {
+public enum RateTable {
 
-    private final static RateTable INSTANCE = new RateTable();
-
+    /** Singleton RateTable instance. */
+    INSTANCE;
     public static RateTable getInstance() {
         return INSTANCE;
     }
 
     private Map<String, Rate> rates = new HashMap<String, Rate>();
-    private Rate systemRate = null; 
+    private Rate systemRate = null;
 
     public Rate getRate(String currencyCode) {
         return rates.get(currencyCode);
@@ -52,8 +52,8 @@ public class RateTable {
         rates.put(rate.getCurrencyCode(), rate);
     }
 
-    public void addRates(List<Rate> rates) {
-        for (Rate rate : rates) addRate(rate);
+    public void addRates(List<Rate> list) {
+        for (Rate rate : list) addRate(rate);
     }
     
     public void clear() {
@@ -64,6 +64,12 @@ public class RateTable {
         return systemRate;
     }
 
+    /**
+     * Sets a rate and currency as the systems primary operating currency. The
+     * given rate will be set to 1.
+     *
+     * @param systemRate system rate
+     */
     public void setSystemRate(Rate systemRate) {
         systemRate.setRate(BigDecimal.ONE);
         this.systemRate = systemRate;

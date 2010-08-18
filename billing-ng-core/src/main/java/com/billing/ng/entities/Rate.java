@@ -35,8 +35,11 @@ import java.util.Currency;
 @Entity
 public class Rate extends BaseEntity {
 
+    @Id @GeneratedValue
     private Long id;
+    @Column(name = "rate", nullable = false, precision = 10, length = 22)
     private BigDecimal rate;
+    @Column(name = "currency_code", nullable = false, length = 3)
     private String currencyCode;
 
     public Rate() {
@@ -47,7 +50,6 @@ public class Rate extends BaseEntity {
         this.currencyCode = currencyCode;
     }
 
-    @Id @GeneratedValue
     public Long getId() {
         return id;
     }
@@ -56,7 +58,6 @@ public class Rate extends BaseEntity {
         this.id = id;
     }
 
-    @Column(name = "rate", nullable = false, precision = 10, length = 22)
     public BigDecimal getRate() {
         return rate;
     }
@@ -65,7 +66,6 @@ public class Rate extends BaseEntity {
         this.rate = rate;
     }
 
-    @Column(name = "currency_code", nullable = false, length = 3)
     public String getCurrencyCode() {
         return currencyCode;
     }

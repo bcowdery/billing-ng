@@ -13,29 +13,29 @@ import static org.hamcrest.text.pattern.PatternMatcher.*;
  * @author Brian Cowdery
  * @since 25-Apr-2010
  */
-public class CustomerTest {
+public class UserTest {
 
     @Test
     public void testSetPassword() throws Exception {
         String password = "My password";
 
-        Customer customer = new Customer();
-        customer.setPassword(password);
+        User user = new User();
+        user.setPassword(password);
 
-        assertThat(customer.getPasswordHash(), is(not(nullValue())));
-        assertThat(customer.getPasswordHash(), matchesPattern(Patterns.URLSAFE_TOKEN));
-        assertThat(customer.getPasswordHash(), is(not(password)));
+        assertThat(user.getPasswordHash(), is(not(nullValue())));
+        assertThat(user.getPasswordHash(), matchesPattern(Patterns.URLSAFE_TOKEN));
+        assertThat(user.getPasswordHash(), is(not(password)));
 
-        Customer customer2 = new Customer();
+        User customer2 = new User();
         customer2.setPassword(password);
         
-        assertThat(customer2.getPasswordHash(), is(not(customer.getPasswordHash())));
+        assertThat(customer2.getPasswordHash(), is(not(user.getPasswordHash())));
     }
 
     @Test
     public void testGetHashSalt() throws Exception {
-        Customer customer1 = new Customer();
-        Customer customer2 = new Customer();
+        User customer1 = new User();
+        User customer2 = new User();
 
         String salt1 = customer1.getHashSalt();
         String salt2 = customer2.getHashSalt();        

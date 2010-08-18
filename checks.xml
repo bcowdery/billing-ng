@@ -62,6 +62,9 @@
         </module>
         
         <module name="JavadocMethod">
+            <property name="scope" value="public"/>
+            <property name="tokens" value="METHOD_DEF"/>
+
             <property name="allowMissingPropertyJavadoc" value="true"/>
             <property name="allowUndeclaredRTE" value="true"/>
             <property name="allowThrowsTagsForSubclasses" value="true"/>

@@ -13,7 +13,7 @@
 
         <!-- mapped classes -->
         <mapping package="com.billing.ng.entities"/>
-        <mapping class="com.billing.ng.entities.Customer"/>
+        <mapping class="com.billing.ng.entities.User"/>
 
     </session-factory>
 </hibernate-configuration>

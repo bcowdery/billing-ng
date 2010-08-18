@@ -17,44 +17,37 @@
 
 package com.billing.ng.entities;
 
-import com.billing.ng.util.Configuration;
+import org.hibernate.validator.Email;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import java.util.Map;
 
 /**
- * Customer
- *
- * http://velocity.apache.org/engine/releases/velocity-1.6.4/user-guide.html
+ * Contact
  *
  * @author Brian Cowdery
  * @since 16-Aug-2010
  */
 @Entity
-public class Customer extends User {
-
-    public static final String DEFAULT_NUMBER_PATTERN = "${customer.id}-${customer.userName}";
+public class Contact {
 
     @Column
-    private String number;
-
+    private String homePhoneNumber;
     @Column
-    private Map<String, String> attributes;
+    private String mobilePhoneNumber;
+    @Column
+    private String workPhoneNumber;
+    @Column @Email
+    private String email;
+    @Column
+    private String xmpp;
 
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public Map<String, String> getAttributes() {
-        return attributes;
-    }
-
-    public void setAttributes(Map<String, String> attributes) {
-        this.attributes = attributes;        
-    }
+    @Embedded
+    private Address mailingAddress;
+    @Embedded
+    private Address billingAddress;
+    
+    @Column
+    private boolean useMailingAddress = true;
 }
