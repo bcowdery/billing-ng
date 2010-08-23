@@ -3,13 +3,7 @@
   <component name="ChangeListManager" verified="true">
     <list default="true" readonly="true" id="38551b27-a239-4bef-8ac3-13d37f1ec9e7" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/build.xml" afterPath="$PROJECT_DIR$/billing-ng-core/build.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.properties" afterPath="$PROJECT_DIR$/build.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$" afterPath="$PROJECT_DIR$" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-web" afterPath="$PROJECT_DIR$/billing-ng-web" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/UserTest.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/UserTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core" afterPath="$PROJECT_DIR$/billing-ng-core" />
     </list>
     <ignored path=".idea/workspace.xml" />
     <ignored path="billing-ng.iws" />
@@ -72,7 +66,16 @@
       <file leaf-file-name="build.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/billing-ng-core/build.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="147" column="101" selection-start="6003" selection-end="6003" vertical-scroll-proportion="2.519802">
+            <state line="3" column="79" selection-start="123" selection-end="123" vertical-scroll-proportion="0.063118815">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.properties" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="24" column="31" selection-start="488" selection-end="488" vertical-scroll-proportion="-204.0">
               <folding />
             </state>
           </provider>
@@ -646,13 +649,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="90" selection-start="445" selection-end="445" vertical-scroll-proportion="0.40047115">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/util/ConfigurationTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="63" column="35" selection-start="2034" selection-end="2034" vertical-scroll-proportion="0.26030624">
@@ -660,9 +656,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/util/HashUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="110" selection-start="1900" selection-end="1900" vertical-scroll-proportion="0.5206125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="31" selection-start="488" selection-end="488" vertical-scroll-proportion="-204.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/billing-ng-core/build.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="147" column="101" selection-start="6003" selection-end="6003" vertical-scroll-proportion="2.519802">
+        <state line="3" column="79" selection-start="123" selection-end="123" vertical-scroll-proportion="0.063118815">
           <folding />
         </state>
       </provider>

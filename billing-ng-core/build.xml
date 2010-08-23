@@ -44,13 +44,13 @@
 
 
     <!-- targets -->
-    <target name="checkstyle" depends="init" description="Run code style checks on all java classes.">
+    <target name="checkstyle" depends="init" description="Run code style and convention checks on all java classes.">
         <delete dir="${checkstyle-results.dir}"/>
         <mkdir dir="${checkstyle-results.dir}/raw"/>
         <mkdir dir="${checkstyle-results.dir}/html"/>
 
         <checkstyle config="${root.dir}/checks.xml" failureproperty="checkstyle.failure" failonviolation="false">
-            <fileset dir="${src.dir}/main/java" includes="**/*.java"/>
+            <fileset dir="${src.dir}/main/java" includes="**/*.java" excludes="**/package-info.java"/>
             <formatter type="plain"/>
             <formatter type="xml" tofile="${checkstyle-results.dir}/raw/checkstyle_report.xml"/>
         </checkstyle>
@@ -62,7 +62,7 @@
         <fail if="checkstyle.failure" message="${ant.project.name} style checks failed, see checkstyle reports for details."/>
     </target>
 
-    <target name="test.all" depends="compile.tests" description="Run all tests and generate testing reports.">
+    <target name="test.all" depends="compile.tests" description="Run all tests.">
         <testng suitename="${ant.project.name} unit test suite"
                 testname="${ant.project.name} test.all "
                 classpathref="test.classpath"
@@ -79,7 +79,7 @@
         <antcall target="test.reports"/>       
     </target>
 
-    <target name="test.groups" depends="compile.tests" if="test.groups" description="Run a specific test configuration set by -Dtest.groups and generate testing reports.">
+    <target name="test.groups" depends="compile.tests" if="test.groups" description="Run a specific test configuration set by -Dtest.groups">
         <testng suitename="${ant.project.name} unit test suite"
                 testname="${ant.project.name} '${test.groups}' test.groups "
                 groups="${test.groups}"
@@ -97,7 +97,7 @@
         <antcall target="test.reports"/>
     </target>
 
-    <target name="test.failed" depends="init" description="Re-run previously failed tests.">
+    <target name="test.failed" depends="init" description="Re-run all previously failed tests.">
         <property name="build.noclean" value="true"/>
         <antcall target="compile.tests"/>
 
