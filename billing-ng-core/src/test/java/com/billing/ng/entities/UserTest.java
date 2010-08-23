@@ -30,7 +30,7 @@ import static org.hamcrest.text.pattern.PatternMatcher.*;
  * @author Brian Cowdery
  * @since 25-Apr-2010
  */
-@Test(groups = { "entities", "quick"})
+@Test(groups = { "entity", "quick"})
 public class UserTest {
 
     @Test

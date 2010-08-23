@@ -8,6 +8,7 @@
     <property name="jar.dir" value="${build.dir}/${ant.project.name}.jar"/>
     <property name="classes.dir" value="${jar.dir}/"/>
 
+
     <!-- paths -->
     <path id="compile.classpath">
     	<fileset dir="${j2ee5.dir}" includes="*.jar"/>
@@ -15,6 +16,19 @@
         <fileset dir="${commons-codec.dir}" includes="*.jar"/>
     </path>
 
+    <path id="testng.classpath">
+        <path refid="compile.classpath"/>
+        <fileset dir="${testng.dir}" includes="testng-*.jar"/>
+        <fileset dir="${hamcrest.dir}" includes="hamcrest-all-*.jar"/>
+        <pathelement path="${classes.dir}"/>
+    </path>
+
+    <path id="test.classpath">
+        <pathelement path="${classes.dir}"/>
+        <pathelement path="${test-build.dir}"/>
+        <path refid="testng.classpath"/>
+    </path>
+   
     <path id="hibernate.classpath">
         <fileset dir="${hibernate-tools.dir}" includes="**/*.jar"/>
         <path refid="compile.classpath"/>
@@ -28,18 +42,9 @@
         <fileset dir="${checkstyle.dir}" includes="checkstyle-all-*.jar"/>
     </path>
 
-    <path id="tests.classpath">
-        <path refid="compile.classpath"/>
-    	<!--<fileset dir="${junit.dir}" includes="junit-dep-*.jar"/>-->
-        <fileset dir="${testng.dir}" includes="testng-*.jar"/>
-        <fileset dir="${hamcrest.dir}" includes="hamcrest-all-*.jar"/>
-        <pathelement path="${classes.dir}"/>
-    </path>
 
     <!-- targets -->
-    <target name="checkstyle" description="Run code style checks on all java classes.">
-        <taskdef resource="checkstyletask.properties" classpathref="checkstyle.classpath"/>
-
+    <target name="checkstyle" depends="init" description="Run code style checks on all java classes.">
         <delete dir="${checkstyle-results.dir}"/>
         <mkdir dir="${checkstyle-results.dir}/raw"/>
         <mkdir dir="${checkstyle-results.dir}/html"/>
@@ -57,6 +62,80 @@
         <fail if="checkstyle.failure" message="${ant.project.name} style checks failed, see checkstyle reports for details."/>
     </target>
 
+    <target name="test.all" depends="compile.tests" description="Run all tests and generate testing reports.">
+        <testng suitename="${ant.project.name} unit test suite"
+                testname="${ant.project.name} test.all "
+                classpathref="test.classpath"
+                outputDir="${test-results.dir}/testng/"
+                failureProperty="test.failure"
+                verbose="${testng.verbose}">
+
+            <classfileset dir="${test-build.dir}">
+                <include name="**/*Test*.class"/>
+                <exclude name="**/*Tester*.class"/>
+            </classfileset>                       
+        </testng>
+
+        <antcall target="test.reports"/>       
+    </target>
+
+    <target name="test.groups" depends="compile.tests" if="test.groups" description="Run a specific test configuration set by -Dtest.groups and generate testing reports.">
+        <testng suitename="${ant.project.name} unit test suite"
+                testname="${ant.project.name} '${test.groups}' test.groups "
+                groups="${test.groups}"
+                classpathref="test.classpath"
+                outputDir="${test-results.dir}/testng/"
+                failureProperty="test.failure"
+                verbose="${testng.verbose}">
+
+            <classfileset dir="${test-build.dir}">
+                <include name="**/*Test*.class"/>
+                <exclude name="**/*Tester*.class"/>
+            </classfileset>
+        </testng>        
+
+        <antcall target="test.reports"/>
+    </target>
+
+    <target name="test.failed" depends="init" description="Re-run previously failed tests.">
+        <property name="build.noclean" value="true"/>
+        <antcall target="compile.tests"/>
+
+        <testng classpathref="test.classpath"
+                outputDir="${test-results.dir}/testng/"
+                failureProperty="test.failure"
+                verbose="${testng.verbose}">
+
+            <xmlfileset dir="${test-results.dir}/testng/" includes="testng-failed.xml"/>
+        </testng>
+
+        <antcall target="test.reports"/>
+    </target>
+
+    <target name="test.reports" unless="test.noreport">
+        <junitreport todir="${test-results.dir}">
+            <fileset dir="${test-results.dir}/testng/">
+                <include name="*/*.xml"/>
+            </fileset>
+            <report format="noframes"  todir="${test-results.dir}/pretty"/>
+        </junitreport>
+        <fail if="test.failure" message="${ant.project.name} tests failed, see testing reports for details."/>
+    </target>
+
+    <target name="compile.tests" depends="compile">
+        <mkdir dir="${test-build.dir}"/>
+        <mkdir dir="${test-results.dir}/testng"/>
+        <mkdir dir="${test-results.dir}/pretty"/>
+
+        <javac srcdir="${src.dir}/test"
+               destdir="${test-build.dir}"
+               classpathref="testng.classpath"
+               source="${javac.source}"
+               target="${javac.target}"
+               debug="${javac.debug}" fork="${javac.fork}" deprecation="${javac.deprecation}" nowarn="${javac.nowarn}">
+        </javac>
+    </target>
+
     <target name="generate.xsd"
             depends="compile"
             description="Generate .xsd XML schema descriptors for JAXB bound entities.">
@@ -65,7 +144,7 @@
                    srcdir="${src.dir}/main/java"
                    destdir="${build.dir}"
                    includes="**/entities/*.java"
-                   excludes="**/*Adapter.java">            
+                   excludes="**/*Adapter.java">
             <schema namespace="http://billing-ng.com/entities" file="core-entities.xsd"/>
         </schemagen>
     </target>
@@ -73,7 +152,7 @@
     <target name="generate.ddl"
             depends="compile, set-ddl-drop.property"
             description="Generate the schema creation .sql file from hibernate entity classes. The property 'ddl.drop' can be set add schema drop statements to the generated ddl file.">
-        
+
         <property name="ddl-sql.file" value="objectmodel.ddl.sql"/>
         <hibernatetool destdir="${build.dir}">
             <annotationconfiguration configurationfile="${src.dir}/main/resources/hibernate.cfg.xml"
@@ -87,47 +166,6 @@
 
     <target name="set-ddl-drop.property" unless="ddl.drop">
         <property name="ddl.drop" value="false"/>
-    </target>
-
-    <target name="test.all" depends="compile.tests" description="Run all tests and generate testing reports.">
-        <taskdef resource="testngtasks" classpathref="tests.classpath"/>
-
-        <testng outputDir="${test-results.dir}/testng/" failureProperty="test.failure" verbose="2">
-            <classpath>
-                <pathelement path="${classes.dir}"/>
-                <pathelement path="${test-build.dir}"/>
-                <path refid="tests.classpath"/>
-            </classpath>
-
-            <classfileset dir="${test-build.dir}" description="core unit tests">
-                <include name="**/*Test*.class"/>
-                <exclude name="**/*Tester*.class"/>
-            </classfileset>                       
-        </testng>
-
-        <junitreport todir="${test-results.dir}">
-            <fileset dir="${test-results.dir}/testng/">
-                <include name="*/*.xml"/>
-            </fileset>
-            <report format="noframes"  todir="${test-results.dir}/pretty"/>
-        </junitreport>
-
-        <fail if="test.failure" message="${ant.project.name} tests failed, see testing reports for details."/>
-    </target>
-
-    <target name="compile.tests" depends="compile">
-        <!-- create junit test directories -->
-        <mkdir dir="${test-build.dir}"/>
-        <mkdir dir="${test-results.dir}/testng"/>
-        <mkdir dir="${test-results.dir}/pretty"/>
-
-        <javac srcdir="${src.dir}/test"
-               destdir="${test-build.dir}"
-               classpathref="tests.classpath"
-               source="${javac.source}"
-               target="${javac.target}"
-               debug="${javac.debug}" fork="${javac.fork}" deprecation="${javac.deprecation}" nowarn="${javac.nowarn}">
-        </javac>
     </target>
 
     <target name="dist"
@@ -173,7 +211,7 @@
         </copy>
     </target>
 
-    <target name="compile" depends="init" unless="build.compiled">
+    <target name="compile" depends="clean, init" unless="build.compiled">
         <mkdir dir="${classes.dir}"/>
         <javac srcdir="${src.dir}/main"
                destdir="${classes.dir}"
@@ -191,8 +229,10 @@
         <property name="build.noclean" value="true"/> <!-- clean once per session -->                
     </target>
 
-    <target name="init" depends="clean">
+    <target name="init">
         <!-- task definitions -->
+        <taskdef resource="testngtasks" classpathref="testng.classpath"/>
+        <taskdef resource="checkstyletask.properties" classpathref="checkstyle.classpath"/>
         <taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="hibernate.classpath"/>
         <taskdef name="schemagen" classname="com.sun.tools.jxc.SchemaGenTask" classpathref="xjc.classpath"/>
     </target>
