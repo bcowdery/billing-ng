@@ -17,14 +17,14 @@
 
 package com.billing.ng.entities;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import java.math.BigDecimal;
 import java.util.Locale;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 /**
  * MoneyTest
@@ -32,17 +32,18 @@ import static org.junit.Assert.assertThat;
  * @author Brian Cowdery
  * @since 15-Aug-2010
  */
+@Test(groups = { "money", "quick" })
 public class MoneyTest {
 
     @BeforeClass
-    public static void setupRateTable() {
+    public void setupRateTable() {
         // August 15, 2010
         // from http://www.xe.com/currency/usd-us-dollar
         RateTable table = RateTable.getInstance();
         table.setSystemRate(new Rate(new BigDecimal("1"), "USD"));
         table.addRate(new Rate(new BigDecimal("1.04279"), "CAD"));
         table.addRate(new Rate(new BigDecimal("0.64218"), "GBP"));
-        table.addRate(new Rate(new BigDecimal("85.8221"), "JPY"));        
+        table.addRate(new Rate(new BigDecimal("85.8221"), "JPY"));
     }
 
     @Test
@@ -55,7 +56,7 @@ public class MoneyTest {
         Money pound = new Money(new BigDecimal("22.00"), Locale.UK);
 
         assertThat(pound.getValue(), is(new BigDecimal("22.00")));
-        assertThat(pound.getCurrency().getCurrencyCode(), is("GBP"));         
+        assertThat(pound.getCurrency().getCurrencyCode(), is("GBP"));
     }
 
     @Test
@@ -102,7 +103,7 @@ public class MoneyTest {
 
         Money largeScale = new Money("$29.9777778 CAD");
         assertThat(largeScale.getScale(), is(2)); // dropped down to default CAD fractional digits
-        
+
         Money noScale = new Money("31 JPY");
         assertThat(noScale.getScale(), is(0)); // no significant digits for JPY
     }

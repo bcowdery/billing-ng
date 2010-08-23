@@ -30,7 +30,8 @@
 
     <path id="tests.classpath">
         <path refid="compile.classpath"/>
-    	<fileset dir="${junit.dir}" includes="junit-dep-*.jar"/>
+    	<!--<fileset dir="${junit.dir}" includes="junit-dep-*.jar"/>-->
+        <fileset dir="${testng.dir}" includes="testng-*.jar"/>
         <fileset dir="${hamcrest.dir}" includes="hamcrest-all-*.jar"/>
         <pathelement path="${classes.dir}"/>
     </path>
@@ -89,37 +90,36 @@
     </target>
 
     <target name="test.all" depends="compile.tests" description="Run all tests and generate testing reports.">
-        <junit printsummary="yes" showoutput="yes" failureproperty="junit.failure">
+        <taskdef resource="testngtasks" classpathref="tests.classpath"/>
+
+        <testng outputDir="${test-results.dir}/testng/" failureproperty="test.failure">
             <classpath>
                 <pathelement path="${classes.dir}"/>
                 <pathelement path="${test-build.dir}"/>
                 <path refid="tests.classpath"/>
             </classpath>
 
-            <batchtest fork="yes" todir="${test-results.dir}/raw/">
-                <formatter type="xml"/>
-                <fileset dir="${src.dir}/test/java">
-                    <include name="**/*Test*.java"/>
-                    <exclude name="**/*Tester*.java"/>
-                </fileset>
-            </batchtest>
-        </junit>
+            <classfileset dir="${test-build.dir}">
+                <include name="**/*Test*.class"/>
+                <exclude name="**/*Tester*.class"/>
+            </classfileset>                       
+        </testng>
 
         <junitreport todir="${test-results.dir}">
-            <fileset dir="${test-results.dir}/raw/">
-                <include name="TEST-*.xml"/>
+            <fileset dir="${test-results.dir}/testng/">
+                <include name="*/*.xml"/>
             </fileset>
-            <report format="frames" todir="${test-results.dir}/html/"/>
+            <report format="noframes"  todir="${test-results.dir}/pretty"/>
         </junitreport>
-        
-        <fail if="${junit.failure}" message="${ant.project.name} tests failed, see testing reports for details."/>
+
+        <fail if="${test.failure}" message="${ant.project.name} tests failed, see testing reports for details."/>
     </target>
 
     <target name="compile.tests" depends="compile">
         <!-- create junit test directories -->
         <mkdir dir="${test-build.dir}"/>
-        <mkdir dir="${test-results.dir}/raw"/>
-        <mkdir dir="${test-results.dir}/html"/>
+        <mkdir dir="${test-results.dir}/testng"/>
+        <mkdir dir="${test-results.dir}/pretty"/>
 
         <javac srcdir="${src.dir}/test"
                destdir="${test-build.dir}"

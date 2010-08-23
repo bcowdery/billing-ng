@@ -17,21 +17,18 @@
 
 package com.billing.ng.util;
 
-import org.hamcrest.Matchers;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import java.io.File;
-import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.hamcrest.text.pattern.PatternMatcher.*;
+import static org.testng.Assert.*;
 
 /**
  * ConfigurationTest
@@ -39,12 +36,13 @@ import static org.hamcrest.text.pattern.PatternMatcher.*;
  * @author Brian Cowdery
  * @since 16-Aug-2010
  */
+@Test(groups = { "utils", "quick" })
 public class ConfigurationTest {
     
     // class under test
-    private static Configuration configuration = Configuration.getInstance();
+    private Configuration configuration = Configuration.getInstance();
 
-    @Before
+    @BeforeTest
     public void loadTestProperties() {
         File fromRoot = new File("billing-ng-core/src/test/resources/test-billing-ng.properties");
         File fromCore = new File("src/test/resources/test-billing-ng.properties");

@@ -13,7 +13,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="junit-4.8.2" level="project" />
+    <orderEntry type="library" name="testng-5.12.1" level="project" />
     <orderEntry type="library" name="hamcrest-1.1" level="project" />
     <orderEntry type="library" exported="" name="jboss5-common" level="project" />
     <orderEntry type="library" exported="" name="jboss5-client" level="project" />
