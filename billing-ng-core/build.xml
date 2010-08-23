@@ -62,6 +62,10 @@
         <fail if="checkstyle.failure" message="${ant.project.name} style checks failed, see checkstyle reports for details."/>
     </target>
 
+
+    <!--
+        testing targets
+    -->
     <target name="test.all" depends="compile.tests" description="Run all tests.">
         <testng suitename="${ant.project.name} unit test suite"
                 testname="${ant.project.name} test.all "
@@ -136,6 +140,10 @@
         </javac>
     </target>
 
+
+    <!--
+        schema generation targets
+    -->
     <target name="generate.xsd"
             depends="compile"
             description="Generate .xsd XML schema descriptors for JAXB bound entities.">
@@ -168,9 +176,13 @@
         <property name="ddl.drop" value="false"/>
     </target>
 
+
+    <!--
+        build targets    
+    -->
     <target name="dist"
             depends="build, generate.ddl, generate.xsd, svn.revision"
-            description="Build and package as a distributable .jar file and all schema artifacts.">
+            description="Build and package as a distributable .jar file and generate all schema artifacts.">
 
         <mkdir dir="${dist.dir}" />
 
