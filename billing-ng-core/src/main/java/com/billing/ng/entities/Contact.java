@@ -22,6 +22,8 @@ import org.hibernate.validator.Email;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * Contact
@@ -31,6 +33,9 @@ import javax.persistence.Entity;
  */
 @Entity
 public class Contact {
+
+    @Id @GeneratedValue
+    private Long id;
 
     @Column
     private String homePhoneNumber;
@@ -50,4 +55,76 @@ public class Contact {
     
     @Column
     private boolean useMailingAddress = true;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getHomePhoneNumber() {
+        return homePhoneNumber;
+    }
+
+    public void setHomePhoneNumber(String homePhoneNumber) {
+        this.homePhoneNumber = homePhoneNumber;
+    }
+
+    public String getMobilePhoneNumber() {
+        return mobilePhoneNumber;
+    }
+
+    public void setMobilePhoneNumber(String mobilePhoneNumber) {
+        this.mobilePhoneNumber = mobilePhoneNumber;
+    }
+
+    public String getWorkPhoneNumber() {
+        return workPhoneNumber;
+    }
+
+    public void setWorkPhoneNumber(String workPhoneNumber) {
+        this.workPhoneNumber = workPhoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getXmpp() {
+        return xmpp;
+    }
+
+    public void setXmpp(String xmpp) {
+        this.xmpp = xmpp;
+    }
+
+    public Address getMailingAddress() {
+        return mailingAddress;
+    }
+
+    public void setMailingAddress(Address mailingAddress) {
+        this.mailingAddress = mailingAddress;
+    }
+
+    public Address getBillingAddress() {
+        return billingAddress;
+    }
+
+    public void setBillingAddress(Address billingAddress) {
+        this.billingAddress = billingAddress;
+    }
+
+    public boolean isUseMailingAddress() {
+        return useMailingAddress;
+    }
+
+    public void setUseMailingAddress(boolean useMailingAddress) {
+        this.useMailingAddress = useMailingAddress;
+    }
 }

@@ -4,19 +4,17 @@
     <list default="true" readonly="true" id="38551b27-a239-4bef-8ac3-13d37f1ec9e7" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/test/resources/test-billing-ng.properties" afterPath="$PROJECT_DIR$/billing-ng-core/src/test/resources/test-billing-ng.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/util/ConfigurationTest.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/util/ConfigurationTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.properties" afterPath="$PROJECT_DIR$/build.properties" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/junit_4_8_2.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/UserTest.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/UserTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Contact.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Contact.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/util/HashUtilsTest.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/util/HashUtilsTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/billing-ng-core.iml" afterPath="$PROJECT_DIR$/billing-ng-core/billing-ng-core.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-web/billing-ng-web.iml" afterPath="$PROJECT_DIR$/billing-ng-web/billing-ng-web.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/resources/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/resources/hibernate.cfg.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/build.xml" afterPath="$PROJECT_DIR$/billing-ng-core/build.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/testng_5_12_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/jaxb.index" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/jaxb.index" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Money.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Money.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/RateTable.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/RateTable.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/util/Configuration.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/util/Configuration.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/MoneyTest.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/MoneyTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles" />
     </list>
     <ignored path="billing-ng.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -75,7 +73,53 @@
   </component>
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="build.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/billing-ng-core/build.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="116" column="0" selection-start="5077" selection-end="5077" vertical-scroll-proportion="-22.884615">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Contact.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Contact.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="58" column="25" selection-start="1552" selection-end="1552" vertical-scroll-proportion="0.8742857">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/User.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="67" column="0" selection-start="2134" selection-end="2178" vertical-scroll-proportion="-176.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Money.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Money.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="75" column="53" selection-start="2617" selection-end="2617" vertical-scroll-proportion="-102.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hibernate.cfg.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/resources/hibernate.cfg.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="36" selection-start="240" selection-end="240" vertical-scroll-proportion="-42.5">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -85,22 +129,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Contact.java" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/User.java" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Staff.java" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Rate.java" />
         <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Customer.java" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/RateTable.java" />
         <option value="$PROJECT_DIR$/checks.xml" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/test/resources/test-billing-ng.properties" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/util/Configuration.java" />
         <option value="$PROJECT_DIR$/billing-ng-core/src/test/java/testng.xml" />
         <option value="$PROJECT_DIR$/build.properties" />
-        <option value="$PROJECT_DIR$/billing-ng-core/build.xml" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/MoneyTest.java" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/util/HashUtilsTest.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/test/resources/test-billing-ng.properties" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/util/Configuration.java" />
         <option value="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/util/ConfigurationTest.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/util/HashUtilsTest.java" />
         <option value="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/UserTest.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/MoneyTest.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Money.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/RateTable.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/jaxb.index" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/main/resources/hibernate.cfg.xml" />
+        <option value="$PROJECT_DIR$/billing-ng-core/build.xml" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Contact.java" />
       </list>
     </option>
   </component>
@@ -175,6 +219,84 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="billing-ng" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="billing-ng-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="billing-ng" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="billing-ng-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ng" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="billing-ng" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="billing-ng-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ng" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="entities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane">
@@ -190,7 +312,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="org.infernus.idea.checkstyle.CheckStylePlugin" />
+    <property name="options.lastSelected" value="preferences.sourceCode" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="project.structure.side.proportion" value="0.24426605" />
     <property name="GoToClass.includeJavaFiles" value="false" />
@@ -209,50 +331,6 @@
     </key>
   </component>
   <component name="RunManager" selected="TestNG.MoneyTest">
-    <configuration default="false" name="MoneyTest.testToString" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="snapshooter" />
-      <module name="billing-ng-core" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.billing.ng.entities" />
-      <option name="MAIN_CLASS_NAME" value="com.billing.ng.entities.MoneyTest" />
-      <option name="METHOD_NAME" value="testToString" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="MoneyTest.testSum" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="snapshooter" />
-      <module name="billing-ng-core" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.billing.ng.entities" />
-      <option name="MAIN_CLASS_NAME" value="com.billing.ng.entities.MoneyTest" />
-      <option name="METHOD_NAME" value="testSum" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
     <configuration default="false" name="ConfigurationTest.testFlush" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="snapshooter" />
       <module name="billing-ng-core" />
@@ -308,6 +386,64 @@
       <option name="METHOD_NAME" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="ConfigurationTest" type="TestNG" factoryName="TestNG" temporary="true">
+      <extension name="snapshooter" />
+      <module name="billing-ng-core" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="com.billing.ng.util" />
+      <option name="MAIN_CLASS_NAME" value="com.billing.ng.util.ConfigurationTest" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="MoneyTest.testAdd" type="TestNG" factoryName="TestNG" temporary="true">
+      <extension name="snapshooter" />
+      <module name="billing-ng-core" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="com.billing.ng.entities" />
+      <option name="MAIN_CLASS_NAME" value="com.billing.ng.entities.MoneyTest" />
+      <option name="METHOD_NAME" value="testAdd" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="METHOD" />
       <option name="VM_PARAMETERS" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" />
@@ -434,11 +570,11 @@
       </method>
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.MoneyTest.testToString" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.MoneyTest.testSum" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.ConfigurationTest.testFlush" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.ConfigurationTest" />
-      <item index="4" class="java.lang.String" itemvalue="TestNG.MoneyTest" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.ConfigurationTest.testFlush" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.ConfigurationTest" />
+      <item index="2" class="java.lang.String" itemvalue="TestNG.MoneyTest" />
+      <item index="3" class="java.lang.String" itemvalue="TestNG.ConfigurationTest" />
+      <item index="4" class="java.lang.String" itemvalue="TestNG.MoneyTest.testAdd" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -559,64 +695,9 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///opt/jboss-5.1.0.GA/common/lib/slf4j-api.jar!/org/slf4j/Logger.class">
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/util/ConfigurationTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="17" selection-start="151" selection-end="151" vertical-scroll-proportion="-3.8678415" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/RateTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="12" selection-start="987" selection-end="987" vertical-scroll-proportion="0.33259913" />
-      </provider>
-    </entry>
-    <entry file="jar:///opt/jdk1.6/src.zip!/java/math/BigDecimal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="719" column="36" selection-start="30557" selection-end="30578" vertical-scroll-proportion="0.55726874" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/util/HashUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="13" selection-start="1013" selection-end="1013" vertical-scroll-proportion="-0.9030837" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/util/Configuration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="178" column="98" selection-start="5979" selection-end="5979" vertical-scroll-proportion="-8.5">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/test/Patterns.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="65" selection-start="474" selection-end="474" vertical-scroll-proportion="0.34">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/testng-5.13.1/testng-5.13.1.jar!/org/testng/annotations/BeforeTest.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="18" selection-start="315" selection-end="315" vertical-scroll-proportion="0.14571428">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="40" selection-start="608" selection-end="608" vertical-scroll-proportion="0.49">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/testng-5.13.1/testng-5.13.1.jar!/org/testng/annotations/BeforeClass.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="0" selection-start="679" selection-end="679" vertical-scroll-proportion="0.51">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/MoneyTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="53" selection-start="1154" selection-end="1154" vertical-scroll-proportion="-110.5">
+        <state line="147" column="79" selection-start="5878" selection-end="5878" vertical-scroll-proportion="3.3214285">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -625,16 +706,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/util/HashUtilsTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="36" selection-start="1157" selection-end="1157" vertical-scroll-proportion="0.26">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/util/ConfigurationTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="46" selection-start="1269" selection-end="1269" vertical-scroll-proportion="-120.5">
+        <state line="75" column="45" selection-start="2531" selection-end="2531" vertical-scroll-proportion="0.44142857">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -643,30 +715,102 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/UserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="44" selection-start="1802" selection-end="1802" vertical-scroll-proportion="0.5871429">
+        <state line="35" column="88" selection-start="1148" selection-end="1148" vertical-scroll-proportion="0.12571429">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/resources/test-billing-ng.properties">
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Address.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="353" selection-end="353" vertical-scroll-proportion="0.24285714">
+        <state line="33" column="13" selection-start="1064" selection-end="1064" vertical-scroll-proportion="0.33285713">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-web/build.xml">
+    <entry file="jar:///opt/jdk1.6/src.zip!/javax/xml/bind/annotation/XmlElement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="69" selection-start="538" selection-end="538" vertical-scroll-proportion="0.19526628">
+        <state line="122" column="48" selection-start="3755" selection-end="3755" vertical-scroll-proportion="2.7685714">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/MoneyTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="76" selection-start="2156" selection-end="2156" vertical-scroll-proportion="-4.4885716">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/RateTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="36" selection-start="950" selection-end="950" vertical-scroll-proportion="0.12142857">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/jaxb.index">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="0" selection-start="47" selection-end="47" vertical-scroll-proportion="0.17">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/package-info.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="0" selection-start="1120" selection-end="1120" vertical-scroll-proportion="0.26714286">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Money.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="75" column="53" selection-start="2617" selection-end="2617" vertical-scroll-proportion="-102.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Rate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="72" selection-start="1536" selection-end="1536" vertical-scroll-proportion="0.39285713">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/resources/hibernate.cfg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="36" selection-start="240" selection-end="240" vertical-scroll-proportion="-42.5">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/billing-ng-core/build.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="121" column="80" selection-start="5278" selection-end="5278" vertical-scroll-proportion="0.67526555">
+        <state line="116" column="0" selection-start="5077" selection-end="5077" vertical-scroll-proportion="-22.884615">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Customer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="13" selection-start="1079" selection-end="1079" vertical-scroll-proportion="0.33285713">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="0" selection-start="2134" selection-end="2178" vertical-scroll-proportion="-176.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Contact.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="25" selection-start="1552" selection-end="1552" vertical-scroll-proportion="0.8742857">
           <folding />
         </state>
       </provider>
@@ -719,7 +863,13 @@
       <state key="ScopeChooserConfigurable.UI">
         <UIState>
           <splitter-proportions>
-            <SplitterProportionsDataImpl />
+            <SplitterProportionsDataImpl>
+              <option name="proportions">
+                <list>
+                  <option value="0.2" />
+                </list>
+              </option>
+            </SplitterProportionsDataImpl>
           </splitter-proportions>
           <settings />
         </UIState>

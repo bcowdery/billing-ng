@@ -41,7 +41,7 @@ public class HashUtilsTest {
     private static final String BASE_STRING = "Some generic base string.";
 
     @Test
-    public void testGenerateHash() throws Exception {
+    public void testGenerateHash() {
         String hash = HashUtils.generateHash(BASE_STRING);
         assertThat(hash, is(not(nullValue())));
         assertThat(hash, is(not(BASE_STRING)));
@@ -49,7 +49,7 @@ public class HashUtilsTest {
     }
 
     @Test
-    public void testGenerateHashSalt() throws Exception {
+    public void testGenerateHashSalt() {
         String salt = HashUtils.generateHashSalt(10);
         assertThat(salt, is(not(nullValue())));
         assertThat(salt.length(), is(10));
@@ -57,7 +57,7 @@ public class HashUtilsTest {
     }
 
     @Test
-    public void testGenerateHashSaltUniqueness() throws Exception {
+    public void testGenerateHashSaltUniqueness() {
         List<String> salts = new ArrayList<String>(UNIQUE_TESTS);
        
         for (int i = 0; i < UNIQUE_TESTS; i++) {
@@ -73,7 +73,7 @@ public class HashUtilsTest {
     }
 
     @Test
-    public void testGenerateHashSaltLength() throws Exception {
+    public void testGenerateHashSaltLength() {
         List<String> salts = new ArrayList<String>(UNIQUE_TESTS);
 
         Random generator = new Random();

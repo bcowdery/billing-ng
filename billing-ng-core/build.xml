@@ -92,14 +92,14 @@
     <target name="test.all" depends="compile.tests" description="Run all tests and generate testing reports.">
         <taskdef resource="testngtasks" classpathref="tests.classpath"/>
 
-        <testng outputDir="${test-results.dir}/testng/" failureproperty="test.failure">
+        <testng outputDir="${test-results.dir}/testng/" failureProperty="test.failure" verbose="2">
             <classpath>
                 <pathelement path="${classes.dir}"/>
                 <pathelement path="${test-build.dir}"/>
                 <path refid="tests.classpath"/>
             </classpath>
 
-            <classfileset dir="${test-build.dir}">
+            <classfileset dir="${test-build.dir}" description="core unit tests">
                 <include name="**/*Test*.class"/>
                 <exclude name="**/*Tester*.class"/>
             </classfileset>                       
@@ -112,7 +112,7 @@
             <report format="noframes"  todir="${test-results.dir}/pretty"/>
         </junitreport>
 
-        <fail if="${test.failure}" message="${ant.project.name} tests failed, see testing reports for details."/>
+        <fail if="test.failure" message="${ant.project.name} tests failed, see testing reports for details."/>
     </target>
 
     <target name="compile.tests" depends="compile">

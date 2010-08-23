@@ -20,6 +20,10 @@ package com.billing.ng.entities;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -58,6 +62,7 @@ import java.util.Locale;
  * @since 11-Aug-2010
  */
 @Embeddable
+@XmlRootElement(name = "monetary") 
 public class Money implements Serializable {
 
     private static final String NON_DIGIT_REGEX = "^\\D*";
@@ -65,8 +70,22 @@ public class Money implements Serializable {
     private static final String BLANK = "";
     private static final String WHITESPACE = " ";
 
-    private final BigDecimal value;
-    private final Currency currency;
+    private BigDecimal value;
+    private Currency currency;
+
+    public Money() {
+    }
+
+    /**
+     * Copy constructor
+     * @param money money to copy
+     */
+    public Money(Money money) {
+        // BigDecimal and Currency are both immutable or singleton - no need for defensive copies.
+        this.value = money.getValue();
+        this.currency = money.getCurrency();        
+    }
+
 
     /**
      * Constructs money for the given value and currency.
@@ -132,8 +151,13 @@ public class Money implements Serializable {
     }
 
     @Transient
+    @XmlAttribute(name = "amount")
     public BigDecimal getValue() {
         return value;
+    }
+
+    public void setValue(BigDecimal value) {
+        this.value = value;
     }
 
     /**
@@ -145,6 +169,7 @@ public class Money implements Serializable {
      * @return integral dollar value as a long
      */
     @Column(name = "value", nullable = false, length = 22)
+    @XmlAttribute(name = "integral_amount")
     public long getLongValue() {
         return value.movePointRight(value.scale()).longValueExact();
     }
@@ -156,16 +181,23 @@ public class Money implements Serializable {
      * @return scale
      */
     @Column(name = "scale", nullable = false, length = 2)
+    @XmlAttribute(name = "decimal_places")
     public int getScale() {
         return value.scale();
     }
 
     @Transient
+    @XmlTransient
     public Currency getCurrency() {
         return currency;
     }
 
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+
     @Column(name = "currency_code", nullable = false, length = 3)
+    @XmlAttribute(name = "currency")
     public String getCurrencyCode() {
         return currency.getCurrencyCode();
     }
@@ -287,5 +319,24 @@ public class Money implements Serializable {
                 .append(currency.getCurrencyCode());
 
         return builder.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        Money money = (Money) o;
+        return currency.equals(money.currency) && value.equals(money.value);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = value.hashCode();
+        result = 31 * result + currency.hashCode();
+        return result;
     }
 }

@@ -25,6 +25,7 @@ import java.util.Locale;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.testng.Assert.*;
 
 /**
  * MoneyTest
@@ -47,7 +48,7 @@ public class MoneyTest {
     }
 
     @Test
-    public void testCreateFromLocale() throws Exception {
+    public void testCreateFromLocale() {
         Money cad = new Money(new BigDecimal("20.03"), Locale.CANADA);
 
         assertThat(cad.getValue(), is(new BigDecimal("20.03")));
@@ -60,7 +61,7 @@ public class MoneyTest {
     }
 
     @Test
-    public void testCreateFromString() throws Exception {
+    public void testCreateFromString() {
         Money money = new Money("$10.95 USD");
 
         assertThat(money.getValue(), is(new BigDecimal("10.95")));
@@ -68,7 +69,7 @@ public class MoneyTest {
     }
 
     @Test
-    public void testCreateFromStringAndCurrency() throws Exception {
+    public void testCreateFromStringAndCurrency() {
         Money pounds = new Money("11.33", "GBP");
 
         assertThat(pounds.getValue(), is(new BigDecimal("11.33")));
@@ -81,14 +82,14 @@ public class MoneyTest {
     }
 
     @Test
-    public void testCreateFromLongValueAndScale() throws Exception {
+    public void testCreateFromLongValueAndScale() {
         Money money = new Money(2939L, 2, "CAD");
 
         assertThat(money.getValue(), is(new BigDecimal("29.39")));
     }
 
     @Test
-    public void testGetLongValue() throws Exception {
+    public void testGetLongValue() {
         Money smallScale = new Money("$29.93 CAD");
         assertThat(smallScale.getLongValue(), is(2993L));
 
@@ -97,7 +98,7 @@ public class MoneyTest {
     }
 
     @Test
-    public void testGetScale() throws Exception {
+    public void testGetScale() {
         Money smallScale = new Money("$29.96 CAD");
         assertThat(smallScale.getScale(), is(2));
 
@@ -110,10 +111,9 @@ public class MoneyTest {
 
     /**
      * Test conversion between the system rate and a foreign rate
-     * @throws Exception unexpected exception
      */
     @Test
-    public void testConvertCADtoUSD() throws Exception {
+    public void testConvertCADtoUSD() {
         Money usd = new Money("1.00", "USD");
         Money cad = new Money("1.00", "CAD");
 
@@ -130,12 +130,10 @@ public class MoneyTest {
     }
 
     /**
-     * Test conversion between two foreign rates, neither of which is the
-     * system rate.
-     * @throws Exception unexpected exception
+     * Test conversion between two foreign rates, neither of which is the system rate.
      */
     @Test
-    public void testConvertGBPtoJPY() throws Exception {
+    public void testConvertGBPtoJPY() {
         Money gbp = new Money("1.00", "GBP");
         Money jpy = new Money("100.00", "JPY");
 
@@ -150,10 +148,116 @@ public class MoneyTest {
         assertThat(convertedJpy.getCurrency().getDefaultFractionDigits(), is(convertedJpy.getValue().scale()));
     }
 
-    // todo: money math tests.
+    @Test
+    public void testAdd() {
+        Money usd20 = new Money("20.00", "USD");
+        Money usd033 = new Money("00.33", "USD");
+
+        // copies for immutability test
+        Money usd20Copy = new Money(usd20);
+        Money usd033Copy = new Money(usd033);
+
+        // test addition
+        Money sum = usd20.add(usd033);
+        assertThat(sum.getValue(), is(new BigDecimal("20.33")));
+        assertThat(sum.getCurrencyCode(), is("USD"));
+
+        // original objects remain unchanged
+        assertEquals(usd20, usd20Copy);
+        assertEquals(usd033, usd033Copy);
+    }
 
     @Test
-    public void testToString() throws Exception {
+    public void testSubtract() {
+        Money usd30 = new Money("30.00", "USD");
+        Money usd1050 = new Money("10.50", "USD");
+
+        // copies for immutability test
+        Money usd30Copy = new Money(usd30);
+        Money usd1050Copy = new Money(usd1050);
+
+        // test subtraction
+        Money total = usd30.subtract(usd1050);
+        assertThat(total.getValue(), is(new BigDecimal("19.50")));
+        assertThat(total.getCurrencyCode(), is("USD"));
+
+        // original objects remain unchanged
+        assertEquals(usd30, usd30Copy);
+        assertEquals(usd1050, usd1050Copy);
+    }
+
+    @Test
+    public void testMultiply() {
+        Money usd10 = new Money("10.00", "USD");
+        Money usd2 = new Money("2.00", "USD");
+
+        // copies for immutability test
+        Money usd10Copy = new Money(usd10);
+        Money usd2Copy = new Money(usd2);
+
+        // test multiplication
+        Money product = usd10.multiply(usd2);
+        assertThat(product.getValue(), is(new BigDecimal("20.00")));
+        assertThat(product.getCurrencyCode(), is("USD"));
+
+        // original objects remain unchanged
+        assertEquals(usd10, usd10Copy);
+        assertEquals(usd2, usd2Copy);
+    }
+
+    @Test
+    public void testDivide() {
+        Money usd10 = new Money("10.00", "USD");
+        Money usd2 = new Money("2.00", "USD");
+
+        // copies for immutability test
+        Money usd10Copy = new Money(usd10);
+        Money usd2Copy = new Money(usd2);
+
+        // test division
+        Money product = usd10.divide(usd2);
+        assertThat(product.getValue(), is(new BigDecimal("5.00")));
+        assertThat(product.getCurrencyCode(), is("USD"));
+
+        // original objects remain unchanged
+        assertEquals(usd10, usd10Copy);
+        assertEquals(usd2, usd2Copy);
+    }
+
+    @Test
+    public void testAbs() {
+        Money usdNegative1099 = new Money("-10.99", "USD");
+
+        // copies for immutability test
+        Money usdNegative1099Copy = new Money(usdNegative1099);
+
+        // test absolute value
+        Money abs = usdNegative1099.abs();
+        assertThat(abs.getValue(), is(new BigDecimal("10.99")));
+        assertThat(abs.getCurrencyCode(), is("USD"));
+
+        // original objects remain unchanged
+        assertEquals(usdNegative1099, usdNegative1099Copy);
+    }
+
+    @Test
+    public void testNegate() {
+        Money usd1030 = new Money("10.30", "USD");
+
+        // copies for immutability test
+        Money usd1030Copy = new Money(usd1030);
+
+        // test negative value
+        Money negate = usd1030.negate();
+        assertThat(negate.getValue(), is(new BigDecimal("-10.30")));
+        assertThat(negate.getCurrencyCode(), is("USD"));
+
+        // original objects remain unchanged
+        assertEquals(usd1030, usd1030Copy);
+    }
+
+    @Test
+    public void testToString() {
         Money usd = new Money("$56.23 USD");
         assertThat(usd.toString(), is("$56.23 USD"));
 
@@ -165,7 +269,7 @@ public class MoneyTest {
     }
 
     @Test
-    public void testToStringWithLocale() throws Exception {
+    public void testToStringWithLocale() {
         Money jpy = new Money("193 JPY");
         assertThat(jpy.toString(Locale.JAPAN), is("￥193 JPY"));
 

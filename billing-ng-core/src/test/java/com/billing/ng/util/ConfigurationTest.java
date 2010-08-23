@@ -17,10 +17,11 @@
 
 package com.billing.ng.util;
 
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
@@ -42,7 +43,15 @@ public class ConfigurationTest {
     // class under test
     private Configuration configuration = Configuration.getInstance();
 
-    @BeforeTest
+    private Calendar calendar = GregorianCalendar.getInstance();
+
+    @BeforeMethod
+    public void resetCalendar() {
+        calendar.clear();
+        calendar.set(2010, Calendar.AUGUST, 17, 22, 30);
+    }
+
+    @BeforeMethod
     public void loadTestProperties() {
         File fromRoot = new File("billing-ng-core/src/test/resources/test-billing-ng.properties");
         File fromCore = new File("src/test/resources/test-billing-ng.properties");
@@ -72,10 +81,6 @@ public class ConfigurationTest {
 
     @Test
     public void testGetPropertyAsDate() {
-        Calendar calendar = GregorianCalendar.getInstance();
-        calendar.clear();
-        calendar.set(2010, Calendar.AUGUST, 17, 22, 30);
-
         assertThat(configuration.getPropertyAsDate("test.property.date"), is(calendar.getTime()));
         assertThat(configuration.getPropertyAsDate("test.property.string"), is(nullValue()));
     }
@@ -92,12 +97,57 @@ public class ConfigurationTest {
     public void testSetProperty() {
         configuration.setProperty("test.property.setter", "set property string");
         assertThat(configuration.getProperty("test.property.setter"), is("set property string"));
+
+        configuration.setProperty("test.property.setter", (String) null);
+        assertThat(configuration.getProperty("test.property.setter"), is(nullValue()));        
     }
 
-    // todo: test all "setProperty" types.
+    @Test
+    public void testSetIntegerProperty() {
+        configuration.setProperty("test.property.integer", 456);
+        assertThat(configuration.getPropertyAsInteger("test.property.integer"), is(456));
+
+        configuration.setProperty("test.property.integer", (Integer) null);
+        assertThat(configuration.getPropertyAsInteger("test.property.integer"), is(nullValue()));
+    }
 
     @Test
-    public void testFlush() {
+    public void testSetDecimalProperty() {
+        configuration.setProperty("test.property.decimal", new BigDecimal("29.34599"));
+        assertThat(configuration.getPropertyAsDecimal("test.property.decimal"), is(new BigDecimal("29.34599")));
+
+        configuration.setProperty("test.property.decimal", (BigDecimal) null);
+        assertThat(configuration.getPropertyAsDecimal("test.property.decimal"), is(nullValue()));
+    }    
+
+    @Test
+    public void testSetDateProperty() {
+        calendar.set(2010, Calendar.AUGUST, 22, 22, 42);
+
+        configuration.setProperty("test.property.date", calendar.getTime());
+        assertThat(configuration.getPropertyAsDate("test.property.date"), is(calendar.getTime()));
+
+        configuration.setProperty("test.property.date", (Date) null);
+        assertThat(configuration.getPropertyAsDate("test.property.date"), is(nullValue()));
+    }
+
+    @Test
+    public void testSetBooleanYesProperty() {
+        configuration.setProperty("test.property.boolean.true", true);
+        assertThat(configuration.getPropertyAsBoolean("test.property.boolean.true"), is(true));
+
+        configuration.setProperty("test.property.boolean.true", false);
+        assertThat(configuration.getPropertyAsBoolean("test.property.boolean.true"), is(false));
+
+        configuration.setProperty("test.property.boolean.true", (Boolean) null);
+        assertThat(configuration.getPropertyAsBoolean("test.property.boolean.true"), is(nullValue()));
+    }
+
+    @Test
+    public void testFlush() throws IOException {
+        File file = File.createTempFile("test-billing-ng", ".properties");
+        configuration.setPath(file.getAbsolutePath());
+
         Date flushdate = new Date();
         configuration.setProperty("test.property.flush", "flushed property on " + flushdate);
         configuration.flush();

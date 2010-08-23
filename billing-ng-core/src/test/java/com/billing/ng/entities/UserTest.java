@@ -34,7 +34,7 @@ import static org.hamcrest.text.pattern.PatternMatcher.*;
 public class UserTest {
 
     @Test
-    public void testSetPassword() throws Exception {
+    public void testSetPassword() {
         String password = "My password";
 
         User user = new User();
@@ -51,7 +51,7 @@ public class UserTest {
     }
 
     @Test
-    public void testGetHashSalt() throws Exception {
+    public void testGetHashSalt() {
         User customer1 = new User();
         User customer2 = new User();
 

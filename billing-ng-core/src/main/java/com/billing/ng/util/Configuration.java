@@ -52,6 +52,7 @@ public enum Configuration {
         DEFAULTS.setProperty("customer.number.pattern", Customer.DEFAULT_NUMBER_PATTERN);
     }
 
+    private static final String BLANK_VALUE = "";
     private static final DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy HH:mm");
     private static final Pattern BOOLEAN_PATTERN = Pattern.compile("^(yes|on|true)$", Pattern.CASE_INSENSITIVE);
 
@@ -94,7 +95,8 @@ public enum Configuration {
      * @return property value, null if property and default not found.
      */
     public String getProperty(String key) {
-        return properties.getProperty(key);
+        String value = properties.getProperty(key);
+        return BLANK_VALUE.equals(value) ? null : value;
     }
 
     /**
@@ -182,7 +184,7 @@ public enum Configuration {
      * @param value property value to set
      */
     public void setProperty(String key, String value) {
-        properties.setProperty(key, value);
+        properties.setProperty(key, (value == null ? BLANK_VALUE : value));
     }
 
     /**
@@ -192,7 +194,7 @@ public enum Configuration {
      * @param value property value to set.
      */
     public void setProperty(String key, Integer value) {
-        properties.setProperty(key, (value != null ? value.toString() : null));
+        setProperty(key, (value != null ? value.toString() : null));
     }
 
     /**
@@ -202,7 +204,7 @@ public enum Configuration {
      * @param value property value to set.
      */
     public void setProperty(String key, BigDecimal value) {
-        properties.setProperty(key, (value != null ? value.toString() : null));
+        setProperty(key, (value != null ? value.toString() : null));
     }
 
     /**
@@ -213,7 +215,7 @@ public enum Configuration {
      * @param value property value to set.
      */
     public void setProperty(String key, Date value) {
-        properties.setProperty(key, (value != null ? DATE_FORMAT.format(value) : null));
+        setProperty(key, (value != null ? DATE_FORMAT.format(value) : null));
     }
 
     /**
@@ -223,7 +225,7 @@ public enum Configuration {
      * @param value property value to set.
      */
     public void setProperty(String key, Boolean value) {
-        properties.setProperty(key, (value != null ? value.toString() : null));
+        setProperty(key, (value != null ? value.toString() : null));
     }
 
     /**

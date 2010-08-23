@@ -17,6 +17,7 @@
 
 package com.billing.ng.entities;
 
+import javax.xml.bind.annotation.XmlTransient;
 import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.HashMap;
@@ -29,6 +30,7 @@ import java.util.Map;
  * @author Brian Cowdery
  * @since 15-Aug-2010
  */
+@XmlTransient
 public enum RateTable {
 
     /** Singleton RateTable instance. */
