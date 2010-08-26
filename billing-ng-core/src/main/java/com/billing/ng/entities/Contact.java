@@ -113,7 +113,7 @@ public class Contact {
     }
 
     public Address getBillingAddress() {
-        return billingAddress;
+        return useMailingAddress ? mailingAddress : billingAddress;
     }
 
     public void setBillingAddress(Address billingAddress) {

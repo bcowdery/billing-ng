@@ -44,7 +44,13 @@
 
 
     <!-- targets -->
-    <target name="checkstyle" depends="init" description="Run code style and convention checks on all java classes.">
+    <target  name="reformat-text" description="Cleans up text files and sets the appropriate EOL character.">
+        <fixcrlf srcdir="${src.dir}/main/java" includes="**/*.java"
+                 tab="remove" tablength="4" javafiles="yes"
+                 eol="unix"/>
+    </target>
+    
+    <target name="checkstyle" depends="init" description="Run code style checks on all java classes.">
         <delete dir="${checkstyle-results.dir}"/>
         <mkdir dir="${checkstyle-results.dir}/raw"/>
         <mkdir dir="${checkstyle-results.dir}/html"/>
@@ -169,7 +175,7 @@
             <classpath path="${classes.dir}"/>
             <hbm2ddl outputfilename="${ddl-sql.file}" export="false" drop="${ddl.drop}" format="true"/>
         </hibernatetool>
-        <echo message="Generated ddl ${build.dir}/${ddl-sql.file} with drop = ${ddl.drop}"/>
+        <echo message="Generated ddl ${build.dir}/${ddl-sql.file} with ddl.drop = ${ddl.drop}"/>
     </target>
 
     <target name="set-ddl-drop.property" unless="ddl.drop">

@@ -18,6 +18,7 @@
 package com.billing.ng.entities;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -29,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Brian Cowdery
  * @since 24-Apr-2010
  */
-@Entity
+@Embeddable
 @XmlTransient
 public class Address extends BaseEntity {
 

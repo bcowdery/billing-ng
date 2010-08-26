@@ -17,7 +17,8 @@
 
 package com.billing.ng.entities;
 
-import com.billing.ng.util.Configuration;
+import org.hibernate.annotations.CollectionOfElements;
+import org.hibernate.annotations.MapKey;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,7 +40,9 @@ public class Customer extends User {
     @Column
     private String number;
 
-    @Column
+    @CollectionOfElements
+    @MapKey(columns = @Column(name = "attribute_name"))
+    @Column(name = "attribute_value")
     private Map<String, String> attributes;
 
     public String getNumber() {
