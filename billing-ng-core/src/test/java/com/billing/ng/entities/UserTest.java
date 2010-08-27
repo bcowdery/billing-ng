@@ -33,18 +33,24 @@ import static org.hamcrest.text.pattern.PatternMatcher.*;
 @Test(groups = { "entity", "quick"})
 public class UserTest {
 
+    /**
+     * Class under test
+     */
+    private class TestUser extends User {
+    }
+
     @Test
     public void testSetPassword() {
         String password = "My password";
 
-        User user = new User();
+        User user = new TestUser();
         user.setPassword(password);
 
         assertThat(user.getPasswordHash(), is(not(nullValue())));
         assertThat(user.getPasswordHash(), matchesPattern(Patterns.URLSAFE_TOKEN));
         assertThat(user.getPasswordHash(), is(not(password)));
 
-        User customer2 = new User();
+        User customer2 = new TestUser();
         customer2.setPassword(password);
         
         assertThat(customer2.getPasswordHash(), is(not(user.getPasswordHash())));
@@ -52,8 +58,8 @@ public class UserTest {
 
     @Test
     public void testGetHashSalt() {
-        User customer1 = new User();
-        User customer2 = new User();
+        User customer1 = new TestUser();
+        User customer2 = new TestUser();
 
         String salt1 = customer1.getHashSalt();
         String salt2 = customer2.getHashSalt();        

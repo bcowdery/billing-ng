@@ -37,6 +37,7 @@ import static org.testng.Assert.*;
  */
 @Test(groups = { "utils", "quick" })
 public class HashUtilsTest {
+
     private static final int UNIQUE_TESTS = 10000;
     private static final String BASE_STRING = "Some generic base string.";
 
@@ -54,6 +55,13 @@ public class HashUtilsTest {
         assertThat(salt, is(not(nullValue())));
         assertThat(salt.length(), is(10));
         assertThat(salt, matchesPattern(Patterns.ALPHANUMERIC));
+    }
+
+    @Test
+    public void testSaltiness() {
+        String hash = HashUtils.generateHash("Salty!");
+        assertThat(hash, is(not(nullValue())));
+        assertThat(hash, is(not("Salty!"))); // Mmm.. good hash, not too salty!
     }
 
     @Test

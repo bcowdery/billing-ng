@@ -28,8 +28,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.Transient;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Account held by a customer.
@@ -39,7 +40,8 @@ import java.util.Set;
  * hierarchy.
  *
  * Charges are accrued under the customer's account (root account if a hierarchical structure is used),
- * and can either be billed up to the customer, or to an account-specific contact.
+ * and can either be billed up to the customer, or to an account-specific or sub-account specific
+ * contact.
  *
  * @author Brian Cowdery
  * @since 26-Aug-2010
@@ -47,20 +49,27 @@ import java.util.Set;
 @Entity
 public class Account extends BaseEntity implements Visitable<Account> {
 
+    public static Integer ROOT_HIERARCHY_LEVEL = 0;
+
     public enum BillingType {
         /** Accrue charges under the customer holding this account. */
         CUSTOMER,
         /** Accrue charges under this account, using the account contact information instead of the customers. */
-        ACCOUNT 
+        ACCOUNT,
+        /** Accrue charges for each sub-account separately, using the sub-accounts contact information.*/
+        SUB_ACCOUNT
     }
-    
-    @Id @GeneratedValue    
+
+    @Id @GeneratedValue
     private Long id;
 
     @Column
     private String number;
 
-    @ManyToOne   
+    @Column
+    private String name;
+
+    @ManyToOne
     private Customer customer;
 
     @ManyToOne
@@ -74,10 +83,10 @@ public class Account extends BaseEntity implements Visitable<Account> {
     private Account parentAccount;
 
     @OneToMany(mappedBy = "parentAccount")
-    private Set<Account> subAccounts = new HashSet<Account>();
+    private List<Account> subAccounts = new ArrayList<Account>();
 
     @Column
-    private Integer hierarchyLevel = 0;
+    private Integer hierarchyLevel = ROOT_HIERARCHY_LEVEL;
 
     public Account() {
     }
@@ -96,6 +105,14 @@ public class Account extends BaseEntity implements Visitable<Account> {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Customer getCustomer() {
@@ -138,34 +155,61 @@ public class Account extends BaseEntity implements Visitable<Account> {
     }
 
     public void setParentAccount(Account parentAccount) {
-        // shift all sub account hierarchy levels +1 when adding a new parent
-        if (this.parentAccount == null && parentAccount != null && subAccounts != null)
-            accept(new Visitor<Account, Object>() {
-                public Object visit(Account account) {
-                    account.setHierarchyLevel(account.getHierarchyLevel() + 1);
-                    
-                    for (Account subAccount : account.subAccounts)
-                        subAccount.accept(this);
-                    return null;
-                }
-            });
-
         this.parentAccount = parentAccount;
     }
 
-    public Set<Account> getSubAccounts() {
+    public void addParentAccount(Account parentAccount) {
+        if (parentAccount != null) {
+            // insert a new parent account for "this" sub-account, shifting the sub-account
+            // down 1 level in the hierarchy and placing the new parent under the old one
+            if (!isRootAccount()) {
+                // move the old parent above the new parent
+                parentAccount.setParentAccount(this.parentAccount);
+                parentAccount.setHierarchyLevel(this.parentAccount.getHierarchyLevel() + 1);
+                this.parentAccount.getSubAccounts().add(parentAccount);
+                // move the sub-account below the new parent
+                this.parentAccount.getSubAccounts().remove(this);
+            }
+
+            // set the parent of "this" sub-account
+            this.parentAccount = parentAccount;
+            parentAccount.getSubAccounts().add(this);
+
+            // shift sub-account hierarchy levels down by 1 to reflect addition of a new parent
+            if (parentAccount.hasSubAccounts()) {
+                parentAccount.accept(
+                        new Visitor<Account, Object>() {
+                            public Object visit(Account account) {
+                                account.setHierarchyLevel(!account.isRootAccount()
+                                                          ? account.getParentAccount().getHierarchyLevel() + 1
+                                                          : ROOT_HIERARCHY_LEVEL);
+
+                                for (Account subAccount : account.getSubAccounts())
+                                    subAccount.accept(this);
+                                return null;
+                            }
+                        }
+                );
+            }
+        }
+    }
+
+    // todo: handle removal of parent account
+    public Account removeParentAccount(Account parentAccount) {
+        return null;
+    }
+
+    public List<Account> getSubAccounts() {
         return subAccounts;
     }
 
-    public void setSubAccounts(Set<Account> subAccounts) {
+    public void setSubAccounts(List<Account> subAccounts) {
         this.subAccounts = subAccounts;
     }
 
-    public void addSubAccount(Account account) {
-        // set sub account hierarchy level to +1 of this current level
-        account.setParentAccount(this);
-        account.setHierarchyLevel(this.hierarchyLevel + 1);
-        this.subAccounts.add(account);
+    public void addSubAccount(Account account) {        
+        account.setHierarchyLevel(hierarchyLevel + 1);
+        account.addParentAccount(this);
     }
 
     /**
@@ -173,7 +217,7 @@ public class Account extends BaseEntity implements Visitable<Account> {
      * of levels below the parent account). Parent accounts
      * have a hierarchy level of 0.
      *
-     * @return hierarchy level.
+     * @return hierarchy level
      */
     public Integer getHierarchyLevel() {
         return hierarchyLevel;
@@ -181,6 +225,39 @@ public class Account extends BaseEntity implements Visitable<Account> {
 
     public void setHierarchyLevel(Integer hierarchyLevel) {
         this.hierarchyLevel = hierarchyLevel;
+    }
+
+    /**
+     * Returns true if this account is the top level (root)
+     * parent of an account hierarchy. This method will also
+     * return true if this account is the ONLY account in a hierarchy.
+     *
+     * @return true if account is a top level parent account
+     */
+    @Transient
+    public boolean isRootAccount() {
+        return parentAccount == null;
+    }
+
+    /**
+     * Returns true if this account is a sub-account of another.
+     *
+     * @return true if account is a sub-account
+     */
+    @Transient
+    public boolean isSubAccount() {
+        return parentAccount != null;
+    }
+
+    /**
+     * Returns true if this account has sub-accounts.
+     *
+     * @return true if account has sub-accounts
+     */
+    @Transient
+    public boolean hasSubAccounts() {
+        return !subAccounts.isEmpty();
+
     }
 
     /**
