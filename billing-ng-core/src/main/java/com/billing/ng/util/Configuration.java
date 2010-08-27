@@ -49,7 +49,6 @@ public enum Configuration {
     private static final Properties DEFAULTS;
     static {
         DEFAULTS = new Properties();
-        DEFAULTS.setProperty("customer.number.pattern", Customer.DEFAULT_NUMBER_PATTERN);
     }
 
     private static final String BLANK_VALUE = "";

@@ -19,6 +19,8 @@ package com.billing.ng.entities;
 
 import org.hibernate.validator.Email;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -43,18 +45,42 @@ public class Contact {
     private String mobilePhoneNumber;
     @Column
     private String workPhoneNumber;
+    @Column
+    private String faxNumber;
     @Column @Email
     private String email;
     @Column
     private String xmpp;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "streetAddress1", column = @Column(name = "mail_street_address1")),
+            @AttributeOverride(name = "streetAddress2", column = @Column(name = "mail_street_address2")),
+            @AttributeOverride(name = "streetAddress3", column = @Column(name = "mail_street_address3")),
+            @AttributeOverride(name = "city", column = @Column(name = "mail_city")),
+            @AttributeOverride(name = "state", column = @Column(name = "mail_state")),
+            @AttributeOverride(name = "country", column = @Column(name = "mail_country")),
+            @AttributeOverride(name = "postalCode", column = @Column(name = "mail_postal_code"))
+    })
     private Address mailingAddress;
+
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "streetAddress1", column = @Column(name = "bill_street_address1")),
+            @AttributeOverride(name = "streetAddress2", column = @Column(name = "bill_street_address2")),
+            @AttributeOverride(name = "streetAddress3", column = @Column(name = "bill_street_address3")),
+            @AttributeOverride(name = "city", column = @Column(name = "bill_city")),
+            @AttributeOverride(name = "state", column = @Column(name = "bill_state")),
+            @AttributeOverride(name = "country", column = @Column(name = "bill_country")),
+            @AttributeOverride(name = "postalCode", column = @Column(name = "bill_postal_code"))
+    })
     private Address billingAddress;
     
     @Column
     private boolean useMailingAddress = true;
+
+    public Contact() {
+    }
 
     public Long getId() {
         return id;
@@ -86,6 +112,14 @@ public class Contact {
 
     public void setWorkPhoneNumber(String workPhoneNumber) {
         this.workPhoneNumber = workPhoneNumber;
+    }
+
+    public String getFaxNumber() {
+        return faxNumber;
+    }
+
+    public void setFaxNumber(String faxNumber) {
+        this.faxNumber = faxNumber;
     }
 
     public String getEmail() {

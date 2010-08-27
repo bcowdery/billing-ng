@@ -18,16 +18,12 @@
 package com.billing.ng.entities;
 
 import com.billing.ng.util.HashUtils;
-import org.hibernate.validator.Email;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlTransient;
@@ -43,7 +39,7 @@ import java.util.List;
  */
 @MappedSuperclass
 @XmlTransient
-public class User extends BaseEntity {
+public abstract class User extends BaseEntity {
 
     public enum Gender { MALE, FEMALE }
 
@@ -85,7 +81,10 @@ public class User extends BaseEntity {
     private Gender gender;
     @Column @Enumerated(EnumType.STRING)
     private Salutation salutation;
-   
+
+    protected User() {
+    }
+
     public Long getId() {
         return id;
     }

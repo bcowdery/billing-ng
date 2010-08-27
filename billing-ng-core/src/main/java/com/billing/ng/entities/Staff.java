@@ -31,4 +31,15 @@ public class Staff extends User {
     
     @Column
     private String staffId;
+
+    public Staff() {
+    }
+
+    public String getStaffId() {
+        return staffId;
+    }
+
+    public void setStaffId(String staffId) {
+        this.staffId = staffId;
+    }
 }

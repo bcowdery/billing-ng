@@ -22,7 +22,9 @@ import org.hibernate.annotations.MapKey;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Customer
@@ -35,15 +37,22 @@ import java.util.Map;
 @Entity
 public class Customer extends User {
 
-    public static final String DEFAULT_NUMBER_PATTERN = "${customer.id}-${customer.userName}";
-
     @Column
     private String number;
+
+    @Column
+    private String companyName;
+    
+    @OneToMany(mappedBy = "customer")
+    private Set<Account> accounts;
 
     @CollectionOfElements
     @MapKey(columns = @Column(name = "attribute_name"))
     @Column(name = "attribute_value")
     private Map<String, String> attributes;
+
+    public Customer() {
+    }
 
     public String getNumber() {
         return number;
@@ -51,6 +60,22 @@ public class Customer extends User {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+    
+    public Set<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(Set<Account> accounts) {
+        this.accounts = accounts;
     }
 
     public Map<String, String> getAttributes() {

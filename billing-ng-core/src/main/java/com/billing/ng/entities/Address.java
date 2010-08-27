@@ -34,13 +34,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlTransient
 public class Address extends BaseEntity {
 
-    @Id @GeneratedValue
-    private Long id;
-
     @Column
     private String streetAddress1;
     @Column
     private String streetAddress2;
+    @Column
+    private String streetAddress3;
     @Column
     private String city;
     @Column
@@ -50,12 +49,7 @@ public class Address extends BaseEntity {
     @Column
     private String postalCode;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public Address() {
     }
 
     public String getStreetAddress1() {
@@ -72,6 +66,14 @@ public class Address extends BaseEntity {
 
     public void setStreetAddress2(String streetAddress2) {
         this.streetAddress2 = streetAddress2;
+    }
+
+    public String getStreetAddress3() {
+        return streetAddress3;
+    }
+
+    public void setStreetAddress3(String streetAddress3) {
+        this.streetAddress3 = streetAddress3;
     }
 
     public String getCity() {
