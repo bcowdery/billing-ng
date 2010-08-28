@@ -2,22 +2,14 @@
 <project version="4">
   <component name="ChangeListManager" verified="true">
     <list default="true" readonly="true" id="38551b27-a239-4bef-8ac3-13d37f1ec9e7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/validator" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/User.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Contact.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Contact.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Customer.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Customer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Address.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Address.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/structure/Visitable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/resources/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/resources/hibernate.cfg.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Account.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/structure/Visitor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/structure" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Staff.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Staff.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/AccountTest.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/AccountTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/util/Configuration.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/util/Configuration.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Account.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Account.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-web/build.xml" afterPath="$PROJECT_DIR$/billing-ng-web/build.xml" />
     </list>
-    <ignored path="billing-ng.iws" />
     <ignored path=".idea/workspace.xml" />
+    <ignored path="billing-ng.iws" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,11 +66,22 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Contact.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Contact.java">
+      <file leaf-file-name="Account.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Account.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="48" selection-start="1176" selection-end="1176" vertical-scroll-proportion="0.19428572">
+            <state line="194" column="103" selection-start="5687" selection-end="5687" vertical-scroll-proportion="0.51943463">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AccountTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/AccountTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="177" column="86" selection-start="6109" selection-end="6109" vertical-scroll-proportion="-128.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -93,22 +96,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/billing-ng-core/testng.xml" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/UserTest.java" />
-        <option value="$PROJECT_DIR$/build.properties" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/util/ConfigurationTest.java" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/BaseEntityTest.java" />
-        <option value="$PROJECT_DIR$/billing-ng-core/build.xml" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/structure/Visitable.java" />
         <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/structure/Visitor.java" />
         <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/util/Configuration.java" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Account.java" />
         <option value="$PROJECT_DIR$/billing-ng-core/src/main/resources/hibernate.cfg.xml" />
         <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Staff.java" />
         <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Customer.java" />
         <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/User.java" />
         <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Address.java" />
         <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Contact.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/UserTest.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/CustomerTest.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/util/HashUtilsTest.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/graph/AccountGraphVisitor.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/graph/AccountGraphVizVisitor.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/graph/AccountDOTGraphVizVisitor.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/AccountTest.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Account.java" />
       </list>
     </option>
   </component>
@@ -150,7 +153,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Favorites" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -253,22 +255,113 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="billing-ng" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="billing-ng-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ng" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="graph" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="billing-ng" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="billing-ng-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ng" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="entities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="billing-ng" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="billing-ng-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ng" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dao" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Favorites" />
       <pane id="PackagesPane">
         <subPane />
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="project.structure.last.edited" value="Modules" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="TestNG" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
@@ -302,45 +395,16 @@
     <option name="referencePos" value="0" />
     <option name="showLabels" value="true" />
   </component>
-  <component name="RunManager" selected="TestNG.BaseEntityTest">
-    <configuration default="false" name="ConfigurationTest" type="TestNG" factoryName="TestNG" temporary="true">
-      <extension name="snapshooter" />
-      <module name="billing-ng-core" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="com.billing.ng.util" />
-      <option name="MAIN_CLASS_NAME" value="com.billing.ng.util.ConfigurationTest" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="MoneyTest.testAdd" type="TestNG" factoryName="TestNG" temporary="true">
+  <component name="RunManager" selected="TestNG.AccountTest.testRemoveParent">
+    <configuration default="false" name="AccountTest.testIsSubAccount" type="TestNG" factoryName="TestNG" temporary="true">
       <extension name="snapshooter" />
       <module name="billing-ng-core" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
       <option name="PACKAGE_NAME" value="com.billing.ng.entities" />
-      <option name="MAIN_CLASS_NAME" value="com.billing.ng.entities.MoneyTest" />
-      <option name="METHOD_NAME" value="testAdd" />
+      <option name="MAIN_CLASS_NAME" value="com.billing.ng.entities.AccountTest" />
+      <option name="METHOD_NAME" value="testIsSubAccount" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="VM_PARAMETERS" />
@@ -361,44 +425,15 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="BaseEntityTest" type="TestNG" factoryName="TestNG" temporary="true">
+    <configuration default="false" name="AccountTest.testAddParent" type="TestNG" factoryName="TestNG" temporary="true">
       <extension name="snapshooter" />
       <module name="billing-ng-core" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
       <option name="PACKAGE_NAME" value="com.billing.ng.entities" />
-      <option name="MAIN_CLASS_NAME" value="com.billing.ng.entities.BaseEntityTest" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="BaseEntityTest.testSingleValidation" type="TestNG" factoryName="TestNG" temporary="true">
-      <extension name="snapshooter" />
-      <module name="billing-ng-core" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="com.billing.ng.entities" />
-      <option name="MAIN_CLASS_NAME" value="com.billing.ng.entities.BaseEntityTest" />
-      <option name="METHOD_NAME" value="testSingleValidation" />
+      <option name="MAIN_CLASS_NAME" value="com.billing.ng.entities.AccountTest" />
+      <option name="METHOD_NAME" value="testAddParent" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="VM_PARAMETERS" />
@@ -419,15 +454,73 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="BaseEntityTest.testMultipleValidations" type="TestNG" factoryName="TestNG" temporary="true">
+    <configuration default="false" name="AccountTest.testAddNewMiddleParent" type="TestNG" factoryName="TestNG" temporary="true">
       <extension name="snapshooter" />
       <module name="billing-ng-core" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
       <option name="PACKAGE_NAME" value="com.billing.ng.entities" />
-      <option name="MAIN_CLASS_NAME" value="com.billing.ng.entities.BaseEntityTest" />
-      <option name="METHOD_NAME" value="testMultipleValidations" />
+      <option name="MAIN_CLASS_NAME" value="com.billing.ng.entities.AccountTest" />
+      <option name="METHOD_NAME" value="testAddNewMiddleParent" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="AccountTest.testVisitorTransversal" type="TestNG" factoryName="TestNG" temporary="true">
+      <extension name="snapshooter" />
+      <module name="billing-ng-core" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="com.billing.ng.entities" />
+      <option name="MAIN_CLASS_NAME" value="com.billing.ng.entities.AccountTest" />
+      <option name="METHOD_NAME" value="testVisitorTransversal" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="AccountTest.testRemoveParent" type="TestNG" factoryName="TestNG" temporary="true">
+      <extension name="snapshooter" />
+      <module name="billing-ng-core" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="com.billing.ng.entities" />
+      <option name="MAIN_CLASS_NAME" value="com.billing.ng.entities.AccountTest" />
+      <option name="METHOD_NAME" value="testRemoveParent" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="VM_PARAMETERS" />
@@ -556,11 +649,11 @@
       </method>
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="TestNG.ConfigurationTest" />
-      <item index="1" class="java.lang.String" itemvalue="TestNG.MoneyTest.testAdd" />
-      <item index="2" class="java.lang.String" itemvalue="TestNG.BaseEntityTest" />
-      <item index="3" class="java.lang.String" itemvalue="TestNG.BaseEntityTest.testSingleValidation" />
-      <item index="4" class="java.lang.String" itemvalue="TestNG.BaseEntityTest.testMultipleValidations" />
+      <item index="0" class="java.lang.String" itemvalue="TestNG.AccountTest.testIsSubAccount" />
+      <item index="1" class="java.lang.String" itemvalue="TestNG.AccountTest.testAddParent" />
+      <item index="2" class="java.lang.String" itemvalue="TestNG.AccountTest.testAddNewMiddleParent" />
+      <item index="3" class="java.lang.String" itemvalue="TestNG.AccountTest.testVisitorTransversal" />
+      <item index="4" class="java.lang.String" itemvalue="TestNG.AccountTest.testRemoveParent" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -588,8 +681,12 @@
     <option name="myMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="$PROJECT_DIR$/resources" />
-          <option name="myCopyRoot" value="$PROJECT_DIR$/resources" />
+          <option name="myVcsRoot" value="$PROJECT_DIR$/billing-ng-ear" />
+          <option name="myCopyRoot" value="$PROJECT_DIR$/billing-ng-ear" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="$PROJECT_DIR$/.idea" />
+          <option name="myCopyRoot" value="$PROJECT_DIR$/.idea" />
         </SvnCopyRootSimple>
         <SvnCopyRootSimple>
           <option name="myVcsRoot" value="$PROJECT_DIR$/billing-ng-web" />
@@ -600,12 +697,8 @@
           <option name="myCopyRoot" value="$PROJECT_DIR$" />
         </SvnCopyRootSimple>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="$PROJECT_DIR$/.idea" />
-          <option name="myCopyRoot" value="$PROJECT_DIR$/.idea" />
-        </SvnCopyRootSimple>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="$PROJECT_DIR$/billing-ng-ear" />
-          <option name="myCopyRoot" value="$PROJECT_DIR$/billing-ng-ear" />
+          <option name="myVcsRoot" value="$PROJECT_DIR$/resources" />
+          <option name="myCopyRoot" value="$PROJECT_DIR$/resources" />
         </SvnCopyRootSimple>
         <SvnCopyRootSimple>
           <option name="myVcsRoot" value="$PROJECT_DIR$/billing-ng-core" />
@@ -623,30 +716,30 @@
     </option>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="25" width="1600" height="850" extended-state="0" />
+    <frame x="0" y="25" width="1680" height="1000" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32990867" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CheckStyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24520548" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32968536" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27824402" sideWeight="0.6634747" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22455275" sideWeight="0.6815069" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3269494" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3105023" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="1746" y="240" width="1550" height="703" />
+      <window_info id="Regex" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Properties" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32880434" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32968536" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Regex" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsManagerConfiguration">
@@ -682,120 +775,96 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Rate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="13" selection-start="1242" selection-end="1242" vertical-scroll-proportion="-87.5" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Staff.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="64" selection-start="968" selection-end="968" vertical-scroll-proportion="-136.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="62" selection-start="2466" selection-end="2466" vertical-scroll-proportion="-1.2871429" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Address.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="32" selection-start="1402" selection-end="1402" vertical-scroll-proportion="0.67285717" />
+      </provider>
+    </entry>
+    <entry file="jar:///opt/jboss-5.1.0.GA/common/lib/hibernate-validator.jar!/org/hibernate/validator/Email.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="0" selection-start="508" selection-end="508" vertical-scroll-proportion="0.26714286" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/MoneyTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="13" selection-start="1160" selection-end="1160" vertical-scroll-proportion="0.26153848" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/BaseEntityTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="81" column="23" selection-start="2290" selection-end="2290" vertical-scroll-proportion="1.2914286" />
+        <state line="39" column="13" selection-start="1275" selection-end="1275" vertical-scroll-proportion="0.20118344" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/build.xml">
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/UserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="195" column="114" selection-start="7732" selection-end="7732" vertical-scroll-proportion="1.1092565">
-          <folding />
-        </state>
+        <state line="61" column="70" selection-start="1908" selection-end="1908" vertical-scroll-proportion="0.7183432" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/structure/Visitor.java">
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/test/Patterns.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="46" selection-start="974" selection-end="974" vertical-scroll-proportion="-93.5">
-          <folding />
-        </state>
+        <state line="20" column="68" selection-start="530" selection-end="530" vertical-scroll-proportion="0.36213017" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/util/Configuration.java">
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/util/HashUtilsTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="36" selection-start="1513" selection-end="1513" vertical-scroll-proportion="0.5342857">
-          <folding />
-        </state>
+        <state line="40" column="116" selection-start="1301" selection-end="1301" vertical-scroll-proportion="0.30177516" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/structure/Visitable.java">
+    <entry file="jar://$PROJECT_DIR$/lib/testng-5.12.1/testng-5.12.1.jar!/org/testng/Assert.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="17" selection-start="1015" selection-end="1015" vertical-scroll-proportion="0.3157143">
-          <folding />
-        </state>
+        <state line="108" column="0" selection-start="6067" selection-end="6067" vertical-scroll-proportion="0.8423493" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/resources/hibernate.cfg.xml">
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/graph/AccountDOTGraphVizVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="81" selection-start="843" selection-end="843" vertical-scroll-proportion="0.4857143">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///opt/jboss-5.1.0.GA/common/lib/ejb3-persistence.jar!/javax/persistence/DiscriminatorColumn.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="71" selection-start="501" selection-end="501" vertical-scroll-proportion="0.26714286">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Account.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="39" selection-start="2141" selection-end="2141" vertical-scroll-proportion="0.2957143">
+        <state line="46" column="85" selection-start="1790" selection-end="1790" vertical-scroll-proportion="0.6236686">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/BaseEntity.java">
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Contact.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="22" selection-start="1568" selection-end="1568" vertical-scroll-proportion="0.3157143">
+        <state line="36" column="13" selection-start="1166" selection-end="1166" vertical-scroll-proportion="-1.695858">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Customer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="50" selection-start="1304" selection-end="1304" vertical-scroll-proportion="-120.5">
+        <state line="37" column="13" selection-start="1191" selection-end="1191" vertical-scroll-proportion="-0.14674556">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/AccountTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="177" column="86" selection-start="6109" selection-end="6109" vertical-scroll-proportion="-128.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Rate.java">
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Account.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="13" selection-start="1242" selection-end="1242" vertical-scroll-proportion="-87.5">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Staff.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="64" selection-start="968" selection-end="968" vertical-scroll-proportion="-136.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="62" selection-start="2466" selection-end="2466" vertical-scroll-proportion="-1.2871429">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Address.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="32" selection-start="1402" selection-end="1402" vertical-scroll-proportion="0.67285717">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///opt/jboss-5.1.0.GA/common/lib/hibernate-validator.jar!/org/hibernate/validator/Email.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="508" selection-end="508" vertical-scroll-proportion="0.26714286">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Contact.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="48" selection-start="1176" selection-end="1176" vertical-scroll-proportion="0.19428572">
+        <state line="194" column="103" selection-start="5687" selection-end="5687" vertical-scroll-proportion="0.51943463">
           <folding />
         </state>
       </provider>

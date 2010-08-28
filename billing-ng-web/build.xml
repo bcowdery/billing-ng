@@ -8,11 +8,13 @@
     <property name="war.dir" value="${build.dir}/${ant.project.name}.war" />
     <property name="classes.dir" value="${war.dir}/WEB-INF/classes"/>
 
+
     <!-- paths -->
     <path id="compile.classpath">
         <fileset dir="${j2ee5.dir}" includes="*.jar"/>
         <fileset dir="${j2ee5client.dir}" includes="*.jar"/>
     </path>
+
 
     <!-- targets -->
     <target name="dist" depends="build, svn.revision" description="Build and package as a distributable .war file.">

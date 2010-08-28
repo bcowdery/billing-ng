@@ -158,26 +158,52 @@ public class Account extends BaseEntity implements Visitable<Account> {
         this.parentAccount = parentAccount;
     }
 
-    public void addParentAccount(Account parentAccount) {
-        if (parentAccount != null) {
+    /**
+     * Adds the given account as a parent of this sub-account. If this account already
+     * has a parent, then the new parent will be inserted below the existing parent
+     * adding a new hierarchy level by shifting this sub-account down one level.
+     *
+     *
+     * Adding a new parent to the root of the tree:
+     * <code>
+     *        a      new root e      e
+     *        |                      |
+     *   b ---+---c                  a
+     *                               |
+     *                          b ---+---c
+     * </code>
+     *
+     * Adding a new parent to a sub-account:
+     * <code>
+     *        a      new parent e      a
+     *        |                        |
+     *   b ---+---c               e ---+---c
+     *                            |
+     *                            b 
+     * </code>
+     *
+     * @param account account to add as a parent
+     */
+    public void addParentAccount(Account account) {
+        if (account != null) {
             // insert a new parent account for "this" sub-account, shifting the sub-account
             // down 1 level in the hierarchy and placing the new parent under the old one
             if (!isRootAccount()) {
                 // move the old parent above the new parent
-                parentAccount.setParentAccount(this.parentAccount);
-                parentAccount.setHierarchyLevel(this.parentAccount.getHierarchyLevel() + 1);
-                this.parentAccount.getSubAccounts().add(parentAccount);
+                account.setParentAccount(this.parentAccount);
+                account.setHierarchyLevel(this.parentAccount.getHierarchyLevel() + 1);
+                this.parentAccount.getSubAccounts().add(account);
                 // move the sub-account below the new parent
                 this.parentAccount.getSubAccounts().remove(this);
             }
 
             // set the parent of "this" sub-account
-            this.parentAccount = parentAccount;
-            parentAccount.getSubAccounts().add(this);
+            this.parentAccount = account;
+            account.getSubAccounts().add(this);
 
             // shift sub-account hierarchy levels down by 1 to reflect addition of a new parent
-            if (parentAccount.hasSubAccounts()) {
-                parentAccount.accept(
+            if (account.hasSubAccounts()) {
+                account.accept(
                         new Visitor<Account, Object>() {
                             public Object visit(Account account) {
                                 account.setHierarchyLevel(!account.isRootAccount()
@@ -194,9 +220,26 @@ public class Account extends BaseEntity implements Visitable<Account> {
         }
     }
 
-    // todo: handle removal of parent account
-    public Account removeParentAccount(Account parentAccount) {
-        return null;
+    public Account removeParentAccount(Account account) {
+        if (account != null) {
+            // removing a root account would orphan all sub-accounts
+            if (account.isRootAccount() && account.hasSubAccounts()) {
+                if (account.hasSubAccounts())
+                    throw new IllegalArgumentException("Cannot remove a root account from the hierarchy.");
+            }
+
+            // non root account, shift all sub-accounts up to parent
+            if (!account.isRootAccount()) {
+                account.getParentAccount().getSubAccounts().remove(account);
+
+                for (Account subAccount : account.getSubAccounts()) {
+                    subAccount.addParentAccount(account.getParentAccount());
+                }
+                account.getSubAccounts().clear();
+            }
+        }
+
+        return account;
     }
 
     public List<Account> getSubAccounts() {
@@ -271,5 +314,14 @@ public class Account extends BaseEntity implements Visitable<Account> {
      */
     public <R> R accept(Visitor<Account, R> visitor) {
         return visitor.visit(this);
+    }
+
+    @Override public String toString() {
+        return "Account{"
+               + "id=" + id
+               + ", hierarchyLevel=" + hierarchyLevel
+               + ", subAccounts=" + subAccounts
+               + ", parentAccount=" + (parentAccount != null ? parentAccount.getId() : null)
+               + '}';
     }
 }

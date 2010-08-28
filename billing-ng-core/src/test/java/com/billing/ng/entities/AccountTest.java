@@ -17,13 +17,16 @@
 
 package com.billing.ng.entities;
 
+import com.billing.ng.entities.structure.Visitor;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.hamcrest.Matchers.*;
+import static org.testng.Assert.*;
 
 /**
  * @author Brian Cowdery
@@ -159,22 +162,32 @@ public class AccountTest {
         assertThat(subAccount2.getHierarchyLevel(), is(Account.ROOT_HIERARCHY_LEVEL + 1));
     }
 
-
-    // todo: not supported yet
-    @Test(dataProvider = "mock_account_hierarchy", enabled = false)
+    @Test(dataProvider = "mock_account_hierarchy", expectedExceptions = IllegalArgumentException.class)
+    public void testRemoveRootParent(Account root) {
+        Account subAccount = root.getSubAccounts().get(0);
+        subAccount.removeParentAccount(root);
+    }
+    
+    @Test(dataProvider = "mock_account_hierarchy")
     public void testRemoveParent(Account root) {
         Account subAccount = root.getSubAccounts().get(0);
 
-        assertFalse(subAccount.isRootAccount());
-        assertTrue(subAccount.isSubAccount());
-        assertThat(subAccount.getHierarchyLevel(), is(Account.ROOT_HIERARCHY_LEVEL + 1));
+        Account subAccount3 = new Account();
+        subAccount3.setId(4L);
 
-        subAccount.addParentAccount(null);
+        subAccount.addSubAccount(subAccount3);
+
+        assertFalse(subAccount3.isRootAccount());
+        assertTrue(subAccount3.isSubAccount());
+        assertThat(subAccount3.getHierarchyLevel(), is(Account.ROOT_HIERARCHY_LEVEL + 2));
+
+        subAccount3.removeParentAccount(subAccount);
         
-        // sub account has no parent, is now root
-        assertTrue(subAccount.isRootAccount());
-        assertFalse(subAccount.isSubAccount());
-        assertThat(subAccount.getHierarchyLevel(), is(Account.ROOT_HIERARCHY_LEVEL));
+        // removed middle parent, subAccount3 is now directly below root
+        assertFalse(subAccount3.isRootAccount());
+        assertTrue(subAccount3.isSubAccount());
+        assertThat(subAccount3.getParentAccount().getId(), is(1L));
+        assertThat(subAccount3.getHierarchyLevel(), is(Account.ROOT_HIERARCHY_LEVEL + 1));
     }
 
     @Test(dataProvider = "mock_account_hierarchy")
@@ -192,7 +205,23 @@ public class AccountTest {
         assertThat(subAccount3.getHierarchyLevel(), is(Account.ROOT_HIERARCHY_LEVEL + 1));
     }
 
-    public void testVisitorTransversal() {
+    @Test(dataProvider = "mock_account_hierarchy")
+    public void testVisitorTransversal(Account root) {
+        List<Long> ids = root.accept(
+                new Visitor<Account, List<Long>>() {
+                    private List<Long> ids = new ArrayList<Long>();
 
+                    public List<Long> visit(Account account) {
+                        ids.add(account.getId());
+
+                        for (Account subAccount : account.getSubAccounts())
+                            subAccount.accept(this);
+
+                        return ids;
+                    }
+                }
+        );
+
+        assertThat(ids, hasItems(1L, 2L, 3L));
     }
 }
