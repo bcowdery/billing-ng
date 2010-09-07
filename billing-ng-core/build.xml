@@ -184,6 +184,21 @@
         <echo message="Generated ddl ${build.dir}/${ddl-sql.file} with ddl.drop = ${ddl.drop}"/>
     </target>
 
+    <target name="generate.changelog"
+            description="Generates a liquibase changelog that can be used to re-create an existing database schema."
+            depends="init, prompt-db.properties, set-db.properties">
+        <generateChangeLog outputFile="${db.changelog.file}"
+                           driver="${db.driver}"
+                           url="${db.url}"
+                           username="${db.username}"
+                           password="${db.password}"
+                           databasechangelogtablename="${db.changelog.tablename}"
+                           databasechangeloglocktablename="${db.changelog.lock-tablename}"
+                           promptonnonlocaldatabase="${db.prompt.nonlocal}"
+                           classpathref="liquibase.classpath"/>
+        <echo message="Generated changelog ${db.changelog.releasefile}"/>
+    </target>    
+
     <target name="db.update"
             description="Updates the database to the most recent version."
             depends="init, prompt-db.properties, set-db.properties">
@@ -234,21 +249,6 @@
         <echo message="Tagged database as version '${db.tag}'"/>
     </target>
 
-    <target name="generate.changelog"
-            description="Generates a liquibase changelog that can be used to re-create an existing database schema."
-            depends="init, prompt-db.properties, set-db.properties">
-        <generateChangeLog outputFile="${db.changelog.file}"
-                           driver="${db.driver}"
-                           url="${db.url}"
-                           username="${db.username}"
-                           password="${db.password}"                           
-                           databasechangelogtablename="${db.changelog.tablename}"
-                           databasechangeloglocktablename="${db.changelog.lock-tablename}"
-                           promptonnonlocaldatabase="${db.prompt.nonlocal}"
-                           classpathref="liquibase.classpath"/>
-        <echo message="Generated changelog ${db.changelog.file}"/>
-    </target>
-
     <target name="prompt-db.properties" unless="db.noprompt">
         <input message="Database URL" addproperty="db.url" defaultvalue="${db.default.url}"/>
         <input message="Database username" addproperty="db.username" defaultvalue="${db.default.username}"/>
@@ -295,10 +295,11 @@
             </manifest>
         </jar>
 
-        <!-- copy database schema ddl and xml schema files -->
+        <!-- copy database change-logs, ddl and xml schema files -->
         <copy todir="${dist.dir}">
             <fileset dir="${build.dir}" includes="*.sql"/>
             <fileset dir="${build.dir}" includes="*.xsd"/>
+            <fileset dir="${src.dir}/main/resources/" includes="changelog*.xml"/>
         </copy>
     </target>
 
