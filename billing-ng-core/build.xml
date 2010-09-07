@@ -28,7 +28,13 @@
         <pathelement path="${test-build.dir}"/>
         <path refid="testng.classpath"/>
     </path>
-   
+
+    <path  id="liquibase.classpath">
+        <fileset dir="${liquibase.dir}" includes="liquibase.jar"/>
+        <fileset dir="${mysql-connector.dir}" includes="*.jar"/>
+        <path refid="compile.classpath"/>
+    </path>
+
     <path id="hibernate.classpath">
         <fileset dir="${hibernate-tools.dir}" includes="**/*.jar"/>
         <path refid="compile.classpath"/>
@@ -178,6 +184,87 @@
         <echo message="Generated ddl ${build.dir}/${ddl-sql.file} with ddl.drop = ${ddl.drop}"/>
     </target>
 
+    <target name="db.update"
+            description="Updates the database to the most recent version."
+            depends="init, prompt-db.properties, set-db.properties">
+        <input message="Drop schema before updating?" addproperty="db.drop" defaultvalue="false"/>
+        <updateDatabase changeLogFile="${db.changelog.file}"
+                        driver="${db.driver}"
+                        url="${db.url}"
+                        username="${db.username}"
+                        password="${db.password}"
+                        databasechangelogtablename="${db.changelog.tablename}"
+                        databasechangeloglocktablename="${db.changelog.lock-tablename}"
+                        promptOnNonLocalDatabase="${db.prompt.nonlocal}"
+                        dropFirst="${db.drop}"
+                        classpathref="liquibase.classpath"/>
+        <echo message="Updated database to the most recent version with db.drop = ${db.drop}"/>
+    </target>
+
+    <target name="db.rollback"
+            description="Rollback the database to the given version tag."
+            depends="init, prompt-db.properties, set-db.properties">
+        <input message="Rollback to tag" addproperty="db.rollback.tag" defaultvalue="${release.version}"/>
+        <rollbackDatabase changeLogFile="${db.changelog.file}"
+                          driver="${db.driver}"
+                          url="${db.url}"
+                          username="${db.username}"
+                          password="${db.password}"
+                          databasechangelogtablename="${db.changelog.tablename}"
+                          databasechangeloglocktablename="${db.changelog.lock-tablename}"
+                          promptonnonlocaldatabase="${db.prompt.nonlocal}"
+                          rollbackTag="${db.rollback.tag}"
+                          classpathref="liquibase.classpath"/>
+        <echo message="Rolled back database to version '${db.rollback.tag}'"/>
+    </target>
+
+    <target name="db.tag"
+            description="Tags the database with a version tag for future rollbacks/upgrades."
+            depends="init, prompt-db.properties, set-db.properties">
+        <input message="Tag database as version" addproperty="db.tag" defaultvalue="${release.version}"/>
+        <tagDatabase driver="${db.driver}"
+                     url="${db.url}"
+                     username="${db.username}"
+                     password="${db.password}"
+                     databasechangelogtablename="${db.changelog.tablename}"
+                     databasechangeloglocktablename="${db.changelog.lock-tablename}"
+                     promptonnonlocaldatabase="${db.prompt.nonlocal}"
+                     tag="${db.tag}"
+                     classpathref="liquibase.classpath"/>
+        <echo message="Tagged database as version '${db.tag}'"/>
+    </target>
+
+    <target name="generate.changelog"
+            description="Generates a liquibase changelog that can be used to re-create an existing database schema."
+            depends="init, prompt-db.properties, set-db.properties">
+        <generateChangeLog outputFile="${db.changelog.file}"
+                           driver="${db.driver}"
+                           url="${db.url}"
+                           username="${db.username}"
+                           password="${db.password}"                           
+                           databasechangelogtablename="${db.changelog.tablename}"
+                           databasechangeloglocktablename="${db.changelog.lock-tablename}"
+                           promptonnonlocaldatabase="${db.prompt.nonlocal}"
+                           classpathref="liquibase.classpath"/>
+        <echo message="Generated changelog ${db.changelog.file}"/>
+    </target>
+
+    <target name="prompt-db.properties" unless="db.noprompt">
+        <input message="Database URL" addproperty="db.url" defaultvalue="${db.default.url}"/>
+        <input message="Database username" addproperty="db.username" defaultvalue="${db.default.username}"/>
+        <input message="Database password" addproperty="db.password" defaultvalue="${db.default.password}"/>
+        <input message="Database driver" addproperty="db.driver" defaultvalue="${db.default.driver}"/>
+    </target>    
+
+    <target name="set-db.properties" unless="db.url, db.username, db.password, db.driver">
+        <property name="db.url" value="${db.default.url}"/>
+        <property name="db.username" value="${db.default.username}"/>
+        <property name="db.password" value="${db.default.password}"/>
+        <property name="db.driver" value="${db.default.driver}"/>
+        
+        <echo message="Using database config: ${db.url} ${db.username}/${db.password} (driver ${db.driver})"/>
+    </target>
+
     <target name="set-ddl-drop.property" unless="ddl.drop">
         <property name="ddl.drop" value="false"/>
     </target>
@@ -251,6 +338,7 @@
         <!-- task definitions -->
         <taskdef resource="testngtasks" classpathref="testng.classpath"/>
         <taskdef resource="checkstyletask.properties" classpathref="checkstyle.classpath"/>
+        <taskdef resource="liquibasetasks.properties" classpathref="liquibase.classpath"/>
         <taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="hibernate.classpath"/>
         <taskdef name="schemagen" classname="com.sun.tools.jxc.SchemaGenTask" classpathref="xjc.classpath"/>
     </target>
