@@ -17,7 +17,6 @@
 
 package com.billing.ng.util;
 
-import com.billing.ng.entities.Customer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

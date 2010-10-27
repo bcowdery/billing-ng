@@ -49,6 +49,11 @@ import java.util.List;
 @Entity
 public class Account extends BaseEntity implements Visitable<Account> {
 
+    /**
+     * Simple visitor that updates the hierarchy level of all visited accounts. Used
+     * during the addition/removal of nodes from the account hierarchy to keep hierarchy
+     * levels in sync.
+     */
     private static class HierarchyLevelUpdateVisitor implements Visitor<Account, Object> {
         public Object visit(Account account) {
             if (!account.isRootAccount()) {
