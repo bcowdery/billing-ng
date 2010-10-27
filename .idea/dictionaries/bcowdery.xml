@@ -2,8 +2,12 @@
   <dictionary name="bcowdery">
     <words>
       <w>affero</w>
+      <w>changelog</w>
       <w>checkstyle</w>
       <w>cowdery</w>
+      <w>effectivley</w>
+      <w>javabeans</w>
+      <w>liquibase</w>
     </words>
   </dictionary>
 </component>

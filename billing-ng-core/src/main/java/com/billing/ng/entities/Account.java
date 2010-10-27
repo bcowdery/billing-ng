@@ -28,6 +28,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,15 +72,6 @@ public class Account extends BaseEntity implements Visitable<Account> {
 
     public static final Integer ROOT_HIERARCHY_LEVEL = 0;
 
-    public enum BillingType {
-        /** Accrue charges under the customer holding this account. */
-        CUSTOMER,
-        /** Accrue charges under this account, using the account contact information instead of the customers. */
-        ACCOUNT,
-        /** Accrue charges for each sub-account separately, using the sub-accounts contact information.*/
-        SUB_ACCOUNT
-    }
-
     @Id @GeneratedValue
     private Long id;
 
@@ -99,6 +91,9 @@ public class Account extends BaseEntity implements Visitable<Account> {
     @Column
     private BillingType billingType;
 
+    @OneToOne
+    private BillingCycle billingCycle;
+    
     @ManyToOne
     private Account parentAccount;
 
@@ -160,6 +155,7 @@ public class Account extends BaseEntity implements Visitable<Account> {
 
     /**
      * Returns the billing type for this account.
+     *
      * @return billing type
      */
     public BillingType getBillingType() {
@@ -168,6 +164,19 @@ public class Account extends BaseEntity implements Visitable<Account> {
 
     public void setBillingType(BillingType billingType) {
         this.billingType = billingType;
+    }
+
+    /**
+     * Returns the billing cycle for this account.
+     *
+     * @return billing cycle
+     */
+    public BillingCycle getBillingCycle() {
+        return billingCycle;
+    }
+
+    public void setBillingCycle(BillingCycle billingCycle) {
+        this.billingCycle = billingCycle;
     }
 
     public Account getParentAccount() {
