@@ -112,7 +112,7 @@ public class AccountTest {
 
         // set a new parent for the root
         Account parent = new Account();
-        root.addParentAccount(parent);
+        root.addParent(parent);
 
         // new parent is now root
         assertTrue(parent.isRootAccount());
@@ -135,7 +135,7 @@ public class AccountTest {
                 
         Account parent = new Account();
         parent.setId(4L);
-        subAccount1.addParentAccount(parent);
+        subAccount1.addParent(parent);
 
         // root account is still root
         assertTrue(root.isRootAccount());
@@ -162,10 +162,9 @@ public class AccountTest {
         assertThat(subAccount2.getHierarchyLevel(), is(Account.ROOT_HIERARCHY_LEVEL + 1));
     }
 
-    @Test(dataProvider = "mock_account_hierarchy", expectedExceptions = IllegalArgumentException.class)
+    @Test(dataProvider = "mock_account_hierarchy", expectedExceptions = UnsupportedOperationException.class)
     public void testRemoveRootParent(Account root) {
-        Account subAccount = root.getSubAccounts().get(0);
-        subAccount.removeParentAccount(root);
+        root.remove();
     }
     
     @Test(dataProvider = "mock_account_hierarchy")
@@ -181,8 +180,8 @@ public class AccountTest {
         assertTrue(subAccount3.isSubAccount());
         assertThat(subAccount3.getHierarchyLevel(), is(Account.ROOT_HIERARCHY_LEVEL + 2));
 
-        subAccount3.removeParentAccount(subAccount);
-        
+        subAccount.remove();
+
         // removed middle parent, subAccount3 is now directly below root
         assertFalse(subAccount3.isRootAccount());
         assertTrue(subAccount3.isSubAccount());

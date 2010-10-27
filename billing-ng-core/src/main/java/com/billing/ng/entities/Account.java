@@ -49,7 +49,22 @@ import java.util.List;
 @Entity
 public class Account extends BaseEntity implements Visitable<Account> {
 
-    public static Integer ROOT_HIERARCHY_LEVEL = 0;
+    private static class HierarchyLevelUpdateVisitor implements Visitor<Account, Object> {
+        public Object visit(Account account) {
+            if (!account.isRootAccount()) {
+                account.setHierarchyLevel(account.getParentAccount().getHierarchyLevel() + 1);
+            } else {
+                account.setHierarchyLevel(ROOT_HIERARCHY_LEVEL);
+            }
+
+            for (Account subAccount : account.getSubAccounts())
+                subAccount.accept(this);
+
+            return null;
+        }
+    }
+
+    public static final Integer ROOT_HIERARCHY_LEVEL = 0;
 
     public enum BillingType {
         /** Accrue charges under the customer holding this account. */
@@ -154,6 +169,15 @@ public class Account extends BaseEntity implements Visitable<Account> {
         return parentAccount;
     }
 
+    /**
+     * Sets the parent account to the given Account. Do not use this method to manipulate the
+     * structure of a hierarchy. Instead use the {@link #addParent(Account)} and
+     * {@link #remove()} methods.
+     *
+     * This method is provided for Hibernate and other tools that expect valid Javabeans getters and setters. 
+     *
+     * @param parentAccount parent account to set
+     */
     public void setParentAccount(Account parentAccount) {
         this.parentAccount = parentAccount;
     }
@@ -163,28 +187,27 @@ public class Account extends BaseEntity implements Visitable<Account> {
      * has a parent, then the new parent will be inserted below the existing parent
      * adding a new hierarchy level by shifting this sub-account down one level.
      *
-     *
      * Adding a new parent to the root of the tree:
      * <code>
      *        a      new root e      e
      *        |                      |
-     *   b ---+---c                  a
+     *   b ---+--- c                 a
      *                               |
-     *                          b ---+---c
+     *                          b ---+--- c
      * </code>
      *
      * Adding a new parent to a sub-account:
      * <code>
      *        a      new parent e      a
      *        |                        |
-     *   b ---+---c               e ---+---c
+     *   b ---+--- c              e ---+--- c
      *                            |
      *                            b 
      * </code>
      *
      * @param account account to add as a parent
      */
-    public void addParentAccount(Account account) {
+    public void addParent(Account account) {
         if (account != null) {
             // insert a new parent account for "this" sub-account, shifting the sub-account
             // down 1 level in the hierarchy and placing the new parent under the old one
@@ -202,46 +225,48 @@ public class Account extends BaseEntity implements Visitable<Account> {
             account.getSubAccounts().add(this);
 
             // shift sub-account hierarchy levels down by 1 to reflect addition of a new parent
-            if (account.hasSubAccounts()) {
-                account.accept(
-                        new Visitor<Account, Object>() {
-                            public Object visit(Account account) {
-                                account.setHierarchyLevel(!account.isRootAccount()
-                                                          ? account.getParentAccount().getHierarchyLevel() + 1
-                                                          : ROOT_HIERARCHY_LEVEL);
-
-                                for (Account subAccount : account.getSubAccounts())
-                                    subAccount.accept(this);
-                                return null;
-                            }
-                        }
-                );
-            }
+            if (account.hasSubAccounts())
+                this.accept(new HierarchyLevelUpdateVisitor());
         }
     }
 
-    public Account removeParentAccount(Account account) {
-        if (account != null) {
-            // removing a root account would orphan all sub-accounts
-            if (account.isRootAccount() && account.hasSubAccounts()) {
-                if (account.hasSubAccounts())
-                    throw new IllegalArgumentException("Cannot remove a root account from the hierarchy.");
-            }
+    /**
+     * Removes this account from the hierarchy. If this account is a parent node (has children), then
+     * all child accounts will be shifted up one level to become children of the parent.
+     *
+     * Attempting to remove a root account will result in an <code>UnsupportedOperationException</code>.
+     *
+     * Removing a parent account:
+     * <code>
+     *        a      remove parent b      a
+     *        |                           |
+     *        b                      c ---+--- d
+     *        |
+     *   c ---+--- d
+     * </code>
+     *
+     * @return account after removal from the hierarchy
+     */
+    public Account remove() {
+        if (isRootAccount())
+            throw new UnsupportedOperationException("Cannot remove a root account from the hierarchy.");
 
-            // non root account, shift all sub-accounts up to parent
-            if (!account.isRootAccount()) {
-                account.getParentAccount().getSubAccounts().remove(account);
-
-                for (Account subAccount : account.getSubAccounts()) {
-                    subAccount.addParentAccount(account.getParentAccount());
-                }
-                account.getSubAccounts().clear();
-            }
+        // disconnect account from hierarchy
+        Account parent = getParentAccount();
+        getParentAccount().getSubAccounts().remove(this);
+        setParentAccount(null);
+        
+        // move child accounts up to parent
+        for (Account child : getSubAccounts()) {
+            child.setParentAccount(null);
+            child.addParent(parent);
         }
+        
+        getSubAccounts().clear();
 
-        return account;
+        return this;
     }
-
+    
     public List<Account> getSubAccounts() {
         return subAccounts;
     }
@@ -252,7 +277,7 @@ public class Account extends BaseEntity implements Visitable<Account> {
 
     public void addSubAccount(Account account) {        
         account.setHierarchyLevel(hierarchyLevel + 1);
-        account.addParentAccount(this);
+        account.addParent(this);
     }
 
     /**
@@ -316,11 +341,15 @@ public class Account extends BaseEntity implements Visitable<Account> {
         return visitor.visit(this);
     }
 
-    @Override public String toString() {
+    @Override public String toString() {                
+        List<Long> subAccountIds = new ArrayList<Long>(subAccounts.size());
+        for (Account account : subAccounts)
+            subAccountIds.add(account.getId());
+        
         return "Account{"
                + "id=" + id
                + ", hierarchyLevel=" + hierarchyLevel
-               + ", subAccounts=" + subAccounts
+               + ", subAccounts=" + subAccountIds
                + ", parentAccount=" + (parentAccount != null ? parentAccount.getId() : null)
                + '}';
     }
