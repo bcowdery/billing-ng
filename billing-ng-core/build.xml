@@ -29,8 +29,9 @@
         <path refid="testng.classpath"/>
     </path>
 
-    <path  id="liquibase.classpath">
+    <path id="liquibase.classpath">
         <fileset dir="${liquibase.dir}" includes="liquibase.jar"/>
+        <fileset dir="${liquibase.dir}/lib" includes="**/*.jar"/>
         <fileset dir="${mysql-connector.dir}" includes="*.jar"/>
         <path refid="compile.classpath"/>
     </path>

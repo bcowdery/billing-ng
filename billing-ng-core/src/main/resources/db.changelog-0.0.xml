@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  BillingNG, a next-generation billing solution
+  Copyright (C) 2010 Brian Cowdery
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as
+  published by the Free Software Foundation, either version 3 of the
+  License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  You should have received a copy of the GNU Affero General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/agpl-3.0.html
+  -->
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet author="bcowdery (generated)" id="1283835761127-1">
+        <createTable tableName="account">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="billing_type" type="VARCHAR(255)"/>
+            <column name="hierarchy_level" type="INT"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="number" type="VARCHAR(255)"/>
+            <column name="contact" type="BIGINT"/>
+            <column name="parent_account" type="BIGINT"/>
+            <column name="customer" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="bcowdery (generated)" id="1283835761127-2">
+        <createTable tableName="contact">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="bill_city" type="VARCHAR(255)"/>
+            <column name="bill_country" type="VARCHAR(255)"/>
+            <column name="bill_postal_code" type="VARCHAR(255)"/>
+            <column name="bill_state" type="VARCHAR(255)"/>
+            <column name="bill_street_address1" type="VARCHAR(255)"/>
+            <column name="bill_street_address2" type="VARCHAR(255)"/>
+            <column name="bill_street_address3" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="fax_number" type="VARCHAR(255)"/>
+            <column name="home_phone_number" type="VARCHAR(255)"/>
+            <column name="mail_city" type="VARCHAR(255)"/>
+            <column name="mail_country" type="VARCHAR(255)"/>
+            <column name="mail_postal_code" type="VARCHAR(255)"/>
+            <column name="mail_state" type="VARCHAR(255)"/>
+            <column name="mail_street_address1" type="VARCHAR(255)"/>
+            <column name="mail_street_address2" type="VARCHAR(255)"/>
+            <column name="mail_street_address3" type="VARCHAR(255)"/>
+            <column name="mobile_phone_number" type="VARCHAR(255)"/>
+            <column name="use_mailing_address" type="BIT"/>
+            <column name="work_phone_number" type="VARCHAR(255)"/>
+            <column name="xmpp" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="bcowdery (generated)" id="1283835761127-3">
+        <createTable tableName="customer">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="first_name" type="VARCHAR(255)"/>
+            <column name="gender" type="VARCHAR(255)"/>
+            <column name="hash_salt" type="VARCHAR(255)"/>
+            <column name="initial" type="VARCHAR(255)"/>
+            <column name="last_name" type="VARCHAR(255)"/>
+            <column name="password_hash" type="VARCHAR(255)"/>
+            <column name="salutation" type="VARCHAR(255)"/>
+            <column name="user_name" type="VARCHAR(255)"/>
+            <column name="company_name" type="VARCHAR(255)"/>
+            <column name="number" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="bcowdery (generated)" id="1283835761127-4">
+        <createTable tableName="customer_attributes">
+            <column name="customer" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="attribute_value" type="VARCHAR(255)"/>
+            <column defaultValue="" name="attribute_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="bcowdery (generated)" id="1283835761127-5">
+        <createTable tableName="rate">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="currency_code" type="VARCHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rate" type="DECIMAL(10,0)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="bcowdery (generated)" id="1283835761127-6">
+        <createTable tableName="staff">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="first_name" type="VARCHAR(255)"/>
+            <column name="gender" type="VARCHAR(255)"/>
+            <column name="hash_salt" type="VARCHAR(255)"/>
+            <column name="initial" type="VARCHAR(255)"/>
+            <column name="last_name" type="VARCHAR(255)"/>
+            <column name="password_hash" type="VARCHAR(255)"/>
+            <column name="salutation" type="VARCHAR(255)"/>
+            <column name="user_name" type="VARCHAR(255)"/>
+            <column name="staff_id" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="bcowdery (generated)" id="1283835761127-7">
+        <addPrimaryKey columnNames="customer, attribute_name" tableName="customer_attributes"/>
+    </changeSet>
+    <changeSet author="bcowdery (generated)" id="1283835761127-8">
+        <createIndex associatedWith="" indexName="FKB9D38A2DAC4AD954" tableName="account" unique="false">
+            <column name="customer"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="bcowdery (generated)" id="1283835761127-9">
+        <createIndex associatedWith="" indexName="FKB9D38A2DB6B8DBA8" tableName="account" unique="false">
+            <column name="contact"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="bcowdery (generated)" id="1283835761127-10">
+        <createIndex associatedWith="" indexName="FKB9D38A2DC8160D2D" tableName="account" unique="false">
+            <column name="parent_account"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="bcowdery (generated)" id="1283835761127-11">
+        <createIndex associatedWith="primaryKey" indexName="PRIMARY" tableName="account" unique="true">
+            <column name="id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="bcowdery (generated)" id="1283835761127-12">
+        <createIndex associatedWith="primaryKey" indexName="PRIMARY" tableName="contact" unique="true">
+            <column name="id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="bcowdery (generated)" id="1283835761127-13">
+        <createIndex associatedWith="primaryKey" indexName="PRIMARY" tableName="customer" unique="true">
+            <column name="id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="bcowdery (generated)" id="1283835761127-14">
+        <createIndex associatedWith="" indexName="FKD3628858AC4AD954" tableName="customer_attributes" unique="false">
+            <column name="customer"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="bcowdery (generated)" id="1283835761127-15">
+        <createIndex associatedWith="primaryKey" indexName="PRIMARY" tableName="customer_attributes" unique="true">
+            <column name="customer"/>
+            <column name="attribute_name"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="bcowdery (generated)" id="1283835761127-16">
+        <createIndex associatedWith="primaryKey" indexName="PRIMARY" tableName="rate" unique="true">
+            <column name="id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="bcowdery (generated)" id="1283835761127-17">
+        <createIndex associatedWith="primaryKey" indexName="PRIMARY" tableName="staff" unique="true">
+            <column name="id"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>
