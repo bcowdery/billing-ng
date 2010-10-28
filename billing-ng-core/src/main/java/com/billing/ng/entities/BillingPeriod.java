@@ -20,6 +20,7 @@ package com.billing.ng.entities;
 import org.joda.time.Period;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,10 @@ import javax.persistence.Id;
  * @author Brian Cowdery
  * @since 26-Oct-2010
  */
+@Entity
 public class BillingPeriod extends BaseEntity {
+
+    private static final Period DEFAULT = Period.months(1);
 
     public enum Type { DAY, WEEK, MONTH, YEAR }
 
@@ -44,6 +48,11 @@ public class BillingPeriod extends BaseEntity {
     private Integer interval;
 
     public BillingPeriod() {
+    }
+
+    public BillingPeriod(Type type, Integer interval) {
+        this.type = type;
+        this.interval = interval;
     }
 
     public Long getId() {
@@ -71,6 +80,9 @@ public class BillingPeriod extends BaseEntity {
     }
 
     public Period getPeriod() {
+        if (getType() == null)
+            return DEFAULT;
+        
         switch (getType()) {
             case DAY:
                 return Period.days(interval);
@@ -81,12 +93,21 @@ public class BillingPeriod extends BaseEntity {
             case YEAR:
                 return Period.years(interval);
             default:
-                return Period.months(1);
+                return DEFAULT;
         }
     }
 
     @Override
     public String toString() {
-        return interval + " " + type.name().toLowerCase() + "s";
+        StringBuilder builder = new StringBuilder()
+                .append(interval)
+                .append(" ")
+                .append(type.name().toLowerCase());
+
+        // pluralize
+        if (interval > 1)
+            builder.append("s");
+
+        return builder.toString();
     }
 }

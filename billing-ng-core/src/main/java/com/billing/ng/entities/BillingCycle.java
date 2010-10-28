@@ -18,8 +18,10 @@
 package com.billing.ng.entities;
 
 import org.joda.time.DateMidnight;
+import org.joda.time.Period;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -33,9 +35,10 @@ import java.util.Date;
  * @author Brian Cowdery
  * @since 26-Oct-2010
  */
+@Entity
 public class BillingCycle extends BaseEntity {
 
-    public static final Integer LAST_DAY_OF_MONTH = 31;
+    public static final int LAST_DAY_OF_MONTH = 31;
 
     @GeneratedValue @Id
     private Long id;
@@ -45,7 +48,7 @@ public class BillingCycle extends BaseEntity {
     @Column @Temporal(TemporalType.DATE)
     private Date end;
     @ManyToOne
-    private BillingPeriod period;
+    private BillingPeriod billingPeriod;
     @Column
     private Integer cycleStartDay;
 
@@ -76,18 +79,30 @@ public class BillingCycle extends BaseEntity {
         this.end = end;
     }
 
-    public BillingPeriod getPeriod() {
-        return period;
+    public BillingPeriod getBillingPeriod() {
+        return billingPeriod;
     }
 
-    public void setPeriod(BillingPeriod period) {
-        this.period = period;
+    public void setBillingPeriod(BillingPeriod billingPeriod) {
+        this.billingPeriod = billingPeriod;
     }
 
+    /**
+     * Day of month that this customers cycle starts.
+     *
+     * @return cycle start day of month
+     */
     public Integer getCycleStartDay() {
         return cycleStartDay;
     }
 
+    /**
+     * Sets the day of month that this customer cycle starts. Use
+     * <code>Billingcycle.LAST_DAY_OF_MONTH</code> for the last day
+     * of the month.
+     *
+     * @param cycleStartDay cycle start day of month
+     */
     public void setCycleStartDay(Integer cycleStartDay) {
         this.cycleStartDay = cycleStartDay;
     }
@@ -126,36 +141,24 @@ public class BillingCycle extends BaseEntity {
     }
 
     /**
-     * Calculate the current cycle start date for this period based on the
-     * set cycle start day.
-     *
-     * @return calculated cycle start date for this period.
-     */
-    public DateMidnight calculateCycleStart() {
-        DateMidnight start = new DateMidnight(getStart());
-
-        // if start day is greater than cycle day, increment to next period
-        // if start day is less than cycle day, use start with cycle day as "day" period of date. 
-    }
-
-    /**
      * The initial starting instant of the entire billing cycle. The start instant is
-     * the first instance of the cycle start day after the cycle start date.
+     * the first instance of the cycle start day after (or equal to) the cycle start date.
      *
      * @return starting instant of this billing cycle.
      */
-    private DateMidnight getStartInstant() {
+    public DateMidnight getStartInstant() {
+        DateMidnight start = new DateMidnight(getStart());
+        Period period = getBillingPeriod().getPeriod();
 
-    }
+        // first possible start date for a period
+        DateMidnight calculated = getCycleStartDay() != LAST_DAY_OF_MONTH
+                                  ? start.dayOfMonth().setCopy(getCycleStartDay())
+                                  : start.dayOfMonth().withMaximumValue();
 
-    /**
-     * Calculate the current cycle end date for this period based on the
-     * set cycle start day.
-     *
-     * @return calculated cycle end date for this period.
-     */
-    public DateMidnight calculateCycleEnd() {
-
+        // increment by billing period interval until a valid start date is found
+        while (calculated.isBefore(start))
+            calculated = calculated.plus(period);
+        return calculated;
     }
 
     /**
@@ -163,14 +166,33 @@ public class BillingCycle extends BaseEntity {
      * of the billing cycle, effectively {@link #getEnd()}.
      *
      * If billing cycle end is null, this method will return the start instant
-     * with the year period incremented to it's maximum value.
+     * with the year billingPeriod incremented to it's maximum value.
      *
      * @return ending instant of this billing cycle.
      */
-    private DateMidnight getEndInstant() {
-        if (getEnd() == null)
-            return getStartInstant().year().withMaximumValue();
+    public DateMidnight getEndInstant() {
+        return getEnd() == null
+               ? getStartInstant().year().withMaximumValue()
+               : new DateMidnight(getEnd());
+    }    
 
-        return new DateMidnight(getEnd());
+    /**
+     * Calculate the current cycle start date for this billingPeriod based on the
+     * set cycle start day.
+     *
+     * @return calculated cycle start date for this billingPeriod.
+     */
+    public DateMidnight calculateCycleStart() {
+        return null;
+    }
+
+    /**
+     * Calculate the current cycle end date for this billingPeriod based on the
+     * set cycle start day.
+     *
+     * @return calculated cycle end date for this billingPeriod.
+     */
+    public DateMidnight calculateCycleEnd() {
+        return null;
     }
 }

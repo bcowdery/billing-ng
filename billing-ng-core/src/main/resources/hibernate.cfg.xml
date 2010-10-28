@@ -14,6 +14,8 @@
         <!-- mapped classes -->
         <mapping package="com.billing.ng.entities"/>
         <mapping class="com.billing.ng.entities.Account"/>
+        <mapping class="com.billing.ng.entities.BillingCycle"/>
+        <mapping class="com.billing.ng.entities.BillingPeriod"/>
         <mapping class="com.billing.ng.entities.Contact"/>
         <mapping class="com.billing.ng.entities.Customer"/>
         <mapping class="com.billing.ng.entities.Rate"/>
