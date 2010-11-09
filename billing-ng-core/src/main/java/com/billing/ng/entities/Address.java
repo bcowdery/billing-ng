@@ -22,6 +22,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
@@ -31,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @since 24-Apr-2010
  */
 @Embeddable
-@XmlTransient
+@XmlRootElement
 public class Address extends BaseEntity {
 
     @Column

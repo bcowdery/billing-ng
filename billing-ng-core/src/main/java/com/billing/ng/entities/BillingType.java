@@ -17,6 +17,12 @@
 
 package com.billing.ng.entities;
 
+/**
+ * BillingType
+ *
+ * @author Brian Cowdery
+ * @since 26-Oct-2010
+ */
 public enum BillingType {
     /** Accrue charges under the customer holding this account. */
     CUSTOMER,
