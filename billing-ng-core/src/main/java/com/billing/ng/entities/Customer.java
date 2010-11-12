@@ -23,6 +23,8 @@ import org.hibernate.annotations.MapKey;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -44,12 +46,12 @@ public class Customer extends User {
     private String companyName;
     
     @OneToMany(mappedBy = "customer")
-    private Set<Account> accounts;
+    private Set<Account> accounts = new HashSet<Account>();
 
     @CollectionOfElements
     @MapKey(columns = @Column(name = "attribute_name"))
     @Column(name = "attribute_value")
-    private Map<String, String> attributes;
+    private Map<String, String> attributes = new HashMap<String, String>();
 
     public Customer() {
     }
@@ -84,5 +86,9 @@ public class Customer extends User {
 
     public void setAttributes(Map<String, String> attributes) {
         this.attributes = attributes;        
+    }
+
+    public void addAttribute(String name, String value) {
+        this.attributes.put(name, value);
     }
 }

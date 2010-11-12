@@ -77,16 +77,28 @@ public abstract class BaseEntity implements Serializable {
         return validator.getInvalidValues(this);
     }
 
+
     /**
-     * Marshals this entity to an XML string.
+     * Marshals this entity to an XML string using mapped packages.
      *
      * @return this entity in a serialized XML form.
      * @throws JAXBException thrown if JAXB context cannot be initialized
      * @throws IOException thrown if serialization fails
      */
-    @Transient
     public String toXml() throws JAXBException, IOException {
-        JAXBContext context = JAXBContext.newInstance(PACKAGES);
+        return toXml(JAXBContext.newInstance(PACKAGES));
+    }
+
+    /**
+     * Marshals this entity to an XML string using the given JAXBContext.
+     *
+     * @param context JAXB context for serialization
+     * @return this entity in a serialized XML form.
+     * @throws JAXBException thrown if JAXB context cannot be initialized
+     * @throws IOException thrown if serialization fails
+     */
+    @Transient
+    public String toXml(JAXBContext context) throws JAXBException, IOException {
         Marshaller m = context.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         m.setProperty("com.sun.xml.bind.namespacePrefixMapper", new XmlNamespacePrefixMapper());

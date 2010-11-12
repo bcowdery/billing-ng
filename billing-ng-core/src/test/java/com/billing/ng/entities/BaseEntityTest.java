@@ -36,7 +36,7 @@ import static org.testng.Assert.*;
  * @author Brian Cowdery
  * @since 25-Aug-2010
  */
-@Test(groups = { "quick", "validation" })
+@Test(groups = { "entity", "quick", "validation" })
 public class BaseEntityTest {
 
     /**

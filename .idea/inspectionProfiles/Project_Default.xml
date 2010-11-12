@@ -5,7 +5,7 @@
     <inspection_tool class="groupsTestNG" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="groups">
         <value>
-          <list size="8">
+          <list size="9">
             <item index="0" class="java.lang.String" itemvalue="quick" />
             <item index="1" class="java.lang.String" itemvalue="money" />
             <item index="2" class="java.lang.String" itemvalue="utils" />
@@ -13,6 +13,7 @@
             <item index="5" class="java.lang.String" itemvalue="entity" />
             <item index="6" class="java.lang.String" itemvalue="validation" />
             <item index="7" class="java.lang.String" itemvalue="billing" />
+            <item index="8" class="java.lang.String" itemvalue="xml" />
           </list>
         </value>
       </option>

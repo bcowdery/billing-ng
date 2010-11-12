@@ -174,6 +174,10 @@ public class Money implements Serializable {
         return value.movePointRight(value.scale()).longValueExact();
     }
 
+    public void setLongValue(long value) {
+
+    }
+
     /**
      * Scale of this dollar value, effectively the number of decimal places for this dollar
      * value and currency.
@@ -184,6 +188,10 @@ public class Money implements Serializable {
     @XmlAttribute(name = "decimal_places")
     public int getScale() {
         return value.scale();
+    }
+
+    public void setScale(int scale) {
+
     }
 
     @Transient
@@ -200,6 +208,10 @@ public class Money implements Serializable {
     @XmlAttribute(name = "currency")
     public String getCurrencyCode() {
         return currency.getCurrencyCode();
+    }
+
+    public void setCurrencyCode(String currency) {
+        
     }
 
     /**
