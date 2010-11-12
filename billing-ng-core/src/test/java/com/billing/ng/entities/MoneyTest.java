@@ -257,6 +257,24 @@ public class MoneyTest {
     }
 
     @Test
+    public void testHibernateSetters() {
+        // set all values in preferred order
+        Money cad = new Money();
+        cad.setCurrencyCode("CAD");
+        cad.setLongValue(13989);
+        cad.setScale(2);
+
+        assertThat(cad.toString(), is("$139.89 CAD"));
+
+        // set required values, no explicit scale
+        Money usd = new Money();
+        usd.setLongValue(79201);
+        usd.setCurrencyCode("USD");
+
+        assertThat(usd.toString(), is("$792.01 USD"));
+    }
+
+    @Test
     public void testToString() {
         Money usd = new Money("$56.23 USD");
         assertThat(usd.toString(), is("$56.23 USD"));
@@ -280,4 +298,24 @@ public class MoneyTest {
         Money compound = new Money("98.23 GBP");
         assertThat(compound.toString(Locale.JAPAN), is("98.23 GBP"));
     }
+
+    @Test
+    public void testEquals() {
+        // 2 equal instances of money
+        Money cad1 = new Money("123.33", "CAD");
+        Money cad2 = new Money("123.33", "CAD");
+        assertTrue(cad1.equals(cad2));
+
+        // different values
+        assertFalse(cad1.equals(new Money("123.32", "CAD")));
+
+        // different currency
+        assertFalse(cad1.equals(new Money("123.33", "USD")));
+
+        // different value scale
+        Money cadScale = new Money("123.33", "CAD");
+        cadScale.setValue(new BigDecimal("123.330"));
+        assertFalse(cad1.equals(cadScale));
+    }
+
 }

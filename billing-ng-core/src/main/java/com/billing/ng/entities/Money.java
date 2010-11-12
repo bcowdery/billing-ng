@@ -82,10 +82,9 @@ public class Money implements Serializable {
      */
     public Money(Money money) {
         // BigDecimal and Currency are both immutable or singleton - no need for defensive copies.
+        this.currency = money.getCurrency();     
         this.value = money.getValue();
-        this.currency = money.getCurrency();        
     }
-
 
     /**
      * Constructs money for the given value and currency.
@@ -119,7 +118,7 @@ public class Money implements Serializable {
      */
     public Money(String amount) {
         String[] values = amount.trim().replaceAll(NON_DIGIT_REGEX, BLANK).split(WHITESPACE);
-        this.currency = Currency.getInstance(values[1]);
+        setCurrencyCode(values[1]);
         this.value = new BigDecimal(values[0]).setScale(currency.getDefaultFractionDigits(), RoundingMode.HALF_UP);
     }
 
@@ -128,10 +127,10 @@ public class Money implements Serializable {
      * contain a monetary symbol.
      *
      * @param amount monetary amount string
-     * @param currency currency
+     * @param currencyCode currency
      */
-    public Money(String amount, String currency) {
-        this.currency = Currency.getInstance(currency);
+    public Money(String amount, String currencyCode) {
+        setCurrencyCode(currencyCode);
         this.value = new BigDecimal(amount.trim().replaceAll(NON_DIGIT_REGEX, BLANK))
                 .setScale(this.currency.getDefaultFractionDigits(), RoundingMode.HALF_UP);                            
     }
@@ -142,12 +141,15 @@ public class Money implements Serializable {
      *
      * @param value integral value
      * @param scale scale (number of decimal places)
-     * @param currency currency
+     * @param currencyCode currency
      */
-    public Money(long value, int scale, String currency) {
-        this.currency = Currency.getInstance(currency);
-        this.value = new BigDecimal(BigInteger.valueOf(value), scale)
-                .setScale(this.currency.getDefaultFractionDigits(), RoundingMode.HALF_UP);
+    public Money(long value, int scale, String currencyCode) {
+        setCurrencyCode(currencyCode);
+        this.value = new BigDecimal(BigInteger.valueOf(value), scale);
+
+        // shouldn't be necessary... but scale should match the given currency
+        if (this.value.scale() != this.currency.getDefaultFractionDigits())
+            this.value = this.value.setScale(this.currency.getDefaultFractionDigits(), RoundingMode.HALF_UP);
     }
 
     @Transient
@@ -174,8 +176,21 @@ public class Money implements Serializable {
         return value.movePointRight(value.scale()).longValueExact();
     }
 
-    public void setLongValue(long value) {
+    /**
+     * Explicitly sets the monetary value of this Money instance. This method is intended
+     * to be used by Hibernate when instantiating Money and should not be used in client code.
+     *
+     * Set long value first to ensure precision by when setting scale.
+     *
+     * Warning! It's possible to construct an incomplete Money instance by failing to set currency!
+     *
+     * @param value long value
+     */
+    public void setLongValue(long value) {        
+        this.value = new BigDecimal(BigInteger.valueOf(value));
 
+        if (this.currency != null)
+            setScale(this.currency.getDefaultFractionDigits());
     }
 
     /**
@@ -190,8 +205,17 @@ public class Money implements Serializable {
         return value.scale();
     }
 
+    /**
+     * Explicitly sets the scale of this Money instance. This method is intended to
+     * be used by Hibernate when instantiating Money and should not be used in client code.
+     *
+     * Set scale last to ensure precision.
+     *
+     * @param scale scale of money
+     */
     public void setScale(int scale) {
-
+        if (value != null && value.scale() != scale)
+            value = value.movePointLeft(scale);
     }
 
     @Transient
@@ -210,8 +234,22 @@ public class Money implements Serializable {
         return currency.getCurrencyCode();
     }
 
+    /**
+     * Explicitly sets the currency code of this Money instance. This method also shifts
+     * the decimal place of the monetary value to the preferred currency fractional digits.
+     *
+     * This method is intended to be used by Hibernate when instantiating Money
+     * and should not be used in client code.
+     *
+     * Warning! It's possible to construct an incomplete Money instance by failing to set currency!
+     *
+     * @param currency currency code string
+     */
     public void setCurrencyCode(String currency) {
-        
+        this.currency = Currency.getInstance(currency);
+
+        if (value != null && value.scale() != this.currency.getDefaultFractionDigits())
+            setScale(this.currency.getDefaultFractionDigits());
     }
 
     /**
