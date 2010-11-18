@@ -38,9 +38,7 @@
     </path>
 
     <path id="hibernate.classpath">
-        <fileset dir="${hibernate-tools.dir}">
-            <include name="tools/*.jar"/>
-        </fileset>
+        <fileset dir="${hibernate-tools.dir}" includes="tools/*.jar"/>
         <path refid="compile.classpath"/>
     </path>    
 
@@ -189,10 +187,10 @@
         <echo message="Generated ddl ${build.dir}/${ddl-sql.file} with ddl.drop = ${ddl.drop}"/>
     </target>
 
-    <target name="generate.changelog"
+    <target name="generate.db.changelog"
             description="Generates a liquibase changelog that can be used to re-create an existing database schema."
             depends="init, prompt-db.properties, set-db.properties">
-        <generateChangeLog outputFile="${db.changelog.file}"
+        <generateChangeLog outputFile="${db.changelog.releasefile}"
                            driver="${db.driver}"
                            url="${db.url}"
                            username="${db.username}"

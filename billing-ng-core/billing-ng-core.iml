@@ -15,9 +15,9 @@
     <facet type="jpa" name="JPA">
       <configuration>
         <setting name="validation-enabled" value="true" />
-        <setting name="provider-name" value="" />
+        <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
-          <factory-entry name="pontificatePU" />
+          <factory-entry name="pontificatePU" value="ddbe83eb-0e2c-43c2-ad78-bd474d3480e8" />
         </datasource-mapping>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
       </configuration>
@@ -25,7 +25,7 @@
     <facet type="hibernate" name="Hibernate">
       <configuration>
         <datasource-map>
-          <unit-entry name="src:main:resources:hibernate.cfg.xml" />
+          <unit-entry name="src:main:resources:hibernate.cfg.xml" value="ddbe83eb-0e2c-43c2-ad78-bd474d3480e8" />
         </datasource-map>
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/resources/hibernate.cfg.xml" />
       </configuration>
@@ -46,8 +46,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="testng-5.12.1" level="project" />
     <orderEntry type="library" name="hamcrest-1.1" level="project" />
-    <orderEntry type="library" exported="" name="jboss5-common" level="project" />
-    <orderEntry type="library" exported="" name="jboss6-client" level="project" />
+    <orderEntry type="library" name="jboss6-client" level="project" />
+    <orderEntry type="library" name="jboss6-common" level="project" />
     <orderEntry type="library" name="jaxb-ri-20091104" level="project" />
     <orderEntry type="library" name="commons-codec-1.4" level="project" />
     <orderEntry type="library" name="joda-time-1.6.2" level="project" />

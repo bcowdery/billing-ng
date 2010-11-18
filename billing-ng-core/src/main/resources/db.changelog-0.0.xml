@@ -1,23 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!--
-  BillingNG, a next-generation billing solution
-  Copyright (C) 2010 Brian Cowdery
-
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU Affero General Public License as
-  published by the Free Software Foundation, either version 3 of the
-  License, or (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU Affero General Public License for more details.
-  You should have received a copy of the GNU Affero General Public License
-  along with this program.  If not, see http://www.gnu.org/licenses/agpl-3.0.html
-  -->
-
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-    <changeSet author="bcowdery (generated)" id="1283835761127-1">
+    <changeSet author="brian (generated)" id="1290058671958-1">
         <createTable tableName="account">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
@@ -26,12 +9,33 @@
             <column name="hierarchy_level" type="INT"/>
             <column name="name" type="VARCHAR(255)"/>
             <column name="number" type="VARCHAR(255)"/>
+            <column name="billing_cycle" type="BIGINT"/>
             <column name="contact" type="BIGINT"/>
-            <column name="parent_account" type="BIGINT"/>
             <column name="customer" type="BIGINT"/>
+            <column name="parent_account" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="bcowdery (generated)" id="1283835761127-2">
+    <changeSet author="brian (generated)" id="1290058671958-2">
+        <createTable tableName="billing_cycle">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="cycle_start_day" type="INT"/>
+            <column name="end" type="DATE"/>
+            <column name="start" type="DATE"/>
+            <column name="billing_period" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="brian (generated)" id="1290058671958-3">
+        <createTable tableName="billing_period">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="period_interval" type="INT"/>
+            <column name="period_type" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="brian (generated)" id="1290058671958-4">
         <createTable tableName="contact">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
@@ -59,7 +63,7 @@
             <column name="xmpp" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="bcowdery (generated)" id="1283835761127-3">
+    <changeSet author="brian (generated)" id="1290058671958-5">
         <createTable tableName="customer">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
@@ -76,18 +80,18 @@
             <column name="number" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="bcowdery (generated)" id="1283835761127-4">
-        <createTable tableName="customer_attributes">
+    <changeSet author="brian (generated)" id="1290058671958-6">
+        <createTable tableName="customer_attribute">
             <column name="customer" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
             <column name="attribute_value" type="VARCHAR(255)"/>
-            <column defaultValue="" name="attribute_name" type="VARCHAR(255)">
+            <column name="attribute_key" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="bcowdery (generated)" id="1283835761127-5">
+    <changeSet author="brian (generated)" id="1290058671958-7">
         <createTable tableName="rate">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
@@ -100,7 +104,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="bcowdery (generated)" id="1283835761127-6">
+    <changeSet author="brian (generated)" id="1290058671958-8">
         <createTable tableName="staff">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
@@ -116,56 +120,76 @@
             <column name="staff_id" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="bcowdery (generated)" id="1283835761127-7">
-        <addPrimaryKey columnNames="customer, attribute_name" tableName="customer_attributes"/>
+    <changeSet author="brian (generated)" id="1290058671958-9">
+        <addPrimaryKey columnNames="customer, attribute_key" tableName="customer_attribute"/>
     </changeSet>
-    <changeSet author="bcowdery (generated)" id="1283835761127-8">
+    <changeSet author="brian (generated)" id="1290058671958-10">
+        <createIndex associatedWith="" indexName="FKB9D38A2D65283EE5" tableName="account" unique="false">
+            <column name="billing_cycle"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="brian (generated)" id="1290058671958-11">
         <createIndex associatedWith="" indexName="FKB9D38A2DAC4AD954" tableName="account" unique="false">
             <column name="customer"/>
         </createIndex>
     </changeSet>
-    <changeSet author="bcowdery (generated)" id="1283835761127-9">
+    <changeSet author="brian (generated)" id="1290058671958-12">
         <createIndex associatedWith="" indexName="FKB9D38A2DB6B8DBA8" tableName="account" unique="false">
             <column name="contact"/>
         </createIndex>
     </changeSet>
-    <changeSet author="bcowdery (generated)" id="1283835761127-10">
+    <changeSet author="brian (generated)" id="1290058671958-13">
         <createIndex associatedWith="" indexName="FKB9D38A2DC8160D2D" tableName="account" unique="false">
             <column name="parent_account"/>
         </createIndex>
     </changeSet>
-    <changeSet author="bcowdery (generated)" id="1283835761127-11">
+    <changeSet author="brian (generated)" id="1290058671958-14">
         <createIndex associatedWith="primaryKey" indexName="PRIMARY" tableName="account" unique="true">
             <column name="id"/>
         </createIndex>
     </changeSet>
-    <changeSet author="bcowdery (generated)" id="1283835761127-12">
+    <changeSet author="brian (generated)" id="1290058671958-15">
+        <createIndex associatedWith="" indexName="FKB8B916226A178189" tableName="billing_cycle" unique="false">
+            <column name="billing_period"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="brian (generated)" id="1290058671958-16">
+        <createIndex associatedWith="primaryKey" indexName="PRIMARY" tableName="billing_cycle" unique="true">
+            <column name="id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="brian (generated)" id="1290058671958-17">
+        <createIndex associatedWith="primaryKey" indexName="PRIMARY" tableName="billing_period" unique="true">
+            <column name="id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="brian (generated)" id="1290058671958-18">
         <createIndex associatedWith="primaryKey" indexName="PRIMARY" tableName="contact" unique="true">
             <column name="id"/>
         </createIndex>
     </changeSet>
-    <changeSet author="bcowdery (generated)" id="1283835761127-13">
+    <changeSet author="brian (generated)" id="1290058671958-19">
         <createIndex associatedWith="primaryKey" indexName="PRIMARY" tableName="customer" unique="true">
             <column name="id"/>
         </createIndex>
     </changeSet>
-    <changeSet author="bcowdery (generated)" id="1283835761127-14">
-        <createIndex associatedWith="" indexName="FKD3628858AC4AD954" tableName="customer_attributes" unique="false">
+    <changeSet author="brian (generated)" id="1290058671958-20">
+        <createIndex associatedWith="" indexName="FK69EA677BAC4AD954" tableName="customer_attribute" unique="false">
             <column name="customer"/>
         </createIndex>
     </changeSet>
-    <changeSet author="bcowdery (generated)" id="1283835761127-15">
-        <createIndex associatedWith="primaryKey" indexName="PRIMARY" tableName="customer_attributes" unique="true">
+    <changeSet author="brian (generated)" id="1290058671958-21">
+        <createIndex associatedWith="primaryKey" indexName="PRIMARY" tableName="customer_attribute" unique="true">
             <column name="customer"/>
-            <column name="attribute_name"/>
+            <column name="attribute_key"/>
         </createIndex>
     </changeSet>
-    <changeSet author="bcowdery (generated)" id="1283835761127-16">
+    <changeSet author="brian (generated)" id="1290058671958-22">
         <createIndex associatedWith="primaryKey" indexName="PRIMARY" tableName="rate" unique="true">
             <column name="id"/>
         </createIndex>
     </changeSet>
-    <changeSet author="bcowdery (generated)" id="1283835761127-17">
+    <changeSet author="brian (generated)" id="1290058671958-23">
         <createIndex associatedWith="primaryKey" indexName="PRIMARY" tableName="staff" unique="true">
             <column name="id"/>
         </createIndex>

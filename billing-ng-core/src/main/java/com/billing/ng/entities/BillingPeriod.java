@@ -42,9 +42,10 @@ public class BillingPeriod extends BaseEntity {
     @GeneratedValue @Id
     private Long id;
 
-    @Column @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "period_type")
     private Type type;
-    @Column
+    @Column(name = "period_interval")
     private Integer interval;
 
     public BillingPeriod() {
