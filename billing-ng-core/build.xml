@@ -11,13 +11,14 @@
 
     <!-- paths -->
     <path id="compile.classpath">
+        <fileset dir="${jboss.lib.dir}" includes="*.jar"/>
     	<fileset dir="${j2ee5.dir}" includes="*.jar"/>
         <fileset dir="${j2ee5client.dir}" includes="*.jar"/>
         <fileset dir="${commons-codec.dir}" includes="*.jar"/>
         <fileset dir="${joda-time.dir}" includes="*.jar"/>
     </path>
 
-    <path id="testng.classpath">
+    <path id="compile.test.classpath">
         <path refid="compile.classpath"/>
         <fileset dir="${testng.dir}" includes="testng-*.jar"/>
         <fileset dir="${hamcrest.dir}" includes="hamcrest-all-*.jar"/>
@@ -25,9 +26,8 @@
     </path>
 
     <path id="test.classpath">
-        <pathelement path="${classes.dir}"/>
         <pathelement path="${test-build.dir}"/>
-        <path refid="testng.classpath"/>
+        <path refid="compile.test.classpath"/>
     </path>
 
     <path id="liquibase.classpath">
@@ -38,7 +38,9 @@
     </path>
 
     <path id="hibernate.classpath">
-        <fileset dir="${hibernate-tools.dir}" includes="**/*.jar"/>
+        <fileset dir="${hibernate-tools.dir}">
+            <include name="tools/*.jar"/>
+        </fileset>
         <path refid="compile.classpath"/>
     </path>    
 
@@ -147,9 +149,10 @@
 
         <javac srcdir="${src.dir}/test"
                destdir="${test-build.dir}"
-               classpathref="testng.classpath"
+               classpathref="compile.test.classpath"
                source="${javac.source}"
                target="${javac.target}"
+               includeantruntime="false"
                debug="${javac.debug}" fork="${javac.fork}" deprecation="${javac.deprecation}" nowarn="${javac.nowarn}">
         </javac>
     </target>
@@ -326,6 +329,7 @@
                classpathref="compile.classpath"
                source="${javac.source}"
                target="${javac.target}"
+               includeantruntime="false"
                debug="${javac.debug}" fork="${javac.fork}" deprecation="${javac.deprecation}" nowarn="${javac.nowarn}">
         </javac>
 
@@ -339,7 +343,7 @@
 
     <target name="init">
         <!-- task definitions -->
-        <taskdef resource="testngtasks" classpathref="testng.classpath"/>
+        <taskdef resource="testngtasks" classpathref="compile.test.classpath"/>
         <taskdef resource="checkstyletask.properties" classpathref="checkstyle.classpath"/>
         <taskdef resource="liquibasetasks.properties" classpathref="liquibase.classpath"/>
         <taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="hibernate.classpath"/>

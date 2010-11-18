@@ -17,11 +17,11 @@
 
 package com.billing.ng.entities;
 
-import org.hibernate.annotations.CollectionOfElements;
-import org.hibernate.annotations.MapKey;
-
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -48,8 +48,9 @@ public class Customer extends User {
     @OneToMany(mappedBy = "customer")
     private Set<Account> accounts = new HashSet<Account>();
 
-    @CollectionOfElements
-    @MapKey(columns = @Column(name = "attribute_name"))
+    @ElementCollection
+    @CollectionTable(name = "customer_attribute")
+    @MapKeyColumn(name = "attribute_key")
     @Column(name = "attribute_value")
     private Map<String, String> attributes = new HashMap<String, String>();
 

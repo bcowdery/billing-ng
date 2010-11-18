@@ -51,6 +51,10 @@ public class ConfigurationTest {
         calendar.set(2010, Calendar.AUGUST, 17, 22, 30);
     }
 
+    /*
+        Test can be run from within the 'billing-ng-core' sub component, or from the root
+        application build file. Select the appropriate path based on the running base dir.
+     */    
     @BeforeMethod
     public void loadTestProperties() {
         File fromRoot = new File("billing-ng-core/src/test/resources/test-billing-ng.properties");

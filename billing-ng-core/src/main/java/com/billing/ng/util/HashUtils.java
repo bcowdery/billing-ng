@@ -30,6 +30,7 @@ import java.util.Random;
  * @since 25-Apr-2010
  */
 public class HashUtils {
+
     private static final char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
 
     /**
@@ -45,7 +46,7 @@ public class HashUtils {
         try {
             digest = MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Unsupported digest algorithm, check JDK deployemnt.", e);
+            throw new RuntimeException("Unsupported digest algorithm, check JDK deployment.", e);
         }
 
         StringBuffer plainText = new StringBuffer();
