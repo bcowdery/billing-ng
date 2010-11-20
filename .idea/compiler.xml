@@ -18,7 +18,14 @@
       <entry name="?*.tld" />
       <entry name="?*.ftl" />
     </wildcardResourcePatterns>
-    <annotationProcessing enabled="false" useClasspath="true" />
+    <annotationProcessing enabled="true" useClasspath="false">
+      <processorPath value="/opt/jboss-6/common/lib/hibernate-validator.jar" />
+      <processorPath value="/opt/jboss-6/common/lib/hibernate-annotations.jar" />
+      <processorPath value="/opt/jboss-6/common/lib/hibernate-commons-annotations.jar" />
+      <processorPath value="/opt/jboss-6/common/lib/validation-api.jar" />
+      <processor name="org.hibernate.validator.ap.ConstraintValidationProcessor" options="" />
+      <processModule name="billing-ng-core" />
+    </annotationProcessing>
   </component>
   <component name="EclipseCompilerSettings">
     <option name="GENERATE_NO_WARNINGS" value="true" />

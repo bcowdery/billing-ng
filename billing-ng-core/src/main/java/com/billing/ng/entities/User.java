@@ -41,8 +41,10 @@ import java.util.List;
 @XmlTransient
 public abstract class User extends BaseEntity {
 
+    /** User gender. */
     public enum Gender { MALE, FEMALE }
 
+    /** User salutation based on gender. */
     public enum Salutation {
         MR  (Gender.MALE),
         MS  (Gender.FEMALE),

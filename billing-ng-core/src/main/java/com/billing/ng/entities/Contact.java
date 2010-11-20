@@ -17,6 +17,7 @@
 
 package com.billing.ng.entities;
 
+import com.billing.ng.entities.validator.Phone;
 import org.hibernate.validator.Email;
 
 import javax.persistence.AttributeOverride;
@@ -39,17 +40,17 @@ public class Contact {
     @Id @GeneratedValue
     private Long id;
 
-    @Column
+    @Column @Phone
     private String homePhoneNumber;
-    @Column
+    @Column @Phone
     private String mobilePhoneNumber;
-    @Column
+    @Column @Phone
     private String workPhoneNumber;
-    @Column
+    @Column @Phone
     private String faxNumber;
     @Column @Email
     private String email;
-    @Column
+    @Column @Email
     private String xmpp;
 
     @Embedded
