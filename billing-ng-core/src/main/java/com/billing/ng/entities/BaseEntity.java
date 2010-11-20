@@ -23,6 +23,10 @@ import org.hibernate.validator.ClassValidator;
 import org.hibernate.validator.InvalidValue;
 
 import javax.persistence.Transient;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -36,6 +40,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * BaseEntity
@@ -46,6 +51,8 @@ import java.util.List;
 @XmlTransient
 public abstract class BaseEntity implements Serializable {
 
+    private static final ValidatorFactory VALIDATOR_FACTORY = Validation.buildDefaultValidatorFactory();
+    
     /**
      * colon-separates string of packages that contain JAXB bound objects.
      */
@@ -65,18 +72,17 @@ public abstract class BaseEntity implements Serializable {
     }
 
     /**
-     * Executes the Hibernate ClassValidator on this class, validating
-     * all annotated fields and returning any invalid values encountered.
+     * Executes a constraint validator on this class, validating all annotated
+     * fields and returning all constraint violations encountered.
      *
-     * @return invalid values (validation messages), empty if none
+     * @param <T> entity type for validation
+     * @return set of constraint violations
      */
     @Transient
     @SuppressWarnings("unchecked")
-    public InvalidValue[] validate() {
-        ClassValidator validator = new ClassValidator(this.getClass());
-        return validator.getInvalidValues(this);
+    public <T> Set<ConstraintViolation<T>> validateConstraints() {
+        return VALIDATOR_FACTORY.getValidator().validate((T) this);
     }
-
 
     /**
      * Marshals this entity to an XML string using mapped packages.

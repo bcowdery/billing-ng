@@ -18,17 +18,17 @@
 package com.billing.ng.entities;
 
 import org.hamcrest.Matchers;
-import org.hibernate.validator.InvalidValue;
-import org.hibernate.validator.Length;
-import org.hibernate.validator.NotNull;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
-import java.util.List;
+import javax.validation.ConstraintViolation;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.*;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 
 /**
  * BaseEntityTest
@@ -47,7 +47,7 @@ public class BaseEntityTest {
         @NotNull
         private Long id;
 
-        @Length(min = 0, max = 20)
+        @Size(min = 0, max = 20)
         private String string;
 
         public Long getId() {
@@ -72,12 +72,12 @@ public class BaseEntityTest {
         TestEntity entity = new TestEntity();
         entity.setId(null); // not null validator
 
-        List<InvalidValue> invalid = Arrays.asList(entity.validate());
-        
-        assertThat(invalid.size(), is(1));
+        Set<ConstraintViolation<TestEntity>> constraintViolations = entity.validateConstraints();
 
-        assertThat(invalid, hasItem(Matchers.<InvalidValue>hasProperty("propertyName", is("id"))));
-        assertThat(invalid, hasItem(Matchers.<InvalidValue>hasProperty("message", is("may not be null"))));
+        assertThat(constraintViolations.size(), is(1));
+
+        assertThat(constraintViolations, hasItem(Matchers.<ConstraintViolation<TestEntity>>hasProperty("invalidValue", nullValue())));
+        assertThat(constraintViolations, hasItem(Matchers.<ConstraintViolation<TestEntity>>hasProperty("message", is("may not be null"))));
     }
 
     @Test
@@ -86,14 +86,14 @@ public class BaseEntityTest {
         entity.setId(null);                        // not null validator
         entity.setString("1234567890abcdefghijk"); // 21, exceeds max length validator
 
-        List<InvalidValue> invalid = Arrays.asList(entity.validate());
+        Set<ConstraintViolation<TestEntity>> constraintViolations = entity.validateConstraints();
 
-        assertThat(invalid.size(), is(2));
+        assertThat(constraintViolations.size(), is(2));
 
-        assertThat(invalid, hasItem(Matchers.<InvalidValue>hasProperty("propertyName", is("id"))));
-        assertThat(invalid, hasItem(Matchers.<InvalidValue>hasProperty("message", is("may not be null"))));
+        assertThat(constraintViolations, hasItem(Matchers.<ConstraintViolation<TestEntity>>hasProperty("invalidValue", nullValue())));
+        assertThat(constraintViolations, hasItem(Matchers.<ConstraintViolation<TestEntity>>hasProperty("message", is("may not be null"))));
 
-        assertThat(invalid, hasItem(Matchers.<InvalidValue>hasProperty("propertyName", is("string"))));
-        assertThat(invalid, hasItem(Matchers.<InvalidValue>hasProperty("message", is("length must be between 0 and 20"))));
+        assertThat(constraintViolations, hasItem(Matchers.<ConstraintViolation<TestEntity>>hasProperty("invalidValue", is("1234567890abcdefghijk"))));
+        assertThat(constraintViolations, hasItem(Matchers.<ConstraintViolation<TestEntity>>hasProperty("message", is("size must be between 0 and 20"))));
     }
 }

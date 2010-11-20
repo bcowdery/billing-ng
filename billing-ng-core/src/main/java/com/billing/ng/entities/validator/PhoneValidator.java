@@ -34,8 +34,10 @@ import java.io.Serializable;
  *      000.310.1010
  *      000 310 1010
  *      000 310-1010
- *   +1 000 3010 1010
- * +123 000 3010 1010  etc.
+ *   +1 000 310 1010
+ * +123 000 310 1010
+ *    (000) 310 1010
+ * +1 (000) 310 1010 etc.
  *
  * This validator will also accept null values and blank strings as valid. If you wish to enforce not
  * null values you should use the @NotNull constraint validator annotation.
