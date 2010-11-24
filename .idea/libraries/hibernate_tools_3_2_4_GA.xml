@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="hibernate-tools-3.2.4.GA">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/hibernate-tools-3.2.4.GA/hibernate-tools.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
