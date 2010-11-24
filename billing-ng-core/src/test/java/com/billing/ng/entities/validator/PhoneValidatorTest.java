@@ -19,21 +19,13 @@ package com.billing.ng.entities.validator;
 
 import com.billing.ng.entities.BaseEntity;
 import org.hamcrest.Matchers;
-import org.hibernate.validator.InvalidValue;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.hamcrest.Matchers.hasItem;
 import static org.testng.Assert.*;
 
 /**

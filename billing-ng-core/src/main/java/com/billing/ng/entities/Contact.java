@@ -18,6 +18,7 @@
 package com.billing.ng.entities;
 
 import com.billing.ng.entities.validator.Phone;
+import com.billing.ng.entities.validator.URL;
 import org.hibernate.validator.Email;
 
 import javax.persistence.AttributeOverride;
@@ -52,6 +53,8 @@ public class Contact {
     private String email;
     @Column @Email
     private String xmpp;
+    @Column @URL
+    private String website;
 
     @Embedded
     @AttributeOverrides({
@@ -137,6 +140,14 @@ public class Contact {
 
     public void setXmpp(String xmpp) {
         this.xmpp = xmpp;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
     public Address getMailingAddress() {
