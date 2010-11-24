@@ -32,8 +32,12 @@ import java.util.Properties;
 import java.util.regex.Pattern;
 
 /**
- * Configuration
+ * Configuration helper for reading and writing external configuration properties as
+ * String, Boolean, BigDecimal, Date and Integer values.
  *
+ * By default, properties are stored in the billing-ng.properties file deployed to the
+ * application container. This file is used to store environment specific settings.
+ * 
  * @author Brian Cowdery
  * @since 16-Aug-2010
  */
@@ -54,7 +58,7 @@ public enum Configuration {
     private static final DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy HH:mm");
     private static final Pattern BOOLEAN_PATTERN = Pattern.compile("^(yes|on|true)$", Pattern.CASE_INSENSITIVE);
 
-    private final Logger log = LoggerFactory.getLogger(Configuration.class);
+    private transient final Logger log = LoggerFactory.getLogger(Configuration.class);
 
     private String path = "./billing-ng.properties";
     private String header = "Billing NG configuration properties";

@@ -19,6 +19,7 @@ package com.billing.ng.entities;
 
 import com.billing.ng.entities.structure.Visitable;
 import com.billing.ng.entities.structure.Visitor;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,6 +30,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +80,10 @@ public class Account extends BaseEntity implements Visitable<Account> {
     @Column
     private String number;
 
+    @ManyToOne
+    @Where(clause = "type = ACCOUNT")
+    private NumberPattern numberPattern;
+
     @Column
     private String name;
 
@@ -114,12 +120,26 @@ public class Account extends BaseEntity implements Visitable<Account> {
         this.id = id;
     }
 
-    public String getNumber() {
+    public String getNumber() {        
         return number;
     }
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public NumberPattern getNumberPattern() {
+        return numberPattern;
+    }
+
+    public void setNumberPattern(NumberPattern numberPattern) {
+        this.numberPattern = numberPattern;
+    }
+
+    @PrePersist
+    public void generateAccountNumber() {
+        if (getNumber() == null && getNumberPattern() != null)
+            setNumber(getNumberPattern().generate("account", this));
     }
 
     public String getName() {

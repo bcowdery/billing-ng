@@ -28,6 +28,7 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.Valid;
 
 /**
  * Contact
@@ -56,6 +57,7 @@ public class Contact {
     @Column @URL
     private String website;
 
+    @Valid
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "streetAddress1", column = @Column(name = "mail_street_address1")),
@@ -68,6 +70,7 @@ public class Contact {
     })
     private Address mailingAddress;
 
+    @Valid
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "streetAddress1", column = @Column(name = "bill_street_address1")),

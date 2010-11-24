@@ -17,8 +17,12 @@
 
 package com.billing.ng.entities;
 
+import org.hibernate.annotations.Where;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 
 /**
  * Staff
@@ -32,6 +36,10 @@ public class Staff extends User {
     @Column
     private String staffId;
 
+    @ManyToOne
+    @Where(clause = "type = STAFF")
+    private NumberPattern numberPattern;
+
     public Staff() {
     }
 
@@ -41,5 +49,19 @@ public class Staff extends User {
 
     public void setStaffId(String staffId) {
         this.staffId = staffId;
+    }
+
+    public NumberPattern getNumberPattern() {
+        return numberPattern;
+    }
+
+    public void setNumberPattern(NumberPattern numberPattern) {
+        this.numberPattern = numberPattern;
+    }
+
+    @PrePersist
+    public void generateStaffId() {
+        if (getStaffId() == null && getNumberPattern() != null)
+            setStaffId(getNumberPattern().generate("staff", this));
     }
 }

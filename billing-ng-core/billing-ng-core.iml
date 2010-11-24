@@ -51,6 +51,7 @@
     <orderEntry type="library" name="jaxb-ri-20091104" level="project" />
     <orderEntry type="library" name="commons-codec-1.4" level="project" />
     <orderEntry type="library" name="joda-time-1.6.2" level="project" />
+    <orderEntry type="library" name="freemarker-2.3.16" level="project" />
   </component>
 </module>
 

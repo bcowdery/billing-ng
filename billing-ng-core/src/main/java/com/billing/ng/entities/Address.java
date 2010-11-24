@@ -17,20 +17,13 @@
 
 package com.billing.ng.entities;
 
-import org.hibernate.validator.Length;
 import org.hibernate.validator.Pattern;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Address
@@ -42,19 +35,19 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 public class Address extends BaseEntity {
 
-    @Column
+    @Column @NotNull
     private String streetAddress1;
     @Column
     private String streetAddress2;
     @Column
     private String streetAddress3;
-    @Column
+    @Column @NotNull
     private String city;
-    @Column @Size(min = 2, max = 3)
+    @Column @NotNull @Size(min = 2, max = 3)
     private String state;
-    @Column @Size(min = 2, max = 2)
+    @Column @NotNull @Size(min = 2, max = 2)
     private String country;
-    @Column @Pattern(regex = "^[A-Za-z0-9_\\-\\s]*$")
+    @Column @NotNull @Pattern(regex = "^[A-Za-z0-9_\\-\\s]*$")
     private String postalCode;
 
     public Address() {

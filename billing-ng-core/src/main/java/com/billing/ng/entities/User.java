@@ -26,6 +26,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -66,18 +69,18 @@ public abstract class User extends BaseEntity {
     @Id @GeneratedValue
     private Long id;
 
-    @Column
+    @Column @NotNull @Pattern(regexp = "[A-Za-z_\\-\\.]")
     private String userName;
-    @Column
+    @Column @NotNull
     private String passwordHash;
-    @Column
+    @Column @NotNull
     private String hashSalt;
     
     @Column
     private String firstName;
     @Column
     private String lastName;
-    @Column
+    @Column @Max(3)
     private String initial;
     @Column @Enumerated(EnumType.STRING)
     private Gender gender;

@@ -18,6 +18,7 @@
         <mapping class="com.billing.ng.entities.BillingPeriod"/>
         <mapping class="com.billing.ng.entities.Contact"/>
         <mapping class="com.billing.ng.entities.Customer"/>
+        <mapping class="com.billing.ng.entities.NumberPattern"/>
         <mapping class="com.billing.ng.entities.Rate"/>
         <mapping class="com.billing.ng.entities.Staff"/>
         <mapping class="com.billing.ng.entities.User"/>        

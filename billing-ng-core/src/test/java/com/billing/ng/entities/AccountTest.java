@@ -223,4 +223,46 @@ public class AccountTest {
 
         assertThat(ids, hasItems(1L, 2L, 3L));
     }
+
+
+    @Test
+    public void testGenerateAccountNumber() {
+        NumberPattern pattern = new NumberPattern();
+        pattern.setPattern("No. ${account.id}");
+
+        Account account = new Account();
+        account.setId(1L);
+        account.setNumberPattern(pattern);
+
+        account.generateAccountNumber();
+        
+        // generated account number
+        assertThat(account.getNumber(), is("No. 1"));
+    }
+
+    @Test
+    public void testGenerateAccountNumberNullPattern() {
+        Account account = new Account();
+        account.setNumberPattern(null);
+
+        account.generateAccountNumber();
+
+        // no pattern, account number should remain null
+        assertThat(account.getNumber(), nullValue());
+    }
+
+    @Test
+    public void testGenerateExistingAccountNumber() {
+        NumberPattern pattern = new NumberPattern();
+        pattern.setPattern("No. ${customer.id}");
+
+        Account account = new Account();
+        account.setNumber("Some ID");
+        account.setNumberPattern(pattern);
+
+        account.generateAccountNumber();
+
+        // account number was already set and shouldn't change
+        assertThat(account.getNumber(), is("Some ID"));
+    }
 }

@@ -17,12 +17,17 @@
 
 package com.billing.ng.entities;
 
+import org.hibernate.annotations.Where;
+
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -42,9 +47,16 @@ public class Customer extends User {
     @Column
     private String number;
 
+    @ManyToOne
+    @Where(clause = "type = CUSTOMER")
+    private NumberPattern numberPattern;
+    
     @Column
     private String companyName;
     
+    @OneToOne
+    private Contact contact;
+
     @OneToMany(mappedBy = "customer")
     private Set<Account> accounts = new HashSet<Account>();
 
@@ -65,6 +77,20 @@ public class Customer extends User {
         this.number = number;
     }
 
+    public NumberPattern getNumberPattern() {
+        return numberPattern;
+    }
+
+    public void setNumberPattern(NumberPattern numberPattern) {
+        this.numberPattern = numberPattern;
+    }
+
+    @PrePersist
+    public void generateCustomerNumber() {
+        if (getNumber() == null && getNumberPattern() != null)
+            setNumber(getNumberPattern().generate("customer", this));
+    }
+
     public String getCompanyName() {
         return companyName;
     }
@@ -72,7 +98,15 @@ public class Customer extends User {
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
-    
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
     public Set<Account> getAccounts() {
         return accounts;
     }
