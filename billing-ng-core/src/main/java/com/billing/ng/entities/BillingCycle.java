@@ -27,6 +27,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.Date;
 
 /**
@@ -49,7 +51,7 @@ public class BillingCycle extends BaseEntity {
     private Date end;
     @ManyToOne
     private BillingPeriod billingPeriod;
-    @Column
+    @Column @Min(1) @Max(32)
     private Integer cycleStartDay;
 
     public BillingCycle() {
