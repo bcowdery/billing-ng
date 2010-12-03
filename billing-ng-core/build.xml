@@ -185,12 +185,15 @@
             <classpath path="${classes.dir}"/>
             <hbm2ddl outputfilename="${ddl-sql.file}" export="false" drop="${ddl.drop}" format="true"/>
         </hibernatetool>
+        
+        <delete file="transaction.log"/>
         <echo message="Generated ddl ${build.dir}/${ddl-sql.file} with ddl.drop = ${ddl.drop}"/>
     </target>
 
     <target name="generate.db.changelog"
             description="Generates a liquibase changelog that can be used to re-create an existing database schema."
             depends="init, prompt-db.properties, set-db.properties">
+
         <generateChangeLog outputFile="${db.changelog.releasefile}"
                            driver="${db.driver}"
                            url="${db.url}"
@@ -206,6 +209,7 @@
     <target name="db.update"
             description="Updates the database to the most recent version."
             depends="init, prompt-db.properties, set-db.properties">
+
         <input message="Drop schema before updating?" addproperty="db.drop" defaultvalue="false"/>
         <updateDatabase changeLogFile="${db.changelog.file}"
                         driver="${db.driver}"
@@ -223,6 +227,7 @@
     <target name="db.rollback"
             description="Rollback the database to the given version tag."
             depends="init, prompt-db.properties, set-db.properties">
+
         <input message="Rollback to tag" addproperty="db.rollback.tag" defaultvalue="${release.version}"/>
         <rollbackDatabase changeLogFile="${db.changelog.file}"
                           driver="${db.driver}"
@@ -240,6 +245,7 @@
     <target name="db.tag"
             description="Tags the database with a version tag for future rollbacks/upgrades."
             depends="init, prompt-db.properties, set-db.properties">
+        
         <input message="Tag database as version" addproperty="db.tag" defaultvalue="${release.version}"/>
         <tagDatabase driver="${db.driver}"
                      url="${db.url}"
