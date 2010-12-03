@@ -25,7 +25,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * RateTable
+ * Rate Table holding known currencies and conversion rates. This table is used when
+ * performing math operations on {@link Money} of different currencies.
+ *
+ * The table system rate is used as a pivot point when converting currencies. The set
+ * system rate will always have a conversion "rate" of 1.
  *
  * @author Brian Cowdery
  * @since 15-Aug-2010
