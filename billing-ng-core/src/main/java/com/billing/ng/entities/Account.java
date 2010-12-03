@@ -50,7 +50,7 @@ import java.util.List;
  * @since 26-Aug-2010
  */
 @Entity
-public class Account extends BaseEntity implements Visitable<Account> {
+public class Account extends BaseEntity implements Visitable<Account>, Numbered {
 
     /**
      * Simple visitor that updates the hierarchy level of all visited accounts. Used
@@ -137,7 +137,7 @@ public class Account extends BaseEntity implements Visitable<Account> {
     }
 
     @PrePersist
-    public void generateAccountNumber() {
+    public void generateNumber() {
         if (getNumber() == null && getNumberPattern() != null)
             setNumber(getNumberPattern().generate("account", this));
     }

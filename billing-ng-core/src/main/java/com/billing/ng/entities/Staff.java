@@ -31,10 +31,10 @@ import javax.persistence.PrePersist;
  * @since 16-Aug-2010
  */
 @Entity
-public class Staff extends User {
+public class Staff extends User implements Numbered {
     
     @Column
-    private String staffId;
+    private String number;
 
     @ManyToOne
     @Where(clause = "type = STAFF")
@@ -43,12 +43,12 @@ public class Staff extends User {
     public Staff() {
     }
 
-    public String getStaffId() {
-        return staffId;
+    public String getNumber() {
+        return number;
     }
 
-    public void setStaffId(String staffId) {
-        this.staffId = staffId;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public NumberPattern getNumberPattern() {
@@ -60,8 +60,8 @@ public class Staff extends User {
     }
 
     @PrePersist
-    public void generateStaffId() {
-        if (getStaffId() == null && getNumberPattern() != null)
-            setStaffId(getNumberPattern().generate("staff", this));
+    public void generateNumber() {
+        if (getNumber() == null && getNumberPattern() != null)
+            setNumber(getNumberPattern().generate("staff", this));
     }
 }

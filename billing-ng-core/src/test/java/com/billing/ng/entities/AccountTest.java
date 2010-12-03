@@ -234,7 +234,7 @@ public class AccountTest {
         account.setId(1L);
         account.setNumberPattern(pattern);
 
-        account.generateAccountNumber();
+        account.generateNumber();
         
         // generated account number
         assertThat(account.getNumber(), is("No. 1"));
@@ -245,7 +245,7 @@ public class AccountTest {
         Account account = new Account();
         account.setNumberPattern(null);
 
-        account.generateAccountNumber();
+        account.generateNumber();
 
         // no pattern, account number should remain null
         assertThat(account.getNumber(), nullValue());
@@ -260,7 +260,7 @@ public class AccountTest {
         account.setNumber("Some ID");
         account.setNumberPattern(pattern);
 
-        account.generateAccountNumber();
+        account.generateNumber();
 
         // account number was already set and shouldn't change
         assertThat(account.getNumber(), is("Some ID"));

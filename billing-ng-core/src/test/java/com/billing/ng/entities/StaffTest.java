@@ -32,7 +32,7 @@ import static org.hamcrest.Matchers.*;
 public class StaffTest {
 
     @Test
-    public void testGenerateStaffId() {
+    public void testGenerateNumber() {
         NumberPattern pattern = new NumberPattern();
         pattern.setPattern("No. ${staff.id}");
 
@@ -40,35 +40,35 @@ public class StaffTest {
         staff.setId(1L);
         staff.setNumberPattern(pattern);
 
-        staff.generateStaffId();
+        staff.generateNumber();
 
-        // generated staff id
-        assertThat(staff.getStaffId(), is("No. 1"));        
+        // generated staff number
+        assertThat(staff.getNumber(), is("No. 1"));        
     }
 
     @Test
-    public void testGenerateStaffIdNullPattern() {
+    public void testGenerateNumberNullPattern() {
         Staff staff = new Staff();
         staff.setNumberPattern(null);
 
-        staff.generateStaffId();
+        staff.generateNumber();
 
-        // no pattern, staff id should remain null
-        assertThat(staff.getStaffId(), nullValue());
+        // no pattern, staff number should remain null
+        assertThat(staff.getNumber(), nullValue());
     }
 
     @Test
-    public void testGenerateExistingStaffId() {
+    public void testGenerateExistingNumber() {
         NumberPattern pattern = new NumberPattern();
         pattern.setPattern("No. ${staff.id}");
 
         Staff staff = new Staff();
-        staff.setStaffId("Some ID");
+        staff.setNumber("Some ID");
         staff.setNumberPattern(pattern);
 
-        staff.generateStaffId();
+        staff.generateNumber();
 
-        // staff id was already set and shouldn't change
-        assertThat(staff.getStaffId(), is("Some ID"));
+        // staff number was already set and shouldn't change
+        assertThat(staff.getNumber(), is("Some ID"));
     }
 }

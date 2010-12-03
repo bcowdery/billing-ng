@@ -41,7 +41,7 @@ public class CustomerTest {
         customer.setId(1L);
         customer.setNumberPattern(pattern);
 
-        customer.generateCustomerNumber();
+        customer.generateNumber();
 
         // generated customer number
         assertThat(customer.getNumber(), is("No. 1"));        
@@ -52,7 +52,7 @@ public class CustomerTest {
         Customer customer = new Customer();
         customer.setNumberPattern(null);
 
-        customer.generateCustomerNumber();
+        customer.generateNumber();
 
         // no pattern, customer number should remain null
         assertThat(customer.getNumber(), nullValue());
@@ -67,7 +67,7 @@ public class CustomerTest {
         customer.setNumber("Some ID");
         customer.setNumberPattern(pattern);
 
-        customer.generateCustomerNumber();
+        customer.generateNumber();
 
         // customer number was already set and shouldn't change
         assertThat(customer.getNumber(), is("Some ID"));

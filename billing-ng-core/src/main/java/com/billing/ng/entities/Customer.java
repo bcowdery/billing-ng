@@ -42,7 +42,7 @@ import java.util.Set;
  * @since 16-Aug-2010
  */
 @Entity
-public class Customer extends User {
+public class Customer extends User implements Numbered {
 
     @Column
     private String number;
@@ -86,7 +86,7 @@ public class Customer extends User {
     }
 
     @PrePersist
-    public void generateCustomerNumber() {
+    public void generateNumber() {
         if (getNumber() == null && getNumberPattern() != null)
             setNumber(getNumberPattern().generate("customer", this));
     }

@@ -93,7 +93,7 @@ public class NumberPattern extends BaseEntity {
         root.put(key, object);
 
         Writer out = new StringWriter();
-        
+
         try {
             Template template = new Template(getTemplateName(), new StringReader(pattern), getConfiguration());
             template.process(root, out);
