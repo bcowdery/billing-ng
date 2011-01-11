@@ -318,4 +318,9 @@ public class MoneyTest {
         assertFalse(cad1.equals(cadScale));
     }
 
+    @Test
+    public void testXmlSeralization() {
+        
+    }
+
 }

@@ -62,7 +62,7 @@ import java.util.Locale;
  * @since 11-Aug-2010
  */
 @Embeddable
-@XmlRootElement(name = "monetary") 
+@XmlRootElement(name = "monetary")
 public class Money implements Serializable {
 
     private static final String NON_DIGIT_REGEX = "^\\D*";
@@ -70,8 +70,22 @@ public class Money implements Serializable {
     private static final String BLANK = "";
     private static final String WHITESPACE = " ";
 
+    @Transient
     private BigDecimal value;
+    @Transient
     private Currency currency;
+
+    // todo: this is an ugly solution, implement an XML type adaptor or Hibernate user type instead.
+    /*
+        Persisted values derived from value and currency. These values are necessary
+        to allow both JPA and JAXB annotations to be mixed on the same class.
+     */
+    @Column(name = "value", nullable = false, length = 22)
+    private long longValue;
+    @Column(name = "scale", nullable = false, length = 2)    
+    private int scale;
+    @Column(name = "currency_code", nullable = false, length = 3)
+    private String currencyCode;
 
     public Money() {
     }
@@ -152,7 +166,6 @@ public class Money implements Serializable {
             this.value = this.value.setScale(this.currency.getDefaultFractionDigits(), RoundingMode.HALF_UP);
     }
 
-    @Transient
     @XmlAttribute(name = "amount")
     public BigDecimal getValue() {
         return value;
@@ -170,10 +183,10 @@ public class Money implements Serializable {
      *
      * @return integral dollar value as a long
      */
-    @Column(name = "value", nullable = false, length = 22)
     @XmlAttribute(name = "integral_amount")
     public long getLongValue() {
-        return value.movePointRight(value.scale()).longValueExact();
+        longValue = value.movePointRight(value.scale()).longValueExact();
+        return longValue; 
     }
 
     /**
@@ -199,10 +212,10 @@ public class Money implements Serializable {
      *
      * @return scale
      */
-    @Column(name = "scale", nullable = false, length = 2)
     @XmlAttribute(name = "decimal_places")
     public int getScale() {
-        return value.scale();
+        scale = value.scale();
+        return scale;
     }
 
     /**
@@ -218,7 +231,6 @@ public class Money implements Serializable {
             value = value.movePointLeft(scale);
     }
 
-    @Transient
     @XmlTransient
     public Currency getCurrency() {
         return currency;
@@ -228,10 +240,10 @@ public class Money implements Serializable {
         this.currency = currency;
     }
 
-    @Column(name = "currency_code", nullable = false, length = 3)
     @XmlAttribute(name = "currency")
     public String getCurrencyCode() {
-        return currency.getCurrencyCode();
+        currencyCode = currency.getCurrencyCode();
+        return currencyCode;
     }
 
     /**
