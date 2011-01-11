@@ -17,6 +17,9 @@
   <component name="DependencyValidationManager">
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>
+  <component name="EntryPointsManager">
+    <entry_points version="2.0" />
+  </component>
   <component name="IdProvider" IDEtalkID="D08BA185BFBC3EF8C55603618ABBFE06" />
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" />
@@ -39,7 +42,10 @@
     <option name="projectName" value="billing-ng" />
   </component>
   <component name="ProjectKey">
-    <option name="state" value="http://svn.pointyspoon.com/billing/trunk/.idea/misc.xml" />
+    <option name="state" value="git@github.com:bcowdery/Billing-NG.git" />
+  </component>
+  <component name="ProjectResources">
+    <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
