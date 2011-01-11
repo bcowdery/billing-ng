@@ -99,7 +99,10 @@ public class Account extends BaseEntity implements Visitable<Account>, Numbered 
 
     @OneToOne
     private BillingCycle billingCycle;
-    
+
+    @OneToMany(mappedBy = "account")
+    private List<PurchaseOrder> purchaseOrders = new ArrayList<PurchaseOrder>();
+
     @ManyToOne
     private Account parentAccount;
 
@@ -197,6 +200,14 @@ public class Account extends BaseEntity implements Visitable<Account>, Numbered 
 
     public void setBillingCycle(BillingCycle billingCycle) {
         this.billingCycle = billingCycle;
+    }
+
+    public List<PurchaseOrder> getPurchaseOrders() {
+        return purchaseOrders;
+    }
+
+    public void setPurchaseOrders(List<PurchaseOrder> purchaseOrders) {
+        this.purchaseOrders = purchaseOrders;
     }
 
     public Account getParentAccount() {

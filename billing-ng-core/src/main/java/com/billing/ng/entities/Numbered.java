@@ -27,7 +27,6 @@ package com.billing.ng.entities;
 public interface Numbered {
 
     public String getNumber();
-    public void setNumber(String number);
 
     public NumberPattern getNumberPattern();
     public void setNumberPattern(NumberPattern numberPattern);
