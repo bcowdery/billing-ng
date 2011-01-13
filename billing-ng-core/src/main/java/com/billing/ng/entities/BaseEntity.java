@@ -52,23 +52,26 @@ import java.util.Set;
 public abstract class BaseEntity implements Serializable {
 
     private static final ValidatorFactory VALIDATOR_FACTORY = Validation.buildDefaultValidatorFactory();
-    
-    /**
-     * colon-separates string of packages that contain JAXB bound objects.
-     */
-    private static transient String PACKAGES;
+    private static transient JAXBContext JAXB_CONTEXT;
+
     static {
+        // list of packages containing JAXB bound objects
         List<String> packages = Arrays.asList(
                 "com.billing.ng.entities"
         );
 
+        // convert to a colon-separated string
         StringBuilder builder = new StringBuilder();
         for (Iterator<String> it = packages.iterator(); it.hasNext();) {
-            String pkg = it.next();
-            builder.append(pkg);
+            builder.append(it.next());
             if (it.hasNext()) builder.append(":");
         }
-        PACKAGES = builder.toString();
+
+        try {
+            JAXB_CONTEXT = JAXBContext.newInstance(builder.toString());
+        } catch (JAXBException e) {
+            throw new RuntimeException("Cannot build JAXB context for packages [" + builder.toString() + "]");
+        }
     }
 
     /**
@@ -92,7 +95,7 @@ public abstract class BaseEntity implements Serializable {
      * @throws IOException thrown if serialization fails
      */
     public String toXml() throws JAXBException, IOException {
-        return toXml(JAXBContext.newInstance(PACKAGES));
+        return toXml(JAXB_CONTEXT);
     }
 
     /**
@@ -131,8 +134,7 @@ public abstract class BaseEntity implements Serializable {
      */
     @SuppressWarnings("unchecked")
     public static <T> T fromXml(Class<T> destType, String xml) throws JAXBException, IOException {
-        JAXBContext context = JAXBContext.newInstance(PACKAGES);
-        Unmarshaller u = context.createUnmarshaller();
+        Unmarshaller u = JAXB_CONTEXT.createUnmarshaller();
 
         ByteArrayInputStream bis = new ByteArrayInputStream(xml.getBytes());
         return (T) u.unmarshal(new StreamSource(bis));
