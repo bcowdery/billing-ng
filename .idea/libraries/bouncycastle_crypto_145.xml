@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="bouncycastle-crypto-145">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/bouncycastle-crypto-145/bcprov-jdk16-145.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/bouncycastle-crypto-145/src.zip!/" />
+    </SOURCES>
+  </library>
+</component>

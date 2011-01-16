@@ -14,9 +14,10 @@
         <fileset dir="${jboss.lib.dir}" includes="*.jar"/>
     	<fileset dir="${j2ee5.dir}" includes="*.jar"/>
         <fileset dir="${j2ee5client.dir}" includes="*.jar"/>
+        <fileset dir="${bouncycastle-crypto.dir}" includes="*.jar"/>
         <fileset dir="${commons-codec.dir}" includes="*.jar"/>
-        <fileset dir="${joda-time.dir}" includes="*.jar"/>
         <fileset dir="${freemarker.dir}/lib" includes="*.jar"/>
+        <fileset dir="${joda-time.dir}" includes="*.jar"/>
     </path>
 
     <path id="compile.test.classpath">
@@ -33,7 +34,6 @@
 
     <path id="liquibase.classpath">
         <fileset dir="${liquibase.dir}" includes="liquibase.jar"/>
-        <fileset dir="${liquibase.dir}/lib" includes="**/*.jar"/>
         <fileset dir="${mysql-connector.dir}" includes="*.jar"/>
         <path refid="compile.classpath"/>
     </path>
