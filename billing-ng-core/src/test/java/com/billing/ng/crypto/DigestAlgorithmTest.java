@@ -44,6 +44,22 @@ public class DigestAlgorithmTest {
                         "TAhzqKKQenwKn5dxq87wzg==\r\n"
                 },
                 {
+                        DigestAlgorithm.RipeMD128,
+                        "k4jH/zkGAAIC5HZefIfJPg==\r\n"
+                },
+                {
+                        DigestAlgorithm.RipeMD160,
+                        "/uFW+nT/RroOa43+oPAY7oqZWTw=\r\n"
+                },
+                {
+                        DigestAlgorithm.RipeMD256,
+                        "GXC9+TqsM+5VHShwmFMrgsCZr8RSv2gmr0jgCOV0Zas=\r\n"
+                },
+                {
+                        DigestAlgorithm.RipeMD320,
+                        "8WiqXaPaYDViLtes78Zvs3S/6nA7Rl0uAQsMQ1pIXa3VLx9jvq7THA==\r\n"
+                },
+                {
                         DigestAlgorithm.SHA1,
                         "Je4dk9ZIFqKADaTRhkDr7p9BGzM=\r\n"
                 },
@@ -58,6 +74,14 @@ public class DigestAlgorithmTest {
                 {
                         DigestAlgorithm.SHA512,
                         "feYfGu2VmJcONP7212V7lSjKL2nJKh3HLjwUhHd9C+ZHvCn9F+KVtd65r9sznyi/aqobO5+89rK4\r\nApvfuPQHvA==\r\n"
+                },
+                {
+                        DigestAlgorithm.Tiger,
+                        "ESikkdwGEP+XsDR/8ldeqHQ5a4h2waBy\r\n"
+                },
+                {
+                        DigestAlgorithm.GOST3411,
+                        "LmcNWH1HjTypB/5CcFYBWM3jRnLhIs7cPce1tpm1wto=\r\n"
                 },
                 {
                         DigestAlgorithm.Whirlpool,

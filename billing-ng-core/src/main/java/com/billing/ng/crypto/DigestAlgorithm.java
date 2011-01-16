@@ -34,10 +34,16 @@ import java.security.Security;
 public enum DigestAlgorithm {
 
     MD5         ("MD5"),
+    RipeMD128   ("RIPEMD128"),
+    RipeMD160   ("RIPEMD160"),
+    RipeMD256   ("RIPEMD256"),
+    RipeMD320   ("RIPEMD320"),
     SHA1        ("SHA-1"),
     SHA256      ("SHA-256"),
     SHA384      ("SHA-384"),
     SHA512      ("SHA-512"),
+    Tiger       ("Tiger"),
+    GOST3411    ("GOST3411"),
     Whirlpool   ("Whirlpool");
 
 
