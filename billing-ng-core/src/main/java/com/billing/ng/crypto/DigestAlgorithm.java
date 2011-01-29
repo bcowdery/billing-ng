@@ -73,16 +73,28 @@ public enum DigestAlgorithm {
 
     /**
      * Compute the hash digest of the given plain text string for this algorithm
+     * and return the digested bytes.
+     *
+     * @param plainText plain text string
+     * @return digested bytes
+     */
+    public byte[] digestBytes(String plainText) {
+        MessageDigest digest = getMessageDigestInstance();
+        digest.reset();
+        digest.update(plainText.getBytes());
+
+        return digest.digest();
+    }
+
+    /**
+     * Compute the hash digest of the given plain text string for this algorithm
      * and return the hash as a base-64 encoded string.
      *
      * @param plainText plain text string
      * @return digested hash string
      */
     public String digest(String plainText) {
-        MessageDigest digest = getMessageDigestInstance();
-        digest.reset();
-        digest.update(plainText.getBytes());
-
-        return Base64.encodeBase64String(digest.digest());
+        byte[] digested = digestBytes(plainText);
+        return Base64.encodeBase64String(digested);
     }
 }

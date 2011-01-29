@@ -17,6 +17,8 @@
 
 package com.billing.ng.util;
 
+import com.billing.ng.crypto.DigestAlgorithm;
+import com.billing.ng.crypto.context.DigestAlgorithmHolder;
 import org.apache.commons.codec.binary.Base64;
 
 import java.security.MessageDigest;
@@ -34,30 +36,25 @@ public class HashUtils {
     private static final char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
 
     /**
-     * Generates an alphanumeric salted hash token using an SHA-256 hashing algorithm. The generated hash
+     * Generates an alphanumeric salted hash token using the configured digest algorithm. The generated hash
      * is stripped of all non-alphanumeric characters to make it safe for use as an HTTP GET parameter value.
+     *
+     * @see DigestAlgorithmHolder
      *
      * @param base string to use as the primary basis of the hash
      * @param appends additional strings to append to the plain-text password before hashing
      * @return hash string
      */
     public static String generateHash(String base, String... appends) {
-        MessageDigest digest;
-        try {
-            digest = MessageDigest.getInstance("SHA-256");
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Unsupported digest algorithm, check JDK deployment.", e);
-        }
-
         StringBuffer plainText = new StringBuffer();
         plainText.append(base);
         for (String string : appends)
             plainText.append(string);
 
-        digest.reset();
-        digest.update(plainText.toString().getBytes());
+        DigestAlgorithm algorithm = DigestAlgorithmHolder.getAlgorithm();
 
-        return Base64.encodeBase64URLSafeString(digest.digest());
+        byte[] bytes = algorithm.digestBytes(plainText.toString());
+        return Base64.encodeBase64URLSafeString(bytes);
     }
 
     /**
