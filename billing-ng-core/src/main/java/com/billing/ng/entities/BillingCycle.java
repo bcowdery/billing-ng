@@ -18,11 +18,7 @@
 package com.billing.ng.entities;
 
 import org.joda.time.DateMidnight;
-import org.joda.time.Days;
-import org.joda.time.Months;
 import org.joda.time.Period;
-import org.joda.time.Weeks;
-import org.joda.time.Years;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,13 +27,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.util.Date;
 
 /**
- * BillingCycle
+ * The billing cycle start and end date of a customer that defines when a customer starts
+ * and stops receiving invoices.
  *
  * @author Brian Cowdery
  * @since 26-Oct-2010
@@ -54,10 +50,11 @@ public class BillingCycle extends BaseEntity {
     private Date start = new Date(); // default start date to today
     @Column @Temporal(TemporalType.DATE)
     private Date end;
-    @ManyToOne
-    private BillingPeriod billingPeriod;
     @Column @Min(1) @Max(31)
     private Integer cycleStartDay;
+    @ManyToOne
+    private BillingPeriod billingPeriod;
+
 
     public BillingCycle() {
     }
@@ -90,14 +87,6 @@ public class BillingCycle extends BaseEntity {
         this.end = end;
     }
 
-    public BillingPeriod getBillingPeriod() {
-        return billingPeriod;
-    }
-
-    public void setBillingPeriod(BillingPeriod billingPeriod) {
-        this.billingPeriod = billingPeriod;
-    }
-
     /**
      * Day of month that this customers cycle starts.
      *
@@ -115,6 +104,14 @@ public class BillingCycle extends BaseEntity {
      */
     public void setCycleStartDay(Integer cycleStartDay) {
         this.cycleStartDay = cycleStartDay;
+    }
+
+    public BillingPeriod getBillingPeriod() {
+        return billingPeriod;
+    }
+
+    public void setBillingPeriod(BillingPeriod billingPeriod) {
+        this.billingPeriod = billingPeriod;
     }
 
     /**
@@ -164,7 +161,6 @@ public class BillingCycle extends BaseEntity {
         while (calculated.isBefore(start)) {
             calculated = calculated.plus(period);
         }
-
         return calculated;
     }
 
@@ -184,60 +180,21 @@ public class BillingCycle extends BaseEntity {
     }
 
     /**
-     * Calculates the number of complete cycles between the starting instant of this
-     * BillingCycle and the given date.
+     * Calculates the current billing cycle for today's date.
      *
-     * @param date end date
-     * @return number of cycles
+     * @return current billing cycle as of today
      */
-    public Integer calculateCycleNumber(DateMidnight date) {
-        return calculateCycleNumber(getStartInstant(), date);
-    }
-
-    private Integer calculateCycleNumber(DateMidnight startInstant, DateMidnight date) {
-        Integer interval = getBillingPeriod().getInterval();
-
-        switch (getBillingPeriod().getType()) {
-            case DAY:
-                return Days.daysBetween(startInstant, date).getDays() / interval;
-
-            case WEEK:
-                return Weeks.weeksBetween(startInstant, date).getWeeks() / interval;
-
-            case MONTH:
-                return Months.monthsBetween(startInstant, date).getMonths() / interval;
-
-            case YEAR:
-                return Years.yearsBetween(startInstant, date).getYears() / interval;
-        }
-        return null;
+    public CurrentBillingCycle getCurrentBillingCycle() {
+        return new CurrentBillingCycle(getBillingPeriod(), getStartInstant());
     }
 
     /**
-     * Calculate the start date of the current cycle.
+     * Calculates the current billing cycle for the given date.
      *
-     * @return calculated cycle start date
+     * @param today date to calculate billing cycle for
+     * @return current billing cycle for the given date
      */
-    public DateMidnight calculateCycleStart() {
-        DateMidnight start = getStartInstant();
-
-        // calculate the current cycle number (elapsed number of cycles)
-        Integer cycleNumber = calculateCycleNumber(start, new DateMidnight());
-
-        // increment the billing cycle starting instant by the elapsed number of cycles
-        Period period = getBillingPeriod().getPeriodOfTime(cycleNumber);
-        return start.plus(period);
-    }
-
-    /**
-     * Calculate the end date of the current cycle.
-     *
-     * @param cycleStart cycle start date
-     * @return calculated cycle end date
-     */
-    public DateMidnight calculateCycleEnd(DateMidnight cycleStart) {
-        // increment the cycle start date by a single period
-        Period period = getBillingPeriod().getPeriodOfTime();
-        return cycleStart.plus(period);
+    public CurrentBillingCycle getCurrentBillingCycle(DateMidnight today) {
+        return new CurrentBillingCycle(getBillingPeriod(), getStartInstant(), today);
     }
 }

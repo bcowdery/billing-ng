@@ -27,7 +27,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
- * BillingPeriod
+ * Billing period of a customers billing cycle. The billing period defines the number of
+ * days, weeks, months or years between each billing cycle (invoice generation).
  *
  * @author Brian Cowdery
  * @since 26-Oct-2010
@@ -80,7 +81,7 @@ public class BillingPeriod extends BaseEntity {
 
     /**
      * Returns a Joda Time <code>Period</code> representing the period of time
-     * of a single BillingPeriod cycle.
+     * of a single BillingPeriod.
      *
      * @return period of time
      */

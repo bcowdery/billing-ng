@@ -32,7 +32,7 @@ import static org.hamcrest.Matchers.*;
 public class BillingPeriodTest {
 
     @Test
-    public void testGetPeriod() throws Exception {
+    public void testGetPeriodOfTime() throws Exception {
         BillingPeriod period = new BillingPeriod();
         period.setInterval(5);
 
@@ -50,7 +50,7 @@ public class BillingPeriodTest {
     }
 
     @Test
-    public void testGetPeriodDefault() throws Exception {
+    public void testGetDefaultPeriodOfTime() throws Exception {
         BillingPeriod period = new BillingPeriod();
         assertThat(period.getPeriodOfTime().getValues(), is(new int[] {0, 1, 0, 0, 0, 0, 0, 0})); // default 1 month
     }
