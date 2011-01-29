@@ -20,11 +20,11 @@ package com.billing.ng.crypto.key;
 import java.security.Key;
 
 /**
- * KeyPair is a simple holder for generated keys. Like javax.crypto.KeyPair, it does
- * not enforce any security and should be treated as a PrivateKey once initialized.
+ * KeyPair is a simple holder for generated keys. Like <code>javax.crypto.KeyPair</code>, it does
+ * not enforce any security and should be treated as a <code>PrivateKey</code> once initialized.
  *
  * This KeyPair holder stores keys using the top-level Key interface so that
- * it can store keys regardless of the generating class (KeyGenerator, KeyPairGenerator, KeyFactory etc.).
+ * it can store keys regardless of the generating class (<code>KeyGenerator, KeyPairGenerator, KeyFactory</code> etc.).
  *
  * @author Brian Cowdery
  * @since 14/01/11

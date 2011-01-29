@@ -18,6 +18,9 @@
 package com.billing.ng.crypto;
 
 import com.billing.ng.crypto.key.KeyPair;
+import com.billing.ng.crypto.profile.CipherProfile;
+import com.billing.ng.crypto.profile.PublicKeyProfile;
+import com.billing.ng.crypto.profile.SymmetricKeyProfile;
 import org.apache.commons.codec.binary.Base64;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
@@ -25,13 +28,12 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.Security;
-
-import static com.billing.ng.crypto.CipherAlgorithmKeyType.*;
 
 /**
  * Cipher algorithms available using the BouncyCastle JCE provider.
@@ -45,88 +47,45 @@ public enum CipherAlgorithm {
     // symmetric block ciphers
 
     /** Data Encryption Standard */
-    DES         (SYMMETRIC_KEY, "DES"),
+    DES         (new SymmetricKeyProfile("DES"),            "DES"),
     /** Triple DES */
-    DESede      (SYMMETRIC_KEY, "DESede"),
+    DESede      (new SymmetricKeyProfile("DESede"),         "DESede"),
     /** Advanced Encryption Standard */
-    AES         (SYMMETRIC_KEY, 128, "AES"),
+    AES         (new SymmetricKeyProfile("AES", 128),       "AES"),
     /** Blowfish */
-    Blowfish    (SYMMETRIC_KEY, "Blowfish"),
+    Blowfish    (new SymmetricKeyProfile("Blowfish"),       "Blowfish"),
+    /** Twofish */
+    Twofish     (new SymmetricKeyProfile("Twofish", 128),   "Twofish"),
 
 
     // public key ciphers
 
     /** RSA */
-    RSA                 (PUBLIC_KEY, "RSA"),
+    RSA                 (new PublicKeyProfile("RSA"), "RSA"),
     /** RSA-SHA256 Signature with Optimal Asymmetric Encryption Padding */
-    RSA_OAEP_SHA256     (PUBLIC_KEY, "RSA", "NONE", "OAEPWithSHA256AndMGF1Padding"),
+    RSA_OAEP_SHA256     (new PublicKeyProfile("RSA"), "RSA/NONE/OAEPWithSHA256AndMGF1Padding"),
     /** RSA-SHA384 Signature with Optimal Asymmetric Encryption Padding */
-    RSA_OAEP_SHA384     (PUBLIC_KEY, "RSA", "NONE", "OAEPWithSHA384AndMGF1Padding"),
+    RSA_OAEP_SHA384     (new PublicKeyProfile("RSA"), "RSA/NONE/OAEPWithSHA384AndMGF1Padding"),
     /** RSA-SHA512 Signature with Optimal Asymmetric Encryption Padding */
-    RSA_OAEP_SHA512     (PUBLIC_KEY, "RSA", "NONE", "OAEPWithSHA512AndMGF1Padding"),
+    RSA_OAEP_SHA512     (new PublicKeyProfile("RSA"), "RSA/NONE/OAEPWithSHA512AndMGF1Padding"),
     /** RSA-MD5 Signature with Optimal Asymmetric Encryption Padding */
-    RSA_OAEP_MD5        (PUBLIC_KEY, "RSA", "NONE", "OAEPWithMD5AndMGF1Padding");
+    RSA_OAEP_MD5        (new PublicKeyProfile("RSA"), "RSA/NONE/OAEPWithMD5AndMGF1Padding");
 
 
     static {
         Security.addProvider(new BouncyCastleProvider());
     }
 
-    private CipherAlgorithmKeyType type;
-    private Integer keySize;
+
+    private CipherProfile profile;
     private String algorithm;
-    private String mode;
-    private String padding;
 
-    public CipherAlgorithmKeyType getType() { return type; }
-    public Integer getKeySize() { return keySize; }
+    public CipherProfile getProfile() { return profile; }
     public String getAlgorithm() { return algorithm; }
-    public String getMode() { return mode; }
-    public String getPadding() { return padding; }
 
-    CipherAlgorithm(CipherAlgorithmKeyType type, String algorithm) {
-        this.type = type;
+    CipherAlgorithm(CipherProfile profile, String algorithm) {
+        this.profile = profile;
         this.algorithm = algorithm;
-    }
-
-    CipherAlgorithm(CipherAlgorithmKeyType type, Integer keySize, String algorithm) {
-        this.type = type;
-        this.keySize = keySize;
-        this.algorithm = algorithm;
-    }
-
-    CipherAlgorithm(CipherAlgorithmKeyType type, String algorithm, String mode, String padding) {
-        this.type = type;
-        this.algorithm = algorithm;
-        this.mode = mode;
-        this.padding = padding;
-    }
-
-    CipherAlgorithm(CipherAlgorithmKeyType type, Integer keySize, String algorithm, String mode, String padding) {
-        this.type = type;
-        this.keySize = keySize;
-        this.algorithm = algorithm;
-        this.mode = mode;
-        this.padding = padding;
-    }
-
-    /**
-     * Builds and returns the algorithm specification string for this CipherAlgorithm. Algorithm
-     * specification strings are in the format "ALGORITHM/MODE/PADDING".
-     *
-     * @return algorithm specification string
-     */
-    public String getAlgorithmSpecification() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(algorithm);
-
-        if (mode != null)
-            builder.append('/').append(mode);
-
-        if (padding != null)
-            builder.append('/').append(padding);
-
-        return builder.toString();
     }
 
     /**
@@ -135,7 +94,7 @@ public enum CipherAlgorithm {
      */
     public Cipher getCipherInstance() {
         try {
-            return Cipher.getInstance(getAlgorithmSpecification(), BouncyCastleProvider.PROVIDER_NAME);
+            return Cipher.getInstance(getAlgorithm(), BouncyCastleProvider.PROVIDER_NAME);
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Cipher algorithm not supported by the JCE provider.");
         } catch (NoSuchProviderException e) {
@@ -150,7 +109,7 @@ public enum CipherAlgorithm {
      * @return key pair
      */
     public KeyPair generateKey() {
-        return getType().generateKey(getAlgorithm(), getKeySize());
+        return getProfile().generateKey();
     }
 
     /**
@@ -163,9 +122,11 @@ public enum CipherAlgorithm {
     public synchronized String encrypt(Key key, String plainText) {
         Cipher cipher = getCipherInstance();
         try {
-            cipher.init(Cipher.ENCRYPT_MODE, key);
+            cipher.init(Cipher.ENCRYPT_MODE, key, getProfile().getAlgorithmParameterSpec());
         } catch (InvalidKeyException e) {
             throw new RuntimeException("Security key is not valid.");
+        } catch (InvalidAlgorithmParameterException e) {
+            throw new RuntimeException("Invalid cipher algorithm parameter.");
         }
 
         try {
@@ -189,9 +150,11 @@ public enum CipherAlgorithm {
     public synchronized String decrypt(Key key, String encryptedText) {
         Cipher cipher = getCipherInstance();
         try {
-            cipher.init(Cipher.DECRYPT_MODE, key);
+            cipher.init(Cipher.DECRYPT_MODE, key, getProfile().getAlgorithmParameterSpec());
         } catch (InvalidKeyException e) {
             throw new RuntimeException("Security key is not valid.");
+        } catch (InvalidAlgorithmParameterException e) {
+            throw new RuntimeException("Invalid cipher algorithm parameter.");
         }
 
         try {
