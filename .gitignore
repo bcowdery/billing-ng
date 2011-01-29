@@ -2,3 +2,4 @@
 out
 **/build
 **/test-*
+transaction.log
