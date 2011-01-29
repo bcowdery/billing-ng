@@ -18,6 +18,7 @@
 package com.billing.ng.entities;
 
 import com.billing.ng.xml.XmlNamespacePrefixMapper;
+import com.billing.ng.xml.XmlPackages;
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 import org.hibernate.validator.ClassValidator;
 import org.hibernate.validator.InvalidValue;
@@ -52,27 +53,6 @@ import java.util.Set;
 public abstract class BaseEntity implements Serializable {
 
     private static final ValidatorFactory VALIDATOR_FACTORY = Validation.buildDefaultValidatorFactory();
-    private static transient JAXBContext JAXB_CONTEXT;
-
-    static {
-        // list of packages containing JAXB bound objects
-        List<String> packages = Arrays.asList(
-                "com.billing.ng.entities"
-        );
-
-        // convert to a colon-separated string
-        StringBuilder builder = new StringBuilder();
-        for (Iterator<String> it = packages.iterator(); it.hasNext();) {
-            builder.append(it.next());
-            if (it.hasNext()) builder.append(":");
-        }
-
-        try {
-            JAXB_CONTEXT = JAXBContext.newInstance(builder.toString());
-        } catch (JAXBException e) {
-            throw new RuntimeException("Cannot build JAXB context for packages [" + builder.toString() + "]");
-        }
-    }
 
     /**
      * Executes a constraint validator on this class, validating all annotated
@@ -95,7 +75,7 @@ public abstract class BaseEntity implements Serializable {
      * @throws IOException thrown if serialization fails
      */
     public String toXml() throws JAXBException, IOException {
-        return toXml(JAXB_CONTEXT);
+        return toXml(XmlPackages.JAXB_CONTEXT);
     }
 
     /**
@@ -134,7 +114,7 @@ public abstract class BaseEntity implements Serializable {
      */
     @SuppressWarnings("unchecked")
     public static <T> T fromXml(Class<T> destType, String xml) throws JAXBException, IOException {
-        Unmarshaller u = JAXB_CONTEXT.createUnmarshaller();
+        Unmarshaller u = XmlPackages.JAXB_CONTEXT.createUnmarshaller();
 
         ByteArrayInputStream bis = new ByteArrayInputStream(xml.getBytes());
         return (T) u.unmarshal(new StreamSource(bis));
