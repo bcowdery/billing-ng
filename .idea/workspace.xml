@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="38551b27-a239-4bef-8ac3-13d37f1ec9e7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/context/CipherAlgorithmHolder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/context/DigestAlgorithmHolder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/profile/CipherProfile.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/profile/PublicKeyProfile.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/profile/SymmetricKeyProfile.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/CipherAlgorithmKeyType.java" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/CurrentBillingCycle.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/CipherAlgorithm.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/CipherAlgorithm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/key/KeyPair.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/key/KeyPair.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/crypto/CipherAlgorithmTest.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/crypto/CipherAlgorithmTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/BillingCycle.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/BillingCycle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/BillingPeriod.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/BillingPeriod.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/BillingCycleTest.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/BillingCycleTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/BillingPeriodTest.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/BillingPeriodTest.java" />
     </list>
     <ignored path="billing-ng.iws" />
     <ignored path="$USER_HOME$/.griffon/" />
@@ -72,37 +68,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CipherAlgorithmTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/crypto/CipherAlgorithmTest.java">
+      <file leaf-file-name="BillingCycleTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/BillingCycleTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="36" selection-start="1962" selection-end="1962" vertical-scroll-proportion="0.0">
+            <state line="170" column="83" selection-start="6209" selection-end="6209" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CipherAlgorithm.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/CipherAlgorithm.java">
+      <file leaf-file-name="BillingCycle.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/BillingCycle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="60" selection-start="1572" selection-end="1572" vertical-scroll-proportion="0.0">
+            <state line="183" column="5" selection-start="5498" selection-end="5498" vertical-scroll-proportion="0.11320755">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DigestAlgorithm.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/DigestAlgorithm.java">
+      <file leaf-file-name="CurrentBillingCycle.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/CurrentBillingCycle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="78" selection-start="1321" selection-end="1321" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DigestAlgorithmHolder.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/context/DigestAlgorithmHolder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="63" selection-start="926" selection-end="926" vertical-scroll-proportion="0.43589744">
+            <state line="48" column="76" selection-start="1656" selection-end="1656" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -110,49 +97,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CipherProfile.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/profile/CipherProfile.java">
+      <file leaf-file-name="BillingPeriod.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/BillingPeriod.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="3" selection-start="1074" selection-end="1074" vertical-scroll-proportion="0.0">
+            <state line="104" column="58" selection-start="2761" selection-end="2761" vertical-scroll-proportion="0.0">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="KeyPair.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/key/KeyPair.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="62" selection-start="1206" selection-end="1206" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PublicKeyProfile.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/profile/PublicKeyProfile.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="18" selection-start="1484" selection-end="1484" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SymmetricKeyProfile.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/profile/SymmetricKeyProfile.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="62" selection-start="557" selection-end="557" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CipherAlgorithmHolder.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/context/CipherAlgorithmHolder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="32" selection-start="231" selection-end="231" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -172,22 +121,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/key/profile/RSAKeyProfile.java" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/CipherAlgorithmKeyType.java" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/key/profile/AESKeyProfile.java" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/key/profile/KeyProfile.java" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/key/profile/SymmetricKeyProfile.java" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/key/profile/PublicKeyProfile.java" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/profile/KeyProfile.java" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/profile/GOSTProfile.java" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/crypto/CipherAlgorithmTest.java" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/profile/PublicKeyProfile.java" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/profile/SymmetricKeyProfile.java" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/profile/CipherProfile.java" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/key/KeyPair.java" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/CipherAlgorithm.java" />
         <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/context/CipherAlgorithmHolder.java" />
         <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/context/DigestAlgorithmHolder.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/DigestAlgorithm.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/util/HashUtils.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/key/KeyPair.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/validator/URLValidatorTest.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/BillingPeriodTest.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/xml/XmlNamespacePrefixMapper.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/jaxb.index" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/xml/JaxbXmlContext.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/BaseEntity.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/xml/XmlPackages.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/BillingPeriod.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/BillingCycleTest.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/CurrentBillingCycle.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/BillingCycle.java" />
       </list>
     </option>
   </component>
@@ -229,6 +178,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Favorites" />
       <pane id="PackagesPane">
         <subPane />
@@ -300,6 +250,10 @@
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ng" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -371,115 +325,12 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="crypto" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="billing-ng" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="billing-ng-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ng" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="crypto" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="profile" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="billing-ng" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="billing-ng-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ng" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="crypto" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="key" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="billing-ng" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="billing-ng-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ng" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="crypto" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="context" />
+              <option name="myItemId" value="entities" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -500,9 +351,9 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -521,11 +372,11 @@
     <option name="referencePos" value="0" />
     <option name="showLabels" value="true" />
   </component>
-  <component name="RunManager" selected="TestNG.CipherAlgorithmTest">
-    <configuration default="false" name="CipherAlgorithmTest.testAES" type="TestNG" factoryName="TestNG" temporary="true">
+  <component name="RunManager" selected="TestNG.BillingCycleTest">
+    <configuration default="false" name="BillingCycleTest.testCalculateCycleNumberDays" type="TestNG" factoryName="TestNG" temporary="true">
       <extension name="coverage" enabled="false" merge="false">
         <pattern>
-          <option name="PATTERN" value="com.billing.ng.crypto.*" />
+          <option name="PATTERN" value="com.billing.ng.entities.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -533,9 +384,9 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="com.billing.ng.crypto" />
-      <option name="MAIN_CLASS_NAME" value="com.billing.ng.crypto.CipherAlgorithmTest" />
-      <option name="METHOD_NAME" value="testAES" />
+      <option name="PACKAGE_NAME" value="com.billing.ng.entities" />
+      <option name="MAIN_CLASS_NAME" value="com.billing.ng.entities.BillingCycleTest" />
+      <option name="METHOD_NAME" value="testCalculateCycleNumberDays" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="VM_PARAMETERS" />
@@ -557,10 +408,10 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="CipherAlgorithmTest.testCipherAlgorithm" type="TestNG" factoryName="TestNG" temporary="true">
+    <configuration default="false" name="BillingCycleTest.testBlah" type="TestNG" factoryName="TestNG" temporary="true">
       <extension name="coverage" enabled="false" merge="false">
         <pattern>
-          <option name="PATTERN" value="com.billing.ng.crypto.*" />
+          <option name="PATTERN" value="com.billing.ng.entities.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -568,9 +419,9 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="com.billing.ng.crypto" />
-      <option name="MAIN_CLASS_NAME" value="com.billing.ng.crypto.CipherAlgorithmTest" />
-      <option name="METHOD_NAME" value="testCipherAlgorithm" />
+      <option name="PACKAGE_NAME" value="com.billing.ng.entities" />
+      <option name="MAIN_CLASS_NAME" value="com.billing.ng.entities.BillingCycleTest" />
+      <option name="METHOD_NAME" value="testBlah" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="VM_PARAMETERS" />
@@ -592,10 +443,10 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="CipherAlgorithmTest.testRSAKeyProfile" type="TestNG" factoryName="TestNG" temporary="true">
+    <configuration default="false" name="BillingCycleTest.testCalculateCycleNumberMonths" type="TestNG" factoryName="TestNG" temporary="true">
       <extension name="coverage" enabled="false" merge="false">
         <pattern>
-          <option name="PATTERN" value="com.billing.ng.crypto.*" />
+          <option name="PATTERN" value="com.billing.ng.entities.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -603,9 +454,9 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="com.billing.ng.crypto" />
-      <option name="MAIN_CLASS_NAME" value="com.billing.ng.crypto.CipherAlgorithmTest" />
-      <option name="METHOD_NAME" value="testRSAKeyProfile" />
+      <option name="PACKAGE_NAME" value="com.billing.ng.entities" />
+      <option name="MAIN_CLASS_NAME" value="com.billing.ng.entities.BillingCycleTest" />
+      <option name="METHOD_NAME" value="testCalculateCycleNumberMonths" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="VM_PARAMETERS" />
@@ -627,10 +478,10 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="CipherAlgorithmTest.testGOST" type="TestNG" factoryName="TestNG" temporary="true">
+    <configuration default="false" name="BillingCycleTest.testCalculateCycleNumberYears" type="TestNG" factoryName="TestNG" temporary="true">
       <extension name="coverage" enabled="false" merge="false">
         <pattern>
-          <option name="PATTERN" value="com.billing.ng.crypto.*" />
+          <option name="PATTERN" value="com.billing.ng.entities.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -638,9 +489,9 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="com.billing.ng.crypto" />
-      <option name="MAIN_CLASS_NAME" value="com.billing.ng.crypto.CipherAlgorithmTest" />
-      <option name="METHOD_NAME" value="testGOST" />
+      <option name="PACKAGE_NAME" value="com.billing.ng.entities" />
+      <option name="MAIN_CLASS_NAME" value="com.billing.ng.entities.BillingCycleTest" />
+      <option name="METHOD_NAME" value="testCalculateCycleNumberYears" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="VM_PARAMETERS" />
@@ -662,10 +513,10 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="CipherAlgorithmTest" type="TestNG" factoryName="TestNG" temporary="true">
+    <configuration default="false" name="BillingCycleTest" type="TestNG" factoryName="TestNG" temporary="true">
       <extension name="coverage" enabled="false" merge="false">
         <pattern>
-          <option name="PATTERN" value="com.billing.ng.crypto.*" />
+          <option name="PATTERN" value="com.billing.ng.entities.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -673,8 +524,8 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="com.billing.ng.crypto" />
-      <option name="MAIN_CLASS_NAME" value="com.billing.ng.crypto.CipherAlgorithmTest" />
+      <option name="PACKAGE_NAME" value="com.billing.ng.entities" />
+      <option name="MAIN_CLASS_NAME" value="com.billing.ng.entities.BillingCycleTest" />
       <option name="METHOD_NAME" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="CLASS" />
@@ -734,24 +585,6 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" />
       <module name="" />
@@ -785,6 +618,24 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" />
       <option name="MAIN_CLASS_NAME" />
@@ -803,6 +654,15 @@
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
         <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="FtpUpload" enabled="false" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+        <option name="ValidateXdebugSetup" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
@@ -831,15 +691,6 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="FtpUpload" enabled="false" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-        <option name="ValidateXdebugSetup" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
       <option name="VM_PARAMETERS" value="" />
       <option name="USER_CFG_CLASS" />
@@ -852,11 +703,11 @@
       </method>
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="TestNG.CipherAlgorithmTest.testAES" />
-      <item index="1" class="java.lang.String" itemvalue="TestNG.CipherAlgorithmTest.testCipherAlgorithm" />
-      <item index="2" class="java.lang.String" itemvalue="TestNG.CipherAlgorithmTest.testRSAKeyProfile" />
-      <item index="3" class="java.lang.String" itemvalue="TestNG.CipherAlgorithmTest.testGOST" />
-      <item index="4" class="java.lang.String" itemvalue="TestNG.CipherAlgorithmTest" />
+      <item index="0" class="java.lang.String" itemvalue="TestNG.BillingCycleTest.testCalculateCycleNumberDays" />
+      <item index="1" class="java.lang.String" itemvalue="TestNG.BillingCycleTest.testBlah" />
+      <item index="2" class="java.lang.String" itemvalue="TestNG.BillingCycleTest.testCalculateCycleNumberMonths" />
+      <item index="3" class="java.lang.String" itemvalue="TestNG.BillingCycleTest.testCalculateCycleNumberYears" />
+      <item index="4" class="java.lang.String" itemvalue="TestNG.BillingCycleTest" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -893,7 +744,7 @@
     <frame x="-3" y="25" width="1606" height="877" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22674419" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22674419" sideWeight="0.64713717" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.46737683" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JavaEE:App" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2015504" sideWeight="0.4620506" order="2" side_tool="true" content_ui="tabs" />
@@ -906,7 +757,7 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32756326" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.34886816" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="EJB" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -937,7 +788,7 @@
     <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Basic Purchase Order and PO Line entities" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lazy-initialized JAXB context for core packages" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -953,6 +804,10 @@
     <MESSAGE value="Numbered account" />
     <MESSAGE value="Money Hibernate/JAXB updates" />
     <MESSAGE value="Basic Purchase Order and PO Line entities" />
+    <MESSAGE value="Cipher algorithm key profiles &amp; javadoc" />
+    <MESSAGE value="HashUtils now uses the system wide DigestAlgorithm" />
+    <MESSAGE value="Minor URL validation test update (readability)" />
+    <MESSAGE value="Lazy-initialized JAXB context for core packages" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -962,107 +817,93 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/lib/bouncycastle-crypto-145/src.zip!/org/bouncycastle/jce/spec/GOST28147ParameterSpec.java">
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Contact.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+        <state line="39" column="13" selection-start="1291" selection-end="1291" vertical-scroll-proportion="0.33260393" />
       </provider>
     </entry>
-    <entry file="jar:///opt/jdk1.6.0_22/jre/lib/jce.jar!/javax/crypto/Cipher.class">
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Customer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="22" selection-start="5261" selection-end="5261" vertical-scroll-proportion="0.33190578" />
+        <state line="44" column="13" selection-start="1420" selection-end="1420" vertical-scroll-proportion="0.33260393" />
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/bouncycastle-crypto-145/src.zip!/org/bouncycastle/jce/provider/JCEKeyGenerator.java">
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Rate.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="128" selection-start="1399" selection-end="1399" vertical-scroll-proportion="0.73541665" />
+        <state line="35" column="13" selection-start="1242" selection-end="1242" vertical-scroll-proportion="0.33260393" />
       </provider>
     </entry>
-    <entry file="jar:///opt/jdk1.6.0_22/jre/lib/jce.jar!/javax/crypto/spec/IvParameterSpec.class">
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Money.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="82" selection-start="202" selection-end="224" vertical-scroll-proportion="0.0" />
+        <state line="65" column="13" selection-start="2279" selection-end="2279" vertical-scroll-proportion="0.33260393" />
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/bouncycastle-crypto-145/src.zip!/org/bouncycastle/asn1/DERObjectIdentifier.java">
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/Staff.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="116" column="11" selection-start="3395" selection-end="3395" vertical-scroll-proportion="0.332" />
+        <state line="33" column="13" selection-start="1045" selection-end="1045" vertical-scroll-proportion="0.33260393" />
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/bouncycastle-crypto-145/src.zip!/org/bouncycastle/asn1/cryptopro/CryptoProObjectIdentifiers.java">
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="90" selection-start="243" selection-end="243" vertical-scroll-proportion="0.0" />
+        <state line="42" column="49" selection-start="1416" selection-end="1416" vertical-scroll-proportion="0.25820568" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/crypto/CipherAlgorithmTest.java">
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/jaxb.index">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="36" selection-start="1962" selection-end="1962" vertical-scroll-proportion="0.0">
+        <state line="13" column="29" selection-start="127" selection-end="127" vertical-scroll-proportion="0.30609417" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/BaseEntityTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="92" selection-start="1433" selection-end="1433" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/BaseEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="99" column="58" selection-start="3553" selection-end="3553" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/xml/XmlPackages.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="70" selection-start="1369" selection-end="1369" vertical-scroll-proportion="0.5138504" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/joda-time-1.6.2/joda-time-1.6.2-sources.jar!/org/joda/time/Days.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="339" column="23" selection-start="13935" selection-end="13943" vertical-scroll-proportion="1.4709141" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/joda-time-1.6.2/joda-time-1.6.2-sources.jar!/org/joda/time/DateMidnight.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="233" column="11" selection-start="9201" selection-end="9201" vertical-scroll-proportion="0.33260393" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/BillingCycleTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="170" column="83" selection-start="6209" selection-end="6209" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/profile/PublicKeyProfile.java">
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/BillingPeriod.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="18" selection-start="1484" selection-end="1484" vertical-scroll-proportion="0.0">
+        <state line="104" column="58" selection-start="2761" selection-end="2761" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/profile/SymmetricKeyProfile.java">
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/CurrentBillingCycle.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="62" selection-start="557" selection-end="557" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/profile/CipherProfile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="3" selection-start="1074" selection-end="1074" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/key/KeyPair.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="62" selection-start="1206" selection-end="1206" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///opt/jdk1.6/src.zip!/java/lang/Enum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="22" selection-start="544" selection-end="544" vertical-scroll-proportion="0.33333334">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/DigestAlgorithm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="78" selection-start="1321" selection-end="1321" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/CipherAlgorithm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="60" selection-start="1572" selection-end="1572" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/context/CipherAlgorithmHolder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="32" selection-start="231" selection-end="231" vertical-scroll-proportion="0.0">
+        <state line="48" column="76" selection-start="1656" selection-end="1656" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/crypto/context/DigestAlgorithmHolder.java">
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/BillingCycle.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="63" selection-start="926" selection-end="926" vertical-scroll-proportion="0.43589744">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="183" column="5" selection-start="5498" selection-end="5498" vertical-scroll-proportion="0.11320755">
+          <folding />
         </state>
       </provider>
     </entry>

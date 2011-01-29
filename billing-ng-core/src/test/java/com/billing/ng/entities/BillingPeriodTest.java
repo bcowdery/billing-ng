@@ -37,27 +37,27 @@ public class BillingPeriodTest {
         period.setInterval(5);
 
         period.setType(BillingPeriod.Type.DAY);
-        assertThat(period.getPeriod().getValues(), is(new int[] {0, 0, 0, 5, 0, 0, 0, 0})); // 5 days
+        assertThat(period.getPeriodOfTime().getValues(), is(new int[] {0, 0, 0, 5, 0, 0, 0, 0})); // 5 days
 
         period.setType(BillingPeriod.Type.WEEK);
-        assertThat(period.getPeriod().getValues(), is(new int[] {0, 0, 5, 0, 0, 0, 0, 0})); // 5 weeks
+        assertThat(period.getPeriodOfTime().getValues(), is(new int[] {0, 0, 5, 0, 0, 0, 0, 0})); // 5 weeks
 
         period.setType(BillingPeriod.Type.MONTH);
-        assertThat(period.getPeriod().getValues(), is(new int[] {0, 5, 0, 0, 0, 0, 0, 0})); // 5 months
+        assertThat(period.getPeriodOfTime().getValues(), is(new int[] {0, 5, 0, 0, 0, 0, 0, 0})); // 5 months
 
         period.setType(BillingPeriod.Type.YEAR);
-        assertThat(period.getPeriod().getValues(), is(new int[] {5, 0, 0, 0, 0, 0, 0, 0})); // 5 years
+        assertThat(period.getPeriodOfTime().getValues(), is(new int[] {5, 0, 0, 0, 0, 0, 0, 0})); // 5 years
     }
 
     @Test
     public void testGetPeriodDefault() throws Exception {
         BillingPeriod period = new BillingPeriod();
-        assertThat(period.getPeriod().getValues(), is(new int[] {0, 1, 0, 0, 0, 0, 0, 0})); // default 1 month
+        assertThat(period.getPeriodOfTime().getValues(), is(new int[] {0, 1, 0, 0, 0, 0, 0, 0})); // default 1 month
     }
 
     @Test
     public void testToString() throws Exception {
-            BillingPeriod period = new BillingPeriod();
+        BillingPeriod period = new BillingPeriod();
 
         // days
         period.setInterval(1);

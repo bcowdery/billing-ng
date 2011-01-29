@@ -35,8 +35,6 @@ import javax.persistence.Id;
 @Entity
 public class BillingPeriod extends BaseEntity {
 
-    private static final Period DEFAULT = Period.months(1);
-
     public enum Type { DAY, WEEK, MONTH, YEAR }
 
     @GeneratedValue @Id
@@ -44,9 +42,9 @@ public class BillingPeriod extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "period_type")
-    private Type type;
+    private Type type = Type.MONTH;
     @Column(name = "period_interval")
-    private Integer interval;
+    private Integer interval = 1;
 
     public BillingPeriod() {
     }
@@ -80,10 +78,26 @@ public class BillingPeriod extends BaseEntity {
         this.interval = interval;
     }
 
-    public Period getPeriod() {
-        if (getType() == null)
-            return DEFAULT;
-        
+    /**
+     * Returns a Joda Time <code>Period</code> representing the period of time
+     * of a single BillingPeriod cycle.
+     *
+     * @return period of time
+     */
+    public Period getPeriodOfTime() {
+        return getPeriodOfTime(1);
+    }
+
+    /**
+     * Returns a Joda Time <code>Period</code> representing the period of time
+     * between the start of any given cycle and the Nth cycle (give as cycleNumber).
+     *
+     * @param cycleNumber cycle number
+     * @return period of time
+     */
+    public Period getPeriodOfTime(Integer cycleNumber) {
+        Integer interval = cycleNumber * getInterval();
+
         switch (getType()) {
             case DAY:
                 return Period.days(interval);
@@ -93,9 +107,8 @@ public class BillingPeriod extends BaseEntity {
                 return Period.months(interval);
             case YEAR:
                 return Period.years(interval);
-            default:
-                return DEFAULT;
         }
+        return null;
     }
 
     @Override
