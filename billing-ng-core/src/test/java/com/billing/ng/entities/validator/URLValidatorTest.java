@@ -43,18 +43,18 @@ public class URLValidatorTest {
      */
     private class TestEntity extends BaseEntity {
         @URL
-        private String phone;
+        private String url;
 
-        public TestEntity(String phone) {
-            this.phone = phone;
+        public TestEntity(String url) {
+            this.url = url;
         }
 
-        public String getPhone() {
-            return phone;
+        public String getUrl() {
+            return url;
         }
 
-        public void setPhone(String phone) {
-            this.phone = phone;
+        public void setUrl(String url) {
+            this.url = url;
         }
     }
 
