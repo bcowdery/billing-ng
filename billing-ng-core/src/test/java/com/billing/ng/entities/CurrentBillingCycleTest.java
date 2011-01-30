@@ -20,10 +20,6 @@ package com.billing.ng.entities;
 import org.joda.time.DateMidnight;
 import org.testng.annotations.Test;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -36,30 +32,19 @@ import static org.hamcrest.Matchers.is;
 @Test(groups = {"entity", "quick", "billing"})
 public class CurrentBillingCycleTest {
 
-    private Calendar calendar = GregorianCalendar.getInstance();
-
-    /* Convenience method to produce a date instance for the given year/month/day */
-    private Date getDate(int year, int month, int day) {
-        calendar.clear();
-        calendar.set(year, month, day);
-        return calendar.getTime();
-    }
-
     @Test
     public void testCalculateCycleNumberDays() {
         BillingPeriod period = new BillingPeriod(BillingPeriod.Type.DAY, 5);
         DateMidnight start = new DateMidnight(2010, 1, 1);
 
-        CurrentBillingCycle current = new CurrentBillingCycle();
-
         // January 11 2010 = 10 days, 2 cycles
-        assertThat(current.calculateCycleNumber(period, start, new DateMidnight(2010, 1, 11)), is(2));
+        assertThat(CurrentBillingCycle.calculateCycleNumber(period, start, new DateMidnight(2010, 1, 11)), is(2));
 
         // January 15 2010 = 14 days, 2 cycles (still within the 2nd cycle)
-        assertThat(current.calculateCycleNumber(period, start, new DateMidnight(2010, 1, 15)), is(2));
+        assertThat(CurrentBillingCycle.calculateCycleNumber(period, start, new DateMidnight(2010, 1, 15)), is(2));
 
         // January 16 2010 = 15 days, 3 cycles
-        assertThat(current.calculateCycleNumber(period, start, new DateMidnight(2010, 1, 16)), is(3));
+        assertThat(CurrentBillingCycle.calculateCycleNumber(period, start, new DateMidnight(2010, 1, 16)), is(3));
     }
 
     @Test
@@ -67,16 +52,14 @@ public class CurrentBillingCycleTest {
         BillingPeriod period = new BillingPeriod(BillingPeriod.Type.WEEK, 1);
         DateMidnight start = new DateMidnight(2010, 1, 1);
 
-        CurrentBillingCycle current = new CurrentBillingCycle();
-
         // January 29 2010 = 4 weeks
-        assertThat(current.calculateCycleNumber(period, start, new DateMidnight(2010, 1, 29)), is(4));
+        assertThat(CurrentBillingCycle.calculateCycleNumber(period, start, new DateMidnight(2010, 1, 29)), is(4));
 
         // February 4 2010 = 4 weeks (still within the 4th cycle)
-        assertThat(current.calculateCycleNumber(period, start, new DateMidnight(2010, 2, 4)), is(4));
+        assertThat(CurrentBillingCycle.calculateCycleNumber(period, start, new DateMidnight(2010, 2, 4)), is(4));
 
         // February 5 2010 = 5 weeks
-        assertThat(current.calculateCycleNumber(period, start, new DateMidnight(2010, 2, 5)), is(5));
+        assertThat(CurrentBillingCycle.calculateCycleNumber(period, start, new DateMidnight(2010, 2, 5)), is(5));
     }
 
     @Test
@@ -84,16 +67,14 @@ public class CurrentBillingCycleTest {
         BillingPeriod period = new BillingPeriod(BillingPeriod.Type.MONTH, 1);
         DateMidnight start = new DateMidnight(2010, 1, 1);
 
-        CurrentBillingCycle current = new CurrentBillingCycle();
-
         // January 1 2011 = 12 months
-        assertThat(current.calculateCycleNumber(period, start, new DateMidnight(2011, 1, 1)), is(12));
+        assertThat(CurrentBillingCycle.calculateCycleNumber(period, start, new DateMidnight(2011, 1, 1)), is(12));
 
         // January 31 2011 = 12 months (still within the 12th cycle)
-        assertThat(current.calculateCycleNumber(period, start, new DateMidnight(2011, 1, 31)), is(12));
+        assertThat(CurrentBillingCycle.calculateCycleNumber(period, start, new DateMidnight(2011, 1, 31)), is(12));
 
         // February 1 2011 = 13 months
-        assertThat(current.calculateCycleNumber(period, start, new DateMidnight(2011, 2, 1)), is(13));
+        assertThat(CurrentBillingCycle.calculateCycleNumber(period, start, new DateMidnight(2011, 2, 1)), is(13));
     }
 
     @Test
@@ -101,16 +82,153 @@ public class CurrentBillingCycleTest {
         BillingPeriod period = new BillingPeriod(BillingPeriod.Type.YEAR, 1);
         DateMidnight start = new DateMidnight(2010, 1, 1);
 
-        CurrentBillingCycle current = new CurrentBillingCycle();
-
         // January 1 2011 = 1 year
-        assertThat(current.calculateCycleNumber(period, start, new DateMidnight(2011, 1, 1)), is(1));
+        assertThat(CurrentBillingCycle.calculateCycleNumber(period, start, new DateMidnight(2011, 1, 1)), is(1));
 
         // December 31 2011 = 1 year (still within the 1st cycle)
-        assertThat(current.calculateCycleNumber(period, start, new DateMidnight(2011, 12, 31)), is(1));
+        assertThat(CurrentBillingCycle.calculateCycleNumber(period, start, new DateMidnight(2011, 12, 31)), is(1));
 
         // January 1 2012 = 2 years
-        assertThat(current.calculateCycleNumber(period, start, new DateMidnight(2012, 1, 1)), is(2));
+        assertThat(CurrentBillingCycle.calculateCycleNumber(period, start, new DateMidnight(2012, 1, 1)), is(2));
     }
 
+    @Test
+    public void testCalculateCycleStartDays() {
+        DateMidnight start = new DateMidnight(2010, 1, 1);
+
+        // 25th single day cycle; Jan 1 + 25 days = Jan 26th
+        assertThat(
+                CurrentBillingCycle.calculateCycleStart(new BillingPeriod(BillingPeriod.Type.DAY, 1), start, 25),
+                is(new DateMidnight(2010, 1, 26))
+        );
+
+        // 3rd 10 day cycle; Jan 1 + 30 days = Jan 31st
+        assertThat(
+                CurrentBillingCycle.calculateCycleStart(new BillingPeriod(BillingPeriod.Type.DAY, 10), start, 3),
+                is(new DateMidnight(2010, 1, 31))
+        );
+    }
+
+    @Test
+    public void testCalculateCycleStartWeeks() {
+        DateMidnight start = new DateMidnight(2010, 1, 1);
+
+        // 3rd 2 week cycle; Jan 1 + 6 weeks = February 12th
+        // Friday January 1st 2010 -> Friday February 12th 2010
+        assertThat(
+                CurrentBillingCycle.calculateCycleStart(new BillingPeriod(BillingPeriod.Type.WEEK, 2), start, 3),
+                is(new DateMidnight(2010, 2, 12))
+        );
+
+        // 15, 3 week cycle; Jan 1 + 45 weeks = November 12th
+        // Friday January 1st 2010 -> Friday November 12th
+        assertThat(
+                CurrentBillingCycle.calculateCycleStart(new BillingPeriod(BillingPeriod.Type.WEEK, 3), start, 15),
+                is(new DateMidnight(2010, 11, 12))
+        );
+    }
+
+    @Test
+    public void testCalculateCycleStartMonths() {
+        DateMidnight start = new DateMidnight(2010, 1, 1);
+
+        // 10, 1 month cycle; Jan 1 2010 + 10 months = November 1st 2010
+        assertThat(
+                CurrentBillingCycle.calculateCycleStart(new BillingPeriod(BillingPeriod.Type.MONTH, 1), start, 10),
+                is(new DateMidnight(2010, 11, 1))
+        );
+
+        // 3, 6 month cycle; Jan 1 2010 + 18 months = July 1st 2011
+        assertThat(
+                CurrentBillingCycle.calculateCycleStart(new BillingPeriod(BillingPeriod.Type.MONTH, 6), start, 3),
+                is(new DateMidnight(2011, 7, 1))
+        );
+    }
+
+    @Test
+    public void testCalculateCycleStartYears() {
+        DateMidnight start = new DateMidnight(2010, 1, 1);
+
+        // 2nd 1 year cycle; Jan 1 2010 + 2 years = Jan 1 2012
+        assertThat(
+                CurrentBillingCycle.calculateCycleStart(new BillingPeriod(BillingPeriod.Type.YEAR, 1), start, 2),
+                is(new DateMidnight(2012, 1, 1))
+        );
+
+        // 5th 2 year cycle; Jan 1 2010 + 10 years = Jan 1 2020
+        assertThat(
+                CurrentBillingCycle.calculateCycleStart(new BillingPeriod(BillingPeriod.Type.YEAR, 2), start, 5),
+                is(new DateMidnight(2020, 1, 1))
+        );
+    }
+
+    @Test
+    public void testCalculateCycleEndDays() {
+        DateMidnight end = new DateMidnight(2010, 1, 1);
+
+        // 3 day cycle
+        assertThat(
+                CurrentBillingCycle.calculateCycleEnd(new BillingPeriod(BillingPeriod.Type.DAY, 3), end),
+                is(new DateMidnight(2010, 1, 4))
+        );
+
+        // 13 day cycle
+        assertThat(
+                CurrentBillingCycle.calculateCycleEnd(new BillingPeriod(BillingPeriod.Type.DAY, 13), end),
+                is(new DateMidnight(2010, 1, 14))
+        );
+    }
+
+    @Test
+    public void testCalculateCycleEndWeeks() {
+        DateMidnight end = new DateMidnight(2010, 1, 1);
+
+        // 2 week cycle
+        // January 1 + 2 week period = January 15th
+        assertThat(
+                CurrentBillingCycle.calculateCycleEnd(new BillingPeriod(BillingPeriod.Type.WEEK, 2), end),
+                is(new DateMidnight(2010, 1, 15))
+        );
+
+        // 6 week cycle
+        // January 1 + 6 week period = February 12th
+        assertThat(
+                CurrentBillingCycle.calculateCycleEnd(new BillingPeriod(BillingPeriod.Type.WEEK, 6), end),
+                is(new DateMidnight(2010, 2, 12))
+        );
+    }
+
+    @Test
+    public void testCalculateCycleEndMonths() {
+        DateMidnight end = new DateMidnight(2010, 1, 1);
+
+        // 1 month cycle
+        assertThat(
+                CurrentBillingCycle.calculateCycleEnd(new BillingPeriod(BillingPeriod.Type.MONTH, 1), end),
+                is(new DateMidnight(2010, 2, 1))
+        );
+
+        // 7 month cycle (fun with odd numbers!)
+        assertThat(
+                CurrentBillingCycle.calculateCycleEnd(new BillingPeriod(BillingPeriod.Type.MONTH, 7), end),
+                is(new DateMidnight(2010, 8, 1))
+        );
+    }
+
+    @Test
+    public void testCalculateCycleEndYears() {
+        DateMidnight end = new DateMidnight(2010, 1, 1);
+
+        // 1 year cycle
+        assertThat(
+                CurrentBillingCycle.calculateCycleEnd(new BillingPeriod(BillingPeriod.Type.YEAR, 1), end),
+                is(new DateMidnight(2011, 1, 1))
+        );
+
+        // 37 year cycle
+        assertThat(
+                CurrentBillingCycle.calculateCycleEnd(new BillingPeriod(BillingPeriod.Type.YEAR, 37), end),
+                is(new DateMidnight(2047, 1, 1))
+        );
+    }
 }

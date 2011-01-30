@@ -30,7 +30,7 @@ import java.io.Serializable;
 /**
  * The current billing cycle is calculated from a billing period and the initial billing
  * start date. Current billing cycle calculations are done in linear time, but are still
- * fairly expensive.
+ * expensive so avoid creating un-necessary instances.
  *
  * A calculated current billing cycle is immutable, and is not persisted.
  *
@@ -43,12 +43,6 @@ public class CurrentBillingCycle implements Serializable {
     private final Integer cycleNumber;
     private final DateMidnight start;
     private final DateMidnight end;
-
-    public CurrentBillingCycle() {
-        this.cycleNumber = null;
-        this.start = null;
-        this.end = null;
-    }
 
     /**
      * Calculate the current billing cycle for today's date.
@@ -94,7 +88,7 @@ public class CurrentBillingCycle implements Serializable {
      * @param today end date
      * @return number of complete cycles
      */
-    public Integer calculateCycleNumber(BillingPeriod period, DateMidnight billingStart, DateMidnight today) {
+    public static Integer calculateCycleNumber(BillingPeriod period, DateMidnight billingStart, DateMidnight today) {
         Integer interval = period.getInterval();
 
         switch (period.getType()) {
@@ -121,7 +115,7 @@ public class CurrentBillingCycle implements Serializable {
      * @param cycleNumber current cycle number
      * @return calculated cycle start date
      */
-    public DateMidnight calculateCycleStart(BillingPeriod period, DateMidnight billingStart, Integer cycleNumber) {
+    public static DateMidnight calculateCycleStart(BillingPeriod period, DateMidnight billingStart, Integer cycleNumber) {
         Period increment = period.getPeriodOfTime(cycleNumber); // elapsed period of time for cycle number
         return billingStart.plus(increment);
     }
@@ -133,7 +127,7 @@ public class CurrentBillingCycle implements Serializable {
      * @param cycleStart calculated start date for the current cycle
      * @return calculated cycle end date
      */
-    public DateMidnight calculateCycleEnd(BillingPeriod period, DateMidnight cycleStart) {
+    public static DateMidnight calculateCycleEnd(BillingPeriod period, DateMidnight cycleStart) {
         Period increment = period.getPeriodOfTime(); // single period
         return cycleStart.plus(increment);
     }
