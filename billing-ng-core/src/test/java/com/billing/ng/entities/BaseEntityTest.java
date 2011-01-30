@@ -17,6 +17,7 @@
 
 package com.billing.ng.entities;
 
+import com.billing.ng.entities.validator.exception.ValidationException;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
@@ -95,5 +96,14 @@ public class BaseEntityTest {
 
         assertThat(constraintViolations, hasItem(Matchers.<ConstraintViolation<TestEntity>>hasProperty("invalidValue", is("1234567890abcdefghijk"))));
         assertThat(constraintViolations, hasItem(Matchers.<ConstraintViolation<TestEntity>>hasProperty("message", is("size must be between 0 and 20"))));
+    }
+
+    @Test(expectedExceptions = { ValidationException.class })
+    public void testValidate() {
+        TestEntity entity = new TestEntity();
+        entity.setId(null);                        // not null validator
+        entity.setString("1234567890abcdefghijk"); // 21, exceeds max length validator
+
+        entity.validate(); // should throw an exception
     }
 }

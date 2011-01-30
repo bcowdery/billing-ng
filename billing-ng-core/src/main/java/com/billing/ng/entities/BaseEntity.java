@@ -17,6 +17,7 @@
 
 package com.billing.ng.entities;
 
+import com.billing.ng.entities.validator.exception.ValidationException;
 import com.billing.ng.xml.XmlNamespacePrefixMapper;
 import com.billing.ng.xml.XmlPackages;
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
@@ -24,6 +25,7 @@ import org.hibernate.validator.ClassValidator;
 import org.hibernate.validator.InvalidValue;
 
 import javax.persistence.Transient;
+import javax.validation.Constraint;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -55,8 +57,7 @@ public abstract class BaseEntity implements Serializable {
     private static final ValidatorFactory VALIDATOR_FACTORY = Validation.buildDefaultValidatorFactory();
 
     /**
-     * Executes a constraint validator on this class, validating all annotated
-     * fields and returning all constraint violations encountered.
+     * Validates all annotated fields, returning all constraint violations encountered.
      *
      * @param <T> entity type for validation
      * @return set of constraint violations
@@ -65,6 +66,19 @@ public abstract class BaseEntity implements Serializable {
     @SuppressWarnings("unchecked")
     public <T> Set<ConstraintViolation<T>> validateConstraints() {
         return VALIDATOR_FACTORY.getValidator().validate((T) this);
+    }
+
+    /**
+     * Validates all annotated fields and throws a {@link ValidationException} if
+     * any constraint violations are encountered.
+     *
+     * @throws ValidationException thrown if constraint violations found
+     */
+    public void validate() throws ValidationException {
+        Set<? extends ConstraintViolation<?>> constraintViolations = validateConstraints();
+
+        if (!constraintViolations.isEmpty())
+            throw new ValidationException(constraintViolations);
     }
 
     /**
