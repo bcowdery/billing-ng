@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="38551b27-a239-4bef-8ac3-13d37f1ec9e7" name="Default" comment="">
+    <list default="true" id="38551b27-a239-4bef-8ac3-13d37f1ec9e7" name="Default" comment="changed build 'test groups' parameter">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/build.xml" afterPath="$PROJECT_DIR$/billing-ng-core/build.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/CurrentBillingCycle.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/CurrentBillingCycle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/CurrentBillingCycleTest.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/CurrentBillingCycleTest.java" />
     </list>
     <ignored path="billing-ng.iws" />
     <ignored path="$USER_HOME$/.griffon/" />
@@ -662,7 +660,7 @@
     <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Moved current billing cycle to a immutable object" />
+    <option name="LAST_COMMIT_MESSAGE" value="Current billing cycle calculation tests" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -684,6 +682,7 @@
     <MESSAGE value="Lazy-initialized JAXB context for core packages" />
     <MESSAGE value="current billing cycle calculations" />
     <MESSAGE value="Moved current billing cycle to a immutable object" />
+    <MESSAGE value="Current billing cycle calculation tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />

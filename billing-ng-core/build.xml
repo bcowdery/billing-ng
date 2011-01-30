@@ -98,10 +98,10 @@
         <antcall target="test.reports"/>       
     </target>
 
-    <target name="test.groups" depends="compile.tests" if="test.groups" description="Run a specific test configuration set by -Dtest.groups">
+    <target name="test.groups" depends="compile.tests" if="groups" description="Run a specific test configuration set by -Dgroups">
         <testng suitename="${ant.project.name} unit test suite"
-                testname="${ant.project.name} '${test.groups}' test.groups "
-                groups="${test.groups}"
+                testname="${ant.project.name} '${groups}' groups "
+                groups="${groups}"
                 classpathref="test.classpath"
                 outputDir="${test-results.dir}/testng/"
                 failureProperty="test.failure"
