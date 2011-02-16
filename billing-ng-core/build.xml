@@ -18,6 +18,7 @@
         <fileset dir="${commons-codec.dir}" includes="*.jar"/>
         <fileset dir="${freemarker.dir}/lib" includes="*.jar"/>
         <fileset dir="${joda-time.dir}" includes="*.jar"/>
+        <fileset dir="${scannotation.dir}" includes="*.jar"/>
     </path>
 
     <path id="compile.test.classpath">

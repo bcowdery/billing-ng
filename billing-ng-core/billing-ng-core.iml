@@ -53,6 +53,9 @@
     <orderEntry type="library" name="joda-time-1.6.2" level="project" />
     <orderEntry type="library" name="freemarker-2.3.16" level="project" />
     <orderEntry type="library" name="bouncycastle-crypto-145" level="project" />
+    <orderEntry type="library" name="reflections-0.9.5-RC2" level="project" />
+    <orderEntry type="library" name="guava-r08" level="project" />
+    <orderEntry type="library" name="dom4j-2.0.0-ALPHA-2" level="project" />
   </component>
 </module>
 
