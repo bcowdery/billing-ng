@@ -17,17 +17,16 @@
 
 package com.billing.ng.plugin;
 
+import com.billing.ng.entities.validator.exception.ValidationException;
 import com.billing.ng.plugin.annotation.Plugin;
-import org.apache.cxf.service.factory.ReflectionServiceFactoryBean;
 import org.reflections.Reflections;
-import org.reflections.scanners.SubTypesScanner;
-import org.reflections.scanners.TypeAnnotationsScanner;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.ParameterizedType;
+import javax.persistence.Transient;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.ValidatorFactory;
 import java.util.Map;
 import java.util.Set;
 
@@ -38,6 +37,8 @@ import java.util.Set;
  * @since 15/02/11
  */
 public class PluginFactory<T> {
+
+    private static final ValidatorFactory VALIDATOR_FACTORY = Validation.buildDefaultValidatorFactory();
 
     /** Holder for the Reflections instance. The Reflections store is not instantiated until the field is accessed. */
     private static class ReflectionsHolder {
@@ -72,15 +73,39 @@ public class PluginFactory<T> {
      * @return new plugin instance
      */
     public T getInstance(Map<String, String> parameters) {
+        T instance = null;
         try {
-            return type.newInstance();
+            instance = type.newInstance();
         } catch (InstantiationException e) {
-            log.error("Could not produce an instance of '{}', class must have a default constructor.", type);
+            log.error("Could not produce an instance of '" + type + "', class must have a default constructor.", e);
         } catch (IllegalAccessException e) {
-            log.error("Could not produce an instance of '{}', default constructor is not accessible.", type);
+            log.error("Could not produce an instance of '" + type + "', default constructor is not accessible.", e);
         }
 
-        return null;
+        if (instance != null) {
+            // set parameters
+            Parameters<T> injector = new Parameters<T>();
+            injector.populate(instance, parameters);
+
+            // run validations (like @NotNull for required parameters)
+            validate(instance);
+        }
+
+        return instance;
+    }
+
+    /**
+     * Validates all annotated fields and throws a {@link com.billing.ng.entities.validator.exception.ValidationException}
+     * if any constraint violations are encountered.
+     *
+     * @param plugin plugin instance to validate
+     * @throws com.billing.ng.entities.validator.exception.ValidationException thrown if constraint violations found
+     */
+    public void validate(T plugin) throws ValidationException {
+        Set<? extends ConstraintViolation<?>> constraintViolations = VALIDATOR_FACTORY.getValidator().validate(plugin);
+
+        if (!constraintViolations.isEmpty())
+            throw new ValidationException(constraintViolations);
     }
 
     /**

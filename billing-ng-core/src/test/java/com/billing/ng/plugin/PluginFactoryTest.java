@@ -54,11 +54,10 @@ public class PluginFactoryTest {
 
     @Test
     public void getPluginInstance() throws Exception {
-        PluginFactory<PluginType> factory = PluginFactory.createFactory(PluginType.class);
-        PluginType plugin = factory.getInstance(Collections.<String, String>emptyMap());
+        PluginFactory<AnnotatedTestPlugin> factory = PluginFactory.createFactory(AnnotatedTestPlugin.class);
+        AnnotatedTestPlugin plugin = factory.getInstance(Collections.<String, String>emptyMap());
 
         assertNotNull(plugin);
     }
-
 
 }

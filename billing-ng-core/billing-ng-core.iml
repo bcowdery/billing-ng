@@ -56,6 +56,7 @@
     <orderEntry type="library" name="reflections-0.9.5-RC2" level="project" />
     <orderEntry type="library" name="guava-r08" level="project" />
     <orderEntry type="library" name="dom4j-2.0.0-ALPHA-2" level="project" />
+    <orderEntry type="library" name="commons-beanutils-1.8.3" level="project" />
   </component>
 </module>
 

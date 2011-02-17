@@ -33,9 +33,6 @@ import java.lang.annotation.Target;
 public @interface Parameter {
 
     String name();
-
-    boolean required() default false;
-
     String defaultValue() default "";
 
 }
