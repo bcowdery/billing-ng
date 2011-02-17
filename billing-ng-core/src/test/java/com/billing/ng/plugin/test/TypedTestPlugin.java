@@ -15,14 +15,14 @@
  along with this program.  If not, see http://www.gnu.org/licenses/agpl-3.0.html
  */
 
-package com.billing.ng.plugin.type;
+package com.billing.ng.plugin.test;
 
 /**
- * PluginType
+ * TypedTestPlugin
  *
  * @author Brian Cowdery
  * @since 15/02/11
  */
-public interface PluginType {
+public class TypedTestPlugin implements PluginType {
 
 }

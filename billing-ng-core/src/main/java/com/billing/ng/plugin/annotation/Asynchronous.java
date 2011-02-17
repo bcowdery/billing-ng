@@ -23,19 +23,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Can be placed on a plugins field or method to mark targets for parameter injection.
+ * Marks a plug-in as capable of executing asynchronously. Asynchronous plug-ins are non-blocking
+ * and may be executed concurrently.
  *
  * @author Brian Cowdery
- * @since 15/02/11
+ * @since 16/02/11
  */
-@Target({ ElementType.FIELD, ElementType.METHOD })
+@Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Parameter {
-
-    String name();
-
-    boolean required() default false;
-
-    String defaultValue() default "";
-
+public @interface Asynchronous {
 }

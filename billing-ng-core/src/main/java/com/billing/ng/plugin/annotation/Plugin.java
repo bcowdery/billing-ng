@@ -6,7 +6,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Plugin
+ * Marks available plugin implementations. Plugins must also implement an appropriate
+ * interface defining the behaviour and use of the plugin.
  *
  * @author Brian Cowdery
  * @since 15/02/11
@@ -15,6 +16,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Plugin {
 
-    String name();
+    String name() default "";
 
 }

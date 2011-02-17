@@ -24,7 +24,11 @@ import org.reflections.scanners.SubTypesScanner;
 import org.reflections.scanners.TypeAnnotationsScanner;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.ParameterizedType;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -33,24 +37,57 @@ import java.util.Set;
  * @author Brian Cowdery
  * @since 15/02/11
  */
-public class PluginFactory {
+public class PluginFactory<T> {
 
+    /** Holder for the Reflections instance. The Reflections store is not instantiated until the field is accessed. */
     private static class ReflectionsHolder {
-        private static final Reflections REFLECTIONS = getReflections();
+        private static final Reflections REFLECTIONS = new Reflections("com.billing.ng");
+    }
 
-        private static Reflections getReflections() {
-            return new Reflections(new ConfigurationBuilder()
-                                           .setUrls(ClasspathHelper.getUrlsForPackagePrefix("com.billing.ng"))
-                                           .setScanners(new TypeAnnotationsScanner(),
-                                                        new SubTypesScanner()));
+    private transient final Logger log = LoggerFactory.getLogger(PluginFactory.class);
+
+    private Class<T> type;
+
+    public PluginFactory(Class<T> type) {
+        this.type = type;
+    }
+
+    /**
+     * Creates a new PluginFactory of the given type. This static factory method avoids the
+     * annoying need to specify the same type twice when using the public constructor
+     * (e.g., <code>new PluginFactory<Type>(Type.class)</code>).
+     *
+     * @param type type of plugin
+     * @param <T> type T
+     * @return new plugin factory of type T
+     */
+    public static <T> PluginFactory<T> createFactory(Class<T> type) {
+        return new PluginFactory<T>(type);
+    }
+
+    /**
+     * Produces a new instance of the plugin class populated with the given parameters.
+     *
+     * @param parameters map of parameters
+     * @return new plugin instance
+     */
+    public T getInstance(Map<String, String> parameters) {
+        try {
+            return type.newInstance();
+        } catch (InstantiationException e) {
+            log.error("Could not produce an instance of '{}', class must have a default constructor.", type);
+        } catch (IllegalAccessException e) {
+            log.error("Could not produce an instance of '{}', default constructor is not accessible.", type);
         }
+
+        return null;
     }
 
     /**
      * Returns all classes annotated with the {@link Plugin} annotation.
      * @return all plugin classes
      */
-    public Set<Class<?>> getAllPlugins() {
+    public static Set<Class<?>> getAllPlugins() {
         return ReflectionsHolder.REFLECTIONS.getTypesAnnotatedWith(Plugin.class);
     }
 
@@ -60,7 +97,7 @@ public class PluginFactory {
      * @param type interface
      * @return all plugin classes implementing the given interface
      */
-    public <T> Set<Class<? extends T>> getPlugins(Class<T> type) {
+    public static <T> Set<Class<? extends T>> getPlugins(Class<T> type) {
         return ReflectionsHolder.REFLECTIONS.getSubTypesOf(type);
     }
 }

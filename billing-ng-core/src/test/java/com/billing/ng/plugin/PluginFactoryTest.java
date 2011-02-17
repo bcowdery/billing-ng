@@ -17,15 +17,18 @@
 
 package com.billing.ng.plugin;
 
-import com.billing.ng.plugin.annotation.AnnotatedTestPlugin;
-import com.billing.ng.plugin.type.PluginType;
-import com.billing.ng.plugin.type.TypedTestPlugin;
+import com.billing.ng.plugin.annotation.Plugin;
+import com.billing.ng.plugin.test.AnnotatedTestPlugin;
+import com.billing.ng.plugin.test.PluginType;
+import com.billing.ng.plugin.test.TypedTestPlugin;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
+import java.util.Collections;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.*;
 
 /**
@@ -39,14 +42,23 @@ public class PluginFactoryTest {
 
     @Test
     public void testGetAllPlugins() throws Exception {
-        Set<Class<?>> plugins = new PluginFactory().getAllPlugins();
+        Set<Class<?>> plugins = PluginFactory.getAllPlugins();
         assertThat(plugins, Matchers.<Class<?>>hasItem(AnnotatedTestPlugin.class));
     }
 
     @Test
     public void testGetPlugins() throws Exception {
-        Set<Class<? extends PluginType>> plugins = new PluginFactory().getPlugins(PluginType.class);
+        Set<Class<? extends PluginType>> plugins = PluginFactory.getPlugins(PluginType.class);
         assertThat(plugins, Matchers.<Class<? extends PluginType>>hasItem(TypedTestPlugin.class));
     }
+
+    @Test
+    public void getPluginInstance() throws Exception {
+        PluginFactory<PluginType> factory = PluginFactory.createFactory(PluginType.class);
+        PluginType plugin = factory.getInstance(Collections.<String, String>emptyMap());
+
+        assertNotNull(plugin);
+    }
+
 
 }

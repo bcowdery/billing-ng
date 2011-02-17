@@ -15,27 +15,25 @@
  along with this program.  If not, see http://www.gnu.org/licenses/agpl-3.0.html
  */
 
-package com.billing.ng.plugin.annotation;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+package com.billing.ng.plugin;
 
 /**
- * Can be placed on a plugins field or method to mark targets for parameter injection.
+ * Interface to be implemented by plugins that require life-cycle callbacks. This is useful
+ * for plug-ins that need to react to having parameters set, or that need to perform cleanup
+ * regardless of the outcome of the plugins execution.
  *
  * @author Brian Cowdery
- * @since 15/02/11
+ * @since 16/02/11
  */
-@Target({ ElementType.FIELD, ElementType.METHOD })
-@Retention(RetentionPolicy.RUNTIME)
-public @interface Parameter {
+public interface InitializingPlugin {
 
-    String name();
+    /**
+     * Called after a plugin is instantiated and all parameters have been set.
+     */
+    public void init();
 
-    boolean required() default false;
-
-    String defaultValue() default "";
-
+    /**
+     * Called when the plugin is destroyed.
+     */
+    public void destroy();
 }
