@@ -17,14 +17,18 @@
 
 package com.billing.ng.plugin;
 
-import com.billing.ng.plugin.annotation.Plugin;
-import com.billing.ng.plugin.test.AnnotatedTestPlugin;
-import com.billing.ng.plugin.test.PluginType;
-import com.billing.ng.plugin.test.TypedTestPlugin;
+import com.billing.ng.entities.NumberPatternTest;
+import com.billing.ng.entities.validator.exception.ValidationException;
+import com.billing.ng.plugin.test.TestPlugin;
+import com.billing.ng.plugin.test.TestPluginImpl;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
+import javax.validation.ConstraintViolation;
+import java.math.BigDecimal;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -43,21 +47,59 @@ public class PluginFactoryTest {
     @Test
     public void testGetAllPlugins() throws Exception {
         Set<Class<?>> plugins = PluginFactory.getAllPlugins();
-        assertThat(plugins, Matchers.<Class<?>>hasItem(AnnotatedTestPlugin.class));
+        assertThat(plugins, Matchers.<Class<?>>hasItem(TestPluginImpl.class));
     }
 
     @Test
     public void testGetPlugins() throws Exception {
-        Set<Class<? extends PluginType>> plugins = PluginFactory.getPlugins(PluginType.class);
-        assertThat(plugins, Matchers.<Class<? extends PluginType>>hasItem(TypedTestPlugin.class));
+        Set<Class<? extends TestPlugin>> plugins = PluginFactory.getPlugins(TestPlugin.class);
+        assertThat(plugins, Matchers.<Class<? extends TestPlugin>>hasItem(TestPluginImpl.class));
     }
 
     @Test
     public void getPluginInstance() throws Exception {
-        PluginFactory<AnnotatedTestPlugin> factory = PluginFactory.createFactory(AnnotatedTestPlugin.class);
-        AnnotatedTestPlugin plugin = factory.getInstance(Collections.<String, String>emptyMap());
+        PluginFactory<TestPluginImpl> factory = PluginFactory.createFactory(TestPluginImpl.class);
+        TestPluginImpl plugin = factory.getInstance(Collections.<String, String>emptyMap());
 
         assertNotNull(plugin);
     }
 
+    @Test
+    public void getPluginInstanceParameterInjection() {
+        Map<String, String> parameters = new HashMap<String, String>();
+        parameters.put("string", "some string value");
+        parameters.put("number", "123");
+        parameters.put("decimal", null); // use annotation defaultValue
+
+        PluginFactory<TestPluginImpl> factory = PluginFactory.createFactory(TestPluginImpl.class);
+        TestPluginImpl plugin = factory.getInstance(parameters);
+
+        assertNotNull(plugin);
+
+        assertThat(plugin.getString(), is("some string value"));
+        assertThat(plugin.getNumber(), is(123));
+        assertThat(plugin.getDecimal(), is(new BigDecimal("0.00")));
+    }
+
+    @Test
+    public void getPluginInstanceValidations() {
+        Map<String, String> parameters = new HashMap<String, String>();
+        parameters.put("string", null);  // @NotNull
+        parameters.put("number", "-10"); // @Min(0) @Max(999)
+
+        PluginFactory<TestPluginImpl> factory = PluginFactory.createFactory(TestPluginImpl.class);
+
+        try {
+            factory.getInstance(parameters);
+            fail("#getInstance() should have thrown a ValidationException!");
+
+        } catch (ValidationException e) {
+            Set<ConstraintViolation<TestPluginImpl>> constraintViolations = (Set<ConstraintViolation<TestPluginImpl>>) e.getConstraintViolations();
+
+            assertThat(constraintViolations.size(), is(2));
+
+            assertThat(constraintViolations, hasItem(Matchers.<ConstraintViolation<TestPluginImpl>>hasProperty("message", is("may not be null"))));
+            assertThat(constraintViolations, hasItem(Matchers.<ConstraintViolation<TestPluginImpl>>hasProperty("message", is("must be greater than or equal to 0"))));
+        }
+    }
 }

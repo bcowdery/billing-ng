@@ -81,12 +81,12 @@ public class ValidationExceptionTest {
         // sets don't maintain any order of elements, so we could get multiple error messages
         // as there's no guarantee which order the errors will be printed in
         String expectedOne = "Constraint violations for TestEntity\n"
-                             + "\tstring size must be between 0 and 5 : 'more than five chars'\n"
+                             + "\tstring size must be between 0 and 5, was: 'more than five chars'\n"
                              + "\tid may not be null \n";
 
         String expectedTwo = "Constraint violations for TestEntity\n"
                              + "\tid may not be null \n"
-                             + "\tstring size must be between 0 and 5 : 'more than five chars'\n";
+                             + "\tstring size must be between 0 and 5, was: 'more than five chars'\n";
 
 
         assertThat(exception.getMessage(), isOneOf(expectedOne, expectedTwo));

@@ -28,26 +28,34 @@ import java.util.Set;
  */
 public class ValidationException extends RuntimeException {
 
+    private final Set<? extends ConstraintViolation<?>> constraintViolations;
+
     public ValidationException() {
+        this.constraintViolations = null;
     }
 
-    public ValidationException(Set<? extends ConstraintViolation<?>> errors) {
-        super(buildMessage(errors));
+    public ValidationException(Set<? extends ConstraintViolation<?>> constraintViolations) {
+        super(buildMessage(constraintViolations));
+        this.constraintViolations = constraintViolations;
+    }
+
+    public Set<? extends ConstraintViolation<?>> getConstraintViolations() {
+        return constraintViolations;
     }
 
     /**
      * Builds a human readable message from the given set of constraint violations.
      *
-     * @param errors constraint violations
+     * @param constraintViolations constraint violations
      * @return message string
      */
-    public static String buildMessage(Set<? extends ConstraintViolation<?>> errors) {
-        if (errors.isEmpty())
+    public static String buildMessage(Set<? extends ConstraintViolation<?>> constraintViolations) {
+        if (constraintViolations.isEmpty())
             return null;
 
         StringBuilder builder = new StringBuilder();
 
-        for (ConstraintViolation error : errors) {
+        for (ConstraintViolation error : constraintViolations) {
             if (builder.length() == 0) {
                 builder.append("Constraint violations for ");
                 builder.append(error.getRootBean().getClass().getSimpleName());
@@ -61,7 +69,7 @@ public class ValidationException extends RuntimeException {
             builder.append(" ");
 
             if (error.getInvalidValue() != null) {
-                builder.append(": '");
+                builder.append(", was: '");
                 builder.append(error.getInvalidValue());
                 builder.append("'");
             }

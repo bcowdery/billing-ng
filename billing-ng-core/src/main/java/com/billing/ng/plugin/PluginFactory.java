@@ -67,12 +67,16 @@ public class PluginFactory<T> {
     }
 
     /**
-     * Produces a new instance of the plugin class populated with the given parameters.
+     * Produces a new instance of the plugin class populated with the given parameters. New instances
+     * are also validated for correctness using JSR-303 validation annotations after the parameters have
+     * been set.
      *
      * @param parameters map of parameters
      * @return new plugin instance
+     * @throws com.billing.ng.entities.validator.exception.ValidationException thrown if constraint violations found
+     *                                                                         after setting parameters
      */
-    public T getInstance(Map<String, String> parameters) {
+    public T getInstance(Map<String, String> parameters) throws ValidationException {
         T instance = null;
         try {
             instance = type.newInstance();
@@ -101,7 +105,7 @@ public class PluginFactory<T> {
      * @param plugin plugin instance to validate
      * @throws com.billing.ng.entities.validator.exception.ValidationException thrown if constraint violations found
      */
-    public void validate(T plugin) throws ValidationException {
+    public static void validate(Object plugin) throws ValidationException {
         Set<? extends ConstraintViolation<?>> constraintViolations = VALIDATOR_FACTORY.getValidator().validate(plugin);
 
         if (!constraintViolations.isEmpty())

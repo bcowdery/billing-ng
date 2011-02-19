@@ -23,8 +23,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Marks a plug-in as capable of executing asynchronously. Asynchronous plug-ins are non-blocking
- * and may be executed concurrently.
+ * Marks a plug-in as being capable of executing asynchronously. Asynchronous plug-ins are
+ * non-blocking and may be executed concurrently.
  *
  * @author Brian Cowdery
  * @since 16/02/11

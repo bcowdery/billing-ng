@@ -28,7 +28,7 @@ import java.lang.annotation.Target;
  * @author Brian Cowdery
  * @since 15/02/11
  */
-@Target({ ElementType.FIELD, ElementType.METHOD })
+@Target({ ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Parameter {
 

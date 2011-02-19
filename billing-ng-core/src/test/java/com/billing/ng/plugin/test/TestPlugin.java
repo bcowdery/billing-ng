@@ -18,11 +18,11 @@
 package com.billing.ng.plugin.test;
 
 /**
- * TypedTestPlugin
+ * Test plugin interface
  *
  * @author Brian Cowdery
  * @since 15/02/11
  */
-public class TypedTestPlugin implements PluginType {
+public interface TestPlugin {
 
 }

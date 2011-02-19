@@ -18,7 +18,9 @@
 package com.billing.ng.plugin;
 
 import com.billing.ng.plugin.annotation.Parameter;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,6 +46,8 @@ public class Parameters<T> {
      * Populates a plugin instances annotated parameters from the given map
      * of parameter values.
      *
+     * Blank or empty parameter string values will not be set.
+     *
      * @param plugin plugin instance to populate
      * @param parameters map of parameters
      */
@@ -55,18 +59,15 @@ public class Parameters<T> {
             String fieldName = entry.getKey();
             Parameter parameter = entry.getValue();
 
-            String value = parameters.containsKey(parameter.name())
-                           ? parameters.get(parameter.name())
-                           : parameter.defaultValue();
+            String value = parameters.get(parameter.name());
+            if (isBlank(value)) value = parameter.defaultValue();
 
-            if (value != null && !value.trim().equals("")) {
+            if (!isBlank(value)) {
                 try {
-                    PropertyUtils.setProperty(plugin, fieldName, value);
+                    BeanUtils.setProperty(plugin, fieldName, value);
 
                 } catch (InvocationTargetException e) {
                     log.error("Unhandled exception occurred when setting parameter value.", e);
-                } catch (NoSuchMethodException e) {
-                    log.error("Could not set parameter value, setter method does not exist.", e);
                 } catch (IllegalAccessException e) {
                     log.error("Could not set parameter value, setter method is not accessible.", e);
                 }
@@ -91,8 +92,7 @@ public class Parameters<T> {
             Parameter parameter = entry.getValue();
 
             try {
-                String value = (String) PropertyUtils.getProperty(plugin, fieldName);
-                parameters.put(parameter.name(), value);
+                parameters.put(parameter.name(), BeanUtils.getProperty(plugin, fieldName));
 
             } catch (InvocationTargetException e) {
                 log.error("Unhandled exception occurred when getting parameter value.", e);
@@ -110,7 +110,7 @@ public class Parameters<T> {
      * Returns the names of javabeans property methods annotated with the
      * {@link Parameter} annotation.
      *
-     * @param type returns annotated field
+     * @param type plugin class with parameter annotations
      * @return map of collected parameter field names and the associated annotation
      */
     public Map<String, Parameter> getAnnotatedFields(Class<T> type) {
@@ -119,19 +119,11 @@ public class Parameters<T> {
         // collect method annotations
         for (Method method : type.getMethods()) {
             for (Annotation annotation : method.getDeclaredAnnotations()) {
-                if (method.getName().startsWith("get")
-                    && method.getName().startsWith("set")
-                    && annotation instanceof Parameter) {
-
-                    fields.put(getFieldName(method.getName()), (Parameter) annotation);
+                if (annotation instanceof Parameter) {
+                    if (method.getName().startsWith("get") || method.getName().startsWith("set")) {
+                        fields.put(getFieldName(method.getName()), (Parameter) annotation);
+                    }
                 }
-            }
-        }
-
-        // collect field annotations
-        for (Field field : type.getFields()) {
-            for (Annotation annotation : field.getDeclaredAnnotations()) {
-                fields.put(field.getName(), (Parameter) annotation);
             }
         }
 
@@ -144,7 +136,11 @@ public class Parameters<T> {
      * @param methodName method name
      * @return field name
      */
-    private String getFieldName(String methodName) {
+    public static String getFieldName(String methodName) {
         return methodName.substring(3, 4).toLowerCase() + methodName.substring(4);
+    }
+
+    private boolean isBlank(String value) {
+        return value == null || value.trim().equals("");
     }
 }

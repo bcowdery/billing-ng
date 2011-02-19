@@ -20,35 +20,40 @@ package com.billing.ng.plugin.test;
 import com.billing.ng.plugin.annotation.Parameter;
 import com.billing.ng.plugin.annotation.Plugin;
 
-import java.math.BigInteger;
-import java.net.URL;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
- * TestPlugin
+ * Test plugin
  *
  * @author Brian Cowdery
  * @since 15/02/11
  */
 @Plugin(name = "test plugin")
-public class AnnotatedTestPlugin {
+public class TestPluginImpl implements TestPlugin {
 
-    private String description;
+    private String string;
     private Integer number;
-    private BigInteger decimal;
+    private BigDecimal decimal;
 
-    public AnnotatedTestPlugin() {
+    public TestPluginImpl() {
     }
 
-    @Parameter(name = "description")
-    public String getDescription() {
-        return description;
+    @NotNull
+    @Parameter(name = "string")
+    public String getString() {
+        return string;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setString(String string) {
+        this.string = string;
     }
 
-    @Parameter(name = "name")
+    @Min(0) @Max(999)
+    @Parameter(name = "number")
     public Integer getNumber() {
         return number;
     }
@@ -57,12 +62,12 @@ public class AnnotatedTestPlugin {
         this.number = number;
     }
 
-    @Parameter(name = "decimal")
-    public BigInteger getDecimal() {
+    @Parameter(name = "decimal", defaultValue = "0.00")
+    public BigDecimal getDecimal() {
         return decimal;
     }
 
-    public void setDecimal(BigInteger decimal) {
+    public void setDecimal(BigDecimal decimal) {
         this.decimal = decimal;
     }
 }
