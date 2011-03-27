@@ -16,9 +16,12 @@
         <fileset dir="${j2ee5client.dir}" includes="*.jar"/>
         <fileset dir="${bouncycastle-crypto.dir}" includes="*.jar"/>
         <fileset dir="${commons-codec.dir}" includes="*.jar"/>
+        <fileset dir="${commons-beanutils.dir}" includes="*.jar"/>
+        <fileset dir="${dom4j.dir}" includes="*.jar"/>
         <fileset dir="${freemarker.dir}/lib" includes="*.jar"/>
+        <fileset dir="${guava.dir}" includes="*.jar"/>
         <fileset dir="${joda-time.dir}" includes="*.jar"/>
-        <fileset dir="${scannotation.dir}" includes="*.jar"/>
+        <fileset dir="${reflections.dir}" includes="*.jar"/>
     </path>
 
     <path id="compile.test.classpath">

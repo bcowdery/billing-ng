@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="38551b27-a239-4bef-8ac3-13d37f1ec9e7" name="Default" comment="Plugin scanning">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/plugin/ParametersTest.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/plugin/test/TypedTestPlugin.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/plugin/test/AnnotatedTestPlugin.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/plugin/test/TestPluginImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/plugin/test/PluginType.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/plugin/test/TestPlugin.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
+    <list default="true" id="38551b27-a239-4bef-8ac3-13d37f1ec9e7" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/build.xml" afterPath="$PROJECT_DIR$/billing-ng-core/build.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/validator/exception/ValidationException.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/validator/exception/ValidationException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/Parameters.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/Parameters.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/PluginFactory.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/PluginFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/annotation/Asynchronous.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/annotation/Asynchronous.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/annotation/Parameter.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/annotation/Parameter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/validator/exception/ValidationExceptionTest.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/validator/exception/ValidationExceptionTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/plugin/PluginFactoryTest.java" afterPath="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/plugin/PluginFactoryTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.properties" afterPath="$PROJECT_DIR$/build.properties" />
     </list>
     <list id="8c132583-926e-4f51-9fba-89adcc1a9dc9" name="property converter" comment="" />
     <ignored path="billing-ng.iws" />
@@ -77,13 +70,47 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PluginFactoryTest.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="build.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/billing-ng-core/build.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="23" column="54" selection-start="1067" selection-end="1067" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.properties" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/build.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="52" column="94" selection-start="1425" selection-end="1425" vertical-scroll-proportion="0.9354839">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ValidationExceptionTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/validator/exception/ValidationExceptionTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="98" column="49" selection-start="3143" selection-end="3143" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PluginFactoryTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/plugin/PluginFactoryTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="94" column="19" selection-start="3458" selection-end="3458" vertical-scroll-proportion="3.2297297">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="93" column="66" selection-start="3395" selection-end="3395" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestPluginImpl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/plugin/test/TestPluginImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="35" column="13" selection-start="1172" selection-end="1172" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -91,16 +118,7 @@
       <file leaf-file-name="ValidationException.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/validator/exception/ValidationException.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="58" selection-start="2334" selection-end="2334" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BaseEntityTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/BaseEntityTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="94" column="151" selection-start="3201" selection-end="3201" vertical-scroll-proportion="0.0">
+            <state line="70" column="41" selection-start="2476" selection-end="2476" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -121,8 +139,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/converter/SimplePropertyConverter.java" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/converter/PropertyConverter.java" />
         <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/ParameterInjector.java" />
         <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/util/reflection/AbstractGenericType.java" />
         <option value="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/plugin/test/TypedTestPlugin.java" />
@@ -133,9 +149,11 @@
         <option value="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/plugin/ParametersTest.java" />
         <option value="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/plugin/test/TestPluginImpl.java" />
         <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/PluginFactory.java" />
+        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/annotation/Asynchronous.java" />
+        <option value="$PROJECT_DIR$/build.properties" />
+        <option value="$PROJECT_DIR$/billing-ng-core/build.xml" />
         <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/validator/exception/ValidationException.java" />
         <option value="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/validator/exception/ValidationExceptionTest.java" />
-        <option value="$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/annotation/Asynchronous.java" />
         <option value="$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/plugin/PluginFactoryTest.java" />
       </list>
     </option>
@@ -178,10 +196,10 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Favorites" />
       <pane id="PackagesPane">
         <subPane />
       </pane>
-      <pane id="Favorites" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -271,6 +289,78 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="entities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="billing-ng" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="billing-ng-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ng" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="entities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="validator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="billing-ng" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="billing-ng-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ng" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="entities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="validator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="exception" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -405,9 +495,9 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -431,42 +521,7 @@
     <option name="referencePos" value="0" />
     <option name="showLabels" value="true" />
   </component>
-  <component name="RunManager" selected="TestNG.PluginFactoryTest.getPluginInstanceValidations">
-    <configuration default="false" name="ParametersTest.testExtract" type="TestNG" factoryName="TestNG" temporary="true">
-      <extension name="coverage" enabled="false" merge="false">
-        <pattern>
-          <option name="PATTERN" value="com.billing.ng.plugin.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="billing-ng-core" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="com.billing.ng.plugin" />
-      <option name="MAIN_CLASS_NAME" value="com.billing.ng.plugin.ParametersTest" />
-      <option name="METHOD_NAME" value="testExtract" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="TestNG.ValidationExceptionTest">
     <configuration default="false" name="ParametersTest" type="TestNG" factoryName="TestNG" temporary="true">
       <extension name="coverage" enabled="false" merge="false">
         <pattern>
@@ -607,6 +662,41 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
+    <configuration default="false" name="ValidationExceptionTest" type="TestNG" factoryName="TestNG" temporary="true">
+      <extension name="coverage" enabled="false" merge="false">
+        <pattern>
+          <option name="PATTERN" value="com.billing.ng.entities.validator.exception.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="billing-ng-core" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="com.billing.ng.entities.validator.exception" />
+      <option name="MAIN_CLASS_NAME" value="com.billing.ng.entities.validator.exception.ValidationExceptionTest" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
     <configuration default="true" type="PhpRunConfigurationType" factoryName="PHP">
       <method>
         <option name="AntTarget" enabled="false" />
@@ -636,24 +726,6 @@
       </method>
     </configuration>
     <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" adl_options="" air_descriptor_path="" air_program_params="" air_publisher_id="" air_root_dir_path="" air_run_mode="AppDescriptor" browser_family="FIREFOX" class_name="" debugger_sdk="Module SDK" html_or_swf_file_path="" launcher_type="OSDefault" main_class_name="" method_name="" module_name="" output_log_level="" package_name="" player_path="/usr/bin/flashplayer" port="0" run_mode="HtmlOrSwfFile" run_trusted="false" scope="Class" socket_policy_port="0" url_to_launch="http://">
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
@@ -694,6 +766,24 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" />
       <option name="MAIN_CLASS_NAME" />
@@ -712,6 +802,18 @@
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
         <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="FtpUpload" enabled="false">
+          <server_id />
+          <server_name />
+        </option>
+        <option name="Maven.BeforeRunTask" enabled="false" />
+        <option name="ValidateXdebugSetup" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
@@ -740,18 +842,6 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="FtpUpload" enabled="false">
-          <server_id />
-          <server_name />
-        </option>
-        <option name="Maven.BeforeRunTask" enabled="false" />
-        <option name="ValidateXdebugSetup" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
       <option name="VM_PARAMETERS" value="" />
       <option name="USER_CFG_CLASS" />
@@ -764,11 +854,11 @@
       </method>
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="TestNG.ParametersTest.testExtract" />
-      <item index="1" class="java.lang.String" itemvalue="TestNG.ParametersTest" />
-      <item index="2" class="java.lang.String" itemvalue="TestNG.ParametersTest.testPopulateNullValues" />
-      <item index="3" class="java.lang.String" itemvalue="TestNG.PluginFactoryTest.getPluginInstanceParameterInjection" />
-      <item index="4" class="java.lang.String" itemvalue="TestNG.PluginFactoryTest.getPluginInstanceValidations" />
+      <item index="0" class="java.lang.String" itemvalue="TestNG.ParametersTest" />
+      <item index="1" class="java.lang.String" itemvalue="TestNG.ParametersTest.testPopulateNullValues" />
+      <item index="2" class="java.lang.String" itemvalue="TestNG.PluginFactoryTest.getPluginInstanceParameterInjection" />
+      <item index="3" class="java.lang.String" itemvalue="TestNG.PluginFactoryTest.getPluginInstanceValidations" />
+      <item index="4" class="java.lang.String" itemvalue="TestNG.ValidationExceptionTest" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -804,11 +894,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="25" width="1600" height="874" extended-state="0" />
+    <frame x="-3" y="25" width="1606" height="877" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22674419" sideWeight="0.64713717" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.46657753" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.46604526" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JavaEE:App" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2015504" sideWeight="0.4620506" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -817,7 +907,6 @@
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3288948" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3275401" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.34886816" order="1" side_tool="true" content_ui="tabs" />
@@ -825,14 +914,15 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="EJB" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2230869" sideWeight="0.6283423" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37165776" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="1746" y="240" width="1550" height="703" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12273902" sideWeight="0.53395474" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37150466" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="1746" y="240" width="1550" height="703" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Properties" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32880434" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CheckStyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24520548" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32756326" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3275401" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Regex" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
     </layout>
@@ -852,7 +942,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Typed plugin factory, plugin supplementary interfaces" />
+    <option name="LAST_COMMIT_MESSAGE" value="Plugin parameter injection" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -878,6 +968,7 @@
     <MESSAGE value="change testing groups parameter name" />
     <MESSAGE value="Plugin scanning" />
     <MESSAGE value="Typed plugin factory, plugin supplementary interfaces" />
+    <MESSAGE value="Plugin parameter injection" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -887,123 +978,93 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/InstallablePlugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="17" selection-start="984" selection-end="984" vertical-scroll-proportion="0.3379694">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/InitializingPlugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="17" selection-start="1086" selection-end="1086" vertical-scroll-proportion="0.5744089">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/util/ConfigurationTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="0" selection-start="1018" selection-end="1144" vertical-scroll-proportion="0.3574409">
-          <folding />
-        </state>
+        <state line="29" column="0" selection-start="1018" selection-end="1144" vertical-scroll-proportion="0.3574409" />
       </provider>
     </entry>
     <entry file="jar:///opt/jboss-6/client/commons-beanutils.jar!/org/apache/commons/beanutils/converters/DateTimeConverter.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="0" selection-start="2503" selection-end="2503" vertical-scroll-proportion="0.808933">
-          <folding />
-        </state>
+        <state line="51" column="0" selection-start="2503" selection-end="2503" vertical-scroll-proportion="0.808933" />
       </provider>
     </entry>
     <entry file="jar:///opt/jboss-6/client/commons-lang.jar!/org/apache/commons/lang/StringUtils.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="26" selection-start="411" selection-end="411" vertical-scroll-proportion="0.29955947">
-          <folding />
-        </state>
+        <state line="12" column="26" selection-start="411" selection-end="411" vertical-scroll-proportion="0.29955947" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/plugin/ParametersTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="59" selection-start="2934" selection-end="2934" vertical-scroll-proportion="-0.5605007">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
+        <state line="85" column="59" selection-start="2934" selection-end="2934" vertical-scroll-proportion="-0.5605007" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/Parameters.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="12" selection-start="2343" selection-end="2343" vertical-scroll-proportion="0.59805286">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="63" column="12" selection-start="2343" selection-end="2343" vertical-scroll-proportion="0.59805286" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/annotation/Plugin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="18" selection-start="489" selection-end="489" vertical-scroll-proportion="0.30737135" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/annotation/Parameter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="77" selection-start="1040" selection-end="1040" vertical-scroll-proportion="0.54381084" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/annotation/Asynchronous.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="65" selection-start="1094" selection-end="1094" vertical-scroll-proportion="0.5674548" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/PluginFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="73" column="52" selection-start="2625" selection-end="2625" vertical-scroll-proportion="1.023644" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/BaseEntityTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="94" column="151" selection-start="3201" selection-end="3201" vertical-scroll-proportion="0.50347704" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/validator/exception/ValidationException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="70" column="41" selection-start="2476" selection-end="2476" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/validator/exception/ValidationExceptionTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="94" selection-start="2652" selection-end="2652" vertical-scroll-proportion="0.64534074">
+        <state line="98" column="49" selection-start="3143" selection-end="3143" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/plugin/test/TestPluginImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="66" selection-start="1639" selection-end="1639" vertical-scroll-proportion="0.50347704">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/annotation/Plugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="18" selection-start="489" selection-end="489" vertical-scroll-proportion="0.30737135">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/annotation/Parameter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="77" selection-start="1040" selection-end="1040" vertical-scroll-proportion="0.54381084">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/annotation/Asynchronous.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="65" selection-start="1094" selection-end="1094" vertical-scroll-proportion="0.5674548">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/plugin/PluginFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="52" selection-start="2625" selection-end="2625" vertical-scroll-proportion="1.023644">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/entities/BaseEntityTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="151" selection-start="3201" selection-end="3201" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing-ng-core/src/main/java/com/billing/ng/entities/validator/exception/ValidationException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="58" selection-start="2334" selection-end="2334" vertical-scroll-proportion="0.0">
+        <state line="35" column="13" selection-start="1172" selection-end="1172" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/billing-ng-core/src/test/java/com/billing/ng/plugin/PluginFactoryTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="19" selection-start="3458" selection-end="3458" vertical-scroll-proportion="3.2297297">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="93" column="66" selection-start="3395" selection-end="3395" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing-ng-core/build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="54" selection-start="1067" selection-end="1067" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="94" selection-start="1425" selection-end="1425" vertical-scroll-proportion="0.9354839">
+          <folding />
         </state>
       </provider>
     </entry>

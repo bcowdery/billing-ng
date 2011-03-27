@@ -17,6 +17,8 @@
 
 package com.billing.ng.entities.validator.exception;
 
+import com.billing.ng.plugin.test.TestPluginImpl;
+import org.hamcrest.Matchers;
 import org.hibernate.validator.NotEmpty;
 import org.testng.annotations.Test;
 
@@ -70,7 +72,7 @@ public class ValidationExceptionTest {
     }
 
     @Test
-    public void testConstraintViolationMessage() {
+    public void testValidationExceptionMessage() {
         TestEntity entity = new TestEntity();
         entity.setId(null);
         entity.setString("more than five chars");
@@ -82,13 +84,28 @@ public class ValidationExceptionTest {
         // as there's no guarantee which order the errors will be printed in
         String expectedOne = "Constraint violations for TestEntity\n"
                              + "\tstring size must be between 0 and 5, was: 'more than five chars'\n"
-                             + "\tid may not be null \n";
+                             + "\tid may not be null\n";
 
         String expectedTwo = "Constraint violations for TestEntity\n"
-                             + "\tid may not be null \n"
+                             + "\tid may not be null\n"
                              + "\tstring size must be between 0 and 5, was: 'more than five chars'\n";
 
 
         assertThat(exception.getMessage(), isOneOf(expectedOne, expectedTwo));
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    public void testValidationExceptionViolations() {
+        TestEntity entity = new TestEntity();
+        entity.setId(null);
+        entity.setString("more than five chars");
+
+        ValidationException exception = new ValidationException(entity.validateConstraints());
+        Set<ConstraintViolation<TestEntity>> constraintViolations = (Set<ConstraintViolation<TestEntity>>) exception.getConstraintViolations();
+
+        assertThat(constraintViolations.size(), is(2));
+        assertThat(constraintViolations, hasItem(Matchers.<ConstraintViolation<TestEntity>>hasProperty("message", is("may not be null"))));
+        assertThat(constraintViolations, hasItem(Matchers.<ConstraintViolation<TestEntity>>hasProperty("message", is("size must be between 0 and 5"))));
     }
 }

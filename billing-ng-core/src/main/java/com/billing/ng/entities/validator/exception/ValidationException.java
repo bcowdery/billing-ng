@@ -66,7 +66,6 @@ public class ValidationException extends RuntimeException {
             builder.append(error.getPropertyPath());
             builder.append(" ");
             builder.append(error.getMessage());
-            builder.append(" ");
 
             if (error.getInvalidValue() != null) {
                 builder.append(", was: '");

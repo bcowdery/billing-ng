@@ -57,15 +57,19 @@ public class PluginFactoryTest {
     }
 
     @Test
-    public void getPluginInstance() throws Exception {
+    public void testGetPluginInstance() throws Exception {
         PluginFactory<TestPluginImpl> factory = PluginFactory.createFactory(TestPluginImpl.class);
-        TestPluginImpl plugin = factory.getInstance(Collections.<String, String>emptyMap());
+
+        Map<String, String> parameters = new HashMap<String, String>();
+        parameters.put("string", "some string value");
+
+        TestPluginImpl plugin = factory.getInstance(parameters);
 
         assertNotNull(plugin);
     }
 
     @Test
-    public void getPluginInstanceParameterInjection() {
+    public void testGetPluginInstanceParameterInjection() {
         Map<String, String> parameters = new HashMap<String, String>();
         parameters.put("string", "some string value");
         parameters.put("number", "123");
@@ -81,8 +85,9 @@ public class PluginFactoryTest {
         assertThat(plugin.getDecimal(), is(new BigDecimal("0.00")));
     }
 
-    @Test
-    public void getPluginInstanceValidations() {
+    @Test(groups = { "validation" })
+    @SuppressWarnings("unchecked")
+    public void testGetPluginInstanceValidations() {
         Map<String, String> parameters = new HashMap<String, String>();
         parameters.put("string", null);  // @NotNull
         parameters.put("number", "-10"); // @Min(0) @Max(999)
