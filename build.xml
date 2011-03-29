@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="billing-ng" default="dist" basedir=".">
+<project name="billing-ng" default="dist" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
 
     <!-- properties -->
     <property name="root.dir" location="."/>
     <property file="${root.dir}/build.properties"/>
 
     <property name="ear.dir" value="${build.dir}/${ant.project.name}.ear"/>
+
+    <!-- ivy -->
+    <property name="ivy.install.version" value="2.1.0-rc2"/>
+    <condition property="ivy.home" value="${env.IVY_HOME}">
+      <isset property="env.IVY_HOME"/>
+    </condition>
+    <property name="ivy.home" value="${user.home}/.ant"/>
+    <property name="ivy.jar.dir" value="${ivy.home}/lib"/>
+    <property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar"/>
 
 
     <!-- targets -->
@@ -104,9 +113,7 @@
     <target name="copy-libs">
         <mkdir dir="${ear.dir}/lib"/>
         <copy todir="${ear.dir}/lib">
-            <fileset dir="${commons-codec.dir}">
-                <include name="commons-codec-1.4.jar"/>
-            </fileset>
+            <fileset dir="${lib.dir}/compile" includes="*.jar"/>
         </copy>
     </target>
     
@@ -121,4 +128,37 @@
         <ant dir="${billing-ng-core.dir}" target="clean" inheritall="false" inheritrefs="false"/>
         <ant dir="${billing-ng-web.dir}" target="clean" inheritall="false" inheritrefs="false"/>
     </target>
+
+
+    <!--
+        ivy dependency management
+    -->
+
+    <target name="download-ivy" unless="offline">
+        <mkdir dir="${ivy.jar.dir}"/>
+        <get src="http://repo2.maven.org/maven2/org/apache/ivy/ivy/${ivy.install.version}/ivy-${ivy.install.version}.jar"
+             dest="${ivy.jar.file}"
+             usetimestamp="true"/>
+    </target>
+
+    <target name="install-ivy" depends="download-ivy" description="Install the Apache Ivy dependency manager (run once).">
+        <path id="ivy.lib.path">
+            <fileset dir="${ivy.jar.dir}" includes="*.jar"/>
+        </path>
+        <taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
+    </target>
+
+    <target name="resolve.dependencies" description="Download all necessary dependencies and 3rd party libraries.">
+        <ivy:retrieve pattern="${lib.dir}/[conf]/[artifact]-[revision].[ext]" sync="true"/>
+    </target>
+
+    <target name="clean.ivy-cache">
+        <ivy:cleancache/>
+    </target>
+
+    <target name="dependency.report">
+        <ivy:report conf="compile" organisation="com.billing.ng" module="billing-ng-core"/>
+    </target>
+
+
 </project>

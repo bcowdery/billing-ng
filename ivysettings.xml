@@ -1,0 +1,18 @@
+<ivysettings>
+    <settings defaultResolver="resolver-chain" caches="checkUpToDate"/>
+    <resolvers>
+        <chain name="resolver-chain" returnFirst="true">
+
+            <ibiblio name="ibiblio" m2compatible="true"/>
+
+            <ibiblio name="jboss-repo"
+                     m2compatible="true"
+                     root="https://repository.jboss.org/nexus/content/groups/public"/>
+
+            <ibiblio name="reflections-repo"
+                     m2compatible="true"
+                     root="http://reflections.googlecode.com/svn/repo"/>
+
+        </chain>
+    </resolvers>
+</ivysettings>

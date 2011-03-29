@@ -14,21 +14,13 @@
         <fileset dir="${jboss.lib.dir}" includes="*.jar"/>
     	<fileset dir="${j2ee5.dir}" includes="*.jar"/>
         <fileset dir="${j2ee5client.dir}" includes="*.jar"/>
-        <fileset dir="${bouncycastle-crypto.dir}" includes="*.jar"/>
-        <fileset dir="${commons-codec.dir}" includes="*.jar"/>
-        <fileset dir="${commons-beanutils.dir}" includes="*.jar"/>
-        <fileset dir="${dom4j.dir}" includes="*.jar"/>
-        <fileset dir="${freemarker.dir}/lib" includes="*.jar"/>
-        <fileset dir="${guava.dir}" includes="*.jar"/>
-        <fileset dir="${joda-time.dir}" includes="*.jar"/>
-        <fileset dir="${reflections.dir}" includes="*.jar"/>
+        <fileset dir="${lib.dir}/compile" includes="*.jar"/>
     </path>
 
     <path id="compile.test.classpath">
-        <path refid="compile.classpath"/>
-        <fileset dir="${testng.dir}" includes="testng-*.jar"/>
-        <fileset dir="${hamcrest.dir}" includes="hamcrest-all-*.jar"/>
         <pathelement path="${classes.dir}"/>
+        <path refid="compile.classpath"/>
+        <fileset dir="${lib.dir}/test" includes="*.jar"/>
     </path>
 
     <path id="test.classpath">
@@ -37,22 +29,21 @@
     </path>
 
     <path id="liquibase.classpath">
-        <fileset dir="${liquibase.dir}" includes="liquibase.jar"/>
-        <fileset dir="${mysql-connector.dir}" includes="*.jar"/>
+        <fileset dir="${lib.dir}/liquibase" includes="*.jar"/>
         <path refid="compile.classpath"/>
     </path>
 
     <path id="hibernate.classpath">
-        <fileset dir="${hibernate-tools.dir}" includes="tools/*.jar"/>
+        <fileset dir="${lib.dir}/hibernate-tools" includes="*.jar"/>
         <path refid="compile.classpath"/>
     </path>    
 
     <path id="xjc.classpath">
-        <fileset dir="${jaxb.dir}/lib/" includes="*.jar"/>
+        <fileset dir="${lib.dir}/jaxb-xjc" includes="*.jar"/>
     </path>
 
     <path id="checkstyle.classpath">
-        <fileset dir="${checkstyle.dir}" includes="checkstyle-all-*.jar"/>
+        <fileset dir="${lib.dir}/checkstyle" includes="*.jar"/>
     </path>
 
 
@@ -63,10 +54,12 @@
                  eol="unix"/>
     </target>
     
-    <target name="checkstyle" depends="init" description="Run code style checks on all java classes.">
+    <target name="checkstyle" description="Run code style checks on all java classes.">
         <delete dir="${checkstyle-results.dir}"/>
         <mkdir dir="${checkstyle-results.dir}/raw"/>
         <mkdir dir="${checkstyle-results.dir}/html"/>
+
+        <taskdef resource="checkstyletask.properties" classpathref="checkstyle.classpath"/>
 
         <checkstyle config="${root.dir}/checks.xml" failureproperty="checkstyle.failure" failonviolation="false">
             <fileset dir="${src.dir}/main/java" includes="**/*.java" excludes="**/package-info.java"/>
@@ -76,7 +69,7 @@
 
         <xslt in="${checkstyle-results.dir}/raw/checkstyle_report.xml"
               out="${checkstyle-results.dir}/html/checkstyle_report.html"
-              style="${checkstyle.dir}/contrib/checkstyle-noframes-severity-sorted.xsl"/>
+              style="${root.dir}/contrib/checkstyle-noframes-severity-sorted.xsl"/>
 
         <fail if="checkstyle.failure" message="${ant.project.name} style checks failed, see checkstyle reports for details."/>
     </target>
@@ -85,7 +78,7 @@
     <!--
         testing targets
     -->
-    <target name="test.all" depends="compile.tests" description="Run all tests.">
+    <target name="test.all" depends="compile.tests, init.testng" description="Run all tests.">
         <testng suitename="${ant.project.name} unit test suite"
                 testname="${ant.project.name} test.all "
                 classpathref="test.classpath"
@@ -102,7 +95,7 @@
         <antcall target="test.reports"/>       
     </target>
 
-    <target name="test.groups" depends="compile.tests" if="groups" description="Run a specific test configuration set by -Dgroups">
+    <target name="test.groups" depends="compile.tests, init.testng" if="groups" description="Run a specific test configuration set by -Dgroups">
         <testng suitename="${ant.project.name} unit test suite"
                 testname="${ant.project.name} '${groups}' groups "
                 groups="${groups}"
@@ -120,7 +113,7 @@
         <antcall target="test.reports"/>
     </target>
 
-    <target name="test.failed" depends="init" description="Re-run all previously failed tests.">
+    <target name="test.failed" depends="init.testng" description="Re-run all previously failed tests.">
         <property name="build.noclean" value="true"/>
         <antcall target="compile.tests"/>
 
@@ -160,6 +153,10 @@
         </javac>
     </target>
 
+    <target name="init.testng">
+        <taskdef resource="testngtasks" classpathref="compile.test.classpath"/>
+    </target>
+
 
     <!--
         schema generation targets
@@ -167,6 +164,8 @@
     <target name="generate.xsd"
             depends="compile"
             description="Generate .xsd XML schema descriptors for JAXB bound entities.">
+
+        <taskdef name="schemagen" classname="com.sun.tools.jxc.SchemaGenTask" classpathref="xjc.classpath"/>
 
         <schemagen classpathref="compile.classpath"
                    srcdir="${src.dir}/main/java"
@@ -182,6 +181,9 @@
             description="Generate the schema creation .sql file from hibernate entity classes. The property 'ddl.drop' can be set add schema drop statements to the generated ddl file.">
 
         <property name="ddl-sql.file" value="objectmodel.ddl.sql"/>
+
+        <taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="hibernate.classpath"/>
+
         <hibernatetool destdir="${build.dir}">
             <annotationconfiguration configurationfile="${src.dir}/main/resources/hibernate.cfg.xml"
                                      namingStrategy="org.hibernate.cfg.ImprovedNamingStrategy"/>
@@ -196,7 +198,7 @@
 
     <target name="generate.db.changelog"
             description="Generates a liquibase changelog that can be used to re-create an existing database schema."
-            depends="init, prompt-db.properties, set-db.properties">
+            depends="init.liquibase, prompt-db.properties, set-db.properties">
 
         <generateChangeLog outputFile="${db.changelog.releasefile}"
                            driver="${db.driver}"
@@ -212,7 +214,7 @@
 
     <target name="db.update"
             description="Updates the database to the most recent version."
-            depends="init, prompt-db.properties, set-db.properties">
+            depends="init.liquibase, prompt-db.properties, set-db.properties">
 
         <input message="Drop schema before updating?" addproperty="db.drop" defaultvalue="false"/>
         <updateDatabase changeLogFile="${db.changelog.file}"
@@ -230,7 +232,7 @@
 
     <target name="db.rollback"
             description="Rollback the database to the given version tag."
-            depends="init, prompt-db.properties, set-db.properties">
+            depends="init.liquibase, prompt-db.properties, set-db.properties">
 
         <input message="Rollback to tag" addproperty="db.rollback.tag" defaultvalue="${release.version}"/>
         <rollbackDatabase changeLogFile="${db.changelog.file}"
@@ -248,7 +250,7 @@
 
     <target name="db.tag"
             description="Tags the database with a version tag for future rollbacks/upgrades."
-            depends="init, prompt-db.properties, set-db.properties">
+            depends="init.liquibase, prompt-db.properties, set-db.properties">
         
         <input message="Tag database as version" addproperty="db.tag" defaultvalue="${release.version}"/>
         <tagDatabase driver="${db.driver}"
@@ -281,6 +283,10 @@
 
     <target name="set-ddl-drop.property" unless="ddl.drop">
         <property name="ddl.drop" value="false"/>
+    </target>
+
+    <target name="init.liquibase">
+        <taskdef resource="liquibasetasks.properties" classpathref="liquibase.classpath"/>
     </target>
 
 
@@ -317,6 +323,7 @@
         </copy>
     </target>
 
+    <!-- todo: get git revision -->
     <target name="svn.revision" unless="svn.revision">
         <exec executable="svnversion" outputproperty="svn.revision">
             <arg value="."/>
@@ -331,7 +338,7 @@
         </copy>
     </target>
 
-    <target name="compile" depends="clean, init" unless="build.compiled">
+    <target name="compile" depends="clean" unless="build.compiled">
         <mkdir dir="${classes.dir}"/>
         <javac srcdir="${src.dir}/main"
                destdir="${classes.dir}"
@@ -348,15 +355,6 @@
 
         <property name="build.compiled" value="true"/> <!-- compile once per session -->
         <property name="build.noclean" value="true"/> <!-- clean once per session -->                
-    </target>
-
-    <target name="init">
-        <!-- task definitions -->
-        <taskdef resource="testngtasks" classpathref="compile.test.classpath"/>
-        <taskdef resource="checkstyletask.properties" classpathref="checkstyle.classpath"/>
-        <taskdef resource="liquibasetasks.properties" classpathref="liquibase.classpath"/>
-        <taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="hibernate.classpath"/>
-        <taskdef name="schemagen" classname="com.sun.tools.jxc.SchemaGenTask" classpathref="xjc.classpath"/>
     </target>
 
     <target name="clean" description="Remove old build artifacts and temp files." unless="build.noclean">
