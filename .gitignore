@@ -2,4 +2,6 @@
 out
 **/build
 **/test-*
+**/checkstyle-results
+**/ivy-report
 transaction.log

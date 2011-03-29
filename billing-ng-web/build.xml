@@ -72,7 +72,7 @@
         -->
     </target>
 
-    <target name="compile" depends="build.dependencies, init">
+    <target name="compile" depends="build.dependencies">
         <mkdir dir="${classes.dir}" />
         <javac srcdir="${src.dir}/main"
                destdir="${classes.dir}"
@@ -100,11 +100,6 @@
             </and>
         </condition>
     </target>
-
-    <target name="init" depends="clean">
-        <!-- task definitions -->
-        <!-- note: no task defs for web -->
-    </target>    
 
     <target name="clean" description="Remove old build artifacts and temp files." unless="build.noclean">
         <delete dir="${build.dir}"/>
