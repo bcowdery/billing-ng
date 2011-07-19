@@ -1,13 +1,17 @@
 package com.billing.ng.crypto.profile;
 
+import com.billing.ng.crypto.DigestAlgorithm;
 import com.billing.ng.crypto.key.KeyPair;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.spec.AlgorithmParameterSpec;
+import java.util.Arrays;
 
 /**
  * A simple {@link CipherProfile} for symmetric-key algorithms. Symmetric key algorithms use
@@ -19,7 +23,7 @@ import java.security.spec.AlgorithmParameterSpec;
 public class SymmetricKeyProfile implements CipherProfile {
 
     private final String identifier;
-    private final Integer keysize;
+    private final Integer keysize; // in bits
 
     public SymmetricKeyProfile() {
         this.identifier = null;
@@ -53,5 +57,15 @@ public class SymmetricKeyProfile implements CipherProfile {
         if (keysize != null) keyGen.init(keysize);
 
         return new KeyPair(null, keyGen.generateKey());
+    }
+
+    public KeyPair getKey(String password) {
+        byte[] bytes = DigestAlgorithm.SHA1.digestBytes(password); // use a hash so the key always matches the password
+        bytes = Arrays.copyOf(bytes, keysize / 8);                 // trim key down to the keysize in bytes
+
+        // todo: padding for keys less than the keysize, or throw a runtime exception exception
+
+        Key key = new SecretKeySpec(bytes, identifier);
+        return new KeyPair(null, key);
     }
 }

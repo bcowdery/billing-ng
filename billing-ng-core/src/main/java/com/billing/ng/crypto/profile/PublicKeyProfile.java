@@ -20,6 +20,7 @@ package com.billing.ng.crypto.profile;
 import com.billing.ng.crypto.key.KeyPair;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
+import javax.crypto.spec.PBEParameterSpec;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -72,5 +73,10 @@ public class PublicKeyProfile implements CipherProfile {
         if (keysize != null) keyGen.initialize(keysize);
 
         return new KeyPair(keyGen.generateKeyPair());
+    }
+
+    public KeyPair getKey(String password) {
+        // todo: http://stackoverflow.com/questions/5127379/how-to-generate-a-rsa-keypair-with-a-privatekey-encrypted-with-password
+        throw new UnsupportedOperationException("PublicKeyProfile currently does not support password based encryption keys.");
     }
 }

@@ -33,5 +33,6 @@ public interface CipherProfile {
 
     public AlgorithmParameterSpec getAlgorithmParameterSpec();
     public KeyPair generateKey();
+    public KeyPair getKey(String password);
 
 }
