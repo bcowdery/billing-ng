@@ -24,7 +24,8 @@ import java.security.Key;
  * not enforce any security and should be treated as a <code>PrivateKey</code> once initialized.
  *
  * This KeyPair holder stores keys using the top-level Key interface so that
- * it can store keys regardless of the generating class (<code>KeyGenerator, KeyPairGenerator, KeyFactory</code> etc.).
+ * it can store keys regardless of the generating class (<code>KeyGenerator, KeyPairGenerator, KeyFactory</code>
+ * constructed password based <code>SecretKey</code> instances etc.).
  *
  * @author Brian Cowdery
  * @since 14/01/11

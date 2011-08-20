@@ -75,7 +75,7 @@ public class PublicKeyProfile implements CipherProfile {
         return new KeyPair(keyGen.generateKeyPair());
     }
 
-    public KeyPair getKey(String password) {
+    public KeyPair generateKey(String password) {
         // todo: http://stackoverflow.com/questions/5127379/how-to-generate-a-rsa-keypair-with-a-privatekey-encrypted-with-password
         throw new UnsupportedOperationException("PublicKeyProfile currently does not support password based encryption keys.");
     }

@@ -23,6 +23,7 @@ import com.billing.ng.crypto.profile.PublicKeyProfile;
 import com.billing.ng.crypto.profile.SymmetricKeyProfile;
 import org.apache.commons.codec.binary.Base64;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.jboss.serial.finalcontainers.FinalContainer;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -34,6 +35,11 @@ import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.Security;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Cipher algorithms available using the BouncyCastle JCE provider.
@@ -47,13 +53,13 @@ public enum CipherAlgorithm {
     // symmetric block ciphers
 
     /** Data Encryption Standard */
-    DES         (new SymmetricKeyProfile("DES"),            "DES"),
+    DES         (new SymmetricKeyProfile("DES", 64),        "DES"),
     /** Triple DES */
-    DESede      (new SymmetricKeyProfile("DESede"),         "DESede"),
+    DESede      (new SymmetricKeyProfile("DESede", 192),    "DESede"),
     /** Advanced Encryption Standard */
     AES         (new SymmetricKeyProfile("AES", 128),       "AES"),
     /** Blowfish */
-    Blowfish    (new SymmetricKeyProfile("Blowfish"),       "Blowfish"),
+    Blowfish    (new SymmetricKeyProfile("Blowfish", 128),  "Blowfish"),
     /** Twofish */
     Twofish     (new SymmetricKeyProfile("Twofish", 128),   "Twofish"),
 
@@ -72,6 +78,10 @@ public enum CipherAlgorithm {
     RSA_OAEP_MD5        (new PublicKeyProfile("RSA"), "RSA/NONE/OAEPWithMD5AndMGF1Padding");
 
 
+    private static final Map<Class<? extends CipherProfile>, CipherAlgorithm[]> valuesCache
+            = Collections.synchronizedMap(new HashMap<Class<? extends CipherProfile>, CipherAlgorithm[]>());
+
+
     static {
         Security.addProvider(new BouncyCastleProvider());
     }
@@ -86,6 +96,27 @@ public enum CipherAlgorithm {
     CipherAlgorithm(CipherProfile profile, String algorithm) {
         this.profile = profile;
         this.algorithm = algorithm;
+    }
+
+    /**
+     * Returns an array of CipherAlgorithms using the specified type of CipherProfile.
+     * @param profileType type of CipherProfile to fetch
+     * @return array of cipher algorithms using the given CipherProfile type
+     */
+    public static CipherAlgorithm[] values(Class<? extends CipherProfile> profileType) {
+        if (!valuesCache.containsKey(profileType)) {
+            List<CipherAlgorithm> algorithms = new ArrayList<CipherAlgorithm>();
+
+            for (CipherAlgorithm algorithm : values()) {
+                if (algorithm.getProfile().getClass().equals(profileType)) {
+                    algorithms.add(algorithm);
+                }
+            }
+
+            valuesCache.put(profileType, algorithms.toArray(new CipherAlgorithm[algorithms.size()]));
+        }
+
+        return valuesCache.get(profileType);
     }
 
     /**
@@ -113,6 +144,15 @@ public enum CipherAlgorithm {
     }
 
     /**
+     * Creates a new secret key for this CipherAlgorithm using the given password.
+     * @param password password for the key
+     * @return key pair
+     */
+    public KeyPair generateKey(String password) {
+        return getProfile().generateKey(password);
+    }
+
+    /**
      * Encrypt the given plain text string using this Cipher algorithm.
      *
      * @param key secure key
@@ -124,9 +164,9 @@ public enum CipherAlgorithm {
         try {
             cipher.init(Cipher.ENCRYPT_MODE, key, getProfile().getAlgorithmParameterSpec());
         } catch (InvalidKeyException e) {
-            throw new RuntimeException("Security key is not valid.");
+            throw new RuntimeException("Security key is not valid.", e);
         } catch (InvalidAlgorithmParameterException e) {
-            throw new RuntimeException("Invalid cipher algorithm parameter.");
+            throw new RuntimeException("Invalid cipher algorithm parameter.", e);
         }
 
         try {
@@ -152,9 +192,9 @@ public enum CipherAlgorithm {
         try {
             cipher.init(Cipher.DECRYPT_MODE, key, getProfile().getAlgorithmParameterSpec());
         } catch (InvalidKeyException e) {
-            throw new RuntimeException("Security key is not valid.");
+            throw new RuntimeException("Security key is not valid.", e);
         } catch (InvalidAlgorithmParameterException e) {
-            throw new RuntimeException("Invalid cipher algorithm parameter.");
+            throw new RuntimeException("Invalid cipher algorithm parameter.", e);
         }
 
         try {

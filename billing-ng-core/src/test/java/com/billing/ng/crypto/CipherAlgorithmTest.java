@@ -18,22 +18,16 @@
 package com.billing.ng.crypto;
 
 import com.billing.ng.crypto.key.KeyPair;
-import org.bouncycastle.asn1.cryptopro.CryptoProObjectIdentifiers;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import com.billing.ng.crypto.profile.CipherProfile;
+import com.billing.ng.crypto.profile.SymmetricKeyProfile;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.spec.IvParameterSpec;
-import javax.swing.text.PlainDocument;
-import java.math.BigInteger;
-import java.security.Key;
-import java.security.Security;
-import java.security.spec.AlgorithmParameterSpec;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 
 /**
  * CipherAlgorithmTest
@@ -56,9 +50,31 @@ public class CipherAlgorithmTest {
         return data;
     }
 
+    @DataProvider(name = "symmetric_key_algorithms")
+    public Object[][] getSymmetricKeyAlgorithms() {
+        CipherAlgorithm[] algorithms = CipherAlgorithm.values(SymmetricKeyProfile.class);
+
+        Object[][] data = new Object[algorithms.length][1];
+        for (int i = 0; i < algorithms.length; i++)
+            data[i] = new Object[] { algorithms[i] };
+
+        return data;
+    }
+
     @Test(dataProvider = "cipher_algorithms")
-    public void testCipherAlgorithm(CipherAlgorithm algorithm) throws Exception {
+    public void testCipherWithGeneratedKey(CipherAlgorithm algorithm) throws Exception {
         KeyPair keyPair = algorithm.generateKey();
+
+        String encrypted = algorithm.encrypt(keyPair.getEncryptionKey(), PLAIN_TEXT);
+        assertThat(encrypted, is(not(PLAIN_TEXT)));
+
+        String decrypted = algorithm.decrypt(keyPair.getDecryptionKey(), encrypted);
+        assertThat(decrypted, is(PLAIN_TEXT));
+    }
+
+    @Test(dataProvider = "symmetric_key_algorithms")
+    public void testSymmetricCipherWithPasswordKey(CipherAlgorithm algorithm) throws Exception {
+        KeyPair keyPair = algorithm.generateKey("myPassword");
 
         String encrypted = algorithm.encrypt(keyPair.getEncryptionKey(), PLAIN_TEXT);
         assertThat(encrypted, is(not(PLAIN_TEXT)));

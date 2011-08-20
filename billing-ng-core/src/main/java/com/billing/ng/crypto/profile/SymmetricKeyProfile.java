@@ -5,6 +5,7 @@ import com.billing.ng.crypto.key.KeyPair;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
@@ -59,12 +60,17 @@ public class SymmetricKeyProfile implements CipherProfile {
         return new KeyPair(null, keyGen.generateKey());
     }
 
-    public KeyPair getKey(String password) {
-        byte[] bytes = DigestAlgorithm.SHA1.digestBytes(password); // use a hash so the key always matches the password
-        bytes = Arrays.copyOf(bytes, keysize / 8);                 // trim key down to the keysize in bytes
+    public KeyPair generateKey(String password) {
+        // use a hashing algorithm to provide a large number of bytes based off of the password
+        // this should ensure that we meet the key size without needing to pad with predictable data
+        byte[] bytes = DigestAlgorithm.SHA256.digestBytes(password);
 
-        // todo: padding for keys less than the keysize, or throw a runtime exception exception
+        // truncate, or pad with zeros to reach the target keysize
+        if (keysize != null) {
+            bytes = Arrays.copyOf(bytes, keysize / 8);
+        }
 
+        // create a new secret key
         Key key = new SecretKeySpec(bytes, identifier);
         return new KeyPair(null, key);
     }

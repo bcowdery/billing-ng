@@ -18,6 +18,8 @@
 package com.billing.ng.crypto.profile;
 
 import com.billing.ng.crypto.key.KeyPair;
+import org.jaxen.expr.iter.IterableNamespaceAxis;
+import org.omg.CORBA.PRIVATE_MEMBER;
 
 import java.security.spec.AlgorithmParameterSpec;
 
@@ -33,6 +35,6 @@ public interface CipherProfile {
 
     public AlgorithmParameterSpec getAlgorithmParameterSpec();
     public KeyPair generateKey();
-    public KeyPair getKey(String password);
+    public KeyPair generateKey(String password);
 
 }
