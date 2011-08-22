@@ -89,6 +89,16 @@ public enum Configuration {
     }
 
     /**
+     * Returns true if the property exists, false if not.
+     *
+     * @param key property key
+     * @return true if property exists, false if not.
+     */
+    public boolean hasProperty(String key) {
+        return properties.get(key) != null;
+    }
+
+    /**
      * Returns the property for the given key. If the value does not exist in the
      * external properties file, a default value will be returned, or null if no default
      * is defined.

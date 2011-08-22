@@ -264,7 +264,7 @@ public class MoneyTest {
         cad.setLongValue(13989);
         cad.setScale(2);
 
-        assertThat(cad.toString(), is("$139.89 CAD"));
+        assertThat(cad.toString(), is("139.89 CAD"));
 
         // set required values, no explicit scale
         Money usd = new Money();
