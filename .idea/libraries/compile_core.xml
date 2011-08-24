@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="compile-core">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/billing-ng-core/lib/compile" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/billing-ng-core/lib/compile" recursive="false" />
+  </library>
+</component>
