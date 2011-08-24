@@ -45,10 +45,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="jboss6-client" level="project" />
-    <orderEntry type="library" name="jboss6-common" level="project" />
-    <orderEntry type="library" name="compile" level="project" />
+    <orderEntry type="library" name="compile-common" level="project" />
     <orderEntry type="library" name="test" level="project" />
+    <orderEntry type="library" name="provided" level="project" />
+    <orderEntry type="library" name="compile-core" level="project" />
   </component>
 </module>
 

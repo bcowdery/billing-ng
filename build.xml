@@ -7,26 +7,19 @@
 
     <property name="ear.dir" value="${build.dir}/${ant.project.name}.ear"/>
 
-    <!-- ivy -->
-    <property name="ivy.install.version" value="2.1.0-rc2"/>
-    <condition property="ivy.home" value="${env.IVY_HOME}">
-      <isset property="env.IVY_HOME"/>
-    </condition>
-    <property name="ivy.home" value="${user.home}/.ant"/>
-    <property name="ivy.jar.dir" value="${ivy.home}/lib"/>
-    <property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar"/>
+    <import file="${root.dir}/common.xml"/>
 
 
     <!-- targets -->
     <target name="deploy.ds" description="Deploy the data source descriptor to the jBoss application server.">
         <copy todir="${deploy.dir}">
-            <fileset dir="${resources.dir}" includes="billing-ng-ds.xml"/>
+            <fileset dir="${root.dir}/resources" includes="billing-ng-ds.xml"/>
         </copy>
     </target>
 
     <target name="deploy.properties" description="Deploy billing-ng.properties to the jBoss application server.">
         <copy todir="${deploy.dir}">
-            <fileset dir="${resources.dir}" includes="billing-ng.properties"/>
+            <fileset dir="${root.dir}/resources" includes="billing-ng.properties"/>
         </copy>
     </target>
 
@@ -133,37 +126,23 @@
     <!--
         ivy dependency management
     -->
-    <target name="install-ivy" depends="check.ivy" unless="ivy.installed">
-        <mkdir dir="${ivy.jar.dir}"/>
-        <get src="http://repo2.maven.org/maven2/org/apache/ivy/ivy/${ivy.install.version}/ivy-${ivy.install.version}.jar"
-             dest="${ivy.jar.file}"
-             usetimestamp="true"/>
 
-        <path id="ivy.lib.path">
-            <fileset dir="${ivy.jar.dir}" includes="*.jar"/>
-        </path>
-
-        <taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
+    <target name="modules" depends="init-ivy">
+        <ivy:buildlist reference="module-paths">
+            <fileset dir="${root.dir}" includes="**/build.xml"/>
+        </ivy:buildlist>
     </target>
 
-    <target name="check.ivy">
-        <condition property="ivy.installed">
-            <and>
-                <available file="${ivy.jar.file}"/>
-            </and>
-        </condition>
+    <target name="ivy.resolve-all" depends="modules">
+        <subant target="ivy.resolve" buildpathref="module-paths"/>
     </target>
 
-    <target name="ivy.clean-cache" depends="install-ivy" description="Cleans the ivy cache, removing all previously downloaded artifacts.">
-        <ivy:cleancache/>
+    <target name="ivy.publish-all" depends="modules">
+        <subant target="ivy.publish" buildpathref="module-paths"/>
     </target>
 
-    <target name="ivy.resolve-dependencies" depends="install-ivy" description="Download all necessary dependencies and 3rd party libraries.">
-        <ivy:retrieve pattern="${lib.dir}/[conf]/[artifact]-[revision].[ext]" sync="true"/>
-    </target>
-
-    <target name="ivy.dependency-report" depends="ivy.resolve-dependencies" description="Generates a dependency report.">
-        <ivy:report conf="compile" todir="${ivy-report.dir}"/>
+    <target name="ivy.clean-all" depends="modules">
+        <subant target="ivy.clean" buildpathref="module-paths"/>
     </target>
 
 </project>

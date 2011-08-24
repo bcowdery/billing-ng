@@ -20,15 +20,10 @@ package com.billing.ng.entities;
 import com.billing.ng.entities.validator.exception.ValidationException;
 import com.billing.ng.xml.XmlNamespacePrefixMapper;
 import com.billing.ng.xml.XmlPackages;
-import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
-import org.hibernate.validator.ClassValidator;
-import org.hibernate.validator.InvalidValue;
 
 import javax.persistence.Transient;
-import javax.validation.Constraint;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
-import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -40,9 +35,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 /**

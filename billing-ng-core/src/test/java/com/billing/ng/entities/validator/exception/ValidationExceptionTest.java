@@ -17,23 +17,19 @@
 
 package com.billing.ng.entities.validator.exception;
 
-import com.billing.ng.plugin.test.TestPluginImpl;
-import org.hamcrest.Matchers;
-import org.hibernate.validator.NotEmpty;
-import org.testng.annotations.Test;
-
 import com.billing.ng.entities.BaseEntity;
+import org.hamcrest.Matchers;
+import org.testng.annotations.Test;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.isOneOf;
 
 /**
  * ValidationExceptionTest

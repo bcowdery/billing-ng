@@ -23,7 +23,6 @@ import org.joda.time.Months;
 import org.joda.time.Period;
 import org.joda.time.Weeks;
 import org.joda.time.Years;
-import org.quartz.impl.calendar.WeeklyCalendar;
 import org.testng.annotations.Test;
 
 import java.util.Calendar;

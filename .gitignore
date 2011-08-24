@@ -5,3 +5,6 @@ out
 **/checkstyle-results
 **/ivy-report
 transaction.log
+
+lib
+**/lib

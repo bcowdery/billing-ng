@@ -18,8 +18,6 @@
 package com.billing.ng.crypto.profile;
 
 import com.billing.ng.crypto.key.KeyPair;
-import org.jaxen.expr.iter.IterableNamespaceAxis;
-import org.omg.CORBA.PRIVATE_MEMBER;
 
 import java.security.spec.AlgorithmParameterSpec;
 

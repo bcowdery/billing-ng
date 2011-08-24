@@ -8,16 +8,29 @@
     <property name="war.dir" value="${build.dir}/${ant.project.name}.war" />
     <property name="classes.dir" value="${war.dir}/WEB-INF/classes"/>
 
+    <import file="${root.dir}/common.xml"/>
 
     <!-- paths -->
     <path id="compile.classpath">
-        <fileset dir="${j2ee5.dir}" includes="*.jar"/>
-        <fileset dir="${j2ee5client.dir}" includes="*.jar"/>
+        <fileset dir="${lib.dir}/compile" includes="*.jar"/>
+        <fileset dir="${lib.common.dir}/compile" includes="*.jar"/>
+        <fileset dir="${lib.common.dir}/provided" includes="*.jar"/>
+    </path>
+
+    <path id="compile.test.classpath">
+        <pathelement path="${classes.dir}"/>
+        <path refid="compile.classpath"/>
+        <fileset dir="${lib.common.dir}/test" includes="*.jar"/>
+    </path>
+
+    <path id="test.classpath">
+        <pathelement path="${test-build.dir}"/>
+        <path refid="compile.test.classpath"/>
     </path>
 
 
     <!-- targets -->
-    <target name="dist" depends="build, svn.revision" description="Build and package as a distributable .war file.">
+    <target name="dist" depends="build, git.revision" description="Build and package as a distributable .war file.">
         <mkdir dir="${dist.dir}" />
 
         <!-- package the war -->
@@ -28,21 +41,14 @@
                 <attribute name="Built-On" value="${DSTAMP}-${TSTAMP}"/>
                 <attribute name="Specification-Title" value="BillingNG Web Application"/>
                 <attribute name="Specification-Version" value="${release.version}"/>
-                <attribute name="Specification-Vendor" value="Pointyspoon.com"/>
+                <attribute name="Specification-Vendor" value="billing-ng.com"/>
 
                 <attribute name="Package-Title" value="${ant.project.name}"/>
-                <attribute name="Package-Version" value="${svn.revision}"/>
-                <attribute name="Package-Vendor" value="Pointyspoon.com"/>
+                <attribute name="Package-Version" value="${git.tag} (commit: ${git.revision})"/>
+                <attribute name="Package-Vendor" value="billing-ng.com"/>
             </manifest>
         </war>
     </target>        
-
-    <target name="svn.revision" unless="svn.revision">
-        <exec executable="svnversion" outputproperty="svn.revision">
-            <arg value="."/>
-        </exec>
-        <echo message="Revision ${svn.revision}"/>
-    </target>
 
     <target name="build" depends="compile" description="Build the exploded .war for packaging.">
         <mkdir dir="${build.dir}"/>

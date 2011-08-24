@@ -5,50 +5,39 @@
 
     <info organisation="com.billing.ng" module="billing-ng-core"/>
 
-    <configurations defaultconfmapping="compile->default; test->default">
+    <configurations defaultconfmapping="compile->default; provided->default; test->default">
         <conf name="compile"/>
-        <conf name="test"/>
-
+        <conf name="provided"/>
+        <conf name="test" visibility="private"/>
         <conf name="checkstyle" visibility="private"/>
-        <conf name="jaxb-xjc" visibility="private"/>
-        <conf name="hibernate-tools" visibility="private"/>
-        <conf name="liquibase" visibility="private"/>
     </configurations>
 
     <dependencies>
         <!-- compile time dependencies -->
-        <dependency org="bouncycastle" name="bcprov-jdk16" rev="140" conf="compile"/>
-        <dependency org="commons-beanutils" name="commons-beanutils" rev="1.8.3" conf="compile"/>
-        <dependency org="commons-codec" name="commons-codec" rev="1.4" conf="compile"/>
-        <dependency org="org.freemarker" name="freemarker" rev="2.3.16" conf="compile"/>
-        <dependency org="joda-time" name="joda-time" rev="1.6.2" conf="compile"/>
-        <dependency org="org.reflections" name="reflections" rev="0.9.5-RC2" conf="compile"/>
+        <dependency org="commons-lang" name="commons-lang" rev="2.6" conf="compile"/>
+
+        <!-- provided -->
+        <dependency org="org.slf4j" name="slf4j-api" rev="1.6.1" conf="provided"/>
+        <dependency org="com.sun.xml.bind" name="jaxb-impl" rev="2.2.2" conf="provided"/>
+        <dependency org="org.hibernate" name="hibernate-core" rev="3.6.0.Final" conf="provided"/>
+        <dependency org="org.hibernate" name="hibernate-validator" rev="4.1.0.Final" conf="provided"/>
+        <dependency org="org.hibernate" name="hibernate-validator-legacy" rev="4.0.2.GA" conf="provided"/>
+        <dependency org="org.jboss.spec" name="jboss-javaee-6.0" rev="1.0.0.Final" conf="provided"/>
 
         <!-- testing -->
-        <dependency org="org.testng" name="testng" rev="5.14.6" conf="test"/>
+        <dependency org="org.testng" name="testng" rev="5.14.6" conf="test">
+            <exclude org="org.slf4j"/>
+        </dependency>
         <dependency org="org.hamcrest" name="hamcrest-all" rev="1.1" conf="test"/>
+        <dependency org="org.slf4j" name="slf4j-nop" rev="1.6.1" conf="test"/>
 
         <!-- checkstyle -->
         <dependency org="com.puppycrawl.tools" name="checkstyle" rev="5.3" conf="checkstyle->default"/>
 
-        <!-- jaxb-xjc xml schema generator -->
-        <dependency org="com.sun.xml.bind" name="jaxb-xjc" rev="2.2.2" conf="jaxb-xjc->default"/>
-
-        <!-- hibernate-tools -->
-        <dependency org="org.hibernate" name="hibernate-tools" rev="3.2.4.GA" conf="hibernate-tools->default"/>
-
-        <!-- liquibase -->
-        <dependency org="org.liquibase" name="liquibase-core" rev="2.0.1" conf="liquibase->default"/>
-        <dependency org="mysql" name="mysql-connector-java" rev="5.1.14" conf="liquibase->default"/>
-
-        <!-- provided by jboss AS at runtime -->
-        <exclude org="javax.ejb"/>
-        <exclude org="javax.faces"/>
-        <exclude org="javax.jms"/>
-        <exclude org="javax.mail"/>
-        <exclude org="javax.resource"/>
-        <exclude org="org.slf4j"/>
+        <!-- excludes -->
         <exclude org="junit"/>
+        <exclude org="commons-logging"/>
+        <exclude org="ch.qos.logback"/>
     </dependencies>
 </ivy-module>
 

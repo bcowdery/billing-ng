@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="pontificate-common" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+
+    <!-- properties -->
+    <property name="root.dir" value="."/>
+    <property file="${root.dir}/build.properties"/>
+
+    <!-- ivy -->
+    <property name="ivy.install.version" value="2.2.0"/>
+    <condition property="ivy.home" value="${env.IVY_HOME}">
+      <isset property="env.IVY_HOME"/>
+    </condition>
+    <property name="ivy.home" value="${user.home}/.ant"/>
+    <property name="ivy.jar.dir" value="${ivy.home}/lib"/>
+    <property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar"/>
+
+
+    <!-- targets -->
+    <target name="git.revision" unless="git.revision">
+        <exec executable="git" outputproperty="git.revision">
+            <arg value="log"/>
+            <arg value="-1"/>
+            <arg value="--pretty=format:%h"/>
+        </exec>
+        <echo message="Git commit ref ${git.revision}"/>
+
+        <exec executable="git" outputproperty="git.tag">
+            <arg value="describe"/>
+            <arg value="--tags"/>
+        </exec>
+        <echo message="Most recent git tag ${git.tag}"/>
+    </target>
+
+
+    <!--
+        ivy dependency management
+    -->
+    <target name="init-ivy">
+        <antcall target="install-ivy"/>
+
+        <path id="ivy.lib.path">
+            <fileset dir="${ivy.jar.dir}" includes="*.jar"/>
+        </path>
+
+        <taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
+        <ivy:settings file="${root.dir}/ivysettings.xml" />
+    </target>
+
+    <target name="install-ivy" depends="check.ivy" unless="ivy.installed">
+        <mkdir dir="${ivy.jar.dir}"/>
+        <get src="http://repo2.maven.org/maven2/org/apache/ivy/ivy/${ivy.install.version}/ivy-${ivy.install.version}.jar"
+             dest="${ivy.jar.file}"
+             usetimestamp="true"/>
+    </target>
+
+    <target name="check.ivy">
+        <condition property="ivy.installed">
+            <and>
+                <available file="${ivy.jar.file}"/>
+            </and>
+        </condition>
+    </target>
+
+    <target name="ivy.clean" description="Cleans the ivy managed ./lib folder">
+        <delete dir="${lib.dir}"/>
+    </target>
+
+    <target name="ivy.clean-cache" depends="init-ivy" description="Cleans the ivy cache, removing all previously downloaded artifacts.">
+        <delete dir="${lib.dir}"/>
+        <ivy:cleancache/>
+    </target>
+
+    <target name="ivy.resolve" depends="init-ivy" description="Download all necessary dependencies and 3rd party libraries.">
+        <ivy:retrieve pattern="${lib.dir}/[conf]/[artifact]-[revision].[ext]" sync="true"/>
+    </target>
+
+    <target name="ivy.report" depends="ivy.resolve" description="Generates a dependency report.">
+        <ivy:report todir="${ivy-report.dir}"/>
+    </target>
+
+</project>

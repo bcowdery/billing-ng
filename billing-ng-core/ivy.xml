@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+
+    <info organisation="com.billing.ng" module="billing-ng-core"/>
+
+    <configurations defaultconfmapping="compile->default">
+        <conf name="compile"/>
+
+        <conf name="jaxb-xjc" visibility="private"/>
+        <conf name="hibernate-tools" visibility="private"/>
+        <conf name="liquibase" visibility="private"/>
+    </configurations>
+
+    <publications>
+      <artifact name="billing-ng-core" type="jar" conf="compile" />
+    </publications>
+
+    <dependencies>
+        <!-- compile time dependencies -->
+        <dependency org="bouncycastle" name="bcprov-jdk16" rev="140" conf="compile"/>
+        <dependency org="commons-beanutils" name="commons-beanutils" rev="1.8.3" conf="compile"/>
+        <dependency org="commons-codec" name="commons-codec" rev="1.4" conf="compile"/>
+        <dependency org="org.freemarker" name="freemarker" rev="2.3.16" conf="compile"/>
+        <dependency org="joda-time" name="joda-time" rev="1.6.2" conf="compile"/>
+        <dependency org="org.reflections" name="reflections" rev="0.9.5-RC2" conf="compile"/>
+
+        <!-- jaxb-xjc xml schema generator -->
+        <dependency org="com.sun.xml.bind" name="jaxb-xjc" rev="2.2.2" conf="jaxb-xjc->default"/>
+
+        <!-- hibernate-tools -->
+        <dependency org="org.hibernate" name="hibernate-tools" rev="3.2.4.GA" conf="hibernate-tools->default"/>
+
+        <!-- liquibase -->
+        <dependency org="org.liquibase" name="liquibase-core" rev="2.0.1" conf="liquibase->default"/>
+        <dependency org="mysql" name="mysql-connector-java" rev="5.1.14" conf="liquibase->default"/>
+
+        <!-- excludes -->
+        <exclude org="org.slf4j"/>
+        <exclude org="ch.qos.logback"/>
+    </dependencies>
+</ivy-module>
+
