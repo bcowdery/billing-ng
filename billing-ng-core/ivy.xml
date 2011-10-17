@@ -24,7 +24,11 @@
         <dependency org="commons-codec" name="commons-codec" rev="1.4" conf="compile"/>
         <dependency org="org.freemarker" name="freemarker" rev="2.3.16" conf="compile"/>
         <dependency org="joda-time" name="joda-time" rev="1.6.2" conf="compile"/>
-        <dependency org="org.reflections" name="reflections" rev="0.9.5-RC2" conf="compile"/>
+
+        <dependency org="org.reflections" name="reflections" rev="0.9.5-RC2" conf="compile">
+            <exclude org="javax.servlet"/>
+            <exclude org="xml-apis"/>
+        </dependency>
 
         <!-- jaxb-xjc xml schema generator -->
         <dependency org="com.sun.xml.bind" name="jaxb-xjc" rev="2.2.2" conf="jaxb-xjc->default"/>
