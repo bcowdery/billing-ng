@@ -71,11 +71,9 @@
             </fileset>
         </copy>
 
-        <!-- todo: select framework for front-end -->
-        <!-- 
         <copy todir="${war.dir}/WEB-INF/lib">
+            <fileset dir="${lib.dir}/compile" includes="*.jar"/>
         </copy>
-        -->
     </target>
 
     <target name="compile" depends="build.dependencies">

@@ -16,6 +16,11 @@
     <dependencies>
         <!-- compile time dependencies -->
         <dependency org="commons-lang" name="commons-lang" rev="2.6" conf="compile"/>
+        <dependency org="joda-time" name="joda-time" rev="1.6.2" conf="compile"/>
+
+        <!-- seam -->
+        <dependency org="org.jboss.seam.faces" name="seam-faces" rev="3.0.2.Final" conf="compile"/>
+        <dependency org="com.ocpsoft" name="prettyfaces-jsf2" rev="3.3.0" conf="compile"/>
 
         <!-- provided -->
         <dependency org="org.slf4j" name="slf4j-api" rev="1.6.1" conf="provided"/>
