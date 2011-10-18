@@ -2,9 +2,11 @@ Account
 Address
 BillingCycle
 BillingPeriod
+BillingType
 Charge
 Contact
 Customer
+EntityType
 Money
 PurchaseOrder
 PurchaseOrderLine

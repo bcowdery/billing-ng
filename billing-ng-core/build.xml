@@ -172,7 +172,7 @@
                    srcdir="${src.dir}/main/java"
                    destdir="${build.dir}"
                    includes="**/entities/*.java"
-                   excludes="**/*Adapter.java">
+                   excludes="**/*Adapter.java,**/RateTable.java">
             <schema namespace="http://billing-ng.com/entities" file="core-entities.xsd"/>
         </schemagen>
     </target>
