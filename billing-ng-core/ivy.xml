@@ -26,6 +26,7 @@
         <dependency org="joda-time" name="joda-time" rev="1.6.2" conf="compile"/>
 
         <dependency org="org.reflections" name="reflections" rev="0.9.5-RC2" conf="compile">
+            <exclude org="javassist"/>
             <exclude org="javax.servlet"/>
             <exclude org="xml-apis"/>
         </dependency>

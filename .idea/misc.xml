@@ -38,6 +38,9 @@
     <option name="LOCALE" />
     <option name="OPEN_IN_BROWSER" value="true" />
   </component>
+  <component name="JsfProjectComponent">
+    <option name="faceletsSupport" value="ENABLED" />
+  </component>
   <component name="ProjectDetails">
     <option name="projectName" value="billing-ng" />
   </component>

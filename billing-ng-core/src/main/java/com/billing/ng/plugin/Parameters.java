@@ -140,6 +140,7 @@ public class Parameters<T> {
         return methodName.substring(3, 4).toLowerCase() + methodName.substring(4);
     }
 
+    // todo: use Apache commons lang StringUtils.isBlank() instead
     private boolean isBlank(String value) {
         return value == null || value.trim().equals("");
     }

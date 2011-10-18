@@ -19,19 +19,12 @@
 
         <!-- provided -->
         <dependency org="org.slf4j" name="slf4j-api" rev="1.6.1" conf="provided"/>
+        <dependency org="javassist" name="javassist" rev="3.12.1.GA" conf="provided"/>
         <dependency org="com.sun.xml.bind" name="jaxb-impl" rev="2.2.2" conf="provided"/>
         <dependency org="org.hibernate" name="hibernate-core" rev="3.6.0.Final" conf="provided"/>
         <dependency org="org.hibernate" name="hibernate-validator" rev="4.1.0.Final" conf="provided"/>
         <dependency org="org.hibernate" name="hibernate-validator-legacy" rev="4.0.2.GA" conf="provided"/>
         <dependency org="org.jboss.spec" name="jboss-javaee-6.0" rev="1.0.0.Final" conf="provided"/>
-
-        <!-- seam --><!-- might only be needed in web, not sure if CDI works cross-component -->
-
-        <!-- solder -->
-        <!-- persistence -->
-        <!-- validation -->
-        <!-- faces -->
-        <!-- rest -->
 
         <!-- jdbc drivers -->
         <dependency org="mysql" name="mysql-connector-java" rev="5.1.18" conf="jdbc->default"/>

@@ -11,6 +11,9 @@
 
     <dependencies>
         <!-- compile time dependencies -->
+        <dependency org="org.jboss.seam.faces" name="seam-faces" rev="3.0.2.Final" conf="compile"/>
+        <!--<dependency org="com.ocpsoft" name="prettyfaces-jsf2" rev="2.0.4" conf="compile"/>-->
+        <!--<dependency org="com.ocpsoft" name="ocpsoft-pretty-time" rev="1.0.7" conf="compile"/>-->
 
     </dependencies>
 </ivy-module>

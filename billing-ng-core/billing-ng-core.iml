@@ -8,7 +8,6 @@
         </descriptors>
         <ejbRoots>
           <root url="file://$MODULE_DIR$/src/main/java" />
-          <root url="file://$MODULE_DIR$/src/test/java" />
         </ejbRoots>
       </configuration>
     </facet>
@@ -17,7 +16,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
-          <factory-entry name="BillingPU" />
+          <factory-entry name="BillingPU" value="ddbe83eb-0e2c-43c2-ad78-bd474d3480e8" />
           <factory-entry name="pontificatePU" value="ddbe83eb-0e2c-43c2-ad78-bd474d3480e8" />
         </datasource-mapping>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
