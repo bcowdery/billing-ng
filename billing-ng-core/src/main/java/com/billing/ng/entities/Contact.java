@@ -29,6 +29,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.Valid;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Contact
@@ -37,6 +40,7 @@ import javax.validation.Valid;
  * @since 16-Aug-2010
  */
 @Entity
+@XmlRootElement
 public class Contact {
 
     @Id @GeneratedValue
@@ -89,6 +93,7 @@ public class Contact {
     public Contact() {
     }
 
+    @XmlAttribute
     public Long getId() {
         return id;
     }
@@ -97,6 +102,7 @@ public class Contact {
         this.id = id;
     }
 
+    @XmlAttribute
     public String getHomePhoneNumber() {
         return homePhoneNumber;
     }
@@ -105,6 +111,7 @@ public class Contact {
         this.homePhoneNumber = homePhoneNumber;
     }
 
+    @XmlAttribute
     public String getMobilePhoneNumber() {
         return mobilePhoneNumber;
     }
@@ -113,6 +120,7 @@ public class Contact {
         this.mobilePhoneNumber = mobilePhoneNumber;
     }
 
+    @XmlAttribute
     public String getWorkPhoneNumber() {
         return workPhoneNumber;
     }
@@ -121,6 +129,7 @@ public class Contact {
         this.workPhoneNumber = workPhoneNumber;
     }
 
+    @XmlAttribute
     public String getFaxNumber() {
         return faxNumber;
     }
@@ -129,6 +138,7 @@ public class Contact {
         this.faxNumber = faxNumber;
     }
 
+    @XmlAttribute
     public String getEmail() {
         return email;
     }
@@ -137,6 +147,7 @@ public class Contact {
         this.email = email;
     }
 
+    @XmlAttribute
     public String getXmpp() {
         return xmpp;
     }
@@ -145,6 +156,7 @@ public class Contact {
         this.xmpp = xmpp;
     }
 
+    @XmlAttribute
     public String getWebsite() {
         return website;
     }
@@ -153,6 +165,7 @@ public class Contact {
         this.website = website;
     }
 
+    @XmlElement
     public Address getMailingAddress() {
         return mailingAddress;
     }
@@ -161,6 +174,7 @@ public class Contact {
         this.mailingAddress = mailingAddress;
     }
 
+    @XmlElement
     public Address getBillingAddress() {
         return useMailingAddress ? mailingAddress : billingAddress;
     }
@@ -169,6 +183,7 @@ public class Contact {
         this.billingAddress = billingAddress;
     }
 
+    @XmlAttribute
     public boolean isUseMailingAddress() {
         return useMailingAddress;
     }

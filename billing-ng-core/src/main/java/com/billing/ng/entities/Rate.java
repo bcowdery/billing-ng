@@ -22,6 +22,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlTransient;
 import java.math.BigDecimal;
 import java.util.Currency;
 
@@ -33,6 +35,7 @@ import java.util.Currency;
  * @since 15-Aug-2010
  */
 @Entity
+@XmlTransient
 public class Rate extends BaseEntity {
 
     @Id @GeneratedValue
@@ -50,6 +53,7 @@ public class Rate extends BaseEntity {
         this.currencyCode = currencyCode;
     }
 
+    @XmlAttribute
     public Long getId() {
         return id;
     }
@@ -58,6 +62,7 @@ public class Rate extends BaseEntity {
         this.id = id;
     }
 
+    @XmlAttribute
     public BigDecimal getRate() {
         return rate;
     }
@@ -66,6 +71,7 @@ public class Rate extends BaseEntity {
         this.rate = rate;
     }
 
+    @XmlAttribute
     public String getCurrencyCode() {
         return currencyCode;
     }

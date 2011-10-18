@@ -32,7 +32,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,17 +58,21 @@ import java.util.List;
 @XmlRootElement
 public class Account extends BaseEntity implements Visitable<Account>, Numbered {
 
+    public static final Integer ROOT_HIERARCHY_LEVEL = 0;
+
+
     /**
      * Simple visitor that updates the hierarchy level of all visited accounts. Used
      * during the addition/removal of nodes from the account hierarchy to keep hierarchy
      * levels in sync.
      */
+    @XmlTransient
     private static class HierarchyLevelUpdateVisitor implements Visitor<Account, Object> {
         public Object visit(Account account) {
-            if (!account.isRootAccount()) {
-                account.setHierarchyLevel(account.getParentAccount().getHierarchyLevel() + 1);
-            } else {
+            if (account.isRootAccount()) {
                 account.setHierarchyLevel(ROOT_HIERARCHY_LEVEL);
+            } else {
+                account.setHierarchyLevel(account.getParentAccount().getHierarchyLevel() + 1);
             }
 
             for (Account subAccount : account.getSubAccounts())
@@ -74,7 +82,6 @@ public class Account extends BaseEntity implements Visitable<Account>, Numbered 
         }
     }
 
-    public static final Integer ROOT_HIERARCHY_LEVEL = 0;
 
     @Id @GeneratedValue
     private Long id;
@@ -117,6 +124,7 @@ public class Account extends BaseEntity implements Visitable<Account>, Numbered 
     public Account() {
     }
 
+    @XmlAttribute
     public Long getId() {
         return id;
     }
@@ -125,6 +133,7 @@ public class Account extends BaseEntity implements Visitable<Account>, Numbered 
         this.id = id;
     }
 
+    @XmlAttribute
     public String getNumber() {        
         return number;
     }
@@ -133,6 +142,7 @@ public class Account extends BaseEntity implements Visitable<Account>, Numbered 
         this.number = number;
     }
 
+    @XmlTransient
     public NumberPattern getNumberPattern() {
         return numberPattern;
     }
@@ -147,6 +157,7 @@ public class Account extends BaseEntity implements Visitable<Account>, Numbered 
             setNumber(getNumberPattern().generate("account", this));
     }
 
+    @XmlAttribute
     public String getName() {
         return name;
     }
@@ -155,6 +166,7 @@ public class Account extends BaseEntity implements Visitable<Account>, Numbered 
         this.name = name;
     }
 
+    @XmlElement
     public Customer getCustomer() {
         return customer;
     }
@@ -170,6 +182,7 @@ public class Account extends BaseEntity implements Visitable<Account>, Numbered 
      *
      * @return account contact
      */
+    @XmlElement
     public Contact getContact() {
         return contact;
     }
@@ -183,6 +196,7 @@ public class Account extends BaseEntity implements Visitable<Account>, Numbered 
      *
      * @return billing type
      */
+    @XmlElement
     public BillingType getBillingType() {
         return billingType;
     }
@@ -196,6 +210,7 @@ public class Account extends BaseEntity implements Visitable<Account>, Numbered 
      *
      * @return billing cycle
      */
+    @XmlElement
     public BillingCycle getBillingCycle() {
         return billingCycle;
     }
@@ -204,6 +219,8 @@ public class Account extends BaseEntity implements Visitable<Account>, Numbered 
         this.billingCycle = billingCycle;
     }
 
+    @XmlElement
+    @XmlElementWrapper(name = "orders")
     public List<PurchaseOrder> getPurchaseOrders() {
         return purchaseOrders;
     }
@@ -212,6 +229,7 @@ public class Account extends BaseEntity implements Visitable<Account>, Numbered 
         this.purchaseOrders = purchaseOrders;
     }
 
+    @XmlElement
     public Account getParentAccount() {
         return parentAccount;
     }
@@ -313,7 +331,9 @@ public class Account extends BaseEntity implements Visitable<Account>, Numbered 
 
         return this;
     }
-    
+
+    @XmlElement
+    @XmlElementWrapper(name = "subAccounts")
     public List<Account> getSubAccounts() {
         return subAccounts;
     }
@@ -334,6 +354,7 @@ public class Account extends BaseEntity implements Visitable<Account>, Numbered 
      *
      * @return hierarchy level
      */
+    @XmlAttribute
     public Integer getHierarchyLevel() {
         return hierarchyLevel;
     }
@@ -388,7 +409,8 @@ public class Account extends BaseEntity implements Visitable<Account>, Numbered 
         return visitor.visit(this);
     }
 
-    @Override public String toString() {                
+    @Override
+    public String toString() {
         List<Long> subAccountIds = new ArrayList<Long>(subAccounts.size());
         for (Account account : subAccounts)
             subAccountIds.add(account.getId());

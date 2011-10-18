@@ -1,6 +1,6 @@
 /*
  BillingNG, a next-generation billing solution
- Copyright (C) 2010 Brian Cowdery
+ Copyright (C) 2011 Brian Cowdery
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Affero General Public License as
@@ -18,24 +18,33 @@
 package com.billing.ng.entities;
 
 import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlType;
+import java.io.Serializable;
 
 /**
- * BillingType
+ * Enum of core entity types. Used by various meta data and utility classes to identify
+ * the type of core entity that they operate on / belong to.
  *
  * @author Brian Cowdery
- * @since 26-Oct-2010
+ * @since 18-Oct-2011
  */
 @XmlType
 @XmlEnum
-public enum BillingType {
+public enum EntityType {
 
-    /** Accrue charges under the customer holding this account. */
-    CUSTOMER,
+    /** Purchase Order, {@link PurchaseOrder} */
+    ORDER,
 
-    /** Accrue charges under this account, using the account contact information instead of the customers. */
+    /** Invoice */
+    INVOICE,
+
+    /** Billable customer account, {@link Account} */
     ACCOUNT,
 
-    /** Accrue charges for each sub-account separately, using the sub-accounts contact information. */
-    SUB_ACCOUNT
+    /** Top level customer or organization, {@link Customer} */
+    CUSTOMER,
+
+    /** Internal user (staff), {@link Staff} */
+    STAFF
 }

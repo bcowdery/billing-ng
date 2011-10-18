@@ -29,6 +29,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.Date;
 
 /**
@@ -39,6 +43,7 @@ import java.util.Date;
  * @since 26-Oct-2010
  */
 @Entity
+@XmlRootElement
 public class BillingCycle extends BaseEntity {
 
     public static final int LAST_DAY_OF_MONTH = 31;
@@ -63,6 +68,7 @@ public class BillingCycle extends BaseEntity {
         this.billingPeriod = new BillingPeriod(type, interval);
     }
 
+    @XmlAttribute
     public Long getId() {
         return id;
     }
@@ -71,6 +77,7 @@ public class BillingCycle extends BaseEntity {
         this.id = id;
     }
 
+    @XmlAttribute
     public Date getStart() {
         return start;
     }
@@ -79,6 +86,7 @@ public class BillingCycle extends BaseEntity {
         this.start = start;
     }
 
+    @XmlAttribute
     public Date getEnd() {
         return end;
     }
@@ -92,6 +100,7 @@ public class BillingCycle extends BaseEntity {
      *
      * @return cycle start day of month
      */
+    @XmlAttribute
     public Integer getCycleStartDay() {
         return cycleStartDay;
     }
@@ -106,6 +115,7 @@ public class BillingCycle extends BaseEntity {
         this.cycleStartDay = cycleStartDay;
     }
 
+    @XmlElement
     public BillingPeriod getBillingPeriod() {
         return billingPeriod;
     }
@@ -120,6 +130,7 @@ public class BillingCycle extends BaseEntity {
      *
      * @return true if cycle is active for today's date, false if not
      */
+    @XmlTransient
     public boolean isActive() {
         return isActive(new DateMidnight());
     }
@@ -184,6 +195,7 @@ public class BillingCycle extends BaseEntity {
      *
      * @return current billing cycle as of today
      */
+    @XmlTransient
     public CurrentBillingCycle getCurrentBillingCycle() {
         return new CurrentBillingCycle(getBillingPeriod(), getStartInstant());
     }

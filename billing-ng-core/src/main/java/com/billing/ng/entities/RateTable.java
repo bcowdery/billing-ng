@@ -38,12 +38,15 @@ import java.util.Map;
 public enum RateTable {
 
     /** Singleton RateTable instance. */
+    @XmlTransient
     INSTANCE;
     public static RateTable getInstance() {
         return INSTANCE;
     }
 
+    @XmlTransient
     private Map<String, Rate> rates = new HashMap<String, Rate>();
+    @XmlTransient
     private Rate systemRate = null;
 
     public Rate getRate(String currencyCode) {

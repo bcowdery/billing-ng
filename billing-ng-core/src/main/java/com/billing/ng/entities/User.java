@@ -29,7 +29,11 @@ import javax.persistence.Transient;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -41,13 +45,15 @@ import java.util.List;
  * @since 23-Apr-2010
  */
 @MappedSuperclass
-@XmlTransient
+@XmlSeeAlso({User.class, Staff.class})
 public abstract class User extends BaseEntity {
 
     /** User gender. */
+    @XmlType @XmlEnum
     public enum Gender { MALE, FEMALE }
 
     /** User salutation based on gender. */
+    @XmlType @XmlEnum
     public enum Salutation {
         MR  (Gender.MALE),
         MS  (Gender.FEMALE),
@@ -90,6 +96,7 @@ public abstract class User extends BaseEntity {
     protected User() {
     }
 
+    @XmlAttribute
     public Long getId() {
         return id;
     }
@@ -98,6 +105,7 @@ public abstract class User extends BaseEntity {
         this.id = id;
     }
 
+    @XmlAttribute
     public String getUserName() {
         return userName;
     }
@@ -117,6 +125,7 @@ public abstract class User extends BaseEntity {
         setPasswordHash(HashUtils.generateHash(password, getHashSalt()));
     }
 
+    @XmlTransient
     public String getPasswordHash() {
         return passwordHash;
     }
@@ -135,6 +144,7 @@ public abstract class User extends BaseEntity {
      * @see HashUtils#generateHashSalt(int)
      * @return hash salt
      */
+    @XmlTransient
     public String getHashSalt() {
         if (hashSalt == null)
             hashSalt = HashUtils.generateHashSalt(10);
@@ -146,6 +156,7 @@ public abstract class User extends BaseEntity {
         this.hashSalt = hashSalt;
     }
 
+    @XmlAttribute
     public String getFirstName() {
         return firstName;
     }
@@ -154,6 +165,7 @@ public abstract class User extends BaseEntity {
         this.firstName = firstName;
     }
 
+    @XmlAttribute
     public String getLastName() {
         return lastName;
     }
@@ -162,6 +174,7 @@ public abstract class User extends BaseEntity {
         this.lastName = lastName;
     }
 
+    @XmlAttribute
     public String getInitial() {
         return initial;
     }
@@ -170,6 +183,7 @@ public abstract class User extends BaseEntity {
         this.initial = initial;
     }
 
+    @XmlAttribute
     public Gender getGender() {
         return gender;
     }
@@ -178,6 +192,7 @@ public abstract class User extends BaseEntity {
         this.gender = gender;
     }
 
+    @XmlAttribute
     public Salutation getSalutation() {
         return salutation;
     }

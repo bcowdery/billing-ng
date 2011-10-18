@@ -104,7 +104,7 @@ public class EmailAttachment implements DataSource {
 
     @Override
     public String toString() {
-        return "filename: " + filename + " content-type: " + contentType + " length: " + getSize() + " bytes";
+        return "filename: '" + filename + "' content-type: " + contentType + " length: " + getSize() + " bytes";
     }
 }
 

@@ -28,6 +28,12 @@ import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -42,6 +48,7 @@ import java.util.Set;
  * @since 16-Aug-2010
  */
 @Entity
+@XmlRootElement
 public class Customer extends User implements Numbered {
 
     @Column
@@ -69,6 +76,7 @@ public class Customer extends User implements Numbered {
     public Customer() {
     }
 
+    @XmlAttribute
     public String getNumber() {
         return number;
     }
@@ -77,6 +85,7 @@ public class Customer extends User implements Numbered {
         this.number = number;
     }
 
+    @XmlTransient
     public NumberPattern getNumberPattern() {
         return numberPattern;
     }
@@ -91,6 +100,7 @@ public class Customer extends User implements Numbered {
             setNumber(getNumberPattern().generate("customer", this));
     }
 
+    @XmlAttribute
     public String getCompanyName() {
         return companyName;
     }
@@ -99,6 +109,7 @@ public class Customer extends User implements Numbered {
         this.companyName = companyName;
     }
 
+    @XmlElement
     public Contact getContact() {
         return contact;
     }
@@ -107,6 +118,8 @@ public class Customer extends User implements Numbered {
         this.contact = contact;
     }
 
+    @XmlElement
+    @XmlElementWrapper(name = "accounts")
     public Set<Account> getAccounts() {
         return accounts;
     }
@@ -119,6 +132,7 @@ public class Customer extends User implements Numbered {
         return attributes;
     }
 
+    @XmlJavaTypeAdapter(XmlMapAdapter.class)
     public void setAttributes(Map<String, String> attributes) {
         this.attributes = attributes;        
     }

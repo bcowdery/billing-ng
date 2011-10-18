@@ -62,7 +62,7 @@ import java.util.Locale;
  * @since 11-Aug-2010
  */
 @Embeddable
-@XmlRootElement(name = "monetary")
+@XmlRootElement
 public class Money implements Serializable {
 
     private static final String NON_DIGIT_REGEX = "^\\D*";

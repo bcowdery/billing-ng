@@ -32,7 +32,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -52,22 +51,19 @@ public class NumberPattern extends BaseEntity {
 
     private transient final Logger log = LoggerFactory.getLogger(NumberPattern.class);
 
-    @XmlType(name = "patternType")
-    public enum Type { ORDER, INVOICE, ACCOUNT, CUSTOMER, STAFF }
-
     @Id @Enumerated(EnumType.STRING)
-    private Type type;
+    private EntityType type;
     @Column @NotNull
     private String pattern;
 
     public NumberPattern() {        
     }
 
-    public Type getType() {
+    public EntityType getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(EntityType type) {
         this.type = type;
     }
 

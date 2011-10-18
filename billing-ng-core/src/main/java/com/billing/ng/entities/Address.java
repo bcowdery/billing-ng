@@ -23,6 +23,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -53,6 +54,7 @@ public class Address extends BaseEntity {
     public Address() {
     }
 
+    @XmlAttribute
     public String getStreetAddress1() {
         return streetAddress1;
     }
@@ -61,6 +63,7 @@ public class Address extends BaseEntity {
         this.streetAddress1 = streetAddress1;
     }
 
+    @XmlAttribute
     public String getStreetAddress2() {
         return streetAddress2;
     }
@@ -69,6 +72,7 @@ public class Address extends BaseEntity {
         this.streetAddress2 = streetAddress2;
     }
 
+    @XmlAttribute
     public String getStreetAddress3() {
         return streetAddress3;
     }
@@ -77,6 +81,7 @@ public class Address extends BaseEntity {
         this.streetAddress3 = streetAddress3;
     }
 
+    @XmlAttribute
     public String getCity() {
         return city;
     }
@@ -85,6 +90,7 @@ public class Address extends BaseEntity {
         this.city = city;
     }
 
+    @XmlAttribute
     public String getState() {
         return state;
     }
@@ -93,6 +99,7 @@ public class Address extends BaseEntity {
         this.state = state;
     }
 
+    @XmlAttribute
     public String getCountry() {
         return country;
     }
@@ -101,6 +108,7 @@ public class Address extends BaseEntity {
         this.country = country;
     }
 
+    @XmlAttribute
     public String getPostalCode() {
         return postalCode;
     }

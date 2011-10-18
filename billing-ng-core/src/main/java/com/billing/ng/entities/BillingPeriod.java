@@ -25,6 +25,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -40,6 +42,7 @@ import javax.xml.bind.annotation.XmlType;
 public class BillingPeriod extends BaseEntity {
 
     @XmlType(name = "periodType")
+    @XmlEnum
     public enum Type { DAY, WEEK, MONTH, YEAR }
 
     @GeneratedValue @Id
@@ -59,6 +62,7 @@ public class BillingPeriod extends BaseEntity {
         this.interval = interval;
     }
 
+    @XmlAttribute
     public Long getId() {
         return id;
     }
@@ -67,6 +71,7 @@ public class BillingPeriod extends BaseEntity {
         this.id = id;
     }
 
+    @XmlAttribute
     public Type getType() {
         return type;
     }
@@ -75,6 +80,7 @@ public class BillingPeriod extends BaseEntity {
         this.type = type;
     }
 
+    @XmlAttribute
     public Integer getInterval() {
         return interval;
     }

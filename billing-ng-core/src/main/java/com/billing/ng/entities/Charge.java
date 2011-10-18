@@ -23,7 +23,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Individual charge to be aggregated into a single order line.
@@ -50,6 +53,7 @@ public class Charge extends BaseEntity {
     public Charge() {
     }
 
+    @XmlAttribute
     public Long getId() {
         return id;
     }
@@ -58,6 +62,7 @@ public class Charge extends BaseEntity {
         this.id = id;
     }
 
+    @XmlTransient
     public PurchaseOrderLine getLine() {
         return line;
     }
@@ -66,6 +71,7 @@ public class Charge extends BaseEntity {
         this.line = line;
     }
 
+    @XmlElement
     public Money getAmount() {
         return amount;
     }
@@ -74,6 +80,7 @@ public class Charge extends BaseEntity {
         this.amount = amount;
     }
 
+    @XmlAttribute
     public String getDescription() {
         return description;
     }

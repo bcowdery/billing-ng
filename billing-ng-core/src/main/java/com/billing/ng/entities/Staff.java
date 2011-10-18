@@ -23,14 +23,19 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * Staff
+ * An internal user of the system, either an admin, clerk, or some other staff member with
+ * access to the system.
  *
  * @author Brian Cowdery
  * @since 16-Aug-2010
  */
 @Entity
+@XmlRootElement
 public class Staff extends User implements Numbered {
     
     @Column
@@ -43,6 +48,7 @@ public class Staff extends User implements Numbered {
     public Staff() {
     }
 
+    @XmlAttribute
     public String getNumber() {
         return number;
     }
@@ -51,6 +57,7 @@ public class Staff extends User implements Numbered {
         this.number = number;
     }
 
+    @XmlTransient
     public NumberPattern getNumberPattern() {
         return numberPattern;
     }

@@ -19,6 +19,7 @@ package com.billing.ng.entities;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,7 @@ import java.util.List;
  * @since 28-Apr-2010
  */
 @XmlRootElement(name = "map")
+@XmlType(name = "map")
 public class XmlMap {
 
     private final List<XmlMapEntry> entries = new ArrayList<XmlMapEntry>();

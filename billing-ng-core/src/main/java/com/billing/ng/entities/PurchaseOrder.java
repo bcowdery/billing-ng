@@ -27,7 +27,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +67,7 @@ public class PurchaseOrder extends BaseEntity implements Numbered, Totaled {
     public PurchaseOrder() {
     }
 
+    @XmlAttribute
     public Long getId() {
         return id;
     }
@@ -71,6 +76,7 @@ public class PurchaseOrder extends BaseEntity implements Numbered, Totaled {
         this.id = id;
     }
 
+    @XmlAttribute
     public String getNumber() {
         return number;
     }
@@ -79,6 +85,7 @@ public class PurchaseOrder extends BaseEntity implements Numbered, Totaled {
         this.number = number;
     }
 
+    @XmlTransient
     public NumberPattern getNumberPattern() {
         return numberPattern;
     }
@@ -93,6 +100,7 @@ public class PurchaseOrder extends BaseEntity implements Numbered, Totaled {
             setNumber(getNumberPattern().generate("order", this));
     }
 
+    @XmlElement
     public Account getAccount() {
         return account;
     }
@@ -101,6 +109,8 @@ public class PurchaseOrder extends BaseEntity implements Numbered, Totaled {
         this.account = account;
     }
 
+    @XmlElement
+    @XmlElementWrapper(name = "lines")
     public List<PurchaseOrderLine> getLines() {
         return lines;
     }
@@ -109,6 +119,7 @@ public class PurchaseOrder extends BaseEntity implements Numbered, Totaled {
         this.lines = lines;
     }
 
+    @XmlElement
     public Money getTotal() {
         if (total == null)
             calculateTotal();

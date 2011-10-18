@@ -23,7 +23,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +57,7 @@ public class PurchaseOrderLine extends BaseEntity implements Totaled {
     public PurchaseOrderLine() {
     }
 
+    @XmlAttribute
     public Long getId() {
         return id;
     }
@@ -61,6 +66,7 @@ public class PurchaseOrderLine extends BaseEntity implements Totaled {
         this.id = id;
     }
 
+    @XmlTransient
     public PurchaseOrder getPurchaseOrder() {
         return purchaseOrder;
     }
@@ -69,6 +75,8 @@ public class PurchaseOrderLine extends BaseEntity implements Totaled {
         this.purchaseOrder = purchaseOrder;
     }
 
+    @XmlElement
+    @XmlElementWrapper(name = "charges")
     public List<Charge> getCharges() {
         return charges;
     }
@@ -77,6 +85,7 @@ public class PurchaseOrderLine extends BaseEntity implements Totaled {
         this.charges = charges;
     }
 
+    @XmlElement
     public Money getTotal() {
         if (total == null)
             calculateTotal();
