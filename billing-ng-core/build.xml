@@ -333,7 +333,7 @@
 
     <target name="compile" depends="clean" unless="build.compiled">
         <mkdir dir="${classes.dir}"/>
-        <javac srcdir="${src.dir}/main"
+        <javac srcdir="${src.dir}/main/java"
                destdir="${classes.dir}"
                classpathref="compile.classpath"
                source="${javac.source}"

@@ -25,6 +25,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * Billing period of a customers billing cycle. The billing period defines the number of
@@ -34,8 +36,10 @@ import javax.persistence.Id;
  * @since 26-Oct-2010
  */
 @Entity
+@XmlRootElement
 public class BillingPeriod extends BaseEntity {
 
+    @XmlType(name = "periodType")
     public enum Type { DAY, WEEK, MONTH, YEAR }
 
     @GeneratedValue @Id

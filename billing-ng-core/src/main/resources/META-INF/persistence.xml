@@ -19,7 +19,6 @@
             <!-- entity caching setup -->
             <property name="hibernate.cache.use_second_level_cache" value="true"/>
             <property name="hibernate.cache.use_query_cache" value="true"/>
-            <property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.jbc2.JndiMultiplexedJBossCacheRegionFactory"/>
             <property name="hibernate.cache.region.jbc2.cachefactory" value="java:CacheManager"/>
             <property name="hibernate.cache.region.jbc2.cfg.entity" value="mvcc-entity"/>
             <property name="hibernate.cache.region.jbc2.cfg.query" value="local-query"/>

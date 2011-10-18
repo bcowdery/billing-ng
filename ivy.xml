@@ -9,6 +9,7 @@
         <conf name="compile"/>
         <conf name="provided"/>
         <conf name="test" visibility="private"/>
+        <conf name="jdbc" visibility="private"/>
         <conf name="checkstyle" visibility="private"/>
     </configurations>
 
@@ -23,6 +24,17 @@
         <dependency org="org.hibernate" name="hibernate-validator" rev="4.1.0.Final" conf="provided"/>
         <dependency org="org.hibernate" name="hibernate-validator-legacy" rev="4.0.2.GA" conf="provided"/>
         <dependency org="org.jboss.spec" name="jboss-javaee-6.0" rev="1.0.0.Final" conf="provided"/>
+
+        <!-- seam --><!-- might only be needed in web, not sure if CDI works cross-component -->
+
+        <!-- solder -->
+        <!-- persistence -->
+        <!-- validation -->
+        <!-- faces -->
+        <!-- rest -->
+
+        <!-- jdbc drivers -->
+        <dependency org="mysql" name="mysql-connector-java" rev="5.1.18" conf="jdbc->default"/>
 
         <!-- testing -->
         <dependency org="org.testng" name="testng" rev="5.14.6" conf="test">

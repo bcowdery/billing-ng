@@ -32,6 +32,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +51,7 @@ import java.util.List;
  * @since 26-Aug-2010
  */
 @Entity
+@XmlRootElement
 public class Account extends BaseEntity implements Visitable<Account>, Numbered {
 
     /**

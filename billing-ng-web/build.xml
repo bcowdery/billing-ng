@@ -80,7 +80,7 @@
 
     <target name="compile" depends="build.dependencies">
         <mkdir dir="${classes.dir}" />
-        <javac srcdir="${src.dir}/main"
+        <javac srcdir="${src.dir}/main/java"
                destdir="${classes.dir}"
                classpathref="compile.classpath"
                source="${javac.source}"

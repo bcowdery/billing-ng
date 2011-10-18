@@ -107,6 +107,7 @@
         <mkdir dir="${ear.dir}/lib"/>
         <copy todir="${ear.dir}/lib">
             <fileset dir="${lib.dir}/compile" includes="*.jar"/>
+            <fileset dir="${billing-ng-core.dir}/lib/compile" includes="*.jar"/>
         </copy>
     </target>
     
