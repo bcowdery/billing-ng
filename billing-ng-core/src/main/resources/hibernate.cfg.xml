@@ -19,6 +19,7 @@
         <mapping class="com.billing.ng.entities.Charge"/>
         <mapping class="com.billing.ng.entities.Contact"/>
         <mapping class="com.billing.ng.entities.Customer"/>
+        <mapping class="com.billing.ng.entities.CustomerType"/>
         <mapping class="com.billing.ng.entities.NumberPattern"/>
         <mapping class="com.billing.ng.entities.PurchaseOrder"/>
         <mapping class="com.billing.ng.entities.PurchaseOrderLine"/>

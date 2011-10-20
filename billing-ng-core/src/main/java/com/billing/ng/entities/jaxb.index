@@ -6,6 +6,7 @@ BillingType
 Charge
 Contact
 Customer
+CustomerType
 EntityType
 Money
 PurchaseOrder

@@ -57,7 +57,10 @@ public class Customer extends User implements Numbered {
     @ManyToOne
     @Where(clause = "type = CUSTOMER")
     private NumberPattern numberPattern;
-    
+
+    @ManyToOne
+    private CustomerType customerType;
+
     @Column
     private String companyName;
     
@@ -98,6 +101,15 @@ public class Customer extends User implements Numbered {
     public void generateNumber() {
         if (getNumber() == null && getNumberPattern() != null)
             setNumber(getNumberPattern().generate("customer", this));
+    }
+
+    @XmlAttribute
+    public CustomerType getCustomerType() {
+        return customerType;
+    }
+
+    public void setCustomerType(CustomerType customerType) {
+        this.customerType = customerType;
     }
 
     @XmlAttribute
