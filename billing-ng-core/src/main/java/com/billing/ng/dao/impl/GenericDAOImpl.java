@@ -27,9 +27,9 @@ import org.hibernate.criterion.Restrictions;
 
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
-import javax.persistence.PersistenceContext;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -43,7 +43,7 @@ import java.util.List;
  * This implementation relies on Container Managed Transactions (CMT) and Persistence
  * Context injection (also provided by the container). Some method's require Hibernate
  * as the underlying persistence provider and will throw an exception if the hibernate Session
- * could not be retrieved ({@link #getSession()}).
+ * could not be retrieved (e.g., {@link #getSession()}).
  *
  * @param <T>
  * @param <ID>
@@ -53,7 +53,7 @@ import java.util.List;
  */
 public abstract class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T, ID> {
 
-    @PersistenceContext
+    @Inject
     private EntityManager entityManager;
     private transient Session session;
 

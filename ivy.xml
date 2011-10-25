@@ -19,7 +19,9 @@
         <dependency org="joda-time" name="joda-time" rev="1.6.2" conf="compile"/>
 
         <!-- seam -->
-        <dependency org="org.jboss.seam.faces" name="seam-faces" rev="3.0.2.Final" conf="compile"/>
+        <dependency org="org.jboss.seam.persistence" name="seam-persistence" rev="3.1.0.Beta3" conf="compile"/>
+        <dependency org="org.jboss.seam.faces" name="seam-faces" rev="3.1.0.Beta3" conf="compile"/>
+        <dependency org="org.jboss.seam.international" name="seam-international" rev="3.1.0.Beta3" conf="compile"/>
         <dependency org="com.ocpsoft" name="prettyfaces-jsf2" rev="3.3.0" conf="compile"/>
 
         <!-- provided -->
@@ -29,6 +31,7 @@
         <dependency org="org.hibernate" name="hibernate-core" rev="3.6.0.Final" conf="provided"/>
         <dependency org="org.hibernate" name="hibernate-validator" rev="4.1.0.Final" conf="provided"/>
         <dependency org="org.hibernate" name="hibernate-validator-legacy" rev="4.0.2.GA" conf="provided"/>
+        <dependency org="javax.enterprise" name="cdi-api" rev="1.0-SP4" conf="provided"/>
         <dependency org="org.jboss.spec" name="jboss-javaee-6.0" rev="1.0.0.Final" conf="provided"/>
 
         <!-- jdbc drivers -->
