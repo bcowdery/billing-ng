@@ -35,8 +35,10 @@
     </path>
 
     <path id="hibernate.classpath">
+        <fileset dir="${lib.dir}/compile" includes="*.jar"/>
+        <fileset dir="${lib.common.dir}/compile" includes="*.jar"/>
+        <fileset dir="${lib.common.dir}/provided" includes="*.jar" excludes="*hibernate*.jar"/>
         <fileset dir="${lib.dir}/hibernate-tools" includes="*.jar"/>
-        <path refid="compile.classpath"/>
     </path>    
 
     <path id="xjc.classpath">
@@ -192,7 +194,7 @@
             <classpath path="${classes.dir}"/>
             <hbm2ddl outputfilename="${ddl-sql.file}" export="false" drop="${ddl.drop}" format="true"/>
         </hibernatetool>
-        
+
         <delete file="transaction.log"/>
         <echo message="Generated ddl ${build.dir}/${ddl-sql.file} with ddl.drop = ${ddl.drop}"/>
     </target>
@@ -295,14 +297,14 @@
         build targets    
     -->
     <target name="dist"
-            depends="build, generate.ddl, generate.xsd, git.revision"
+            depends="build, git.revision"
             description="Build and package as a distributable .jar file and generate all schema artifacts.">
 
         <mkdir dir="${dist.dir}" />
 
         <!-- package the jar -->
         <tstamp/>
-        <jar destfile="${dist.dir}/${ant.project.name}.jar" basedir="${jar.dir}">
+        <jar destfile="${dist.dir}/${ant.project.name}.jar" basedir="${jar.dir}" manifest="${src.dir}/main/resources/META-INF/MANIFEST.MF">
             <manifest>
                 <attribute name="Built-By" value="${user.name}"/>
                 <attribute name="Built-On" value="${DSTAMP}-${TSTAMP}"/>
@@ -316,7 +318,7 @@
             </manifest>
         </jar>
 
-        <!-- copy database change-logs, ddl and xml schema files -->
+        <!-- copy database change-logs, ddl and xml schema files-->
         <copy todir="${dist.dir}">
             <fileset dir="${build.dir}" includes="*.sql"/>
             <fileset dir="${build.dir}" includes="*.xsd"/>

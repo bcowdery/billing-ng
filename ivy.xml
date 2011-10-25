@@ -17,22 +17,15 @@
         <!-- compile time dependencies -->
         <dependency org="commons-lang" name="commons-lang" rev="2.6" conf="compile"/>
         <dependency org="joda-time" name="joda-time" rev="1.6.2" conf="compile"/>
-
-        <!-- seam -->
-        <dependency org="org.jboss.seam.faces" name="seam-faces" rev="3.0.2.Final" conf="compile"/>
-        <dependency org="com.ocpsoft" name="prettyfaces-jsf2" rev="3.3.0" conf="compile"/>
+        <dependency org="org.jboss.seam.persistence" name="seam-persistence" rev="3.1.0.Beta3" conf="compile"/>
 
         <!-- provided -->
         <dependency org="org.slf4j" name="slf4j-api" rev="1.6.1" conf="provided"/>
         <dependency org="javassist" name="javassist" rev="3.12.1.GA" conf="provided"/>
-        <dependency org="com.sun.xml.bind" name="jaxb-impl" rev="2.2.2" conf="provided"/>
-        <dependency org="org.hibernate" name="hibernate-core" rev="3.6.0.Final" conf="provided"/>
-        <dependency org="org.hibernate" name="hibernate-validator" rev="4.1.0.Final" conf="provided"/>
-        <dependency org="org.hibernate" name="hibernate-validator-legacy" rev="4.0.2.GA" conf="provided"/>
-        <dependency org="org.jboss.spec" name="jboss-javaee-6.0" rev="1.0.0.Final" conf="provided"/>
-
-        <!-- jdbc drivers -->
-        <dependency org="mysql" name="mysql-connector-java" rev="5.1.18" conf="jdbc->default"/>
+        <dependency org="dom4j" name="dom4j" rev="1.6.1" conf="provided"/>
+        <dependency org="org.jboss.as" name="jboss-as-api" rev="7.0.2.Final" conf="provided">
+            <exclude org="org.infinispan"/>
+        </dependency>
 
         <!-- testing -->
         <dependency org="org.testng" name="testng" rev="5.14.6" conf="test">

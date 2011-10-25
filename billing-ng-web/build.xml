@@ -35,7 +35,7 @@
 
         <!-- package the war -->
         <tstamp/>
-        <war warfile="${dist.dir}/${ant.project.name}.war" basedir="${war.dir}">
+        <war warfile="${dist.dir}/${ant.project.name}.war" basedir="${war.dir}" manifest="${src.dir}/main/resources/META-INF/MANIFEST.MF">
             <manifest>
                 <attribute name="Built-By" value="${user.name}"/>
                 <attribute name="Built-On" value="${DSTAMP}-${TSTAMP}"/>

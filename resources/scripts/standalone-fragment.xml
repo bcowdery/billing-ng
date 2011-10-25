@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Fragment of XML from jboss-as-7/standalone/configuration/standalone.xml
+
+        Data source and MySQL Driver should be defined in your standalone.xml file to match the following
+        XML fragment. It is recommended that you add the data source and driver using the CLI scripts
+        instead of editing the XML directly.
+-->
+
+<datasources>
+    <datasource jndi-name="java:jboss/datasources/BillingDS" pool-name="BillingDS_Pool" jta="true" use-java-context="true" use-ccm="true">
+        <connection-url>jdbc:mysql://localhost:3306/billing</connection-url>
+        <driver>mysql</driver>
+        <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
+
+        <pool>
+            <min-pool-size>10</min-pool-size>
+            <max-pool-size>100</max-pool-size>
+        </pool>
+
+        <security>
+            <user-name>billing</user-name>
+            <password>password</password>
+        </security>
+
+        <statement>
+            <prepared-statement-cache-size>32</prepared-statement-cache-size>
+            <share-prepared-statements/>
+        </statement>
+    </datasource>
+</datasources>
+<drivers>
+    <driver name="mysql" module="com.mysql">
+        <xa-datasource-class>
+            com.mysql.jdbc.jdbc2.optional.MysqlXADataSource
+        </xa-datasource-class>
+    </driver>
+</drivers>
+

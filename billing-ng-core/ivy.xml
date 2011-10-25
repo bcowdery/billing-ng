@@ -23,17 +23,22 @@
         <dependency org="commons-beanutils" name="commons-beanutils" rev="1.8.3" conf="compile"/>
         <dependency org="commons-codec" name="commons-codec" rev="1.4" conf="compile"/>
         <dependency org="org.freemarker" name="freemarker" rev="2.3.16" conf="compile"/>
-
         <dependency org="org.reflections" name="reflections" rev="0.9.5-RC2" conf="compile">
             <exclude org="javassist"/>
+            <exclude org="dom4j"/>
             <exclude org="javax.servlet"/>
             <exclude org="xml-apis"/>
         </dependency>
+
+        <dependency org="com.sun.xml.bind" name="jaxb-impl" rev="2.2.2" conf="compile"/>
 
         <!-- jaxb-xjc xml schema generator -->
         <dependency org="com.sun.xml.bind" name="jaxb-xjc" rev="2.2.2" conf="jaxb-xjc->default"/>
 
         <!-- hibernate-tools -->
+        <dependency org="org.hibernate" name="hibernate-core" rev="3.6.0.Final" conf="hibernate-tools->default"/>
+        <dependency org="org.hibernate" name="hibernate-validator" rev="4.1.0.Final" conf="hibernate-tools->default"/>
+        <dependency org="org.hibernate" name="hibernate-validator-legacy" rev="4.0.2.GA" conf="hibernate-tools->default"/>
         <dependency org="org.hibernate" name="hibernate-tools" rev="3.2.4.GA" conf="hibernate-tools->default"/>
 
         <!-- liquibase -->

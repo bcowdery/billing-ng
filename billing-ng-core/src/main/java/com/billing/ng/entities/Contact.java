@@ -19,7 +19,7 @@ package com.billing.ng.entities;
 
 import com.billing.ng.entities.validator.Phone;
 import com.billing.ng.entities.validator.URL;
-import org.hibernate.validator.Email;
+import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
