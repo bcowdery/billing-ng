@@ -9,21 +9,10 @@
                      m2compatible="true"
                      root="https://repository.jboss.org/nexus/content/groups/public"/>
 
-            <ibiblio name="JSF"
-                     m2compatible="true"
-                     root="http://download.java.net/maven/2/" />
-
-            <ibiblio name="java.net"
-                     m2compatible="true"
-                     root="http://repository.codehaus.org/" />
-
             <ibiblio name="reflections-repo"
                      m2compatible="true"
                      root="http://reflections.googlecode.com/svn/repo"/>
 
         </chain>
     </resolvers>
-    <modules>
-        <module organisation="javax.servlet" name="jstl" resolver="ibiblio" />
-    </modules>
 </ivysettings>

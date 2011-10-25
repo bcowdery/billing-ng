@@ -16,6 +16,9 @@
         <dependency org="com.ocpsoft" name="prettyfaces-jsf2" rev="3.3.0" conf="compile"/>
         <dependency org="com.ocpsoft" name="ocpsoft-pretty-time" rev="1.0.7" conf="compile"/>
 
+
+        <!-- exclude -->
+        <exclude org="org.jboss.solder"/>
     </dependencies>
 </ivy-module>
 
