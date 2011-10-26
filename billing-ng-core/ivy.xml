@@ -9,7 +9,6 @@
         <conf name="compile"/>
 
         <conf name="jaxb-xjc" visibility="private"/>
-        <conf name="hibernate-tools" visibility="private"/>
         <conf name="liquibase" visibility="private"/>
     </configurations>
 
@@ -34,12 +33,6 @@
 
         <!-- jaxb-xjc xml schema generator -->
         <dependency org="com.sun.xml.bind" name="jaxb-xjc" rev="2.2.2" conf="jaxb-xjc->default"/>
-
-        <!-- hibernate-tools -->
-        <dependency org="org.hibernate" name="hibernate-core" rev="3.6.0.Final" conf="hibernate-tools->default"/>
-        <dependency org="org.hibernate" name="hibernate-validator" rev="4.1.0.Final" conf="hibernate-tools->default"/>
-        <dependency org="org.hibernate" name="hibernate-validator-legacy" rev="4.0.2.GA" conf="hibernate-tools->default"/>
-        <dependency org="org.hibernate" name="hibernate-tools" rev="3.2.4.GA" conf="hibernate-tools->default"/>
 
         <!-- liquibase -->
         <dependency org="org.liquibase" name="liquibase-core" rev="2.0.1" conf="liquibase->default"/>
