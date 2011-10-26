@@ -195,22 +195,6 @@
         <echo message="Generated changelog ${db.changelog.releasefile}"/>
     </target>    
 
-    <target name="db.diff"
-            description="Updates the changelog by by with the diff of the actual database."
-            depends="init.liquibase, prompt-db.properties, set-db.properties">
-
-        <diffDatabaseToChangeLog changelogfile="${db.changelog.file}"
-                                 driver="${db.driver}"
-                                 url="${db.url}"
-                                 username="${db.username}"
-                                 password="${db.password}"
-                                 databasechangelogtablename="${db.changelog.tablename}"
-                                 databasechangeloglocktablename="${db.changelog.lock-tablename}"
-                                 promptOnNonLocalDatabase="${db.prompt.nonlocal}"
-                                 classpathref="liquibase.classpath"/>
-        <echo message="Updated changelog ${db.changelog.releasefile}"/>
-    </target>
-
     <target name="db.update"
             description="Updates the database to the most recent version."
             depends="init.liquibase, prompt-db.properties, set-db.properties">
