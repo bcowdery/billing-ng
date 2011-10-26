@@ -1,0 +1,20 @@
+##
+## Basic script which can be run against the default standalone.xml configuration to
+## create the BillingNG datasource for use in the application. This requires that the server is running.
+##
+## /opt/jboss-as-7/bin/jboss-admin.sh -c --file=resources/scripts/add-billing-ng-datasource.cli
+##
+
+# Use a batch, so that in case the validation does not pass we don't apply the subsequent changes.
+batch
+
+## add jdbc-driver
+/subsystem=datasources/jdbc-driver=mysql:add(driver-name="mysql",driver-module-name="com.mysql",driver-xa-datasource-class-name="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource")
+/subsystem=datasources/jdbc-driver=mysql:validate-address
+
+## add data-source
+/subsystem=datasources/data-source="java:jboss/datasources/BillingDS":add(jndi-name="java:jboss/datasources/BillingDS",pool-name="BillingDS_Pool",jta="true",use-java-context="true",use-ccm="true",driver-name="mysql",transaction-isolation="TRANSACTION_READ_COMMITTED",connection-url="jdbc:mysql://localhost:3306/billing",user-name="billing",password="password",min-pool-size="10",max-pool-size="100",prepared-statements-cacheSize="32",share-prepared-statements=true)
+/subsystem=datasources/data-source="java:jboss/datasources/BillingDS":validate-address
+
+# Execute the operations
+run-batch

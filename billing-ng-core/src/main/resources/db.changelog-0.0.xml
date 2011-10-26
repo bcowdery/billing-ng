@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-    <changeSet author="brian (generated)" id="1291348955881-1">
+    <changeSet author="brian (generated)" id="1319598169216-1">
         <createTable tableName="account">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
@@ -16,7 +16,7 @@
             <column name="parent_account" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-2">
+    <changeSet author="brian (generated)" id="1319598169216-2">
         <createTable tableName="billing_cycle">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
@@ -27,7 +27,7 @@
             <column name="billing_period" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-3">
+    <changeSet author="brian (generated)" id="1319598169216-3">
         <createTable tableName="billing_period">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
@@ -36,7 +36,25 @@
             <column name="period_type" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-4">
+    <changeSet author="brian (generated)" id="1319598169216-4">
+        <createTable tableName="charge">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="currency_code" type="VARCHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="scale" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="line" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="brian (generated)" id="1319598169216-5">
         <createTable tableName="contact">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
@@ -65,7 +83,7 @@
             <column name="xmpp" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-5">
+    <changeSet author="brian (generated)" id="1319598169216-6">
         <createTable tableName="customer">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
@@ -87,10 +105,11 @@
             <column name="company_name" type="VARCHAR(255)"/>
             <column name="number" type="VARCHAR(255)"/>
             <column name="contact" type="BIGINT"/>
+            <column name="customer_type" type="BIGINT"/>
             <column name="number_pattern" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-6">
+    <changeSet author="brian (generated)" id="1319598169216-7">
         <createTable tableName="customer_attribute">
             <column name="customer" type="BIGINT">
                 <constraints nullable="false"/>
@@ -101,7 +120,26 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-7">
+    <changeSet author="brian (generated)" id="1319598169216-8">
+        <createTable tableName="customer_type">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="isolation" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="brian (generated)" id="1319598169216-9">
+        <createTable tableName="customer_type_visibility">
+            <column name="customer_type" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="visible_customer_type" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="brian (generated)" id="1319598169216-10">
         <createTable tableName="number_pattern">
             <column name="type" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true"/>
@@ -111,7 +149,43 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-8">
+    <changeSet author="brian (generated)" id="1319598169216-11">
+        <createTable tableName="purchase_order">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="number" type="VARCHAR(255)"/>
+            <column name="currency_code" type="VARCHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="scale" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="account" type="BIGINT"/>
+            <column name="number_pattern" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="brian (generated)" id="1319598169216-12">
+        <createTable tableName="purchase_order_line">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="currency_code" type="VARCHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="scale" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="purchase_order" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="brian (generated)" id="1319598169216-13">
         <createTable tableName="rate">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
@@ -124,7 +198,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-9">
+    <changeSet author="brian (generated)" id="1319598169216-14">
         <createTable tableName="staff">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
@@ -147,103 +221,58 @@
             <column name="number_pattern" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-10">
+    <changeSet author="brian (generated)" id="1319598169216-15">
         <addPrimaryKey columnNames="customer, attribute_key" tableName="customer_attribute"/>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-11">
-        <createIndex associatedWith="" indexName="FKB9D38A2D50E48E09" tableName="account" unique="false">
-            <column name="number_pattern"/>
-        </createIndex>
+    <changeSet author="brian (generated)" id="1319598169216-16">
+        <addForeignKeyConstraint baseColumnNames="billing_cycle" baseTableName="account" baseTableSchemaName="billing" constraintName="account_billing_cycle_id_FK" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="billing_cycle" referencedTableSchemaName="billing" referencesUniqueColumn="false"/>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-12">
-        <createIndex associatedWith="" indexName="FKB9D38A2D65283EE5" tableName="account" unique="false">
-            <column name="billing_cycle"/>
-        </createIndex>
+    <changeSet author="brian (generated)" id="1319598169216-17">
+        <addForeignKeyConstraint baseColumnNames="contact" baseTableName="account" baseTableSchemaName="billing" constraintName="account_contact_id_FK" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="contact" referencedTableSchemaName="billing" referencesUniqueColumn="false"/>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-13">
-        <createIndex associatedWith="" indexName="FKB9D38A2DAC4AD954" tableName="account" unique="false">
-            <column name="customer"/>
-        </createIndex>
+    <changeSet author="brian (generated)" id="1319598169216-18">
+        <addForeignKeyConstraint baseColumnNames="customer" baseTableName="account" baseTableSchemaName="billing" constraintName="account_customer_id_Fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="customer" referencedTableSchemaName="billing" referencesUniqueColumn="false"/>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-14">
-        <createIndex associatedWith="" indexName="FKB9D38A2DB6B8DBA8" tableName="account" unique="false">
-            <column name="contact"/>
-        </createIndex>
+    <changeSet author="brian (generated)" id="1319598169216-19">
+        <addForeignKeyConstraint baseColumnNames="number_pattern" baseTableName="account" baseTableSchemaName="billing" constraintName="account_number_pattern_type_FK" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="type" referencedTableName="number_pattern" referencedTableSchemaName="billing" referencesUniqueColumn="false"/>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-15">
-        <createIndex associatedWith="" indexName="FKB9D38A2DC8160D2D" tableName="account" unique="false">
-            <column name="parent_account"/>
-        </createIndex>
+    <changeSet author="brian (generated)" id="1319598169216-20">
+        <addForeignKeyConstraint baseColumnNames="parent_account" baseTableName="account" baseTableSchemaName="billing" constraintName="account_parent_id_FK" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="account" referencedTableSchemaName="billing" referencesUniqueColumn="false"/>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-16">
-        <createIndex associatedWith="primaryKey" indexName="PRIMARY" tableName="account" unique="true">
-            <column name="id"/>
-        </createIndex>
+    <changeSet author="brian (generated)" id="1319598169216-21">
+        <addForeignKeyConstraint baseColumnNames="billing_period" baseTableName="billing_cycle" baseTableSchemaName="billing" constraintName="billing_cycle_period_id_FK" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="billing_period" referencedTableSchemaName="billing" referencesUniqueColumn="false"/>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-17">
-        <createIndex associatedWith="" indexName="FKB8B916226A178189" tableName="billing_cycle" unique="false">
-            <column name="billing_period"/>
-        </createIndex>
+    <changeSet author="brian (generated)" id="1319598169216-22">
+        <addForeignKeyConstraint baseColumnNames="line" baseTableName="charge" baseTableSchemaName="billing" constraintName="charge_purchase_order_line_id_FK" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="purchase_order_line" referencedTableSchemaName="billing" referencesUniqueColumn="false"/>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-18">
-        <createIndex associatedWith="primaryKey" indexName="PRIMARY" tableName="billing_cycle" unique="true">
-            <column name="id"/>
-        </createIndex>
+    <changeSet author="brian (generated)" id="1319598169216-23">
+        <addForeignKeyConstraint baseColumnNames="contact" baseTableName="customer" baseTableSchemaName="billing" constraintName="customer_contact_id_FK" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="contact" referencedTableSchemaName="billing" referencesUniqueColumn="false"/>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-19">
-        <createIndex associatedWith="primaryKey" indexName="PRIMARY" tableName="billing_period" unique="true">
-            <column name="id"/>
-        </createIndex>
+    <changeSet author="brian (generated)" id="1319598169216-24">
+        <addForeignKeyConstraint baseColumnNames="customer_type" baseTableName="customer" baseTableSchemaName="billing" constraintName="customer_customer_type_id_FK" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="customer_type" referencedTableSchemaName="billing" referencesUniqueColumn="false"/>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-20">
-        <createIndex associatedWith="primaryKey" indexName="PRIMARY" tableName="contact" unique="true">
-            <column name="id"/>
-        </createIndex>
+    <changeSet author="brian (generated)" id="1319598169216-25">
+        <addForeignKeyConstraint baseColumnNames="number_pattern" baseTableName="customer" baseTableSchemaName="billing" constraintName="customer_number_pattern_type_FK" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="type" referencedTableName="number_pattern" referencedTableSchemaName="billing" referencesUniqueColumn="false"/>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-21">
-        <createIndex associatedWith="" indexName="FK24217FDE50E48E09" tableName="customer" unique="false">
-            <column name="number_pattern"/>
-        </createIndex>
+    <changeSet author="brian (generated)" id="1319598169216-26">
+        <addForeignKeyConstraint baseColumnNames="customer" baseTableName="customer_attribute" baseTableSchemaName="billing" constraintName="customer_attribute_customer_id_FK" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="customer" referencedTableSchemaName="billing" referencesUniqueColumn="false"/>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-22">
-        <createIndex associatedWith="" indexName="FK24217FDEB6B8DBA8" tableName="customer" unique="false">
-            <column name="contact"/>
-        </createIndex>
+    <changeSet author="brian (generated)" id="1319598169216-27">
+        <addForeignKeyConstraint baseColumnNames="customer_type" baseTableName="customer_type_visibility" baseTableSchemaName="billing" constraintName="customer_type_visibility_type_id_FK" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="customer_type" referencedTableSchemaName="billing" referencesUniqueColumn="false"/>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-23">
-        <createIndex associatedWith="primaryKey" indexName="PRIMARY" tableName="customer" unique="true">
-            <column name="id"/>
-        </createIndex>
+    <changeSet author="brian (generated)" id="1319598169216-28">
+        <addForeignKeyConstraint baseColumnNames="visible_customer_type" baseTableName="customer_type_visibility" baseTableSchemaName="billing" constraintName="customer_type_visibility_visible_type_id_FK" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="customer_type" referencedTableSchemaName="billing" referencesUniqueColumn="false"/>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-24">
-        <createIndex associatedWith="" indexName="FK69EA677BAC4AD954" tableName="customer_attribute" unique="false">
-            <column name="customer"/>
-        </createIndex>
+    <changeSet author="brian (generated)" id="1319598169216-29">
+        <addForeignKeyConstraint baseColumnNames="account" baseTableName="purchase_order" baseTableSchemaName="billing" constraintName="purchase_order_account_id_FK" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="account" referencedTableSchemaName="billing" referencesUniqueColumn="false"/>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-25">
-        <createIndex associatedWith="primaryKey" indexName="PRIMARY" tableName="customer_attribute" unique="true">
-            <column name="customer"/>
-            <column name="attribute_key"/>
-        </createIndex>
+    <changeSet author="brian (generated)" id="1319598169216-30">
+        <addForeignKeyConstraint baseColumnNames="number_pattern" baseTableName="purchase_order" baseTableSchemaName="billing" constraintName="purchase_order_number_pattern_type_FK" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="type" referencedTableName="number_pattern" referencedTableSchemaName="billing" referencesUniqueColumn="false"/>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-26">
-        <createIndex associatedWith="primaryKey" indexName="PRIMARY" tableName="number_pattern" unique="true">
-            <column name="type"/>
-        </createIndex>
+    <changeSet author="brian (generated)" id="1319598169216-31">
+        <addForeignKeyConstraint baseColumnNames="purchase_order" baseTableName="purchase_order_line" baseTableSchemaName="billing" constraintName="purchase_order_line_order_id_FK" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="purchase_order" referencedTableSchemaName="billing" referencesUniqueColumn="false"/>
     </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-27">
-        <createIndex associatedWith="primaryKey" indexName="PRIMARY" tableName="rate" unique="true">
-            <column name="id"/>
-        </createIndex>
-    </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-28">
-        <createIndex associatedWith="" indexName="FK68AC2E050E48E09" tableName="staff" unique="false">
-            <column name="number_pattern"/>
-        </createIndex>
-    </changeSet>
-    <changeSet author="brian (generated)" id="1291348955881-29">
-        <createIndex associatedWith="primaryKey" indexName="PRIMARY" tableName="staff" unique="true">
-            <column name="id"/>
-        </createIndex>
+    <changeSet author="brian (generated)" id="1319598169216-32">
+        <addForeignKeyConstraint baseColumnNames="number_pattern" baseTableName="staff" baseTableSchemaName="billing" constraintName="staff_number_pattern_type_FK" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="type" referencedTableName="number_pattern" referencedTableSchemaName="billing" referencesUniqueColumn="false"/>
     </changeSet>
 </databaseChangeLog>

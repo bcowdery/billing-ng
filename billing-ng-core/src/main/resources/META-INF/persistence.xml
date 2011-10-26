@@ -6,7 +6,10 @@
 
     <persistence-unit name="BillingPU" transaction-type="JTA">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <jta-data-source>java:/BillingDS</jta-data-source>
+        <jta-data-source>java:jboss/datasources/BillingDS</jta-data-source>
+
+        <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
             <property name="hibernate.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
@@ -18,13 +21,11 @@
             <!-- transaction management -->
             <property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.JBossTransactionManagerLookup"/>
 
-            <!-- entity caching setup -->
+            <!-- entity caching -->
             <property name="hibernate.cache.use_second_level_cache" value="true"/>
             <property name="hibernate.cache.use_query_cache" value="true"/>
-            <property name="hibernate.cache.region.jbc2.cachefactory" value="java:CacheManager"/>
-            <property name="hibernate.cache.region.jbc2.cfg.entity" value="mvcc-entity"/>
-            <property name="hibernate.cache.region.jbc2.cfg.query" value="local-query"/>
-            <property name="hibernate.cache.region_prefix" value="billing"/>
+            <property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.infinispan.JndiInfinispanRegionFactory"/>
+            <property name="hibernate.cache.infinispan.cachemanager" value="java:jboss/infinispan/hibernate"/>
 
         </properties>
     </persistence-unit>

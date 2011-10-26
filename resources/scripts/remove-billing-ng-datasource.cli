@@ -1,0 +1,10 @@
+##
+## Basic script which can be run against the default standalone.xml configuration to
+## to remove the BillingNG datasource. This requires that the server is running.
+##
+## /opt/jboss-as-7/bin/jboss-admin.sh -c --file=resources/scripts/remove-billing-ng-datasource.cli
+##
+
+# remove old datasource and driver if it exists
+/subsystem=datasources/data-source="java:jboss/datasources/BillingDS":remove
+/subsystem=datasources/jdbc-driver=mysql:remove(driver-module-name="com.mysql")

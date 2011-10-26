@@ -1,16 +1,16 @@
-<?xml version="1.0"?><component name="dataSourceStorage">
-  <data-source source="LOCAL" name="DataSource" product="" version="" uuid="ddbe83eb-0e2c-43c2-ad78-bd474d3480e8">
+<?xml version="1.0" encoding="UTF-8"?><component name="dataSourceStorage">
+  <data-source source="LOCAL" name="DataSource" product="" version="" jdbc-version="" driver-version="" uuid="ddbe83eb-0e2c-43c2-ad78-bd474d3480e8">
     <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
     <jdbc-url>jdbc:mysql://localhost:3306/billing</jdbc-url>
-    <user-name>root</user-name>
-    <user-password>dfdedfc5dfc5dfd8</user-password>
+    <user-name>billing</user-name>
+    <user-password>dfdadfcbdfd9dfd9dfdddfc5dfd8dfce</user-password>
     <libraries>
       <library>
-        <url>jar://$PROJECT_DIR$/lib/mysql-connector-java-5.1.12/mysql-connector-java-5.1.12-bin.jar!/</url>
+        <url>file://$PROJECT_DIR$/lib/jdbc/mysql-connector-java-5.1.18.jar</url>
       </library>
     </libraries>
     <table name="account" schema="" catalog="billing" type="TABLE">
-      <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="billing_type" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
       <column name="hierarchy_level" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
       <column name="name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
@@ -18,34 +18,46 @@
       <column name="billing_cycle" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" />
       <column name="contact" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" />
       <column name="customer" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <column name="number_pattern" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
       <column name="parent_account" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" />
       <primary-key name="PRIMARY" columns="id" />
-      <index name="FKB9D38A2D65283EE5" unique="false" columns="billing_cycle" />
-      <index name="FKB9D38A2DAC4AD954" unique="false" columns="customer" />
-      <index name="FKB9D38A2DB6B8DBA8" unique="false" columns="contact" />
-      <index name="FKB9D38A2DC8160D2D" unique="false" columns="parent_account" />
+      <foreign-key name="FKB9D38A2DAC4AD954" columns="customer" ref-table="customer" ref-schema="" ref-catalog="billing" ref-columns="id" />
+      <foreign-key name="FKB9D38A2D50E48E09" columns="number_pattern" ref-table="number_pattern" ref-schema="" ref-catalog="billing" ref-columns="type" />
+      <foreign-key name="FKB9D38A2D65283EE5" columns="billing_cycle" ref-table="billing_cycle" ref-schema="" ref-catalog="billing" ref-columns="id" />
+      <foreign-key name="FKB9D38A2DB6B8DBA8" columns="contact" ref-table="contact" ref-schema="" ref-catalog="billing" ref-columns="id" />
+      <foreign-key name="FKB9D38A2DC8160D2D" columns="parent_account" ref-table="account" ref-schema="" ref-catalog="billing" ref-columns="id" />
     </table>
     <table name="billing_cycle" schema="" catalog="billing" type="TABLE">
-      <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="cycle_start_day" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
       <column name="end" sqlType="DATE" length="10" precision="0" nullable="true" jdbcType="91" />
       <column name="start" sqlType="DATE" length="10" precision="0" nullable="true" jdbcType="91" />
       <column name="billing_period" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" />
       <primary-key name="PRIMARY" columns="id" />
-      <index name="FKB8B916226A178189" unique="false" columns="billing_period" />
+      <foreign-key name="FKB8B916226A178189" columns="billing_period" ref-table="billing_period" ref-schema="" ref-catalog="billing" ref-columns="id" />
     </table>
     <table name="billing_period" schema="" catalog="billing" type="TABLE">
-      <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="period_interval" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
       <column name="period_type" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
       <primary-key name="PRIMARY" columns="id" />
     </table>
+    <table name="charge" schema="" catalog="billing" type="TABLE">
+      <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="currency_code" sqlType="VARCHAR" length="3" precision="0" nullable="false" jdbcType="12" />
+      <column name="value" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="scale" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" />
+      <column name="description" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
+      <column name="line" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <primary-key name="PRIMARY" columns="id" />
+      <foreign-key name="FKAED722B4B257A1BD" columns="line" ref-table="purchase_order_line" ref-schema="" ref-catalog="billing" ref-columns="id" />
+    </table>
     <table name="contact" schema="" catalog="billing" type="TABLE">
-      <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="bill_city" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
-      <column name="bill_country" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
+      <column name="bill_country" sqlType="VARCHAR" length="2" precision="0" nullable="true" jdbcType="12" />
       <column name="bill_postal_code" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
-      <column name="bill_state" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
+      <column name="bill_state" sqlType="VARCHAR" length="3" precision="0" nullable="true" jdbcType="12" />
       <column name="bill_street_address1" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
       <column name="bill_street_address2" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
       <column name="bill_street_address3" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
@@ -53,79 +65,104 @@
       <column name="fax_number" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
       <column name="home_phone_number" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
       <column name="mail_city" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
-      <column name="mail_country" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
+      <column name="mail_country" sqlType="VARCHAR" length="2" precision="0" nullable="true" jdbcType="12" />
       <column name="mail_postal_code" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
-      <column name="mail_state" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
+      <column name="mail_state" sqlType="VARCHAR" length="3" precision="0" nullable="true" jdbcType="12" />
       <column name="mail_street_address1" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
       <column name="mail_street_address2" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
       <column name="mail_street_address3" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
       <column name="mobile_phone_number" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
       <column name="use_mailing_address" sqlType="BIT" length="1" precision="0" nullable="true" jdbcType="-7" />
+      <column name="website" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
       <column name="work_phone_number" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
       <column name="xmpp" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
       <primary-key name="PRIMARY" columns="id" />
     </table>
     <table name="customer" schema="" catalog="billing" type="TABLE">
-      <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="first_name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
       <column name="gender" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
-      <column name="hash_salt" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
+      <column name="hash_salt" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12" />
       <column name="initial" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
       <column name="last_name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
-      <column name="password_hash" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
+      <column name="password_hash" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12" />
       <column name="salutation" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
-      <column name="user_name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
+      <column name="user_name" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12" />
       <column name="company_name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
       <column name="number" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
+      <column name="contact" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <column name="customer_type" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <column name="number_pattern" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
       <primary-key name="PRIMARY" columns="id" />
+      <foreign-key name="FK24217FDE50E48E09" columns="number_pattern" ref-table="number_pattern" ref-schema="" ref-catalog="billing" ref-columns="type" />
+      <foreign-key name="FK24217FDEB6B8DBA8" columns="contact" ref-table="contact" ref-schema="" ref-catalog="billing" ref-columns="id" />
+      <foreign-key name="FK24217FDEB8B6B4CB" columns="customer_type" ref-table="customer_type" ref-schema="" ref-catalog="billing" ref-columns="id" />
     </table>
     <table name="customer_attribute" schema="" catalog="billing" type="TABLE">
       <column name="customer" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
       <column name="attribute_value" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
       <column name="attribute_key" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12" />
       <primary-key name="PRIMARY" columns="customer,attribute_key" />
-      <index name="FK69EA677BAC4AD954" unique="false" columns="customer" />
+      <foreign-key name="FK69EA677BAC4AD954" columns="customer" ref-table="customer" ref-schema="" ref-catalog="billing" ref-columns="id" />
     </table>
-    <table name="migration_changelog" schema="" catalog="billing" type="TABLE">
-      <column name="ID" sqlType="VARCHAR" length="63" precision="0" nullable="false" jdbcType="12" />
-      <column name="AUTHOR" sqlType="VARCHAR" length="63" precision="0" nullable="false" jdbcType="12" />
-      <column name="FILENAME" sqlType="VARCHAR" length="200" precision="0" nullable="false" jdbcType="12" />
-      <column name="DATEEXECUTED" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93" />
-      <column name="ORDEREXECUTED" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" />
-      <column name="EXECTYPE" sqlType="VARCHAR" length="10" precision="0" nullable="false" jdbcType="12" />
-      <column name="MD5SUM" sqlType="VARCHAR" length="35" precision="0" nullable="true" jdbcType="12" />
-      <column name="DESCRIPTION" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
-      <column name="COMMENTS" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
-      <column name="TAG" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
-      <column name="LIQUIBASE" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12" />
-      <primary-key name="PRIMARY" columns="id,author,filename" />
-      <index name="UQ_DBCL_ORDEREXEC" unique="true" columns="ORDEREXECUTED" />
-    </table>
-    <table name="migration_changelog_lock" schema="" catalog="billing" type="TABLE">
-      <column name="ID" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" />
-      <column name="LOCKED" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" />
-      <column name="LOCKGRANTED" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
-      <column name="LOCKEDBY" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
+    <table name="customer_type" schema="" catalog="billing" type="TABLE">
+      <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="isolation" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
+      <column name="name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
       <primary-key name="PRIMARY" columns="id" />
     </table>
+    <table name="customer_type_visibility" schema="" catalog="billing" type="TABLE">
+      <column name="customer_type" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="visible_customer_type" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <foreign-key name="FK3FF19AD6DB67C7BE" columns="visible_customer_type" ref-table="customer_type" ref-schema="" ref-catalog="billing" ref-columns="id" />
+      <foreign-key name="FK3FF19AD6B8B6B4CB" columns="customer_type" ref-table="customer_type" ref-schema="" ref-catalog="billing" ref-columns="id" />
+    </table>
+    <table name="number_pattern" schema="" catalog="billing" type="TABLE">
+      <column name="type" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12" />
+      <column name="pattern" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12" />
+      <primary-key name="PRIMARY" columns="type" />
+    </table>
+    <table name="purchase_order" schema="" catalog="billing" type="TABLE">
+      <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="number" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
+      <column name="currency_code" sqlType="VARCHAR" length="3" precision="0" nullable="false" jdbcType="12" />
+      <column name="value" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="scale" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" />
+      <column name="account" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <column name="number_pattern" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
+      <primary-key name="PRIMARY" columns="id" />
+      <foreign-key name="FK71A56A90B8F1A7C2" columns="account" ref-table="account" ref-schema="" ref-catalog="billing" ref-columns="id" />
+      <foreign-key name="FK71A56A9050E48E09" columns="number_pattern" ref-table="number_pattern" ref-schema="" ref-catalog="billing" ref-columns="type" />
+    </table>
+    <table name="purchase_order_line" schema="" catalog="billing" type="TABLE">
+      <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="currency_code" sqlType="VARCHAR" length="3" precision="0" nullable="false" jdbcType="12" />
+      <column name="value" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="scale" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" />
+      <column name="purchase_order" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <primary-key name="PRIMARY" columns="id" />
+      <foreign-key name="FKAA54184379335AC5" columns="purchase_order" ref-table="purchase_order" ref-schema="" ref-catalog="billing" ref-columns="id" />
+    </table>
     <table name="rate" schema="" catalog="billing" type="TABLE">
-      <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="currency_code" sqlType="VARCHAR" length="3" precision="0" nullable="false" jdbcType="12" />
       <column name="rate" sqlType="DECIMAL" length="10" precision="0" nullable="false" jdbcType="3" />
       <primary-key name="PRIMARY" columns="id" />
     </table>
     <table name="staff" schema="" catalog="billing" type="TABLE">
-      <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="first_name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
       <column name="gender" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
-      <column name="hash_salt" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
+      <column name="hash_salt" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12" />
       <column name="initial" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
       <column name="last_name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
-      <column name="password_hash" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
+      <column name="password_hash" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12" />
       <column name="salutation" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
-      <column name="user_name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
-      <column name="staff_id" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
+      <column name="user_name" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12" />
+      <column name="number" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
+      <column name="number_pattern" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" />
       <primary-key name="PRIMARY" columns="id" />
+      <foreign-key name="FK68AC2E050E48E09" columns="number_pattern" ref-table="number_pattern" ref-schema="" ref-catalog="billing" ref-columns="type" />
     </table>
   </data-source>
 </component>

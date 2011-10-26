@@ -24,11 +24,15 @@
         </exec>
         <echo message="Git commit ref ${git.revision}"/>
 
+        <!-- todo: No tags yet, so this fails -->
+        <!--
         <exec executable="git" outputproperty="git.tag">
             <arg value="describe"/>
-            <arg value="--tags"/>
+            <arg value="- -tags"/>
         </exec>
         <echo message="Most recent git tag ${git.tag}"/>
+        -->
+        <property name="git.tag" value="0.0"/>
     </target>
 
 

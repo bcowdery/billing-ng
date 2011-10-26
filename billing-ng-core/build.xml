@@ -35,8 +35,10 @@
     </path>
 
     <path id="hibernate.classpath">
+        <fileset dir="${lib.dir}/compile" includes="*.jar"/>
+        <fileset dir="${lib.common.dir}/compile" includes="*.jar"/>
+        <fileset dir="${lib.common.dir}/provided" includes="*.jar" excludes="*hibernate*.jar"/>
         <fileset dir="${lib.dir}/hibernate-tools" includes="*.jar"/>
-        <path refid="compile.classpath"/>
     </path>    
 
     <path id="xjc.classpath">
@@ -173,28 +175,8 @@
                    destdir="${build.dir}"
                    includes="**/entities/*.java"
                    excludes="**/*Adapter.java,**/RateTable.java">
-            <schema namespace="http://billing-ng.com/entities" file="core-entities.xsd"/>
+            <schema namespace="http://billing-ng.com/entities" file="core-entities-${release.version}.xsd"/>
         </schemagen>
-    </target>
-
-    <target name="generate.ddl"
-            depends="compile, set-ddl-drop.property"
-            description="Generate the schema creation .sql file from hibernate entity classes. The property 'ddl.drop' can be set add schema drop statements to the generated ddl file.">
-
-        <property name="ddl-sql.file" value="objectmodel.ddl.sql"/>
-
-        <taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="hibernate.classpath"/>
-
-        <hibernatetool destdir="${build.dir}">
-            <annotationconfiguration configurationfile="${src.dir}/main/resources/hibernate.cfg.xml"
-                                     namingStrategy="org.hibernate.cfg.ImprovedNamingStrategy"/>
-
-            <classpath path="${classes.dir}"/>
-            <hbm2ddl outputfilename="${ddl-sql.file}" export="false" drop="${ddl.drop}" format="true"/>
-        </hibernatetool>
-        
-        <delete file="transaction.log"/>
-        <echo message="Generated ddl ${build.dir}/${ddl-sql.file} with ddl.drop = ${ddl.drop}"/>
     </target>
 
     <target name="generate.db.changelog"
@@ -282,10 +264,6 @@
         <echo message="Using database config: ${db.url} ${db.username}/${db.password} (driver ${db.driver})"/>
     </target>
 
-    <target name="set-ddl-drop.property" unless="ddl.drop">
-        <property name="ddl.drop" value="false"/>
-    </target>
-
     <target name="init.liquibase">
         <taskdef resource="liquibasetasks.properties" classpathref="liquibase.classpath"/>
     </target>
@@ -295,14 +273,14 @@
         build targets    
     -->
     <target name="dist"
-            depends="build, generate.ddl, generate.xsd, git.revision"
+            depends="build, git.revision"
             description="Build and package as a distributable .jar file and generate all schema artifacts.">
 
         <mkdir dir="${dist.dir}" />
 
         <!-- package the jar -->
         <tstamp/>
-        <jar destfile="${dist.dir}/${ant.project.name}.jar" basedir="${jar.dir}">
+        <jar destfile="${dist.dir}/${ant.project.name}.jar" basedir="${jar.dir}" manifest="${src.dir}/main/resources/META-INF/MANIFEST.MF">
             <manifest>
                 <attribute name="Built-By" value="${user.name}"/>
                 <attribute name="Built-On" value="${DSTAMP}-${TSTAMP}"/>
@@ -316,9 +294,8 @@
             </manifest>
         </jar>
 
-        <!-- copy database change-logs, ddl and xml schema files -->
+        <!-- copy database change-logs and xml schema files-->
         <copy todir="${dist.dir}">
-            <fileset dir="${build.dir}" includes="*.sql"/>
             <fileset dir="${build.dir}" includes="*.xsd"/>
             <fileset dir="${src.dir}/main/resources/" includes="changelog*.xml"/>
         </copy>
@@ -327,7 +304,7 @@
     <target name="build" depends="compile" description="Build the exploded .jar for packaging.">
         <mkdir dir="${build.dir}"/>
         <copy todir="${jar.dir}">
-            <fileset dir="${src.dir}/main/resources" excludes="hibernate.cfg.xml"/>
+            <fileset dir="${src.dir}/main/resources"/>
         </copy>
     </target>
 

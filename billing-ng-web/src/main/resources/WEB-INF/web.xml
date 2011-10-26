@@ -7,8 +7,6 @@
     
     <display-name>BillingNG, a next-generation billing solution</display-name>
 
-    <!-- Web application configuration -->
-
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -25,7 +23,7 @@
     </session-config>
 
     <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
-        <welcome-file>index.xhtml</welcome-file>
+        <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
+
 </web-app>

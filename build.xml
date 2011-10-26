@@ -12,8 +12,20 @@
 
     <!-- targets -->
     <target name="deploy.ds" description="Deploy the data source descriptor to the jBoss application server.">
-        <copy todir="${deploy.dir}">
-            <fileset dir="${root.dir}/resources" includes="billing-ng-ds.xml"/>
+        <property name="jboss.admin.cmd" value="jboss-admin.sh"/>
+        <condition property="jboss.admin.cmd" value="jboss-admin.bat">
+            <os family="windows"/>
+        </condition>
+
+        <exec executable="${jboss.home}/bin/${jboss.admin.cmd}" >
+            <arg value="-c"/>
+            <arg value="--file=${root.dir}/resources/scripts/add-billing-ng-datasource.cli"/>
+        </exec>
+    </target>
+
+    <target name="deploy.jboss-modules" description="Deploys required modules (MySQL JDBC etc.) to the jBoss application server.">
+        <copy todir="${jboss.home}/modules">
+            <fileset dir="${root.dir}/resources/modules"/>
         </copy>
     </target>
 
