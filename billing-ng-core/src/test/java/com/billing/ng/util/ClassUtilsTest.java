@@ -15,24 +15,24 @@
  along with this program.  If not, see http://www.gnu.org/licenses/agpl-3.0.html
  */
 
-package com.billing.ng.plugin.annotation;
+package com.billing.ng.util;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import org.testng.annotations.Test;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 /**
- * Can be placed on a plugins field or method to mark targets for parameter injection.
- *
  * @author Brian Cowdery
- * @since 15/02/11
+ * @since 28-10-2011
  */
-@Target({ ElementType.FIELD, ElementType.METHOD })
-@Retention(RetentionPolicy.RUNTIME)
-public @interface Parameter {
+@Test(groups = { "quick" })
+public class ClassUtilsTest {
 
-    String name();
-    String defaultValue() default "";
-
+    @Test
+    public void testGetFieldName() throws Exception {
+        assertThat(ClassUtils.getFieldName("getSomeField"), is("someField"));
+        assertThat(ClassUtils.getFieldName("setAnotherFieldName"), is("anotherFieldName"));
+        assertThat(ClassUtils.getFieldName("getField"), is("field"));
+    }
 }

@@ -18,12 +18,14 @@
 package com.billing.ng.plugin;
 
 import com.billing.ng.plugin.annotation.Parameter;
+import com.billing.ng.util.ClassUtils;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.xml.registry.infomodel.ClassificationScheme;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -59,10 +61,12 @@ public class Parameters<T> {
             String fieldName = entry.getKey();
             Parameter parameter = entry.getValue();
 
+            // get parameter value to populate the plug-in with
             String value = parameters.get(parameter.name());
-            if (isBlank(value)) value = parameter.defaultValue();
+            if (StringUtils.isBlank(value)) value = parameter.defaultValue();
 
-            if (!isBlank(value)) {
+            // populate the target property with the parameter value
+            if (StringUtils.isNotBlank(value)) {
                 try {
                     BeanUtils.setProperty(plugin, fieldName, value);
 
@@ -107,7 +111,7 @@ public class Parameters<T> {
     }
 
     /**
-     * Returns the names of javabeans property methods annotated with the
+     * Returns the field name of javabeans properties annotated with the
      * {@link Parameter} annotation.
      *
      * @param type plugin class with parameter annotations
@@ -116,32 +120,32 @@ public class Parameters<T> {
     public Map<String, Parameter> getAnnotatedFields(Class<T> type) {
         Map<String, Parameter> fields = new HashMap<String, Parameter>();
 
-        // collect method annotations
+        // collect public member methods of the class, including those defined on the interface
+        // or those inherited from a super class or super interface.
         for (Method method : type.getMethods()) {
-            for (Annotation annotation : method.getDeclaredAnnotations()) {
-                if (annotation instanceof Parameter) {
-                    if (method.getName().startsWith("get") || method.getName().startsWith("set")) {
-                        fields.put(getFieldName(method.getName()), (Parameter) annotation);
-                    }
+            Parameter annotation = method.getAnnotation(Parameter.class);
+            if (annotation != null) {
+                if (method.getName().startsWith("get") || method.getName().startsWith("set")) {
+                    fields.put(ClassUtils.getFieldName(method.getName()), annotation);
                 }
             }
         }
 
+        // collection all field annotations, including private fields that
+        // we can to access via a public accessor method
+        Class klass = type;
+        while (klass != null) {
+            for (Field field : klass.getDeclaredFields()) {
+                Parameter annotation = field.getAnnotation(Parameter.class);
+                if (annotation != null) {
+                    fields.put(field.getName(), annotation);
+                }
+            }
+
+            // try the super class
+            klass = klass.getSuperclass();
+        }
+
         return fields;
-    }
-
-    /**
-     * Converts a method name to a javabeans field name.
-     *
-     * @param methodName method name
-     * @return field name
-     */
-    public static String getFieldName(String methodName) {
-        return methodName.substring(3, 4).toLowerCase() + methodName.substring(4);
-    }
-
-    // todo: use Apache commons lang StringUtils.isBlank() instead
-    private boolean isBlank(String value) {
-        return value == null || value.trim().equals("");
     }
 }

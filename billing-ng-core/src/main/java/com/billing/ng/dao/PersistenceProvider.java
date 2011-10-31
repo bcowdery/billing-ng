@@ -17,7 +17,7 @@
 
 package com.billing.ng.dao;
 
-import org.jboss.seam.solder.core.ExtensionManaged;
+import org.jboss.solder.core.ExtensionManaged;
 
 import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.inject.Produces;

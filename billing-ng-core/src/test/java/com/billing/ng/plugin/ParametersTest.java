@@ -20,6 +20,7 @@ package com.billing.ng.plugin;
 import com.billing.ng.plugin.annotation.Parameter;
 import com.billing.ng.plugin.test.TestPlugin;
 import com.billing.ng.plugin.test.TestPluginImpl;
+import com.billing.ng.util.ClassUtils;
 import org.hamcrest.Matchers;
 import org.joda.time.DateMidnight;
 import org.testng.annotations.Test;
@@ -134,12 +135,5 @@ public class ParametersTest {
 
         assertThat(fields.get("decimal").name(), is("decimal"));
         assertThat(fields.get("decimal").defaultValue(), is("0.00"));
-    }
-
-    @Test
-    public void testGetFieldName() throws Exception {
-        assertThat(Parameters.getFieldName("getSomeField"), is("someField"));
-        assertThat(Parameters.getFieldName("setAnotherFieldName"), is("anotherFieldName"));
-        assertThat(Parameters.getFieldName("getField"), is("field"));
     }
 }

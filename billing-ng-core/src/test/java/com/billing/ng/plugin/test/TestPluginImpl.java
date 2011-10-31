@@ -35,6 +35,8 @@ import java.util.Date;
 @Plugin(name = "test plugin")
 public class TestPluginImpl implements TestPlugin {
 
+    @NotNull
+    @Parameter(name = "string")
     private String string;
     private Integer number;
     private BigDecimal decimal;
@@ -42,8 +44,7 @@ public class TestPluginImpl implements TestPlugin {
     public TestPluginImpl() {
     }
 
-    @NotNull
-    @Parameter(name = "string")
+    // annotation at field level
     public String getString() {
         return string;
     }
