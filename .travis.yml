@@ -1,0 +1,6 @@
+language: java
+jdk:
+  - openjdk7
+  - oraclejdk7
+install: ant ivy.resolve-all
+script: ant test.all
