@@ -14,19 +14,36 @@
     </configurations>
 
     <dependencies>
-        <!-- compile time dependencies -->
+        <!-- compile time dependencies -->	
+        <dependency org="org.jboss.seam.persistence" name="seam-persistence" rev="3.1.0.Final" conf="compile">					
+			<exclude org="org.jboss.solder"/>
+			<exclude org="org.jboss.seam.transaction"/>
+		</dependency>		
+		<dependency org="org.jboss.seam.transaction" name="seam-transaction" rev="3.1.0.Final" conf="compile">		
+			<exclude org="org.jboss.solder"/>
+			<exclude org="org.jboss.spec.javax.servlet"/>
+		</dependency>			
+		<dependency org="org.jboss.solder" name="solder-impl" rev="3.1.0.Final" conf="compile"/>
+		
         <dependency org="commons-lang" name="commons-lang" rev="2.6" conf="compile"/>
         <dependency org="joda-time" name="joda-time" rev="1.6.2" conf="compile"/>
-        <dependency org="org.jboss.seam.persistence" name="seam-persistence" rev="3.1.0.Beta3" conf="compile"/>
-
+		
+		
         <!-- provided -->
+		<dependency org="org.jboss.spec" name="jboss-javaee-6.0" rev="3.0.0.Final" conf="provided"/>
+		<dependency org="org.jboss.as" name="jboss-as-spec-api" rev="7.1.1.Final" conf="provided"/>
+		<dependency org="org.jboss.as" name="jboss-as-ee" rev="7.1.1.Final" conf="provided"/>
+		<dependency org="org.jboss.as" name="jboss-as-web" rev="7.1.1.Final" conf="provided"/>
+		<dependency org="org.jboss.as" name="jboss-as-weld" rev="7.1.1.Final" conf="provided"/>
+		<dependency org="org.jboss.as" name="jboss-as-transactions" rev="7.1.1.Final" conf="provided"/>
+		<dependency org="org.jboss.as" name="jboss-as-jpa-hibernate4" rev="7.1.1.Final" conf="provided"/>
+		<dependency org="org.jboss.as" name="jboss-as-mail" rev="7.1.1.Final" conf="provided"/>
+				
         <dependency org="org.slf4j" name="slf4j-api" rev="1.6.1" conf="provided"/>
         <dependency org="javassist" name="javassist" rev="3.12.1.GA" conf="provided"/>
         <dependency org="dom4j" name="dom4j" rev="1.6.1" conf="provided"/>
-        <dependency org="org.jboss.as" name="jboss-as-api" rev="7.0.2.Final" conf="provided">
-            <exclude org="org.infinispan"/>
-        </dependency>
 
+		
         <!-- testing -->
         <dependency org="org.testng" name="testng" rev="5.14.6" conf="test">
             <exclude org="org.slf4j"/>

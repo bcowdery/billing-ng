@@ -81,6 +81,7 @@
         <javac srcdir="${src.dir}/main/java"
                destdir="${classes.dir}"
                classpathref="compile.classpath"
+               includeantruntime="false"
                source="${javac.source}"
                target="${javac.target}"
                debug="${javac.debug}" fork="${javac.fork}" deprecation="${javac.deprecation}" nowarn="${javac.nowarn}">

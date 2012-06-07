@@ -10,11 +10,10 @@ batch
 
 ## add jdbc-driver
 /subsystem=datasources/jdbc-driver=mysql:add(driver-name="mysql",driver-module-name="com.mysql",driver-xa-datasource-class-name="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource")
-/subsystem=datasources/jdbc-driver=mysql:validate-address
 
 ## add data-source
 /subsystem=datasources/data-source="java:jboss/datasources/BillingDS":add(jndi-name="java:jboss/datasources/BillingDS",pool-name="BillingDS_Pool",jta="true",use-java-context="true",use-ccm="true",driver-name="mysql",transaction-isolation="TRANSACTION_READ_COMMITTED",connection-url="jdbc:mysql://localhost:3306/billing",user-name="billing",password="password",min-pool-size="10",max-pool-size="100",prepared-statements-cacheSize="32",share-prepared-statements=true)
-/subsystem=datasources/data-source="java:jboss/datasources/BillingDS":validate-address
+/subsystem=datasources/data-source="java:jboss/datasources/BillingDS":enable
 
 # Execute the operations
 run-batch

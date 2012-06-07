@@ -11,11 +11,15 @@
 
     <dependencies>
         <!-- compile time dependencies -->
-        <dependency org="org.jboss.seam.faces" name="seam-faces" rev="3.1.0.Beta3" conf="compile"/>
-        <dependency org="org.jboss.seam.international" name="seam-international" rev="3.1.0.Beta3" conf="compile"/>
+        <dependency org="org.jboss.seam.faces" name="seam-faces" rev="3.1.0.Final" conf="compile">
+			<exclude org="org.jboss.seam.international"/>
+		</dependency>
+        <dependency org="org.jboss.seam.international" name="seam-international" rev="3.1.0.Final" conf="compile"/>
+
         <dependency org="com.ocpsoft" name="prettyfaces-jsf2" rev="3.3.0" conf="compile"/>
         <dependency org="com.ocpsoft" name="ocpsoft-pretty-time" rev="1.0.7" conf="compile"/>
 
+		
         <!-- exclude -->
         <exclude org="org.jboss.solder"/>
         <exclude org="org.jboss.seam.transaction"/>

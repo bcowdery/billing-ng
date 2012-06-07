@@ -11,13 +11,17 @@
 
 
     <!-- targets -->
-    <target name="deploy.ds" description="Deploy the data source descriptor to the jBoss application server.">
-        <property name="jboss.admin.cmd" value="jboss-admin.sh"/>
-        <condition property="jboss.admin.cmd" value="jboss-admin.bat">
+    <target name="deploy.ds" description="Deploy the data source descriptor to the jBoss application server.">        
+        <condition property="jboss.admin.cmd" value="jboss-cli.bat">
             <os family="windows"/>
         </condition>
 
+        <condition property="jboss.admin.cmd" value="$jboss-cli.sh">
+            <os family="unix"/>
+        </condition>
+				
         <exec executable="${jboss.home}/bin/${jboss.admin.cmd}" >
+            <env key="NOPAUSE" value="true"/>
             <arg value="-c"/>
             <arg value="--file=${root.dir}/resources/scripts/add-billing-ng-datasource.cli"/>
         </exec>
@@ -139,7 +143,6 @@
     <!--
         ivy dependency management
     -->
-
     <target name="modules" depends="init-ivy">
         <ivy:buildlist reference="module-paths">
             <fileset dir="${root.dir}" includes="**/build.xml"/>
@@ -156,6 +159,15 @@
 
     <target name="ivy.clean-all" depends="modules">
         <subant target="ivy.clean" buildpathref="module-paths"/>
+    </target>
+
+
+    <!--
+        Testing
+    -->
+    <target name="test.all">
+	<ant dir="${billing-ng-core.dir}" target="test.all" inheritall="false" inheritrefs="false"/>
+	<ant dir="${billing-ng-web.dir}" target="test.all" inheritall="false" inheritrefs="false"/>
     </target>
 
 </project>
