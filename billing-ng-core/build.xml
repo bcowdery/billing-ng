@@ -8,6 +8,8 @@
     <property name="jar.dir" value="${build.dir}/${ant.project.name}.jar"/>
     <property name="classes.dir" value="${jar.dir}/"/>
 
+    <available file="${lib.dir}" type="dir" property="ivy.resolved"/>  
+
     <import file="${root.dir}/common.xml"/>
 
 
@@ -308,7 +310,7 @@
         </copy>
     </target>
 
-    <target name="compile" depends="clean" unless="build.compiled">
+    <target name="compile" depends="clean, ivy.resolve-once" unless="build.compiled">
         <mkdir dir="${classes.dir}"/>
         <javac srcdir="${src.dir}/main/java"
                destdir="${classes.dir}"
@@ -334,4 +336,8 @@
         <delete dir="${test-results.dir}"/>
         <delete dir="${checkstyle-results.dir}"/>
     </target>
+
+	<target name="ivy.resolve-once" unless="ivy.resolved">
+		<antcall target="ivy.resolve"/>
+	</target>
 </project>

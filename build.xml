@@ -7,6 +7,8 @@
 
     <property name="ear.dir" value="${build.dir}/${ant.project.name}.ear"/>
 
+	<available file="${lib.dir}" type="dir" property="ivy.resolved"/>
+	
     <import file="${root.dir}/common.xml"/>
 
 
@@ -119,7 +121,7 @@
         </ear>
     </target>
 
-    <target name="copy-libs">
+    <target name="copy-libs" depends="ivy.resolve-once">
         <mkdir dir="${ear.dir}/lib"/>
         <copy todir="${ear.dir}/lib">
             <fileset dir="${lib.dir}/compile" includes="*.jar"/>
@@ -160,14 +162,18 @@
     <target name="ivy.clean-all" depends="modules">
         <subant target="ivy.clean" buildpathref="module-paths"/>
     </target>
+	
+	<target name="ivy.resolve-once" unless="ivy.resolved">
+		<antcall target="ivy.resolve"/>
+	</target>
 
 
     <!--
         Testing
     -->
     <target name="test.all">
-	<ant dir="${billing-ng-core.dir}" target="test.all" inheritall="false" inheritrefs="false"/>
-	<ant dir="${billing-ng-web.dir}" target="test.all" inheritall="false" inheritrefs="false"/>
+		<ant dir="${billing-ng-core.dir}" target="test.all" inheritall="false" inheritrefs="false"/>
+		<ant dir="${billing-ng-web.dir}" target="test.all" inheritall="false" inheritrefs="false"/>
     </target>
 
 </project>

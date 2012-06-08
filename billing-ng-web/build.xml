@@ -8,8 +8,11 @@
     <property name="war.dir" value="${build.dir}/${ant.project.name}.war" />
     <property name="classes.dir" value="${war.dir}/WEB-INF/classes"/>
 
+	<available file="${lib.dir}" type="dir" property="ivy.resolved"/>  
+	
     <import file="${root.dir}/common.xml"/>
 
+	
     <!-- paths -->
     <path id="compile.classpath">
         <fileset dir="${lib.dir}/compile" includes="*.jar"/>
@@ -76,7 +79,7 @@
         </copy>
     </target>
 
-    <target name="compile" depends="build.dependencies">
+    <target name="compile" depends="clean, ivy.resolve-once, build.dependencies">
         <mkdir dir="${classes.dir}" />
         <javac srcdir="${src.dir}/main/java"
                destdir="${classes.dir}"
@@ -110,4 +113,91 @@
         <delete dir="${build.dir}"/>
         <delete dir="${dist.dir}"/>
     </target>
+	
+	<target name="ivy.resolve-once" unless="ivy.resolved">
+		<antcall target="ivy.resolve"/>
+	</target>	
+	
+
+    <!--
+        testing targets
+    -->
+    <target name="test.all" depends="compile.tests, init.testng" description="Run all tests.">
+        <testng suitename="${ant.project.name} unit test suite"
+                testname="${ant.project.name} test.all "
+                classpathref="test.classpath"
+                outputDir="${test-results.dir}/testng/"
+                failureProperty="test.failure"
+                verbose="${testng.verbose}">
+
+            <classfileset dir="${test-build.dir}">
+                <include name="**/*Test*.class"/>
+                <exclude name="**/*Tester*.class"/>
+            </classfileset>                       
+        </testng>
+
+        <antcall target="test.reports"/>       
+    </target>
+
+    <target name="test.groups" depends="compile.tests, init.testng" if="groups" description="Run a specific test configuration set by -Dgroups">
+        <testng suitename="${ant.project.name} unit test suite"
+                testname="${ant.project.name} '${groups}' groups "
+                groups="${groups}"
+                classpathref="test.classpath"
+                outputDir="${test-results.dir}/testng/"
+                failureProperty="test.failure"
+                verbose="${testng.verbose}">
+
+            <classfileset dir="${test-build.dir}">
+                <include name="**/*Test*.class"/>
+                <exclude name="**/*Tester*.class"/>
+            </classfileset>
+        </testng>        
+
+        <antcall target="test.reports"/>
+    </target>
+
+    <target name="test.failed" depends="init.testng" description="Re-run all previously failed tests.">
+        <property name="build.noclean" value="true"/>
+        <antcall target="compile.tests"/>
+
+        <testng classpathref="test.classpath"
+                outputDir="${test-results.dir}/testng/"
+                failureProperty="test.failure"
+                verbose="${testng.verbose}">
+
+            <xmlfileset dir="${test-results.dir}/testng/" includes="testng-failed.xml"/>
+        </testng>
+
+        <antcall target="test.reports"/>
+    </target>
+
+    <target name="test.reports" unless="test.noreport">
+        <junitreport todir="${test-results.dir}">
+            <fileset dir="${test-results.dir}/testng/">
+                <include name="*/*.xml"/>
+            </fileset>
+            <report format="noframes"  todir="${test-results.dir}/pretty"/>
+        </junitreport>
+        <fail if="test.failure" message="${ant.project.name} tests failed, see testing reports for details."/>
+    </target>
+
+    <target name="compile.tests" depends="compile">
+        <mkdir dir="${test-build.dir}"/>
+        <mkdir dir="${test-results.dir}/testng"/>
+        <mkdir dir="${test-results.dir}/pretty"/>
+
+        <javac srcdir="${src.dir}/test"
+               destdir="${test-build.dir}"
+               classpathref="compile.test.classpath"
+               source="${javac.source}"
+               target="${javac.target}"
+               includeantruntime="false"
+               debug="${javac.debug}" fork="${javac.fork}" deprecation="${javac.deprecation}" nowarn="${javac.nowarn}">
+        </javac>
+    </target>
+
+    <target name="init.testng">
+        <taskdef resource="testngtasks" classpathref="compile.test.classpath"/>
+    </target>	
 </project>
