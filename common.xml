@@ -10,9 +10,15 @@
     <condition property="ivy.home" value="${env.IVY_HOME}">
       <isset property="env.IVY_HOME"/>
     </condition>
+
     <property name="ivy.home" value="${user.home}/.ant"/>
     <property name="ivy.jar.dir" value="${ivy.home}/lib"/>
     <property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar"/>
+	<available file="${ivy.jar.file}" property="ivy.installed"/>
+
+    <property name="jsch.install.version" value="0.1.44"/>
+    <property name="jsch.jar.file" value="${ivy.jar.dir}/jsch.jar"/>
+    <available property="jsch.installed" file="${jsch.jar.file}"/>
 
 
     <!-- targets -->
@@ -39,44 +45,44 @@
     <!--
         ivy dependency management
     -->
-    <target name="init-ivy">
-        <antcall target="install-ivy"/>
+    <target name="install-ivy" unless="ivy.installed">
+        <mkdir dir="${ivy.jar.dir}"/>
+        <get src="http://repo1.maven.org/maven2/org/apache/ivy/ivy/${ivy.install.version}/ivy-${ivy.install.version}.jar"
+             dest="${ivy.jar.file}"
+             usetimestamp="true"/>
+    </target>
+
+    <target name="install-jsch" unless="jsch.installed">
+        <mkdir dir="${ivy.jar.dir}"/>
+        <get src="http://repo1.maven.org/maven2/com/jcraft/jsch/${jsch.install.version}/jsch-${jsch.install.version}.jar"
+             dest="${jsch.jar.file}"
+             usetimestamp="true"/>
+    </target>
+
+	<target name="ivy.bootstrap" depends="install-ivy, install-jsch" unless="ivy.bootstrapped">
+        <echo message="ivy jar dir = ${ivy.jar.dir}"/>
 
         <path id="ivy.lib.path">
             <fileset dir="${ivy.jar.dir}" includes="*.jar"/>
         </path>
 
-        <taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
-        <ivy:settings file="${root.dir}/ivysettings.xml" />
-        <echo message="loaded ivy settings file from ${root.dir}/ivysettings.xml"/>
-    </target>
-
-    <target name="install-ivy" depends="check-ivy" unless="ivy.installed">
-        <mkdir dir="${ivy.jar.dir}"/>
-        <get src="http://repo2.maven.org/maven2/org/apache/ivy/ivy/${ivy.install.version}/ivy-${ivy.install.version}.jar"
-             dest="${ivy.jar.file}"
-             usetimestamp="true"/>
-    </target>
-
-    <target name="check-ivy">
-        <condition property="ivy.installed">
-            <and>
-                <available file="${ivy.jar.file}"/>
-            </and>
-        </condition>
-        <echo message="ivy.installed = ${ivy.installed}"/>
-    </target>
-
+        <taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>			
+		<property name="ivy.bootstrapped" value="true"/>
+		
+		<ivy:settings file="${root.dir}/ivysettings.xml" />
+		<echo message="loaded ivy settings file = ${root.dir}/ivysettings.xml"/>
+	</target>	
+	
     <target name="ivy.clean" description="Cleans the ivy managed ./lib folder">
         <delete dir="${lib.dir}"/>
     </target>
 
-    <target name="ivy.clean-cache" depends="init-ivy" description="Cleans the ivy cache, removing all previously downloaded artifacts.">
+    <target name="ivy.clean-cache" depends="ivy.bootstrap" description="Cleans the ivy cache, removing all previously downloaded artifacts.">
         <delete dir="${lib.dir}"/>
         <ivy:cleancache/>
     </target>
 
-    <target name="ivy.resolve" depends="init-ivy" description="Download all necessary dependencies and 3rd party libraries.">
+    <target name="ivy.resolve" depends="ivy.bootstrap" description="Download all necessary dependencies and 3rd party libraries.">
         <ivy:retrieve pattern="${lib.dir}/[conf]/[artifact]-[revision].[ext]" sync="true"/>
     </target>
 
@@ -84,4 +90,15 @@
         <ivy:report todir="${ivy-report.dir}"/>
     </target>
 
+    <target name="ivy.publish" depends="ivy.bootstrap" description="Publishes artifacts to the remote pointyspoon maven repository.">
+        <ivy:resolve/>
+
+        <ivy:makepom ivyfile="./ivy.xml" pomfile="${dist.dir}/${ant.project.name}.pom">
+            <mapping conf="compile" scope="compile"/>
+        </ivy:makepom>
+
+        <ivy:publish resolver="pointyspoon-m2-publish" forcedeliver="true" overwrite="true">
+            <artifacts pattern="${dist.dir}/[artifact].[ext]"/>
+        </ivy:publish>
+    </target>
 </project>

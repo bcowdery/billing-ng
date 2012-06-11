@@ -1,13 +1,27 @@
 <ivysettings>
-    <settings defaultResolver="resolver-chain" caches="checkUpToDate"/>
+    <properties file="${ivy.settings.dir}/ivysettings.properties" override="false"/>
+
+    <settings defaultResolver="default" caches="checkUpToDate"/>
+
     <resolvers>
-        <chain name="resolver-chain" returnFirst="true">
+        <!-- for publishing artifacts -->
+        <ssh name="pointyspoon-m2-publish" user="psmonkey" host="pointyspoon.com" keyFile="${user.home}/.ssh/id_rsa" publishPermissions="0644" m2compatible="true">
+            <ivy pattern="maven2/[organisation]/[module]/[revision]/[artifact]-[revision].xml"/>
+            <artifact pattern="maven2/[organisation]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"/>
+        </ssh>
+
+        <!-- default resolvers -->
+        <chain name="default" returnFirst="true">
 
             <ibiblio name="ibiblio" m2compatible="true"/>
 
             <ibiblio name="jboss-nexus"
                      m2compatible="true"
                      root="https://repository.jboss.org/nexus/content/groups/public"/>
+
+            <ibiblio name="pointyspoon-repo"
+                     m2compatible="true"
+                     root="http://repo.pointyspoon.com/maven2"/>
 
             <ibiblio name="reflections-repo"
                      m2compatible="true"

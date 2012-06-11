@@ -145,7 +145,7 @@
     <!--
         ivy dependency management
     -->
-    <target name="modules" depends="init-ivy">
+    <target name="modules" depends="ivy.bootstrap">
         <ivy:buildlist reference="module-paths">
             <fileset dir="${root.dir}" includes="**/build.xml"/>
         </ivy:buildlist>
@@ -163,17 +163,24 @@
         <subant target="ivy.clean" buildpathref="module-paths"/>
     </target>
 	
-	<target name="ivy.resolve-once" unless="ivy.resolved">
-		<antcall target="ivy.resolve"/>
-	</target>
+    <target name="ivy.resolve-once" unless="ivy.resolved">
+        <antcall target="ivy.resolve"/>
+    </target>
 
 
     <!--
         Testing
     -->
     <target name="test.all">
-		<ant dir="${billing-ng-core.dir}" target="test.all" inheritall="false" inheritrefs="false"/>
-		<ant dir="${billing-ng-web.dir}" target="test.all" inheritall="false" inheritrefs="false"/>
+        <ant dir="${billing-ng-core.dir}" target="test.all" inheritall="false" inheritrefs="false"/>
+        <ant dir="${billing-ng-web.dir}" target="test.all" inheritall="false" inheritrefs="false"/>
     </target>
 
+
+    <!--
+        Overridden targets
+    -->
+    <target name="ivy.publish">
+        <echo message="nothing to publish for ${ant.project.name}"/>
+    </target>
 </project>

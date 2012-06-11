@@ -8,9 +8,10 @@
     <property name="war.dir" value="${build.dir}/${ant.project.name}.war" />
     <property name="classes.dir" value="${war.dir}/WEB-INF/classes"/>
 
-	<available file="${lib.dir}" type="dir" property="ivy.resolved"/>  
+    <available file="${lib.dir}" type="dir" property="ivy.resolved"/>  
 	
     <import file="${root.dir}/common.xml"/>
+    <property file="${root.dir}/ivysettings.properties"/>
 
 	
     <!-- paths -->
@@ -43,7 +44,7 @@
                 <attribute name="Built-By" value="${user.name}"/>
                 <attribute name="Built-On" value="${DSTAMP}-${TSTAMP}"/>
                 <attribute name="Specification-Title" value="BillingNG Web Application"/>
-                <attribute name="Specification-Version" value="${release.version}"/>
+                <attribute name="Specification-Version" value="${revision}"/>
                 <attribute name="Specification-Vendor" value="billing-ng.com"/>
 
                 <attribute name="Package-Title" value="${ant.project.name}"/>
@@ -200,4 +201,12 @@
     <target name="init.testng">
         <taskdef resource="testngtasks" classpathref="compile.test.classpath"/>
     </target>	
+
+
+    <!--
+        Overriden targets
+    -->
+    <target name="ivy.publish">
+        <echo message="nothing to publish for ${ant.project.name}"/>
+    </target>
 </project>

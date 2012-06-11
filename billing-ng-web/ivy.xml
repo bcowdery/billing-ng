@@ -3,7 +3,7 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
 
-    <info organisation="com.billing.ng" module="billing-ng-web"/>
+    <info organisation="com.billing.ng" module="billing-ng-web" revision="${revision}"/>
 
     <configurations defaultconfmapping="compile->default">
         <conf name="compile"/>
@@ -12,8 +12,8 @@
     <dependencies>
         <!-- compile time dependencies -->
         <dependency org="org.jboss.seam.faces" name="seam-faces" rev="3.1.0.Final" conf="compile">
-			<exclude org="org.jboss.seam.international"/>
-		</dependency>
+            <exclude org="org.jboss.seam.international"/>
+        </dependency>
         <dependency org="org.jboss.seam.international" name="seam-international" rev="3.1.0.Final" conf="compile"/>
 
         <dependency org="com.ocpsoft" name="prettyfaces-jsf2" rev="3.3.0" conf="compile"/>

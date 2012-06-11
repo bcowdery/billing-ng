@@ -3,7 +3,7 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
 
-    <info organisation="com.billing.ng" module="billing-ng-core"/>
+    <info organisation="com.billing.ng" module="billing-ng-core" revision="${revision}"/>
 
     <configurations defaultconfmapping="compile->default">
         <conf name="compile"/>
@@ -13,7 +13,8 @@
     </configurations>
 
     <publications>
-      <artifact name="billing-ng-core" type="jar" conf="compile" />
+        <artifact type="pom" ext="pom" conf="compile"/>
+        <artifact type="jar" ext="jar" conf="compile"/>
     </publications>
 
     <dependencies>

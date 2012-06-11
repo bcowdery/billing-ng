@@ -11,6 +11,7 @@
     <available file="${lib.dir}" type="dir" property="ivy.resolved"/>  
 
     <import file="${root.dir}/common.xml"/>
+    <property file="${root.dir}/ivysettings.properties"/>
 
 
     <!-- paths -->
@@ -219,7 +220,7 @@
             description="Rollback the database to the given version tag."
             depends="init.liquibase, prompt-db.properties, set-db.properties">
 
-        <input message="Rollback to tag" addproperty="db.rollback.tag" defaultvalue="${release.version}"/>
+        <input message="Rollback to tag" addproperty="db.rollback.tag" defaultvalue="${revision}"/>
         <rollbackDatabase changeLogFile="${db.changelog.file}"
                           driver="${db.driver}"
                           url="${db.url}"
@@ -237,7 +238,7 @@
             description="Tags the database with a version tag for future rollbacks/upgrades."
             depends="init.liquibase, prompt-db.properties, set-db.properties">
         
-        <input message="Tag database as version" addproperty="db.tag" defaultvalue="${release.version}"/>
+        <input message="Tag database as version" addproperty="db.tag" defaultvalue="${revision}"/>
         <tagDatabase driver="${db.driver}"
                      url="${db.url}"
                      username="${db.username}"
@@ -287,7 +288,7 @@
                 <attribute name="Built-By" value="${user.name}"/>
                 <attribute name="Built-On" value="${DSTAMP}-${TSTAMP}"/>
                 <attribute name="Specification-Title" value="BillingNG Core Classes"/>
-                <attribute name="Specification-Version" value="${release.version}"/>
+                <attribute name="Specification-Version" value="${revision}"/>
                 <attribute name="Specification-Vendor" value="billing-ng.com"/>
 
                 <attribute name="Package-Title" value="${ant.project.name}"/>
