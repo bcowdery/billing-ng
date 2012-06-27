@@ -15,8 +15,9 @@
  along with this program.  If not, see http://www.gnu.org/licenses/agpl-3.0.html
  */
 
-package com.billing.ng.util;
+package com.billing.ng.crypto.utils;
 
+import com.billing.ng.crypto.util.HashUtils;
 import com.billing.ng.test.Patterns;
 import org.testng.annotations.Test;
 

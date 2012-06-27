@@ -15,15 +15,13 @@
  along with this program.  If not, see http://www.gnu.org/licenses/agpl-3.0.html
  */
 
-package com.billing.ng.util;
+package com.billing.ng.crypto.util;
 
-import com.billing.ng.crypto.DigestAlgorithm;
-import com.billing.ng.crypto.context.DigestAlgorithmHolder;
+import com.billing.ng.crypto.HashAlgorithm;
+import com.billing.ng.crypto.context.HashAlgorithmHolder;
 import org.apache.commons.codec.binary.Base64;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Random;
+import java.security.SecureRandom;
 
 /**
  * HashUtils
@@ -39,7 +37,7 @@ public class HashUtils {
      * Generates an alphanumeric salted hash token using the configured digest algorithm. The generated hash
      * is stripped of all non-alphanumeric characters to make it safe for use as an HTTP GET parameter value.
      *
-     * @see DigestAlgorithmHolder
+     * @see com.billing.ng.crypto.context.HashAlgorithmHolder
      *
      * @param base string to use as the primary basis of the hash
      * @param appends additional strings to append to the plain-text password before hashing
@@ -51,7 +49,7 @@ public class HashUtils {
         for (String string : appends)
             plainText.append(string);
 
-        DigestAlgorithm algorithm = DigestAlgorithmHolder.getAlgorithm();
+        HashAlgorithm algorithm = HashAlgorithmHolder.getAlgorithm();
 
         byte[] bytes = algorithm.digestBytes(plainText.toString());
         return Base64.encodeBase64URLSafeString(bytes);
@@ -65,7 +63,7 @@ public class HashUtils {
      * @return salt string
      */
     public static String generateHashSalt(int length) {
-        Random random = new Random();
+        SecureRandom  random = new SecureRandom();
 
         StringBuffer salt = new StringBuffer(length);
         for (int i = 0; i < length; i++)

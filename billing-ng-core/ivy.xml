@@ -20,6 +20,7 @@
     <dependencies>
         <!-- compile time dependencies -->
         <dependency org="bouncycastle" name="bcprov-jdk16" rev="140" conf="compile"/>
+        <dependency org="org.mindrot" name="jbcrypt" rev="0.3m" conf="compile"/>
         <dependency org="commons-beanutils" name="commons-beanutils" rev="1.8.3" conf="compile"/>
         <dependency org="commons-codec" name="commons-codec" rev="1.4" conf="compile"/>
         <dependency org="org.freemarker" name="freemarker" rev="2.3.16" conf="compile"/>

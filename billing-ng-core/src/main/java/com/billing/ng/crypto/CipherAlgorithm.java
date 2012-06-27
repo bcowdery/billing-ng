@@ -18,9 +18,9 @@
 package com.billing.ng.crypto;
 
 import com.billing.ng.crypto.key.KeyPair;
-import com.billing.ng.crypto.profile.CipherProfile;
-import com.billing.ng.crypto.profile.PublicKeyProfile;
-import com.billing.ng.crypto.profile.SymmetricKeyProfile;
+import com.billing.ng.crypto.profile.cipher.CipherProfile;
+import com.billing.ng.crypto.profile.cipher.PublicKeyProfile;
+import com.billing.ng.crypto.profile.cipher.SymmetricKeyProfile;
 import org.apache.commons.codec.binary.Base64;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
@@ -124,11 +124,9 @@ public enum CipherAlgorithm {
      */
     public Cipher getCipherInstance() {
         try {
-            return Cipher.getInstance(getAlgorithm(), BouncyCastleProvider.PROVIDER_NAME);
+            return Cipher.getInstance(getAlgorithm());
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Cipher algorithm not supported by the JCE provider.");
-        } catch (NoSuchProviderException e) {
-            throw new RuntimeException("BouncyCastle JCE provider not configured or not loaded.");
         } catch (NoSuchPaddingException e) {
             throw new RuntimeException("Cipher padding algorithm not supported by the JCE provider.");
         }

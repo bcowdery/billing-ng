@@ -18,12 +18,9 @@
 package com.billing.ng.crypto;
 
 import com.billing.ng.crypto.key.KeyPair;
-import com.billing.ng.crypto.profile.CipherProfile;
-import com.billing.ng.crypto.profile.SymmetricKeyProfile;
+import com.billing.ng.crypto.profile.cipher.SymmetricKeyProfile;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import javax.crypto.Cipher;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;

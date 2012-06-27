@@ -17,11 +17,12 @@
 
 package com.billing.ng.entities;
 
+import com.billing.ng.entities.context.MoneyRoundingModeHolder;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
@@ -70,6 +71,11 @@ public class Money implements Serializable {
     private static final String BLANK = "";
     private static final String WHITESPACE = " ";
 
+    private static RoundingMode RoundingMode() {
+        return MoneyRoundingModeHolder.GetRoundingMode();
+    }
+
+
     @Transient
     private BigDecimal value;
     @Transient
@@ -107,7 +113,7 @@ public class Money implements Serializable {
      */
     public Money(BigDecimal value, Currency currency) {
         this.currency = currency;
-        this.value = value.setScale(currency.getDefaultFractionDigits(), RoundingMode.HALF_UP);
+        this.value = value.setScale(currency.getDefaultFractionDigits(), RoundingMode());
     }
 
     /**
@@ -117,7 +123,7 @@ public class Money implements Serializable {
      */
     public Money(BigDecimal value, Locale locale) {
         this.currency = Currency.getInstance(locale);
-        this.value = value.setScale(currency.getDefaultFractionDigits(), RoundingMode.HALF_UP);
+        this.value = value.setScale(currency.getDefaultFractionDigits(), RoundingMode());
     }
 
     /**
@@ -133,7 +139,7 @@ public class Money implements Serializable {
     public Money(String amount) {
         String[] values = amount.trim().replaceAll(NON_DIGIT_REGEX, BLANK).split(WHITESPACE);
         setCurrencyCode(values[1]);
-        this.value = new BigDecimal(values[0]).setScale(currency.getDefaultFractionDigits(), RoundingMode.HALF_UP);
+        this.value = new BigDecimal(values[0]).setScale(currency.getDefaultFractionDigits(), RoundingMode());
     }
 
     /**
@@ -146,7 +152,7 @@ public class Money implements Serializable {
     public Money(String amount, String currencyCode) {
         setCurrencyCode(currencyCode);
         this.value = new BigDecimal(amount.trim().replaceAll(NON_DIGIT_REGEX, BLANK))
-                .setScale(this.currency.getDefaultFractionDigits(), RoundingMode.HALF_UP);                            
+                .setScale(this.currency.getDefaultFractionDigits(), RoundingMode());
     }
 
     /**
@@ -163,7 +169,7 @@ public class Money implements Serializable {
 
         // shouldn't be necessary... but scale should match the given currency
         if (this.value.scale() != this.currency.getDefaultFractionDigits())
-            this.value = this.value.setScale(this.currency.getDefaultFractionDigits(), RoundingMode.HALF_UP);
+            this.value = this.value.setScale(this.currency.getDefaultFractionDigits(), RoundingMode());
     }
 
     @XmlAttribute(name = "amount")
@@ -177,7 +183,7 @@ public class Money implements Serializable {
 
     /**
      * Returns the dollar value of this money instance an integral value instead
-     * of a fractional value. This is loosely the "number of pennies" of the dollar value.
+     * of a fractional value. This is loosely the "number of pennies" of the given dollar value.
      *
      * Example: <code>new Money("20.00 USD").getLongValue(); // returns 2000L</code>
      *
@@ -195,10 +201,11 @@ public class Money implements Serializable {
      *
      * Set long value first to ensure precision by when setting scale.
      *
-     * Warning! It's possible to construct an incomplete Money instance by failing to set currency!
+     * <strong>Warning! It's possible to construct an incomplete Money instance by failing to set currency!</strong>
      *
      * @param value long value
      */
+    @Deprecated // todo: remove when a better solution is found
     public void setLongValue(long value) {        
         this.value = new BigDecimal(BigInteger.valueOf(value));
 
@@ -253,10 +260,11 @@ public class Money implements Serializable {
      * This method is intended to be used by Hibernate when instantiating Money
      * and should not be used in client code.
      *
-     * Warning! It's possible to construct an incomplete Money instance by failing to set currency!
+     * <strong>Warning! It's possible to construct an incomplete Money instance by failing to set the integral value!</strong>
      *
      * @param currency currency code string
      */
+    @Deprecated // todo: remove when a better solution is found
     public void setCurrencyCode(String currency) {
         this.currency = Currency.getInstance(currency);
 
@@ -352,14 +360,14 @@ public class Money implements Serializable {
 
         // convert to system currency, maintain scale of conversion rate for accuracy
         Rate system = table.getRate(money.getCurrencyCode());
-        BigDecimal pivot = money.getValue().divide(system.getRate(), system.getRate().scale(), RoundingMode.HALF_UP);
+        BigDecimal pivot = money.getValue().divide(system.getRate(), system.getRate().scale(), RoundingMode());
 
         // convert back to target currency
         Rate target = table.getRate(currency.getCurrencyCode());
         BigDecimal converted = pivot.multiply(target.getRate());
 
         // drop scale down to currency's default precision
-        return new Money(converted.setScale(currency.getDefaultFractionDigits(), RoundingMode.HALF_UP), currency);
+        return new Money(converted.setScale(currency.getDefaultFractionDigits(), RoundingMode()), currency);
     }
 
     @Override

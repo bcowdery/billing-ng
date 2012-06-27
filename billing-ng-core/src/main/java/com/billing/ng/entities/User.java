@@ -17,7 +17,7 @@
 
 package com.billing.ng.entities;
 
-import com.billing.ng.util.HashUtils;
+import com.billing.ng.crypto.util.HashUtils;
 
 import javax.persistence.Column;
 import javax.persistence.EnumType;

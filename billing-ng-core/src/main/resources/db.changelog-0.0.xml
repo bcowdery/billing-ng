@@ -90,7 +90,7 @@
             </column>
             <column name="first_name" type="VARCHAR(255)"/>
             <column name="gender" type="VARCHAR(255)"/>
-            <column name="hash_salt" type="VARCHAR(255)">
+            <column name="hash_salt" type="VARCHAR(1024)">
                 <constraints nullable="false"/>
             </column>
             <column name="initial" type="VARCHAR(255)"/>
