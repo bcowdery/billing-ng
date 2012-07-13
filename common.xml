@@ -14,9 +14,9 @@
     <property name="ivy.home" value="${user.home}/.ant"/>
     <property name="ivy.jar.dir" value="${ivy.home}/lib"/>
     <property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar"/>
-	<available file="${ivy.jar.file}" property="ivy.installed"/>
+    <available file="${ivy.jar.file}" property="ivy.installed"/>
 
-    <property name="jsch.install.version" value="0.1.44"/>
+    <property name="jsch.install.version" value="0.1.47"/>
     <property name="jsch.jar.file" value="${ivy.jar.dir}/jsch.jar"/>
     <available property="jsch.installed" file="${jsch.jar.file}"/>
 
@@ -59,7 +59,7 @@
              usetimestamp="true"/>
     </target>
 
-	<target name="ivy.bootstrap" depends="install-ivy, install-jsch" unless="ivy.bootstrapped">
+    <target name="ivy.bootstrap" depends="install-ivy, install-jsch" unless="ivy.bootstrapped">
         <echo message="ivy jar dir = ${ivy.jar.dir}"/>
 
         <path id="ivy.lib.path">
@@ -67,11 +67,11 @@
         </path>
 
         <taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>			
-		<property name="ivy.bootstrapped" value="true"/>
+        <property name="ivy.bootstrapped" value="true"/>
 		
-		<ivy:settings file="${root.dir}/ivysettings.xml" />
-		<echo message="loaded ivy settings file = ${root.dir}/ivysettings.xml"/>
-	</target>	
+        <ivy:settings file="${root.dir}/ivysettings.xml" />
+        <echo message="loaded ivy settings file = ${root.dir}/ivysettings.xml"/>
+    </target>	
 	
     <target name="ivy.clean" description="Cleans the ivy managed ./lib folder">
         <delete dir="${lib.dir}"/>
