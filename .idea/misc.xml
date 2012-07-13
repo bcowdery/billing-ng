@@ -6,16 +6,15 @@
   <component name="CheckStyle-IDEA">
     <option name="configuration">
       <map>
-        <entry key="active-configuration" value="FILE:/home/bcowdery/projects/idea/billing-ng/checks.xml:good programming checks" />
+        <entry key="active-configuration" value="HTTP_URL:http://repo.pointyspoon.com/config/checkstyle.xml:Good programming checks." />
+        <entry key="check-nonjava-files" value="false" />
         <entry key="check-test-classes" value="false" />
-        <entry key="location-0" value="CLASSPATH:/sun_checks.xml:The default CheckStyle rules." />
-        <entry key="location-1" value="FILE:/home/bcowdery/projects/idea/billing-ng/checks.xml:good programming checks" />
+        <entry key="location-0" value="CLASSPATH:/sun_checks.xml:The default CheckStyle rules" />
+        <entry key="location-1" value="CLASSPATH:/sun_checks.xml:The default CheckStyle rules." />
+        <entry key="location-2" value="HTTP_URL:http://repo.pointyspoon.com/config/checkstyle.xml:Good programming checks." />
         <entry key="thirdparty-classpath" value="" />
       </map>
     </option>
-  </component>
-  <component name="DependencyValidationManager">
-    <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
